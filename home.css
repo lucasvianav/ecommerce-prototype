@@ -1,0 +1,171 @@
+html, body {
+    font-family: Ubuntu, Roboto;
+    padding: 0;
+    margin: 0;
+    background-color: #f1eff1;
+}
+
+#navbar {
+    background-color: #202020;
+    text-align: center;
+    display: flex;
+    padding-top: 1%;
+    padding-bottom: 1.5%;
+}
+
+#navbar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#navbar li {
+    display: inline-block;
+    color: #f1eff1;
+    margin-right: 2.5%;
+    margin-left: 2.5%;
+}
+
+#central-buttons {
+    margin: auto;
+    width: 18%;
+}
+
+#right-buttons {
+    float: right;
+    margin: auto;
+    width: 10%;
+} 
+
+#logo {
+    float: left;
+    width: 9%;
+    margin: auto;
+}
+
+#logo img {
+    width: 100%;
+    padding: 0;
+}
+
+main {
+    margin: auto;
+    width: 100%;
+    margin-top: 4%;
+    margin-bottom: 4%;
+}
+
+#gallery {
+}
+
+#gallery ul {
+    list-style-type: none;
+    width: 85%;
+    display: flex;
+    margin: auto;
+    overflow-x: scroll;
+    padding: 1%;
+}
+
+#gallery img {
+    width: 400px;
+}
+
+#footer {
+    background-color: #202020;
+    color: #f1eff1;
+    text-align: center;
+    padding-bottom: 1.4%;
+    padding-top: 1%
+}
+
+#footer ul {
+    list-style-type: none;
+    padding: 0;
+    align-self: center;
+    align-content: center;
+    margin: auto;
+}
+
+#footer li {
+    display: inline-block;
+    margin: auto;
+    vertical-align: middle;
+}
+
+#footer-info {
+    display: flex;
+    justify-items: center;
+    align-content: center;
+    align-self: center;
+    align-items: center;
+    padding: 0;
+    width: 100%;
+}
+
+#help {
+    vertical-align: middle;
+    width: 70%;
+    margin: auto;
+    float: left;
+}
+
+#help li {
+    margin-right: 10%;
+    margin-left: 10%;
+}
+
+#help p {
+    font-size: medium;
+}
+
+#social-media {
+    color: #af7430;
+    vertical-align: middle;
+    width: 30%;
+    float: right;
+}
+
+#social-media li {
+    font-size: small;
+    margin-right: 3%;
+    margin-left: 3%;
+}
+
+#divisor {
+    color: #f1eff1;
+    font-size: xx-large;
+    font-weight: lighter;
+    margin-right: auto;
+}
+
+#credits {
+    margin-top: 2%;
+    font-size: small;
+}
+
+hr.end {
+    border-top: 0.8px solid;
+    color: rgba(65, 65, 65, 0.315);
+    margin-right: 3%;
+    margin-left: 3%;
+
+}
+
+#divBusca{
+    background-color:#2F4F4F;
+    border:solid 1px;
+    border-radius:15px;
+    width:300px;
+  }
+  
+    #txtBusca{
+    float:left;
+    background-color:transparent;
+    padding-left:5px;
+    font-style:italic;
+    font-size:18px;
+    border:none;
+    height:32px;
+    width:260px;
+  }
+  
