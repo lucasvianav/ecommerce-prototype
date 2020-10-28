@@ -1,0 +1,260 @@
+html, body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    padding: 0;
+    margin: 0;
+    background-color: #f1eff1;
+    list-style: none;
+}
+
+#navbar {
+    background-color: #202020;
+    text-align: center;
+    display: flex;
+    padding-top: 1%;
+    padding-bottom: 1.5%;
+}
+
+#logo {
+    float: left;
+    width: 9%;
+    margin: auto;
+}
+
+#logo img {
+    width: 100%;
+    padding: 0;
+}
+
+#central-buttons {
+    margin: auto;
+    width: 18%;
+}
+
+#navbar ul {    list-style-type: none;
+    padding: 0;
+}
+
+#navbar li {
+    display: inline-block;
+    color: #f1eff1;
+    margin-right: 2.5%;
+    margin-left: 2.5%;
+}
+
+#right-buttons {
+    float: right;
+    margin: auto;
+    width: 10%;
+} 
+
+main {
+    margin: auto;
+    width: 85%;
+    margin-top: 4%;
+    margin-bottom: 4%;
+}
+
+
+footer {
+    background-color: #202020;
+    color: #f1eff1;
+    text-align: center;
+    padding-bottom: 1.4%;
+    padding-top: 1%
+}
+
+#footer-info {
+    display: flex;
+    justify-items: center;
+    align-content: center;
+    align-self: center;
+    align-items: center;
+    padding: 0;
+    width: 100%;
+}
+
+footer ul {
+    list-style-type: none;
+    padding: 0;
+    align-self: center;
+    align-content: center;
+    margin: auto;
+}
+
+footer li {
+    display: inline-block;
+    margin: auto;
+    vertical-align: middle;
+}
+
+#help {
+    vertical-align: middle;
+    width: 70%;
+    margin: auto;
+    float: left;
+}
+
+#help li {
+    margin-right: 10%;
+    margin-left: 10%;
+}
+
+#help p {
+    font-size: medium;
+}
+
+#divisor {
+    color: #f1eff1;
+    font-size: xx-large;
+    font-weight: lighter;
+    margin-right: auto;
+}
+
+#social-media {
+    color: #af7430;
+    vertical-align: middle;
+    width: 30%;
+    float: right;
+}
+
+#social-media li {
+    font-size: small;
+    margin-right: 3%;
+    margin-left: 3%;
+}
+
+hr.end {
+    border-top: 0.8px solid;
+    color: rgba(65, 65, 65, 0.315);
+    margin-right: 3%;
+    margin-left: 3%;
+
+}
+
+#credits {
+    margin-top: 2%;
+    font-size: small;
+}
+
+img{
+	max-width:100% ;
+	display: block;
+    align-items: center;
+    
+}
+
+fieldset {
+    padding-top: 1%;
+    padding-bottom: 1%;
+    background-color: white;
+    border: solid 1px #cddbef;
+    border-radius: 10px;
+    display: flex; /*lado a lado*/
+    height: 100%;
+    width:auto;
+    
+}
+
+#title{
+    margin: auto; /*alinhando ao centro*/
+    text-align: center;
+    color: black;
+    font-weight: 700;
+    font-size: 20pt;
+}
+
+.produto{
+    background-color: white;
+    display: flex; /*lado a lado*/
+    flex-wrap: wrap; /*faz quebra quando chega no limite*/
+    height: 100%;
+    width: 70%; 
+    padding-left: 5%;
+}
+
+.produto>div {
+    background-color: #f1eff1;
+    border: 1px solid #cddbef;
+	text-align: center;
+    flex: 1 1 50px;
+    margin: 1%;
+    margin-top: 0%;
+    width: 100%;
+    height: 100%;
+	border-radius: 4px;
+
+}
+.botao {
+    color: white;
+    background: darkgreen;
+    border: none;
+    border-radius: 25px;
+
+}
+.botao:hover {
+    background-color: #8fe604;
+    cursor: pointer;
+    color: white;
+    transition-duration: 0.3s;
+    opacity: 0.7;
+}
+
+.active-button {
+    border: none;
+    font-weight: bolder;
+    padding: 0;
+    padding-bottom: 2px;
+}
+
+.inactive-button{
+    border: none;
+}
+
+/* confiuração do filtro*/
+
+.filter{
+    padding-left: 3%;
+    padding-right: 3%;
+}
+#filter-tittle{
+    color: black;
+    font-size: 20px;
+    text-align: left;
+}
+.selecao{
+    background-color: #f1eff1;
+    border: 1px solid #cddbef; 
+    float: left;
+    width: 20%;
+}
+
+ul{
+    list-style-type: none;
+}
+
+/*configuração da caixa do produto*/
+
+.image-product img.back{
+    text-align: center;
+    object-fit: cover;
+    display: none;
+}
+.image-product img.front{
+    text-align: center;
+    display: block;
+    width: 15%;
+}
+
+/*nova fonte*/
+.shrek{
+    margin: 0 auto;
+    padding-bottom: 1%;
+    color: darkgreen;
+    font-family: shrek-font;
+    font-size: 30px;
+    text-align: center;
+}
+@font-face{
+    font-family: shrek-font;
+    src: url('shrek.TTF') format('truetype');
+}
