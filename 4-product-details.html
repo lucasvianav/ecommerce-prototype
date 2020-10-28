@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+    <head>
+        <title>SA-SHREK</title>
+        <meta http-equiv="Content-Type" content="text/html"; charset="UTF-8">
+        <script src="https://kit.fontawesome.com/adf0c2d913.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="css/4-product-details.css">
+        <script type="text/javascript" src="javaScript/4-product-details.js"></script>
+
+    </head>
+
+    <body>
+        <nav id="navbar">
+            <div id="logo">
+                <img src= "./img/logo.png"/>
+            </div>
+
+            <ul id="central-buttons">
+                <li>Início</li>
+                <li>Produtos</li>
+                <li>Eventos</li>
+            </ul>
+        
+            <ul id="right-buttons">
+                <li><i class="fas fa-search"></i></li>
+                <li><i class="fas fa-shopping-cart"></i></li>
+                <li>Login</li>
+            </ul>
+        </nav>
+
+        <main>
+            <div id="back-buttons">
+                <button  type="submit" class="active-button">Início</button> >
+                <button  type="submit" class="active-button">Produtos</button> >
+                <button  type="submit" class="inactive-button">Moletons</button>
+            </div>
+            <br>
+            <fieldset>
+                <div class="group">
+
+                    <div id="product-photos">
+                        
+                        <div class="container">
+                        
+                            <div id="thumbnail-photos">
+                                <div class="row">
+                                    <div class="column">
+                                        <img class="demo cursor" src="img/products\moletom_canguru_front.png" alt="Frente de um moletom branco com uma pequena estampa na frente com o logo da 'SA-Shrek' fundo preto com pontinhos brancos (semelhante a um céu estrelado)" style="width:100%" onclick="currentSlide(1)" alt="">
+                                    </div>
+                                    <div class="column">
+                                        <img class="demo cursor" src="img/products\moletom_canguru_back.png" alt="Costas de um moletom branco fundo preto com pontinhos brancos (semelhante a um céu estrelado)"style="width:100%" onclick="currentSlide(2)" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div id="large-photos">
+                                <div class="mySlides">
+                                    <img src="img/products\moletom_canguru_front.png" alt="Frente de um moletom branco com uma pequena estampa na frente com o logo da 'SA-Shrek' fundo preto com pontinhos brancos (semelhante a um céu estrelado)"style="width:100%">
+                                </div>
+
+                                <div id="display-none" class="mySlides">
+                                    <img src="img/products\moletom_canguru_back.png" alt="Costas de um moletom branco fundo preto com pontinhos brancos (semelhante a um céu estrelado)" style="width:100%">
+                                </div>
+                            </div>
+                            
+                        </div>
+                            
+                    </div>
+
+
+                    <div id="product-infos">
+                        <div class="title">Moletom Canguru "SA-Shrek"</div>
+                        <h2 class="green-elements">R$ 100,00</h2>
+                        <hr class="product-divisor">
+                        <br>
+
+                        <form id="product-options">           
+                            <strong>Modelagem:</strong>
+                            <a href="#size-options" class="green-elements"> Ver medidas</a>
+                            <br>
+                            <input type="radio" name="modeling" required> Feminino
+                            <input type="radio" name="modeling" required> Masculino
+                            <br><br>
+                            <strong>Tamanho:</strong>
+                            <br>
+                            <input type="radio" name="size" required> PP
+                            <input type="radio" name="size" required> P
+                            <input type="radio" name="size" required> M
+                            <input type="radio" name="size" required> G
+                            <input type="radio" name="size" required> GG 
+                            <br><br>
+                            <strong>Quantidade:</strong>
+                            <br>
+                            <input type="number" name="quantity" min="1" size="5" required>
+                            <br><br>
+                            <hr class ="product-divisor">
+                            <br>
+                            <input id="buy-botton" type="submit" name="buy" value="Comprar">
+                        </form>
+                    </div>
+                </div>
+            
+
+            <div id="product-description">
+                <h1>Descrição</h1>
+                <ul>
+                    <li>Moletom branco modelo canguru com logo da SA-Shrek estampado na frente.</li>
+                    <li>Tecido 100% algodão de alta qualidade.</li>
+                    <li>Garantia de 6 meses contra erros de fabricação.</li>
+                </ul>
+            </div>
+
+            <div id="size-options">
+                <h1>Medidas</h1>
+                <img id="size-photo" src="img/products/size.png"
+                alt="Na imagem: Mokup de moletom e Tabela de Medidas. Na tabela há São 6 colunas. Na ordem: Tipo de medidas, P, M, G, GG, Tolerancia. E 3 linhas. Na ordem: Toráx, Comprimento, Comp. Manga. Na coluna P: 53, 69, 70. Na coluna M: 56, 71, 71. Na coluna GG: 62, 75, 73. Na coluna tolerancia: +-1.5, +-1.5, +-1.0. Observação em baixo da tabela: 'medidas em centímetros'.">
+            </div>
+        </main>
+
+        </fieldset>
+
+        <footer>
+
+            <div id="footer-info">
+                <ul id="help">
+                    <li><p>Política de devolução</p></li>
+                    <li><p>Entregas</p></li>
+                    <li><p>Site institucional</p></li>
+                </ul>
+                
+                <p id="divisor">|</p>
+
+                <ul id="social-media">
+                    <li><i class="fab fa-instagram fa-2x"></i></li>
+                    <li><i class="fab fa-facebook fa-2x"></i></li>
+                    <li><i class="fab fa-linkedin-in fa-2x"></i></li>
+                    <li><i class="fa fa-whatsapp fa-2x"></i></li>
+                    <li><i class="fa fa-envelope fa-2x"></i></li>
+                </ul>
+            </div>
+
+            <hr class ="end">
+            <p id="credits">© 2020 SA-SHREK. Todos os direitos reservados. Tema desenvolvido por Avião, Flip, Rafaela, Phineas e Bia.</p>
+        </footer>
+
+    </body>
