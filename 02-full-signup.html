@@ -6,7 +6,7 @@
         <title>SA-SHREK</title>
         <meta http-equiv="Content-Type" content="text/html"; charset="UTF-8">
         <script src="https://kit.fontawesome.com/adf0c2d913.js" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="css/2-login.css">
+        <link rel="stylesheet" href="css/02-login.css">
         
     </head>
 
@@ -34,28 +34,56 @@
             <div id="forms-panel">
 
                 <div id="form-titles">
-                    <button type="button" class="active-form">LOGIN</button>
-                    <button type="button" class="inactive-form">CRIAR CONTA</button>
+                    <button type="button" class="inactive-form">LOGIN</button>
+                    <button type="button" class="active-form">CRIAR CONTA</button>
                     <button type="button" class="inactive-form">RECUPERAR SENHA</button>
                 </div>
 
-                <form id="login" class="form">
+                <form id="sign-up" class="form">
 
                     <fieldset>
 
                         <div class="input-block">
-                            <label for="login-email">Email</label><br>
-                            <input id="login-email" type="email" required>
+                            <label for="sign-up-name">Nome completo</label><br>
+                            <input id="sign-up-name" type="text" required>
                         </div>
 
                         <div class="input-block">
-                            <label for="login-password">Senha</label><br>
-                            <input id="login-password" type="password" required>
+                            <label for="sign-up-birthday">Data de nascimento</label><br>
+                            <input id="sign-up-birthday" type="date" required>
+                        </div>
+                        
+                    </fieldset>
+
+                    <fieldset>
+
+                        <div class="input-block">
+                            <label for="sign-up-rg">RG</label><br>
+                            <input id="sign-up-rg" type="text" placeholder="1.234.567-8" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" required>
+                        </div>
+
+                        <div class="input-block">
+                            <label for="sign-up-cpf">CPF</label><br>
+                            <input id="sign-up-cpf" type="text" placeholder="123.456.789-00" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" required>
                         </div>
 
                     </fieldset>
 
-                    <button form="login" type="submit" class="btn-login">Login</button>
+                    <fieldset>
+
+                        <div class="input-block">
+                            <label for="sign-up-email">Celular</label><br>
+                            <input id="sign-up-email" type="tel" pattern="+\d{2}\s\d{2}\s\d{5}-\d{4}" placeholder="+DDI DDD 91234-5678" required>
+                        </div>
+
+                        <div class="input-block">
+                            <label for="sign-up-email">Outra forma de contato</label><br>
+                            <input id="sign-up-email" type="text">
+                        </div>
+
+                    </fieldset>
+
+                    <button form="sign-up" type="submit" class="btn-login">Registrar</button>
 
                 </form>
 

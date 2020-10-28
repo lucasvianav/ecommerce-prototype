@@ -6,7 +6,7 @@
         <title>SA-SHREK</title>
         <meta http-equiv="Content-Type" content="text/html"; charset="UTF-8">
         <script src="https://kit.fontawesome.com/adf0c2d913.js" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="css/2-login.css">
+        <link rel="stylesheet" href="css/02-login.css">
         
     </head>
 
@@ -34,9 +34,9 @@
             <div id="forms-panel">
 
                 <div id="form-titles">
-                    <button type="button" class="inactive-form">LOGIN</button>
+                    <button type="button" class="active-form">LOGIN</button>
                     <button type="button" class="inactive-form">CRIAR CONTA</button>
-                    <button type="button" class="active-form">RECUPERAR SENHA</button>
+                    <button type="button" class="inactive-form">RECUPERAR SENHA</button>
                 </div>
 
                 <form id="login" class="form">
@@ -44,13 +44,18 @@
                     <fieldset>
 
                         <div class="input-block">
-                            <label for="login-email">Email cadastrado</label><br>
+                            <label for="login-email">Email</label><br>
                             <input id="login-email" type="email" required>
+                        </div>
+
+                        <div class="input-block">
+                            <label for="login-password">Senha</label><br>
+                            <input id="login-password" type="password" required>
                         </div>
 
                     </fieldset>
 
-                    <button form="login" type="submit" class="btn-login">Recuperar</button>
+                    <button form="login" type="submit" class="btn-login">Login</button>
 
                 </form>
 
