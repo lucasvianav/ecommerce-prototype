@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+    <head>
+        <title>SA-SHREK</title>
+        <meta http-equiv="Content-Type" content="text/html"; charset="UTF-8">
+        <script src="https://kit.fontawesome.com/adf0c2d913.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="login.css">
+        <link rel="stylesheet" href="steps.css">
+    </head>
+
+    <body>
+        <nav id="navbar2"> 
+                <div id="logo-maximizado">
+                    <img src="./logo.png"/>
+                </div>
+                <ul id="steps-list">
+                    <il  class="steps completed" >
+                        <div  id="shopcar" class="icon-steps">
+                            <i class="fa fa-shopping-cart circle-icon completed" aria-hidden="true"></i>
+                            <p>Carrinho</p>
+                        </div>
+                    </il>
+                    <il class="steps completed">
+                        <div  id="identification" class="icon-steps">
+                            <i class="fa fa-id-badge circle-icon completed" aria-hidden="true"></i>
+                            <p>Identificação</p>
+                        </div>
+                    </il>
+                    <il class="steps">
+                        <div  id="verifica" class="icon-steps">
+                            <i class="fa fa-credit-card-alt circle-icon completed" aria-hidden="true"></i>
+                            <p>Pagamento</p>
+                        </div>
+                    </il>
+                    <il class="steps">
+                        <div  id="done" class="icon-steps">
+                            <i class="fa fa fa-check circle-icon" aria-hidden="true"></i>
+                            <p>Encomenda Efetuada</p>
+                        </div>
+                    </il>
+                </ul>
+
+        </nav>
+
+        <main>
+            <div class="check-panel"> <!--Container Grid-->
+                <div  class="box adress"> <!--container flex column com 3 ou 4 itens-->
+                    <div id="box-adress-title" class="title2">
+                        
+                        <h3><i class="fa fa-square" aria-hidden="true" width="10px" ></i> Endereço de Entrega</h3>
+                    </div>
+                    <div id="adress-info">
+                        <p>
+                            Rua dos Bobos, 0 <br>
+                            Não tinha teto <br>
+                            Não tinha nada <br>
+                        </p>
+                    </div>
+                    <div id="edit-adress">
+                        <i class="fa fa-pencil-square-o a" aria-hidden="true"></i>
+                        <a class="button-aux a" href="">
+                            Alterar Endereço de Entrega
+                        </a>
+                        <br>
+                        <i class="fa fa-paper-plane b" aria-hidden="true"></i>
+                        <a class="button-aux b" href="">
+                            Receber detalhes da entrega
+                        </a>
+                    </div>
+                </div >
+                <div class="box summary">
+                    <div class="title2">
+                        <h3><i class="fa fa-square" aria-hidden="true" width="10px" ></i> Resumo da compra</h3>
+                    </div>
+                    <div class="info-line">
+                        <p class="info-par">Itens:</p>
+                        <p class="info-var"> 
+                            R$
+                            160,00
+                        </p>
+                    </div>
+                    <div class="info-line ">
+                        <p class="info-par">Frete e Manuseio:</p>
+                        <p class="info-var">
+                            R$
+                            15,40
+                        </p>
+                    </div>
+                    <div class="info-line">
+                        <p class="info-par total">Total do Pedido: </p>
+                        <p class="info-var total">
+                            R$
+                            175,40
+                        </p>
+                    </div>
+                    <div class ="info-others">
+                        em  
+                        3
+                        X sem juros de 
+                        R$
+                        58,47
+                        <br>
+                        <a class="button-aux alterar" href="">
+                            Alterar
+                        </a>
+                    </div>
+                    
+        
+                </div>
+                <div class="box delivery-option">
+                    <div class="title2">
+                        <h3><i class="fa fa-square" aria-hidden="true" width="10px" ></i> Escolha uma opção de frete</h3>
+                    </div>
+                    
+                    <div class="d-options">
+                        <div>
+                            <input type="radio" name="delivery" id="free-delivery">
+                            <label for="free-delivery" class="op-box"> 
+                                    <span></span> 
+                                    <p>Agendar entrega <br>
+                                        Entrega em até 10 dias utéis
+                                    </p>
+                            </label>
+                        </div>
+
+                        <div>
+                            <input type="radio" name="delivery" id="speed-delivery">
+                            <label for="speed-delivery" class="op-box"><span class="b-box"></span>  
+                                <p>Entrega Padrão</p>
+
+                            </label>
+                        </div>
+
+                        <div>
+                            <input type="radio" name="delivery" id="pick-up"> 
+                            <label for ="pick-up" class="op-box">
+                                <span></span> 
+                                <p>
+                                    Retirar na sala da <br>
+                                    SA-SHREK
+                                </p>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class ="box pay-option">
+                    <div class="title2">
+                        <h3><i class="fa fa-square" aria-hidden="true" width="10px" ></i> Escolha a forma de pagamento</h3>
+                    </div>
+                    <div id="payment-methods">
+                        <div id="credit-card">
+                            <button class="btn-pay-met card">Cartão de Crédito</button>
+                        </div>
+                        <hr id="vert-line">
+                        <div id ="boleto">
+                            <button class="btn-pay-met boleto">Boleto</button>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                
+            </div>
+            <div id="credit-card-small-page">
+                <div id="saved-cards">
+                    <div class="cab-table">
+                        <div class="escolha">
+                            <p>Seus cartões de crédito</p>
+                        </div>
+                        <div class="card-name">
+                            <p>Nome no cartão</p>
+                        </div>
+                        <div class="expire-date">
+                            <p>Vencimento</p>
+                        </div>
+                    </div>
+                    <ul id="cards-list">
+                        <li class="cards-items">
+                            <input type="radio" name="cred-cards-options" id="first">
+                            <label for="first" class="op-box cards"> 
+                                    <div class="select-btn">
+                                        <span></span>
+                                    </div> 
+                                    <div class="cartao">
+                                        <p> 
+                                            (Crédito) Mastercard
+                                            
+                                        </p>
+                                        <p class="card-number"> terminando em
+                                            1178
+                                        </p>
+                                    </div>
+                                    <div class="card-name">
+                                        <p>
+                                            Lucas Henrique Sant'Anna
+                                        </p>
+                                    </div>
+                                    <div class="expire-date">
+                                        <p>
+                                            01/2027
+                                        </p>
+                                    </div>
+                            </label>
+                        </li>
+
+                        <li class="cards-items">
+                            <input type="radio" name="cred-cards-options" id="second">
+                            <label for="second" class="op-box cards">
+                                <div class="select-btn">
+                                    <span></span>
+                                </div> 
+                                <div class="cartao">
+                                    <p> 
+                                        (Crédito) Mastercard
+                                        
+                                    </p>
+                                    <p class="card-number"> terminando em
+                                        4432
+                                    </p>
+                                </div>
+                                <div class="card-name">
+                                    <p>
+                                        Flip Feliz Viana
+                                    </p>
+                                </div>
+                                <div class="expire-date">
+                                    <p>
+                                        01/2026
+                                    </p>
+                                </div>
+                            </label>
+                        </il>
+                    </ul>
+                </div>
+                <div id="confirmation-buy">
+                    <button class="btn-continue">Pagar com o Cartão</button>
+                    <p>Clicando aqui você
+                        estára <br>
+                        confirmando sua compra
+                    </p>
+                </div>
+                <div id="credit-card-add">
+                    <div>
+                        <p id="answer-other-card">
+                            Comprará com outro cartão de crédito?
+                        </p>
+                    </div>
+                    <div>
+                        <a href="" class="button-aux" id="card-add"><i class="fa fa-credit-card" aria-hidden="true"></i>
+                            Adicionar novo cartão</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+
+    </body>
+</html>
