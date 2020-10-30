@@ -29,6 +29,7 @@ html, body{
     margin: auto;
 }
 
+
 #logo img {
     width: 100%;
     padding: 0;
@@ -173,4 +174,6 @@ hr.end {
     font-size: small;
 }
 
-  
+main {
+    min-height: 560px;
+}

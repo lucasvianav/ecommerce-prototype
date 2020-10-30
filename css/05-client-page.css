@@ -11,6 +11,7 @@ html, body{
     flex-direction: column;
 }
 
+
 #navbar {
     background-color: #202020;
     text-align: center;
@@ -173,5 +174,3 @@ hr.end {
     margin-top: 2%;
     font-size: small;
 }
-
-  

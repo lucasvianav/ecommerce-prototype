@@ -62,6 +62,7 @@ main {
     width: 85%;
     margin-top: 8%;
     margin-bottom: 4%;
+    min-height: 465px;
 }
 
 #forms-panel {

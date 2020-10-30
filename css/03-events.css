@@ -56,6 +56,7 @@ main {
     width: 85%;
     margin-top: 8%;
     margin-bottom: 4%;
+    min-height: 465px;
 }
 
 
@@ -226,15 +227,19 @@ fieldset {
     font-size: 20px;
     text-align: left;
 }
+
 .selecao{
     background-color: #f1eff1;
     border: 1px solid #cddbef; 
     float: left;
-    width: 20%;
+    width: 125%;
 }
 
-ul{
+.selecao ul {
     list-style-type: none;
+    margin-right: 10%;
+    margin-left: 5%;
+    padding: 0;
 }
 
 /*configuração da caixa do produto*/
