@@ -7,25 +7,25 @@
         <meta http-equiv="Content-Type" content="text/html"; charset="UTF-8">
         <script src="https://kit.fontawesome.com/adf0c2d913.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="css/02-login.css">
-        
+        <script type="text/javascript" src="javaScript/02-login.js"></script>
     </head>
 
-    <body>
+    <body onload="handleFormTabs(); handleForgotPwButton()">
         <nav id="navbar">
             <div id="logo">
-                <img src="./img/logo.png"/>
+                <a href="./02-login.html" target="_self" rel="noopener noreferrer"><img src="./img/logo.png"/></a>
             </div>
 
             <ul id="central-buttons">
-                <li>Início</li>
-                <li>Produtos</li>
-                <li>Eventos</li>
+                <li><a href="" target="_blank" rel="noopener noreferrer">Início</a></li>
+                <li><a href="" target="_blank" rel="noopener noreferrer">Produtos</a></li>
+                <li><a href="" target="_blank" rel="noopener noreferrer">Eventos</a></li>
             </ul>
         
             <ul id="right-buttons">
-                <li><i class="fas fa-search"></i></li>
-                <li><i class="fas fa-shopping-cart"></i></li>
-                <li>Login</li>
+                <li><a href="" target="_blank" rel="noopener noreferrer"><i class="fas fa-search"></i></a></li>
+                <li><a href="" target="_blank" rel="noopener noreferrer"><i class="fas fa-shopping-cart"></i></a></li>
+                <li><a href="" target="_blank" rel="noopener noreferrer">Login</a></li>
             </ul>
         </nav>
 
@@ -33,31 +33,69 @@
 
             <div id="forms-panel">
 
-                <div id="form-titles">
-                    <button type="button" class="active-form">LOGIN</button>
-                    <button type="button" class="inactive-form">CRIAR CONTA</button>
-                    <button type="button" class="inactive-form">RECUPERAR SENHA</button>
+                <div class="form-wrapper active">
+                    <button type="button" class="switcher switcher-login">LOGIN</button>
+
+                    <form id="login" class="form form-login">
+
+                        <fieldset class="invisible">
+                            <div class="input-block">
+                                <label for="login-email">Email</label><br>
+                                <input id="login-email" type="email" required>
+                            </div>
+
+                            <div class="input-block">
+                                <label for="login-password">Senha</label><br>
+                                <input id="login-password" type="password" required>
+                            </div>
+
+                            <p id="forgot-button" class="small-btn">Esqueci minha senha</p>
+                        </fieldset>
+
+                        <button form="login" type="submit" class="big-btn full-btn invisible">Login</button>
+
+                    </form>
+
+                    <form id="recovery" class="form form-recovery">
+
+                        <fieldset class="invisible">
+                            <div class="input-block">
+                                <label for="recovery-email">Email cadastrado:</label><br>
+                                <input id="recovery-email" type="email" required>
+                            </div>
+                        </fieldset>
+
+                        <button form="recovery" type="submit" class="big-btn full-btn invisible">Recuperar Senha</button>
+
+                    </form>
                 </div>
 
-                <form id="login" class="form">
+                <div class="form-wrapper">
+                    <button type="button" class="switcher switcher-signup">CRIAR CONTA</button>
 
-                    <fieldset>
+                    <form id="sign-up" class="form form-signup">
 
-                        <div class="input-block">
-                            <label for="login-email">Email</label><br>
-                            <input id="login-email" type="email" required>
-                        </div>
+                        <fieldset class="invisible">
+                            <div class="input-block">
+                                <label for="sign-up-email">Email</label><br>
+                                <input id="sign-up-email" type="email" required>
+                            </div>
 
-                        <div class="input-block">
-                            <label for="login-password">Senha</label><br>
-                            <input id="login-password" type="password" required>
-                        </div>
+                            <div class="input-block">
+                                <label for="sign-up-password">Senha</label><br>
+                                <input id="sign-up-password" type="password" required>
+                            </div>
 
-                    </fieldset>
+                            <div class="input-block">
+                                <label for="sign-up-conf-password">Confirmação de senha</label><br>
+                                <input id="sign-up-conf-password" type="password" required>
+                            </div>
+                        </fieldset>
 
-                    <button form="login" type="submit" class="btn-login">Login</button>
+                        <button form="sign-up" type="submit" class="big-btn void-btn invisible">Continuar</button>
 
-                </form>
+                    </form>
+                </div>
 
             </div>
 
@@ -67,19 +105,19 @@
 
             <div id="footer-info">
                 <ul id="help">
-                    <li><p>Política de devolução</p></li>
-                    <li><p>Entregas</p></li>
-                    <li><p>Site institucional</p></li>
+                    <li><a href="" target="_blank" rel="noopener noreferrer"><p>Política de devolução</p></a></li>
+                    <li><a href="" target="_blank" rel="noopener noreferrer"><p>Entregas</p></a></li>
+                    <li><a href="" target="_blank" rel="noopener noreferrer"><p>Site institucional</p></a></li>
                 </ul>
                 
                 <p id="divisor">|</p>
 
                 <ul id="social-media">
-                    <li><i class="fab fa-instagram fa-2x"></i></li>
-                    <li><i class="fab fa-facebook fa-2x"></i></li>
-                    <li><i class="fab fa-linkedin-in fa-2x"></i></li>
-                    <li><i class="fa fa-whatsapp fa-2x"></i></li>
-                    <li><i class="fa fa-envelope fa-2x"></i></li>
+                    <li><a href="" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram fa-2x"></i></a></li>
+                    <li><a href="" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook fa-2x"></i></a></li>
+                    <li><a href="" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in fa-2x"></i></a></li>
+                    <li><a href="" target="_blank" rel="noopener noreferrer"><i class="fa fa-whatsapp fa-2x"></i></a></li>
+                    <li><a href="" target="_blank" rel="noopener noreferrer"><i class="fa fa-envelope fa-2x"></i></a></li>
                 </ul>
             </div>
 
