@@ -98,7 +98,7 @@ fieldset {
 #event-infos{
     width: 40%;
     float: right;
-    display: inline-block;
+    /* display: inline-block; */
 }
 
 

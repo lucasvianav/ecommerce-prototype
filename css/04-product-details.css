@@ -102,7 +102,7 @@ fieldset {
 #thumbnail-photos{
     width: 15%;
     float: left;
-    display: inline-block;
+    /* display: inline-block; */
 }
 
 .cursor {
@@ -131,7 +131,7 @@ fieldset {
 #product-infos{
     width: 40%;
     float: right;
-    display: inline-block;
+    /* display: inline-block; */
 }
 
 .title{
