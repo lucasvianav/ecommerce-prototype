@@ -7,7 +7,7 @@
         <meta http-equiv="Content-Type" content="text/html"; charset="UTF-8">
         <script src="https://kit.fontawesome.com/adf0c2d913.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="css/00-bootstrap.css" />
-        <link rel="stylesheet" href="css/00-standard.css" />
+        <link rel="stylesheet" href="css/00-index.css" />
     </head>
 
     <body onresize="invertConteudo()" onload="invertConteudo()">
@@ -28,244 +28,247 @@
                 <li>Conta</li>
             </ul>
         </nav>
-        <main class="container shadow-sm p-3 mb-5 bg-white rounded">
-            <h1>Página do Adiministrador</h1>
-            <hr />
-            <div class="row">
-                <div class="col-md-6 col-sm-12 order-first sm-invert-2">
-                    <section id="loginInfo" class="d-md-flex no-space d-xs-none d-sm-none">
-                        <h2>Olá Adiministrador Fulaninho</h2>
-                        <p><strong>Email: </strong>fulaninho@example.com</p>
-                        <button id="altSenha" class="btn btn-outline-dark">Alterar Senha</button>
-                    </section>
-                    <section id="produtosCadastrados" class="d-flex rounded bg-light shadow-sm mt-3 p-2">
-                        <ul class="nav nav-tabs">
-                            <li class="nav-item">
-                              <button class="nav-link active" id="tab1" role="button" onclick="showProdutosAtivos()">Produtos Ativos</button>
-                            </li>
-                            <li class="nav-item">
-                              <button class="nav-link" id="tab2" role="button" onclick="showProdutosInativos()">Produtos Inativos</button>
-                            </li>
-                            <li class="nav-item">
-                              <button class="nav-link" id="tab3"role="button" onclick="showProdutoNovo()">Novo Produto</button>
-                            </li>
-                        </ul>
-                        <div id="produtosAtivos" class="collapse show p-2 bg-white border border-top-0" >
-                            <h6 class="align-right mt-2 text-right">
-                                <i class="fas fa-search"></i>
-                                <i class="fas fa-filter"></i>
-                            </h6>
-                            <div class="card-columns">
-                                <div class="card p-0">
-                                  <div class="card-body m-0 p-2">
-                                    <h5 class="card-title">Casaco Guindaste</h5>
-                                    <span class="badge badge-light">Produto</span>
-                                    <span class="badge badge-light">Casaco</span>
-                                    <div class="d-flex justify-content-end">
-                                        <button class="btn btn-link btn-sm mt-2">Mais Detalhes</button>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="card p-0">
+
+        <main>
+            <div class="content-box">
+                <h1>Página do Adiministrador</h1>
+                <hr />
+                <div class="row">
+                    <div class="col-md-6 col-sm-12 order-first sm-invert-2">
+                        <section id="loginInfo" class="d-md-flex no-space d-xs-none d-sm-none">
+                            <h2>Olá Adiministrador Fulaninho</h2>
+                            <p><strong>Email: </strong>fulaninho@example.com</p>
+                            <button id="altSenha" class="btn btn-outline-dark">Alterar Senha</button>
+                        </section>
+                        <section id="produtosCadastrados" class="d-flex rounded bg-light shadow-sm mt-3 p-2">
+                            <ul class="nav nav-tabs">
+                                <li class="nav-item">
+                                <button class="nav-link active" id="tab1" role="button" onclick="showProdutosAtivos()">Produtos Ativos</button>
+                                </li>
+                                <li class="nav-item">
+                                <button class="nav-link" id="tab2" role="button" onclick="showProdutosInativos()">Produtos Inativos</button>
+                                </li>
+                                <li class="nav-item">
+                                <button class="nav-link" id="tab3"role="button" onclick="showProdutoNovo()">Novo Produto</button>
+                                </li>
+                            </ul>
+                            <div id="produtosAtivos" class="collapse show p-2 bg-white border border-top-0" >
+                                <h6 class="align-right mt-2 text-right">
+                                    <i class="fas fa-search"></i>
+                                    <i class="fas fa-filter"></i>
+                                </h6>
+                                <div class="card-columns">
+                                    <div class="card p-0">
                                     <div class="card-body m-0 p-2">
-                                        <h5 class="card-title">Ingresso Tusca</h5>
-                                        <span class="badge badge-light">Evento</span>
-                                        <span class="badge badge-light">Festa</span>
-                                        <div class="d-flex justify-content-end">
-                                            <button class="btn btn-link btn-sm mt-2">Mais Detalhes</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card p-0">
-                                    <div class="card-body m-0 p-2">
-                                        <h5 class="card-title">Kit Tusca</h5>
+                                        <h5 class="card-title">Casaco Guindaste</h5>
                                         <span class="badge badge-light">Produto</span>
-                                        <span class="badge badge-light">Kit</span>
+                                        <span class="badge badge-light">Casaco</span>
                                         <div class="d-flex justify-content-end">
                                             <button class="btn btn-link btn-sm mt-2">Mais Detalhes</button>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <p class="text-right mr-3">
-                                <a href="#">Ver mais</a>
-                            </p>
-                        </div>
-                        <div id="produtosInativos" class="collapse p-2 bg-white border border-top-0" >
-                            <h6 class="align-right mt-2 text-right">
-                                <i class="fas fa-search"></i>
-                                <i class="fas fa-filter"></i>
-                            </h6>
-                            <div class="card-columns">
-                                <div class="card p-0">
-                                    <div class="card-body m-0 p-2">
-                                        <h5 class="card-title">Caneca Somatório</h5>
-                                        <span class="badge badge-light">Produto</span>
-                                        <span class="badge badge-light">Caneca</span>
-                                        <div class="d-flex justify-content-end">
-                                            <button class="btn btn-link btn-sm mt-2">Mais Detalhes</button>
-                                        </div>
                                     </div>
-                                </div>
-                                <div class="card p-0">
-                                    <div class="card-body m-0 p-2">
-                                        <h5 class="card-title">Kit Bixo</h5>
-                                        <span class="badge badge-light">Produto</span>
-                                        <span class="badge badge-light">Kit</span>
-                                        <div class="d-flex justify-content-end">
-                                            <button class="btn btn-link btn-sm mt-2">Mais Detalhes</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="text-right mr-3">
-                                <a href="#">Ver mais</a>
-                            </p>
-                        </div>
-                        <div id="produtoNovo" class="collapse p-2 bg-white border border-top-0">
-                            <form>
-                                <div class="form-row justify-content-between mb-3 mt-3">
-                                    <div class="custom-file col-md-6 ml-1">
-                                        <input type="file" class="custom-file-input" id="imagem">
-                                        <label class="custom-file-label" for="imagem">Escolher Imagem</label>
-                                    </div>
-                                    <div class="custom-control custom-switch col-md-2">
-                                        <input type="checkbox" class="custom-control-input" id="preVenda">
-                                        <label class="custom-control-label" for="preVenda">Pré Venda</label>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-8">
-                                      <label for="nomeProduto">Nome do Produto</label>
-                                      <input type="text" class="form-control" id="nomeProduto">
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label for="precoProduto">Preço</label>
-                                        <input type="number" class="form-control" id="precoProduto">
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label for="categoria">Categoria</label>
-                                        <select class="custom-select" id="categoria">
-                                            <option selected value="nova">Nova</option>
-                                            <option value="produtos">Produtos</option>
-                                            <option value="eventos">Eventos</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="novaCategoria">Nome da Nova Categoria</label>
-                                        <input type="text" class="form-control" id="novaCategoria">
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label for="subCategoria">Sub-Categoria</label>
-                                        <select class="custom-select">
-                                            <option selected value="nova">Nova</option>
-                                            <option value="produtos">Produtos</option>
-                                            <option value="eventos">Eventos</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="novaSubCategoria">Nome da Nova Sub-Categoria</label>
-                                        <input type="text" class="form-control" id="novaSubCategoria">
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-12">
-                                        <label for="descricao">Descrição</label>
-                                        <textarea class="form-control" id="descricao" rows="3"></textarea>
-                                    </div>
-                                </div>
-                                <div class="form-row pl-1">
-                                    <button type="button" class="btn btn-outline-secondary">Adicionar Campo de Opções</button>
-                                </div>
-                                <div class="form-row justify-content-end mb-2 pr-1">
-                                    <button type="button" class="btn btn-success">Cadastrar</button>
-                                </div>
-                            </form>
-                        </div>
-                    </section>
-                </div>
-                <div class="col-md-4 offset-md-1 col-sm-12 order-last sm-invert-1">
-                    <section id="loginInfoMobile" class="d-flex no-space d-md-none">
-                        <h2>Olá Adiministrador Fulaninho</h2>
-                        <p><strong>Email: </strong>fulaninho@example.com</p>
-                        <button id="altSenha" class="btn btn-outline-dark">Alterar Senha</button>
-                    </section>
-                    <section id="ultimosPedidos">
-                        <h2>Ultimos Pedidos</h2> 
-                        <div class="d-flex justify-content-end pr-3">
-                            <p><a href="#">Ver todos</a></p>
-                        </div>
-                        <div class="accordion" id="accordionExample">
-                            <div class="card">
-                                <div class="card-header bg-white d-flex justify-content-between" id="headingOne">
-                                    <h2 class="mb-0">
-                                    <button class="btn btn-link btn-block text-left collapsed text-dark" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                        Aguardando Aprovação
-                                    </button>
-                                    </h2>
-                                    <p class="mt-2 mb-0">
-                                        <span class="badge badge-danger">Novo</span>
-                                    </p>
-                                </div>
-                            
-                                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                                    <div class="card-body">
-                                        <div class="row justify-content-around no-space">
-                                            <div class="card no-space" style="width: 45%;">
-                                                <img src="img/casaco.jpg" class="card-img-top" alt="Casaco engenharia civíl">
-                                                <div class="card-body no-space">
-                                                    <p class="card-text"><a href="#">Casaco Guindaste</a><span class="badge badge-light">G</span></p>
-                                                </div>
-                                            </div>
-                                            <div class="card no-space" style="width: 45%;">
-                                                <img src="img/casaco.jpg" class="card-img-top" alt="Casaco engenharia civíl">
-                                                <div class="card-body no-space">
-                                                    <p class="card-text"><a href="#">Casaco Guindaste</a><span class="badge badge-light">M</span></p>
-                                                </div>
+                                    <div class="card p-0">
+                                        <div class="card-body m-0 p-2">
+                                            <h5 class="card-title">Ingresso Tusca</h5>
+                                            <span class="badge badge-light">Evento</span>
+                                            <span class="badge badge-light">Festa</span>
+                                            <div class="d-flex justify-content-end">
+                                                <button class="btn btn-link btn-sm mt-2">Mais Detalhes</button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="d-flex justify-content-end pr-3">
-                                        <p><a href="#">Ver mais</a></p>
+                                    <div class="card p-0">
+                                        <div class="card-body m-0 p-2">
+                                            <h5 class="card-title">Kit Tusca</h5>
+                                            <span class="badge badge-light">Produto</span>
+                                            <span class="badge badge-light">Kit</span>
+                                            <div class="d-flex justify-content-end">
+                                                <button class="btn btn-link btn-sm mt-2">Mais Detalhes</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="text-right mr-3">
+                                    <a href="#">Ver mais</a>
+                                </p>
+                            </div>
+                            <div id="produtosInativos" class="collapse p-2 bg-white border border-top-0" >
+                                <h6 class="align-right mt-2 text-right">
+                                    <i class="fas fa-search"></i>
+                                    <i class="fas fa-filter"></i>
+                                </h6>
+                                <div class="card-columns">
+                                    <div class="card p-0">
+                                        <div class="card-body m-0 p-2">
+                                            <h5 class="card-title">Caneca Somatório</h5>
+                                            <span class="badge badge-light">Produto</span>
+                                            <span class="badge badge-light">Caneca</span>
+                                            <div class="d-flex justify-content-end">
+                                                <button class="btn btn-link btn-sm mt-2">Mais Detalhes</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card p-0">
+                                        <div class="card-body m-0 p-2">
+                                            <h5 class="card-title">Kit Bixo</h5>
+                                            <span class="badge badge-light">Produto</span>
+                                            <span class="badge badge-light">Kit</span>
+                                            <div class="d-flex justify-content-end">
+                                                <button class="btn btn-link btn-sm mt-2">Mais Detalhes</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="text-right mr-3">
+                                    <a href="#">Ver mais</a>
+                                </p>
+                            </div>
+                            <div id="produtoNovo" class="collapse p-2 bg-white border border-top-0">
+                                <form>
+                                    <div class="form-row justify-content-between mb-3 mt-3">
+                                        <div class="custom-file col-md-6 ml-1">
+                                            <input type="file" class="custom-file-input" id="imagem">
+                                            <label class="custom-file-label" for="imagem">Escolher Imagem</label>
+                                        </div>
+                                        <div class="custom-control custom-switch col-md-2">
+                                            <input type="checkbox" class="custom-control-input" id="preVenda">
+                                            <label class="custom-control-label" for="preVenda">Pré Venda</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-8">
+                                        <label for="nomeProduto">Nome do Produto</label>
+                                        <input type="text" class="form-control" id="nomeProduto">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="precoProduto">Preço</label>
+                                            <input type="number" class="form-control" id="precoProduto">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="categoria">Categoria</label>
+                                            <select class="custom-select" id="categoria">
+                                                <option selected value="nova">Nova</option>
+                                                <option value="produtos">Produtos</option>
+                                                <option value="eventos">Eventos</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="novaCategoria">Nome da Nova Categoria</label>
+                                            <input type="text" class="form-control" id="novaCategoria">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="subCategoria">Sub-Categoria</label>
+                                            <select class="custom-select">
+                                                <option selected value="nova">Nova</option>
+                                                <option value="produtos">Produtos</option>
+                                                <option value="eventos">Eventos</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="novaSubCategoria">Nome da Nova Sub-Categoria</label>
+                                            <input type="text" class="form-control" id="novaSubCategoria">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <label for="descricao">Descrição</label>
+                                            <textarea class="form-control" id="descricao" rows="3"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-row pl-1">
+                                        <button type="button" class="btn btn-outline-secondary">Adicionar Campo de Opções</button>
+                                    </div>
+                                    <div class="form-row justify-content-end mb-2 pr-1">
+                                        <button type="button" class="btn btn-success">Cadastrar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-md-4 offset-md-1 col-sm-12 order-last sm-invert-1">
+                        <section id="loginInfoMobile" class="d-flex no-space d-md-none">
+                            <h2>Olá Adiministrador Fulaninho</h2>
+                            <p><strong>Email: </strong>fulaninho@example.com</p>
+                            <button id="altSenha" class="btn btn-outline-dark">Alterar Senha</button>
+                        </section>
+                        <section id="ultimosPedidos">
+                            <h2>Ultimos Pedidos</h2> 
+                            <div class="d-flex justify-content-end pr-3">
+                                <p><a href="#">Ver todos</a></p>
+                            </div>
+                            <div class="accordion" id="accordionExample">
+                                <div class="card">
+                                    <div class="card-header bg-white d-flex justify-content-between" id="headingOne">
+                                        <h2 class="mb-0">
+                                        <button class="btn btn-link btn-block text-left collapsed text-dark" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                            Aguardando Aprovação
+                                        </button>
+                                        </h2>
+                                        <p class="mt-2 mb-0">
+                                            <span class="badge badge-danger">Novo</span>
+                                        </p>
+                                    </div>
+                                
+                                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <div class="row justify-content-around no-space">
+                                                <div class="card no-space" style="width: 45%;">
+                                                    <img src="img/casaco.jpg" class="card-img-top" alt="Casaco engenharia civíl">
+                                                    <div class="card-body no-space">
+                                                        <p class="card-text"><a href="#">Casaco Guindaste</a><span class="badge badge-light">G</span></p>
+                                                    </div>
+                                                </div>
+                                                <div class="card no-space" style="width: 45%;">
+                                                    <img src="img/casaco.jpg" class="card-img-top" alt="Casaco engenharia civíl">
+                                                    <div class="card-body no-space">
+                                                        <p class="card-text"><a href="#">Casaco Guindaste</a><span class="badge badge-light">M</span></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-end pr-3">
+                                            <p><a href="#">Ver mais</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header bg-white" id="headingTwo">
+                                        <h2 class="mb-0">
+                                        <button class="btn btn-link btn-block text-left collapsed text-dark" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            Aguardando Envio
+                                        </button>
+                                        </h2>
+                                    </div>
+                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            Não há nada aqui!
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header bg-white" id="headingThree">
+                                        <h2 class="mb-0">
+                                        <button class="btn btn-link btn-block text-left collapsed text-dark" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                            Finalizados
+                                        </button>
+                                        </h2>
+                                    </div>
+                                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            Não há nada aqui!
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="card">
-                                <div class="card-header bg-white" id="headingTwo">
-                                    <h2 class="mb-0">
-                                    <button class="btn btn-link btn-block text-left collapsed text-dark" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                        Aguardando Envio
-                                    </button>
-                                    </h2>
-                                </div>
-                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                                    <div class="card-body">
-                                        Não há nada aqui!
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-header bg-white" id="headingThree">
-                                    <h2 class="mb-0">
-                                    <button class="btn btn-link btn-block text-left collapsed text-dark" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                        Finalizados
-                                    </button>
-                                    </h2>
-                                </div>
-                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                                    <div class="card-body">
-                                        Não há nada aqui!
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <button type="button" class="btn btn-outline-secondary mt-3">Pedidos Por Usuários</button>
-                        <button type="button" class="btn btn-secondary mt-3">Gerenciar Usuários</button>
-                    </section>
+                            <button type="button" class="btn btn-outline-secondary mt-3">Pedidos Por Usuários</button>
+                            <button type="button" class="btn btn-secondary mt-3">Gerenciar Usuários</button>
+                        </section>
+                    </div>
                 </div>
             </div>
         </main>

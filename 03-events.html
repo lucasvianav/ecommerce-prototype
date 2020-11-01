@@ -6,9 +6,8 @@
         <title>SA-SHREK</title>
         <meta http-equiv="Content-Type" content="text/html"; charset="UTF-8">
         <script src="https://kit.fontawesome.com/adf0c2d913.js" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="css/03-events.css">
         <link rel="stylesheet" href="css/00-index.css">
-        <script src="javaScript/03-events.js"></script>
+        <link rel="stylesheet" href="css/products-panel.css">
 
     </head>
 
@@ -30,67 +29,90 @@
                 <li>Login</li>
             </ul>
         </nav>
-            <main>
-                <div id="title">Eventos</div>
+        
+        <main>
 
-                <!--botao de navegação-->
-                <div id="back-buttons">
-                    <button  type="submit" class="active-button">Início</button> >
-                    <button  type="submit" class="inactive-button">Eventos</button>
-                </div>
-                <br>
-                <fieldset>
-                    <section class = filter>
-                        <p id="filter-tittle">Filtros</p>
-                            <div class="selecao">
-                                <ul>
-                                    <li>
-                                        <input type="checkbox" id="caixa">
-                                        <label for="caixa">Cervejada</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="caixa">
-                                        <label for="caixa">Mini curso</label>
-                                    </li>
-                                    <li> 
-                                        <input type="checkbox" id="caixa">
-                                        <label for="caixa"> Pacote TUSCA</label>
-                                    </li>
-                                     <li>
-                                        <input type="checkbox" id="caixa">
-                                        <label for="caixa">Churrasco</label>
-                                        </label>
-                                    </li>
-                                    </li>
-                                </ul> 
-                            </div>
-                    </section>
-                    <section class="produto">
-                            <div class="image-product">
-                                <img src="img/cervejada.png"> 
-                                <p>Cervejada: "Sinta o pantano!"</p>
-                                <p><b>R$ 40,00</b></p>
-                            </div>
-                            <div class="image-product">
-                                <img src="img/cervejada.png"> 
-                                <p>Cervejada: "Sinta o pantano!"</p>
-                                <p><b>R$ 40,00</b></p>
-                            </div>
-                            <div class="image-product">
-                                <img src="img/cervejada.png"> 
-                                <p>Cervejada: "Sinta o pantano!"</p>
-                                <p><b>R$ 40,00</b></p>
-                            </div>
-                            <div class="image-product">
-                                <img src="img/cervejada.png"> 
-                                <p>Cervejada: "Sinta o pantano!"</p>
-                                <p><b>R$ 40,00</b></p>
-                            </div>
-                    </section>
-                </fieldset>
-            </main>
+            <div id="panel-title">Eventos</div>
+
+            <!-- botao de navegação -->
+            <div class="tabs-history disable-selection">
+                <a href="" class="active-tab">Início</a>
+                <span> > </span>
+                <span class="inactive-tab">Eventos</span>
+            </div>
+
+            <div class="content-box pruducts-panel">
+
+                <section class="filters">
+                    <span class="filters-title">Filtros</span>
+                    <fieldset class="checkboxes">
+                        <ul>
+                            <li>
+                                <input type="checkbox" id="cervejada">
+                                <label for="cervejada">Cervejada</label>
+                            </li>
+
+                            <li>
+                                <input type="checkbox" id="minicurso">
+                                <label for="minicurso">Minicurso</label>
+                            </li>
+
+                            <li> 
+                                <input type="checkbox" id="tusca">
+                                <label for="tusca">TUSCA</label>
+                            </li>
+
+                            <li>
+                                <input type="checkbox" id="churrasco">
+                                <label for="churrasco">Churrasco</label>
+                            </li>
+                        </ul> 
+                    </fieldset>
+                </section>
+
+                <section class="product-cards-panel">
+                    <div class="product-card"><a href="">
+                        <img class="product-thumb" src="img/cervejada.png"> 
+                        <p>Cervejada: "Sinta o pantano!"</p>
+                        <p class="product-price">R$ 40,00</p>
+                    </a></div>
+                    <div class="product-card"><a href="">
+                        <img class="product-thumb" src="img/cervejada.png"> 
+                        <p>Cervejada: "Sinta o pantano!"</p>
+                        <p class="product-price">R$ 40,00</p>
+                    </a></div>
+                    <div class="product-card"><a href="">
+                        <img class="product-thumb" src="img/cervejada.png"> 
+                        <p>Cervejada: "Sinta o pantano!"</p>
+                        <p class="product-price">R$ 40,00</p>
+                    </a></div>
+                    <div class="product-card"><a href="">
+                        <img class="product-thumb" src="img/cervejada.png"> 
+                        <p>Cervejada: "Sinta o pantano!"</p>
+                        <p class="product-price">R$ 40,00</p>
+                    </a></div>
+                    <div class="product-card"><a href="">
+                        <img class="product-thumb" src="img/cervejada.png"> 
+                        <p>Cervejada: "Sinta o pantano!"</p>
+                        <p class="product-price">R$ 40,00</p>
+                    </a></div>
+                    <div class="product-card"><a href="">
+                        <img class="product-thumb" src="img/cervejada.png"> 
+                        <p>Cervejada: "Sinta o pantano!"</p>
+                        <p class="product-price">R$ 40,00</p>
+                    </a></div>
+                    <div class="product-card"><a href="">
+                        <img class="product-thumb" src="img/cervejada.png"> 
+                        <p>Cervejada: "Sinta o pantano!"</p>
+                        <p class="product-price">R$ 40,00</p>
+                    </a></div>
+                </section>
+
+            </div>
+
+        </main>
+
         <footer>
-
             <div id="footer-info">
                 <ul id="help">
                     <li><p>Política de devolução</p></li>
@@ -112,9 +134,7 @@
             <hr class ="end">
             <p id="credits">© 2020 SA-SHREK. Todos os direitos reservados. Tema desenvolvido por Avião, Flip, Rafaela, Phineas e Bia.</p>
         </footer>
-        <script src="assets/js/events.js"></script>
+
     </body>
 
-
-
-    </html>
+</html>

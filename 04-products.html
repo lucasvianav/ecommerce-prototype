@@ -7,8 +7,7 @@
         <meta http-equiv="Content-Type" content="text/html"; charset="UTF-8">
         <script src="https://kit.fontawesome.com/adf0c2d913.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="css/00-index.css">
-        <link rel="stylesheet" href="css/04-products.css">
-        <script src="javaScript/04-products.js"></script>
+        <link rel="stylesheet" href="css/products-panel.css">
 
     </head>
 
@@ -30,70 +29,83 @@
                 <li>Login</li>
             </ul>
         </nav>
-            <main>
-                <div id="title">Produtos</div>
+        <main>
 
-                <!--botao de navegação-->
-                <div id="back-buttons">
-                    <button  type="submit" class="active-button">Início</button> >
-                    <button  type="submit" class="inactive-button">Produtos</button>
-                </div>
-                <br>
-                <fieldset>
-                    <section class = filter>
-                        <p id="filter-tittle">Filtros</p>
-                            <div class="selecao">
-                                <ul>
-                                    <li>
-                                        <input type="checkbox" id="caixa">
-                                        <label for="caixa">Canecas</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="caixa">
-                                        <label for="caixa">Tirantes</label>
-                                    </li>
-                                    <li> 
-                                        <input type="checkbox" id="caixa">
-                                        <label for="caixa"> Moletom</label>
-                                    </li>
-                                     <li>
-                                        <input type="checkbox" id="caixa">
-                                        <label for="caixa"> Kit Bixo</label>
-                                    </li>
-                                    </li>
-                                </ul> 
-                            </div>
-                    </section>
-                    <section class="produto">
-                            <div class="image-product">
-                                <img src="img/moletom_canguru_front.png"> 
-                                <p>Moletom Canguru Shrek</p>
-                                <p><b>R$ 120,00</b></p>
-                            </div>
-                            <div class="image-product">
-                                <img src="img/moletom_canguru_front.png"> 
-                                <p>Moletom Canguru Shrek</p>
-                                <p><b>R$ 120,00</b></p>
-                            </div>
-                            <div class="image-product">
-                                <img src="img/moletom_canguru_front.png"> 
-                                <p>Moletom Canguru Shrek</p>
-                                <p><b>R$ 120,00</b></p>
-                            </div>
-                            <div class="image-product">
-                                <img src="img/moletom_canguru_front.png"> 
-                                <p>Moletom Canguru Shrek</p>
-                                <p><b>R$ 120,00</b></p>
-                            </div>
-                            <div class="image-product">
-                                <img src="img/moletom_canguru_front.png"> 
-                                <p>Moletom Canguru Shrek</p>
-                                <p><b>R$ 120,00</b></p>
-                            </div>
-            
-                    </section>
-                </fieldset>
-            </main>
+            <div id="panel-title">Produtos</div>
+
+            <!--botao de navegação-->
+            <div class="tabs-history disable-selection">
+                <a href=""  class="active-tab">Início</a>
+                <span> > </span>
+                <span class="inactive-tab">Produtos</span>
+            </div>
+
+            <div class="content-box pruducts-panel">
+
+                <section class = filters>
+                    <span class="filters-title">Filtros</span>
+                    <fieldset class="checkboxes">
+                        <ul>
+                            <li>
+                                <input type="checkbox" id="canecas">
+                                <label for="canecas">Canecas</label>
+                            </li>
+
+                            <li>
+                                <input type="checkbox" id="tirantes">
+                                <label for="tirantes">Tirantes</label>
+                            </li>
+
+                            <li> 
+                                <input type="checkbox" id="moletom">
+                                <label for="moletom">Moletom</label>
+                            </li>
+
+                                <li>
+                                <input type="checkbox" id="kit-bixo">
+                                <label for="kit-bixo">Kit Bixo</label>
+                            </li>
+                        </ul> 
+                    </fieldset>
+                </section>
+
+                <section class="product-cards-panel">
+                    <div class="product-card"><a href="">
+                        <img class="product-thumb" src="img/moletom_canguru_front.png"> 
+                        <p>Moletom Canguru Shrek</p>
+                        <p class="product-price">R$ 120,00</p>
+                    </a></div>
+                    <div class="product-card"><a href="">
+                        <img class="product-thumb" src="img/moletom_canguru_front.png"> 
+                        <p>Moletom Canguru Shrek</p>
+                        <p class="product-price">R$ 120,00</p>
+                    </a></div>
+                    <div class="product-card"><a href="">
+                        <img class="product-thumb" src="img/moletom_canguru_front.png"> 
+                        <p>Moletom Canguru Shrek</p>
+                        <p class="product-price">R$ 120,00</p>
+                    </a></div>
+                    <div class="product-card"><a href="">
+                        <img class="product-thumb" src="img/moletom_canguru_front.png"> 
+                        <p>Moletom Canguru Shrek</p>
+                        <p class="product-price">R$ 120,00</p>
+                    </a></div>
+                    <div class="product-card"><a href="">
+                        <img class="product-thumb" src="img/moletom_canguru_front.png"> 
+                        <p>Moletom Canguru Shrek</p>
+                        <p class="product-price">R$ 120,00</p>
+                    </a></div>
+                    <div class="product-card"><a href="">
+                        <img class="product-thumb" src="img/moletom_canguru_front.png"> 
+                        <p>Moletom Canguru Shrek</p>
+                        <p class="product-price">R$ 120,00</p>
+                    </a></div>
+                </section>
+
+            </div>
+
+        </main>
+
         <footer>
 
             <div id="footer-info">

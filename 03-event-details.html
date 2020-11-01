@@ -7,10 +7,12 @@
         <meta http-equiv="Content-Type" content="text/html"; charset="UTF-8">
         <script src="https://kit.fontawesome.com/adf0c2d913.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="css/00-index.css">
-        <link rel="stylesheet" href="css/03-event-details.css">
+        <link rel="stylesheet" href="css/products-details.css">
+        <script type="text/javascript" src="js/product-details.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
     </head>
 
-    <body>
+    <body onload="initSlides()">
         <nav id="navbar">
             <div id="logo">
                 <img src="./img/logo.png"/>
@@ -30,43 +32,60 @@
         </nav>
 
         <main>
-            <div id="back-buttons">
-                <button  type="submit" class="active-button">Início</button> >
-                <button  type="submit" class="active-button">Produtos</button> >
-                <button  type="submit" class="inactive-button">Eventos</button>
+            <div class="tabs-history disable-selection">
+                <a href=""  class="active-tab">Início</a>
+                <span> > </span>
+                <a href=""  class="active-tab">Eventos</a>
+                <span> > </span>
+                <span class="inactive-tab">Moletom Canguru "SA-SHREK"</span>
             </div>
-            <br>
-            <fieldset>
-                <div class="group">
 
-                        
-                    <img id="event-photos" src="img/events/ticket-cervejada.png" alt="Imagem com fundo preto com pontinhos brancos (semelhante a um céu estrelado) e um ticket verde com um pedaço branco destacável no meio. Na parte verde escrito em preto 'Cervejada', 'Sinta o Pântano' e 'Data: 20/03' com 'A partir das 15h' logo abaixo. E na parte branca escrito 'Cervejada' 'Ingresso Individual' e o logo da SA-Shrek">
-
-
-                    <div id="event-infos">
-                        <div class="title">Cervejada "Sinta o Pântano"</div>
-                        <h2 class="green-elements">R$ 40,00</h2>
-                        <hr class="event-divisor">
-                        <strong>Sobre</strong>
-                        <br>
-                        <div id="about">A nossa tradicional cervejada do início do ano já chegou! Ela ocorerrá dia 20/03 a partir das 15h! Com muita música boa, com espaço de sobra pra você dançar e é claro muita lama! Você não vai ficar de fora dessa né? Não pastela!!! Corre pra garantir seu ingresso!</div>
-
-                        <hr class="event-divisor">
-                        <form id="event-options">           
-                            <strong>Quantidade</strong>
-                            <br>
-                            <input type="number" name="quantity" min="1" size="5" required>
-                            <br><br>
-                            <hr class ="event-divisor">
-                            <br>
-                            <input id="buy-botton" type="submit" name="buy" value="Comprar">
-                        </form>
+            <div class="content-box"> 
+                <div class="product-photos">
+                    <div class="thumbnail-panel">
+                        <img class="product-photo-thumb" src="img/events/ticket-cervejada.png" alt="Imagem com fundo preto com pontinhos brancos (semelhante a um céu estrelado) e um ticket verde com um pedaço branco destacável no meio. Na parte verde escrito em preto 'Cervejada', 'Sinta o Pântano' e 'Data: 20/03' com 'A partir das 15h' logo abaixo. E na parte branca escrito 'Cervejada' 'Ingresso Individual' e o logo da SA-Shrek">
+                    </div>
+                    
+                    <div class="large-photos">
+                        <img class="large-photo" src="img/events/ticket-cervejada.png" alt="Imagem com fundo preto com pontinhos brancos (semelhante a um céu estrelado) e um ticket verde com um pedaço branco destacável no meio. Na parte verde escrito em preto 'Cervejada', 'Sinta o Pântano' e 'Data: 20/03' com 'A partir das 15h' logo abaixo. E na parte branca escrito 'Cervejada' 'Ingresso Individual' e o logo da SA-Shrek">
                     </div>
                 </div>
-            
+
+                <div class="product-info">
+                    <span class="title">Ingresso - Cervejada "Sinta o Pântano"</span>
+                    <h2 class="green">R$40,00</h2>
+
+                    <hr class="product-divisor">
+                        
+                    <span><strong>Informações:</strong></span>
+                    <ul>
+                        <li>Local: Lorem Ipsum</li>
+                        <li>Data: 00/00/0000</li>
+                        <li>Horário: 00h00</li>
+                        <li><a href="" target="_blank" rel="noopener noreferrer">Evento no Facebook</a></li>
+                    </ul>
+                    
+                    <hr class="product-divisor">
+
+                    <form id="product-form">           
+                        <span><strong>Quantidade:</strong></span>
+                        <br>
+                        <input type="number" name="quantity" id="quantity" value="1" min="1" size="5" required>
+
+                        <hr class ="product-divisor">
+
+                        <button class="big-btn full-btn" type="submit" form="product-form">Comprar</button>
+                    </form>
+                </div>
+                
+                <div class="product-description">
+                    <hr class="product-divisor">
+                    <span class="title">Descrição</span>
+                    <p>A nossa tradicional cervejada do início do ano já chegou! Ela ocorerrá dia 20/03 a partir das 15h! Com muita música boa, com espaço de sobra pra você dançar e é claro muita lama! Você não vai ficar de fora dessa né? Não pastela!!! Corre pra garantir seu ingresso!</p>
+                </div>
+            </div>
         </main>
 
-        </fieldset>
 
         <footer>
 

@@ -1,73 +1,6 @@
-/* html, body {
-    font-family: Ubuntu, Roboto;
-    padding: 0;
-    margin: 0;
-    overflow-x: hidden;
-    background-color: #f1eff1;
-    background-color: #653b63;
-}   
-
-button {
-    cursor: pointer;
-}
-
-#navbar {
-    background-color: #202020;
-    text-align: center;
-    display: flex;
-    padding-top: 1%;
-    padding-bottom: 1%;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    z-index: 1;
-}
-
-#logo {
-    float: left;
-    width: 12%;
-    margin: auto;
-}
-
-#logo img {
-    width: 100%;
-    padding: 0;
-}
-
-#central-buttons {
-    margin: auto;
-    width: 18%;
-}
-
-#navbar ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-#navbar li {
-    display: inline-block;
-    color: #f1eff1;
-    margin-right: 2.5%;
-    margin-left: 2.5%;
-}
-
-#right-buttons {
-    float: right;
-    margin: auto;
-    width: 10%;
-} 
-
-main {
-    margin: auto;
-    width: 85%;
-    margin-top: 8%;
-    margin-bottom: 4%;
-    min-height: 465px;
-} */
-
 #forms-panel {
     text-align: center;
-
+    margin: auto;
 }
 
 #forms-panel fieldset {
@@ -83,12 +16,7 @@ main {
 
 .form {
     width: 40%;
-    margin: auto;
-    padding-top: 2%;
-    padding-bottom: 2%;
-    background-color: white;
-    border: solid 1px #cddbef;
-    border-radius: 10px;
+    padding: 2% 0 2% 0;
 }
 
 .active-form {
@@ -178,85 +106,3 @@ main {
     font-size: 14px;
     color: #a1b4b4;
 }
-
-/* footer {
-    background-color: #202020;
-    color: #f1eff1;
-    text-align: center;
-    padding-bottom: 1.4%;
-    padding-top: 1%
-}
-
-#footer-info {
-    display: flex;
-    justify-items: center;
-    align-content: center;
-    align-self: center;
-    align-items: center;
-    padding: 0;
-    width: 100%;
-}
-
-footer ul {
-    list-style-type: none;
-    padding: 0;
-    align-self: center;
-    align-content: center;
-    margin: auto;
-}
-
-footer li {
-    display: inline-block;
-    margin: auto;
-    vertical-align: middle;
-}
-
-#help {
-    vertical-align: middle;
-    width: 70%;
-    margin: auto;
-    float: left;
-}
-
-#help li {
-    margin-right: 10%;
-    margin-left: 10%;
-}
-
-#help p {
-    font-size: medium;
-}
-
-#divisor {
-    color: #f1eff1;
-    font-size: xx-large;
-    font-weight: lighter;
-    margin-right: auto;
-}
-
-#social-media {
-    color: #af7430;
-    vertical-align: middle;
-    width: 30%;
-    float: right;
-}
-
-#social-media li {
-    font-size: small;
-    margin-right: 3%;
-    margin-left: 3%;
-}
-
-hr.end {
-    border-top: 0.8px solid;
-    color: rgba(65, 65, 65, 0.315);
-    margin-right: 3%;
-    margin-left: 3%;
-
-}
-
-#credits {
-    margin-top: 2%;
-    font-size: small;
-}
-   */

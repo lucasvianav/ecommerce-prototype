@@ -1,3 +1,5 @@
+/* NAVBAR */
+
 * {
     font-family: Ubuntu, Roboto;
 }
@@ -58,48 +60,175 @@ html, body {
     width: 10%;
 } 
 
+
+/* TABS */
+
+.tabs-history {
+    margin-bottom: 0.5%;
+    margin-left: 0.3%;
+    font-size: 15px;
+    padding: 0;
+    color: black;
+}
+
+.tabs-history a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.active-tab {
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+.inactive-tab:hover {
+    cursor: initial;
+}
+
+
+/* MAIN */
+
 main {
     margin: auto;
     width: 85%;
-    margin-top: 8%;
+    height: 100%;
+    margin-top: 6%;
     margin-bottom: 4%;
-    min-height: 465px;
+    min-height: 520px;
 }
 
-.container{
-    margin-top: 80pt;
+.content-box {
+    margin: auto;
+    width: auto;
+    height: auto;
+    padding: 3% 4% 3% 4%;
+    background-color: white;
+    border: solid 1px #cddbef;
+    border-radius: 0.7rem;
 }
 
-section{
-    margin-bottom: 20pt;
+.disable-selection {
+    -webkit-user-select: none;  
+    -moz-user-select: none;    
+    -ms-user-select: none;      
+    user-select: none;
 }
 
-.no-space{
+.no-display {
+    display: none;
+}
+
+.green {
+    color: #a7e245;
+}
+
+.underlined {
+    text-decoration: underline;
+}
+
+.clicker:hover {
+    transition-duration: 0.15s;
+    cursor: pointer;
+    opacity: 0.95;
+}
+
+.title {
+    font-size: x-large;
+    font-weight: 550;
     margin: 0;
-    padding: 0;
+    padding: 1% 0 1% 0;
 }
 
-.no-space p{
-    margin: 0;
-    padding: 0;
+
+/* POPUPS */
+
+.modal {
+    z-index: 1;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.9);
+    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+    display: none;
+    overflow-y: auto;
 }
 
-#loginInfo{
-    flex-direction: column;
+.modal .content-box {
+    width: 55%;
+    height: auto;
+    padding: 0.5% 1% 1% 1%;
+    margin-top: 2%;
+    margin-bottom: 3.5%;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
-#loginInfoMobile{
-    flex-direction: column;
+
+/* BUTTONS */
+
+.small-btn {
+    width: 52%;
+    margin: auto;
+    margin-top: 4%;
+    font-size: 14px;
+    color: #92a5a5;
+    border-radius: 25px;
 }
 
-#altSenha{
-    right: 0;
-    margin-left: auto;
+.big-btn {
+    display: block;
+    min-width: 120px;
+    margin: auto;
+    margin-top: 6%;
+    margin-bottom: 1%;
+    font-size: 18px;
+    line-height: 40px;
+    border-radius: 25px;
+    border: none;
 }
 
-#produtosCadastrados{
-    flex-direction: column;
+.small-btn:hover,
+.big-btn:hover {
+    cursor: pointer;
+    transition-duration: 0.2s;
+    opacity: 0.7;
 }
+
+.full-btn {
+    color: white;
+    background-color: #a7e245;
+}
+
+.full-btn:hover {
+    transition-duration: .2s;
+    background-color: #b5e46b;
+    cursor: pointer;
+}
+
+
+.void-btn {
+    color: #a7e245;
+    border: 2px solid #a7e245;
+    background-color: transparent;
+}
+
+.void-btn:hover {
+    transition-duration: .3s;
+    background-color: #a7e245;
+    color: white;
+    cursor: pointer;
+}
+
+.void-btn:active {
+    transition-duration: 0;
+    background-color: #45c3e2;
+    border: 2px solid #45c3e2;
+}
+
+
+/* FOOTER */
 
 footer {
     background-color: #202020;
@@ -182,6 +311,49 @@ hr.end {
     font-size: small;
 }
 
-/* main {
-    min-height: 560px;
-} */
+
+/* ACCOUNT PAGES */
+
+.container{
+    margin-top: 80pt;
+}
+
+section{
+    margin-bottom: 20pt;
+}
+
+.no-space{
+    margin: 0;
+    padding: 0;
+}
+
+.no-space p{
+    margin: 0;
+    padding: 0;
+}
+
+#loginInfo{
+    flex-direction: column;
+}
+
+#loginInfoMobile{
+    flex-direction: column;
+}
+
+#altSenha{
+    right: 0;
+    margin-left: auto;
+}
+
+#produtosCadastrados{
+    flex-direction: column;
+}
+
+#dadosPessoais{
+    flex-direction: column;
+}
+
+#editarDados{
+    right: 0;
+    margin-left: auto;
+}

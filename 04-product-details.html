@@ -7,12 +7,13 @@
         <meta http-equiv="Content-Type" content="text/html"; charset="UTF-8">
         <script src="https://kit.fontawesome.com/adf0c2d913.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="css/00-index.css">
-        <link rel="stylesheet" href="css/04-product-details.css">
-        <script type="text/javascript" src="javaScript/04-product-details.js"></script>
+        <link rel="stylesheet" href="css/products-details.css">
+        <script type="text/javascript" src="js/product-details.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
 
     </head>
 
-    <body>
+    <body onload="initSlides()">
         <nav id="navbar">
             <div id="logo">
                 <img src= "./img/logo.png"/>
@@ -32,95 +33,82 @@
         </nav>
 
         <main>
-            <div id="back-buttons">
-                <button  type="submit" class="active-button">Início</button> >
-                <button  type="submit" class="active-button">Produtos</button> >
-                <button  type="submit" class="inactive-button">Moletons</button>
+            <div class="tabs-history disable-selection">
+                <a href=""  class="active-tab">Início</a>
+                <span> > </span>
+                <a href=""  class="active-tab">Eventos</a>
+                <span> > </span>
+                <span class="inactive-tab">Moletom Canguru "SA-SHREK"</span>
             </div>
-            <br>
-            <fieldset>
-                <div class="group">
 
-                    <div id="product-photos">
-                        
-                        <div class="container">
-                        
-                            <div id="thumbnail-photos">
-                                <div class="row">
-                                    <div class="column">
-                                        <img class="demo cursor" src="img/products\moletom_canguru_front.png" alt="Frente de um moletom branco com uma pequena estampa na frente com o logo da 'SA-Shrek' fundo preto com pontinhos brancos (semelhante a um céu estrelado)" style="width:100%" onclick="currentSlide(1)" alt="">
-                                    </div>
-                                    <div class="column">
-                                        <img class="demo cursor" src="img/products\moletom_canguru_back.png" alt="Costas de um moletom branco fundo preto com pontinhos brancos (semelhante a um céu estrelado)"style="width:100%" onclick="currentSlide(2)" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div id="large-photos">
-                                <div class="mySlides">
-                                    <img src="img/products\moletom_canguru_front.png" alt="Frente de um moletom branco com uma pequena estampa na frente com o logo da 'SA-Shrek' fundo preto com pontinhos brancos (semelhante a um céu estrelado)"style="width:100%">
-                                </div>
-
-                                <div id="display-none" class="mySlides">
-                                    <img src="img/products\moletom_canguru_back.png" alt="Costas de um moletom branco fundo preto com pontinhos brancos (semelhante a um céu estrelado)" style="width:100%">
-                                </div>
-                            </div>
-                            
-                        </div>
-                            
+            <div class="content-box">
+                <div class="product-photos">
+                    <div class="thumbnail-panel">
+                        <img class="product-photo-thumb" src="img/products\moletom_canguru_front.png" alt="Frente de um moletom branco com uma pequena estampa na frente com o logo da 'SA-Shrek' fundo preto com pontinhos brancos (semelhante a um céu estrelado)">
+                        <img class="product-photo-thumb" src="img/products\moletom_canguru_back.png" alt="Costas de um moletom branco fundo preto com pontinhos brancos (semelhante a um céu estrelado)">
                     </div>
-
-
-                    <div id="product-infos">
-                        <div class="title">Moletom Canguru "SA-Shrek"</div>
-                        <h2 class="green-elements">R$ 100,00</h2>
-                        <hr class="product-divisor">
-                        <br>
-
-                        <form id="product-options">           
-                            <strong>Modelagem:</strong>
-                            <a href="#size-options" class="green-elements"> Ver medidas</a>
-                            <br>
-                            <input type="radio" name="modeling" required> Feminino
-                            <input type="radio" name="modeling" required> Masculino
-                            <br><br>
-                            <strong>Tamanho:</strong>
-                            <br>
-                            <input type="radio" name="size" required> PP
-                            <input type="radio" name="size" required> P
-                            <input type="radio" name="size" required> M
-                            <input type="radio" name="size" required> G
-                            <input type="radio" name="size" required> GG 
-                            <br><br>
-                            <strong>Quantidade:</strong>
-                            <br>
-                            <input type="number" name="quantity" min="1" size="5" required>
-                            <br><br>
-                            <hr class ="product-divisor">
-                            <br>
-                            <input id="buy-botton" type="submit" name="buy" value="Comprar">
-                        </form>
+                    
+                    <div class="large-photos">
+                        <img src="img/products/moletom_canguru_front.png" class="large-photo" alt="Frente de um moletom branco com uma pequena estampa na frente com o logo da 'SA-Shrek' fundo preto com pontinhos brancos (semelhante a um céu estrelado)">
+                        <img src="img/products/moletom_canguru_back.png" class="large-photo" alt="Costas de um moletom branco fundo preto com pontinhos brancos (semelhante a um céu estrelado)">
                     </div>
                 </div>
+
+                <div class="product-info">
+                    <span class="title">Moletom Canguru "SA-SHREK"</span>
+                    <h2 class="green">R$100,00</h2>
+                    
+                    <form id="product-form">           
+                        <hr class="product-divisor">
+
+                        <span><strong>Modelagem:</strong></span>
+                        <br>
+                        <input type="radio" name="modeling" id="female" value="female" required><label for="female">Feminino</label>
+                        <input type="radio" name="modeling" id="male" value="male" required><label for="male">Masculino</label>
+                        <br><br>
+
+                        <span><strong>Tamanho:</strong></span>
+                        <br>
+                        <input type="radio" name="size" id="PP" value="PP" required><label for="PP">PP</label>
+                        <input type="radio" name="size" id="P" value="P" required><label for="P">P</label>
+                        <input type="radio" name="size" id="M" value="M" required><label for="M">M</label>
+                        <input type="radio" name="size" id="G" value="G" required><label for="G">G</label>
+                        <input type="radio" name="size" id="GG" value="GG" required><label for="GG">GG</label> 
+                        <br><br>
+
+                        <span class="green underlined clicker disable-selection" onclick='openModal("sizes-modal")'>Ver medidas</span>
+                        <br><br>
+
+                        <span><strong>Quantidade:</strong></span>
+                        <br>
+                        <input type="number" name="quantity" id="quantity" value="1" min="1" size="5" required>
+                        <br><br>
+
+                        <hr class ="product-divisor">
+
+                        <button class="big-btn full-btn" type="submit" form="product-form">Comprar</button>
+                    </form>
+                </div>
             
-
-            <div id="product-description">
-                <h1>Descrição</h1>
-                <ul>
-                    <li>Moletom branco modelo canguru com logo da SA-Shrek estampado na frente.</li>
-                    <li>Tecido 100% algodão de alta qualidade.</li>
-                    <li>Garantia de 6 meses contra erros de fabricação.</li>
-                </ul>
-            </div>
-
-            <div id="size-options">
-                <h1>Medidas</h1>
-                <img id="size-photo" src="img/products/size.png"
-                alt="Na imagem: Mokup de moletom e Tabela de Medidas. Na tabela há São 6 colunas. Na ordem: Tipo de medidas, P, M, G, GG, Tolerancia. E 3 linhas. Na ordem: Toráx, Comprimento, Comp. Manga. Na coluna P: 53, 69, 70. Na coluna M: 56, 71, 71. Na coluna GG: 62, 75, 73. Na coluna tolerancia: +-1.5, +-1.5, +-1.0. Observação em baixo da tabela: 'medidas em centímetros'.">
+                <div class="product-description">
+                    <hr class="product-divisor">
+                    <span class="title">Descrição</span>
+                    <ul>
+                        <li>Moletom branco modelo canguru com logo da SA-Shrek estampado na frente.</li>
+                        <li>Tecido 100% algodão de alta qualidade.</li>
+                        <li>Garantia de 6 meses contra erros de fabricação.</li>
+                    </ul>
+                </div>
             </div>
         </main>
 
-        </fieldset>
+
+        <section id="sizes-modal" class="modal">
+            <div class="content-box">
+                <span class="title">Medidas</span>
+                <img id="size-photo" src="img/products/size.png" alt="Na imagem: Mokup de moletom e Tabela de Medidas. Na tabela há São 6 colunas. Na ordem: Tipo de medidas, P, M, G, GG, Tolerancia. E 3 linhas. Na ordem: Toráx, Comprimento, Comp. Manga. Na coluna P: 53, 69, 70. Na coluna M: 56, 71, 71. Na coluna GG: 62, 75, 73. Na coluna tolerancia: +-1.5, +-1.5, +-1.0. Observação em baixo da tabela: 'medidas em centímetros'.">
+            </div>    
+        </section>
 
         <footer>
 
@@ -147,3 +135,4 @@
         </footer>
 
     </body>
+</html>

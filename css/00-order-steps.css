@@ -21,10 +21,10 @@ main {
 #navbar2{
     background-color: #202020;
     display: flex;
-    padding: 2.1% 2.1% 2.1% 2.1%;
+    padding: 2.1%;
     align-items: center;
     width: 100%;
-    height: 20%;
+    height: 6%;
     max-height: 200px;
     min-height: 100px;
 }
@@ -33,7 +33,6 @@ main {
     float: left;
     width: 10%;
     position: relative;
-    /*overflow:hidden*/
     padding: 0 1.5% 0 1.5%;
     max-width: 200px;
     min-width: 100px;
@@ -46,17 +45,12 @@ main {
 
 
 #title3{
-    margin: 0 auto;
+    margin: auto;
     color: rgb(39, 44, 44);
     font-size: 16px;
     font-weight: bold;
-    font-family: Arial,Helvetica,Verdana,sans-serif;
-    /*border-bottom: 4px solid rgb(33, 36, 36);*/
     width: 15%;
-    margin-bottom: 2%;
-    height: 10%px;
     text-decoration: underline;
-    margin-bottom: 2%;
 }
 
 /*.title3 > p{
@@ -80,6 +74,12 @@ main {
 .navbar2 ul,li{
     list-style: none;
  
+}
+
+.login {
+    padding-top: 2%;
+    padding-bottom: 2%;
+    width: 60%;
 }
 
 .steps{
@@ -148,7 +148,6 @@ main {
     flex-direction: column;
     padding: 0;
     margin: 0;
-    font-family:  sans-serif;
     font-size: 14px;
     font-weight: 500;
 }
@@ -163,7 +162,6 @@ hr.barra-or{
 
 
 .button-aux{
-    font-family:  sans-serif;
     color: rgb(107, 115, 116);
     text-decoration: none;
     font-size: 11pt;
@@ -438,7 +436,6 @@ input[type="radio"]:checked~.cards .select-btn> span{
     font-size: 12pt;
     font-weight: bold;
     margin: 0;
-    font-family: Arial,Helvetica,Verdana,sans-serif;
     height: min-content;
     padding: 0;
 }
@@ -568,18 +565,6 @@ input[type="radio"]:checked~.cards .select-btn> span{
 #confirmation-buy > p{
     margin: 2px 0 0 0;
     color: rgba(187, 187, 187, 0.973);
-}
-
-#confirmation-buy > button{
-background-image: linear-gradient(to top, rgb(185, 243, 93), rgb(166, 226, 70));
-border: 0;
-}
-
-#confirmation-buy > button:hover{
-    border: 0;
-    background-image: none;
-    background-color: rgb(185, 243, 93);
-    color: rgb(255, 255, 255)
 }
 
 #saved-cards{
@@ -716,9 +701,7 @@ border: 0;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: max-content;
-    background-color: rgb(255, 255, 255);
-    padding: 3.5% 3.5% 3.5% 3.5%;
-    margin: 0px auto;
+    margin: auto;
     width: 70%;
     min-width: 60%;
     max-width: 1000px;
@@ -728,7 +711,7 @@ border: 0;
     grid-template-columns: 1fr 1fr;
     column-gap: 7%;
     row-gap: 7%;
-    border-radius: 10px;
+    padding-top: 0;
 }
 
 
@@ -769,16 +752,15 @@ border: 0;
     display:flex;
     font-size: 22pt;
     color:  rgb(166, 226, 70);
-    padding-left: 6.8%;
+    margin: auto;
     grid-row: 3/4;
     grid-column: 1/3;
     align-content: center;
-    margin-top: 3%;
     text-shadow: rgba(158, 158, 158, 0.137) 0.1em 0.1em 0.2em;
 }
 
-#confirmation-text > p{
-    margin: 0 0 0 10px;
+#confirmation-text > span{
+    padding-left: 10px;
 }
 
 .text{
