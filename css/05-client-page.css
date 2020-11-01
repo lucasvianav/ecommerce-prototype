@@ -1,4 +1,4 @@
-*{
+/* *{
     font-family: Ubuntu, Roboto;
 }
 
@@ -56,7 +56,7 @@ html, body{
     float: right;
     margin: auto;
     width: 10%;
-} 
+}  */
 
 .container{
     margin-top: 80pt;
@@ -94,7 +94,7 @@ section{
     margin-left: auto;
 }
 
-footer {
+/* footer {
     background-color: #202020;
     color: #f1eff1;
     text-align: center;
@@ -173,4 +173,4 @@ hr.end {
 #credits {
     margin-top: 2%;
     font-size: small;
-}
+} */

@@ -1,10 +1,10 @@
-html, body {
+/* html, body {
     font-family: Ubuntu, Roboto;
     padding: 0;
     margin: 0;
     overflow-x: hidden;
     background-color: #f1eff1;
-    /* background-color: #653b63; */
+    background-color: #653b63;
 }   
 
 button {
@@ -63,7 +63,7 @@ main {
     margin-top: 8%;
     margin-bottom: 4%;
     min-height: 465px;
-}
+} */
 
 #forms-panel {
     text-align: center;
@@ -179,7 +179,7 @@ main {
     color: #a1b4b4;
 }
 
-footer {
+/* footer {
     background-color: #202020;
     color: #f1eff1;
     text-align: center;
@@ -259,4 +259,4 @@ hr.end {
     margin-top: 2%;
     font-size: small;
 }
-  
+   */

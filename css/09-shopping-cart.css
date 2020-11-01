@@ -1,4 +1,4 @@
-html, body{
+/* html, body{
     padding: 0;
     margin: 0;
     background-color: #f1eff1;
@@ -8,7 +8,7 @@ html, body{
     line-height: 1.42857;
     overflow-x: hidden;
     
-    /* background-color: #653b63; */
+    background-color: #653b63;
 }   
 ul,li{
     padding: 0;
@@ -59,17 +59,17 @@ ul,li{
     float: right;
     margin: auto;
     width: 10%;
-} 
+}  */
 
 /*--------CONTEUD0----------------------------*/
 
-main {
+/* main {
     margin: auto;
     width: 95%;
     margin-top: 8%;
     margin-bottom: -10%;
     height: 100%;
-}
+} */
 .button-aux{
     font-family:  sans-serif;
     color: rgb(107, 115, 116);
@@ -472,7 +472,7 @@ button#mais:hover
 
 /*FOOTER--------------------------*/
 
-footer {
+/* footer {
     background-color: #202020;
     color: #f1eff1;
     text-align: center;
@@ -551,4 +551,4 @@ hr.end {
     margin-top: 2%;
     font-size: small;
 }
-  
+   */

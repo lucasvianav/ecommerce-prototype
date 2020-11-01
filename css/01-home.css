@@ -1,4 +1,4 @@
-html, body {
+/* html, body {
     font-family: Ubuntu, Roboto;
     padding: 0;
     margin: 0;
@@ -57,7 +57,7 @@ main {
     margin-top: 8%;
     margin-bottom: 4%;
     min-height: 465px;
-}
+} */
 
 #gallery ul {
     list-style-type: none;
@@ -72,7 +72,7 @@ main {
     width: 400px;
 }
 
-footer {
+/* footer {
     background-color: #202020;
     color: #f1eff1;
     text-align: center;
@@ -151,24 +151,4 @@ hr.end {
 #credits {
     margin-top: 2%;
     font-size: small;
-}
-
-/*
-#divBusca{
-    background-color:#2F4F4F;
-    border:solid 1px;
-    border-radius:15px;
-    width:300px;
-  }
-  
-#txtBusca{
-    float:left;
-    background-color:transparent;
-    padding-left:5px;
-    font-style:italic;
-    font-size:18px;
-    border:none;
-    height:32px;
-    width:260px;
-}*/
-  
+} */
