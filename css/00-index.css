@@ -1,8 +1,13 @@
-/* NAVBAR */
-
 * {
     font-family: Ubuntu, Roboto;
 }
+
+button:hover {
+    cursor: pointer;
+}
+
+
+/* NAVBAR */
 
 html, body {
     font-family: Ubuntu, Roboto;
@@ -11,6 +16,7 @@ html, body {
     background-color: #f1eff1;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
 }
 
 #navbar {
@@ -23,6 +29,11 @@ html, body {
     position: fixed;
     top: 0;
     z-index: 1;
+}
+
+#navbar a {
+    color: inherit;
+    text-decoration: inherit;
 }
 
 #logo {
@@ -236,6 +247,11 @@ footer {
     text-align: center;
     padding-bottom: 1.4%;
     padding-top: 1%
+}
+
+footer a {
+    color: inherit;
+    text-decoration: inherit;
 }
 
 #footer-info {
