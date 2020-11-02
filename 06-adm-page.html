@@ -7,25 +7,25 @@
         <meta http-equiv="Content-Type" content="text/html"; charset="UTF-8">
         <script src="https://kit.fontawesome.com/adf0c2d913.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="css/00-bootstrap.css" />
-        <link rel="stylesheet" href="css/00-index.css" />
+        <link rel="stylesheet" href="css/index.css" />
     </head>
 
     <body onresize="invertConteudo()" onload="invertConteudo()">
         <nav id="navbar">
             <div id="logo">
-                <img src="./img/logo.png"/>
+                <a href="./01-home.html" target="_self"><img src="./img/logo.png" alt="Logo da SA-SHREK"/></a>
             </div>
 
             <ul id="central-buttons">
-                <li>Início</li>
-                <li>Produtos</li>
-                <li>Eventos</li>
+                <li><a href="./01-home.html" target="_self">Início</a></li>
+                <li><a href="./04-products.html" target="_self">Produtos</a></li>
+                <li><a href="./03-events.html" target="_self">Eventos</a></li>
             </ul>
         
             <ul id="right-buttons">
-                <li><i class="fas fa-search"></i></li>
-                <li><i class="fas fa-shopping-cart"></i></li>
-                <li>Conta</li>
+                <li><button type="button"><i class="fas fa-search"></i></button></li>
+                <li><a href="./09-shopping-cart.html" target="_self"><i class="fas fa-shopping-cart"></i></a></li>
+                <li><a href="./02-login.html" target="_self">Login</a></li>
             </ul>
         </nav>
 

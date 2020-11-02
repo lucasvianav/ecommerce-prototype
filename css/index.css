@@ -36,6 +36,12 @@ html, body {
     text-decoration: inherit;
 }
 
+#navbar button {
+    background-color: transparent;
+    border: none;
+    color: inherit;
+}
+
 #logo {
     float: left;
     width: 12%;
