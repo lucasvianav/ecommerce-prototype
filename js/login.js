@@ -274,8 +274,16 @@ function validateSignup(forms){
         // If no problem was found
         else{
             error.text("")
-            signup.submit()
-            fullSignup.submit()
+            
+            // Submits both forms
+            $.ajax({
+                type: "POST",
+                url: $(signup).attr('action'),
+                data: $(signup).serialize(),
+                success: function(){
+                    fullSignup.submit()
+                }
+            })
         }
 
     }
