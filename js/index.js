@@ -44,3 +44,8 @@ function closeModal(){
     document.removeEventListener("keydown", handleEsc);
     window.removeEventListener("click", handleWindowClick);
 }
+
+// String function to title case
+String.prototype.title = function () {
+    return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+}

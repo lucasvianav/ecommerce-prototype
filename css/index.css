@@ -28,7 +28,7 @@ html, body {
     width: 100%;
     position: fixed;
     top: 0;
-    z-index: 1;
+    z-index: 5;
 }
 
 #navbar a {
@@ -133,6 +133,11 @@ main {
 
 .no-display {
     display: none;
+}
+
+.invisible {
+    opacity: 0;
+	visibility: hidden;
 }
 
 .green {

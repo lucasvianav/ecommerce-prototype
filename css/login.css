@@ -195,8 +195,12 @@ main {
     display: none;
 }
 
-.form-recovery.active {
-
+.form-wrapper .error-message {
+	color: red;
+	font-size: smaller;
+	margin: auto;
+	font-weight: light;
+	text-align: left;
 }
 
 .switcher {
@@ -247,10 +251,6 @@ main {
     background-color: #eef9fe;
     border: 1px solid #cddbef;
     border-radius: 11px;
-}
-
-.invisible {
-    opacity: 0;
 }
 
 .small-btn {
@@ -317,5 +317,6 @@ main {
 
 
 .form-wrapper.active .invisible {
-    opacity: 1;
+	opacity: 1;
+	visibility: visible;
 }

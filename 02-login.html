@@ -9,9 +9,10 @@
         <link rel="stylesheet" href="css/index.css">
         <link rel="stylesheet" href="css/login.css">
         <script type="text/javascript" src="js/login.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
     </head>
 
-    <body onload="handleFormTabs(); handleForgotPwButton()">
+    <body onload="initializeScripts()">
         <nav id="navbar">
             <div id="logo">
                 <a href="./01-home.html" target="_self"><img src="./img/logo.png" alt="Logo da SA-SHREK"/></a>
@@ -37,8 +38,7 @@
                 <div class="form-wrapper active">
                     <button type="button" class="switcher switcher-login">LOGIN</button>
 
-                    <form id="login" class="form form-login">
-
+                    <form id="login" class="form form-login active">
                         <fieldset class="invisible">
                             <div class="input-block">
                                 <label for="login-email">Email</label><br>
@@ -47,18 +47,18 @@
 
                             <div class="input-block">
                                 <label for="login-password">Senha</label><br>
-                                <input id="login-password" type="password" required>
+                                <input id="login-password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,30}" minlength="8" maxlength="30" required>
                             </div>
 
                             <p id="forgot-button" class="small-btn">Esqueci minha senha</p>
                         </fieldset>
 
-                        <button form="login" type="submit" class="big-btn full-btn invisible">Login</button>
+                        <span class="error-message invisible"></span>
 
+                        <button form="login" type="submit" class="big-btn full-btn invisible">Login</button>
                     </form>
 
                     <form id="recovery" class="form form-recovery">
-
                         <fieldset class="invisible">
                             <div class="input-block">
                                 <label for="recovery-email">Email cadastrado:</label><br>
@@ -66,35 +66,81 @@
                             </div>
                         </fieldset>
 
-                        <button form="recovery" type="submit" class="big-btn full-btn invisible">Recuperar Senha</button>
+                        <span class="error-message invisible"></span>
 
+                        <button form="recovery" type="submit" class="big-btn full-btn invisible">Recuperar Senha</button>
                     </form>
                 </div>
 
                 <div class="form-wrapper">
                     <button type="button" class="switcher switcher-signup">CRIAR CONTA</button>
 
-                    <form id="sign-up" class="form form-signup">
-
+                    <form id="signup" name="signup" class="form form-signup">
                         <fieldset class="invisible">
                             <div class="input-block">
-                                <label for="sign-up-email">Email</label><br>
-                                <input id="sign-up-email" type="email" required>
+                                <label for="signup-email">Email</label><br>
+                                <input id="signup-email" type="email" name="email" required>
                             </div>
-
+                            
                             <div class="input-block">
-                                <label for="sign-up-password">Senha</label><br>
-                                <input id="sign-up-password" type="password" required>
+                                <label for="signup-password">Senha</label><br>
+                                <input 
+                                id="signup-password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,30}" maxlength="30" minlength="8"
+                                title="A senha deve onter pelo menos um número, uma letra minúscula e uma letra maiúscula. Deve possuir entre 8 e 30 caracteres."
+                                type="password" name="pw" required
+                                >
                             </div>
-
+                            
                             <div class="input-block">
-                                <label for="sign-up-conf-password">Confirmação de senha</label><br>
-                                <input id="sign-up-conf-password" type="password" required>
+                                <label for="signup-conf-password">Confirmação de senha</label><br>
+                                <input 
+                                id="signup-conf-password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,30}" 
+                                title="Repita a sua senha." maxlength="30" minlength="8"
+                                type="password" name="pwConfirmation" required
+                                >
                             </div>
                         </fieldset>
 
-                        <button form="sign-up" type="submit" class="big-btn void-btn invisible">Continuar</button>
+                        <span class="error-message invisible"></span>
+                        
+                        <button onclick="return validateSignup('signup')" form="signup" type="submit" class="big-btn void-btn invisible">Continuar</button>
+                    </form>
 
+                    <form id="full-signup" name="fullSignup" class="form form-full-signup">
+                        <fieldset>
+                            <div class="input-block">
+                                <label for="signup-name">Nome completo</label><br>
+                                <input id="signup-name" name="fullName" type="text" minlength="6" required>
+                            </div>
+    
+                            <div class="input-block">
+                                <label for="signup-birthday">Data de nascimento</label><br>
+                                <input id="signup-birthday" name="birthday" type="text" pattern="\d{2}/\d{2}/\d{4}" placeholder="DD/MM/AAAA" minlength="10" maxlength="10" required>
+                            </div>
+                        </fieldset>
+    
+                        <fieldset>
+                            <!-- <div class="input-block">
+                                <label for="signup-rg">RG</label><br>
+                                <input id="signup-rg" type="text" name="RG" title="0.000.000-0" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" maxlength="11" required>
+                            </div> -->
+    
+                            <div class="input-block">
+                                <label for="signup-cpf">CPF</label><br>
+                                <input id="signup-cpf" name="CPF" type="text" title="000.000.000-00" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" minlength="" maxlength="14" required>
+                            </div>
+                        </fieldset>
+    
+                        <fieldset>
+                            <div class="input-block">
+                                <label for="signup-phoneNumber">Celular</label><br>
+                                <input id="signup-phoneNumber" name="phoneNumber" type="tel" pattern="\(\d{2}\)\s\d{5}-\d{4}" title="(DDD) 90000-0000" minlength="14" maxlength="15" required>
+                            </div>
+                        </fieldset>
+
+                        <span class="error-message invisible"></span>
+    
+                        <button onclick="return validateSignup('fullSignup')" form="full-signup" type="submit" class="big-btn full-btn">Registrar</button>
                     </form>
                 </div>
 
