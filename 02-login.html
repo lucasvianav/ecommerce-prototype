@@ -8,11 +8,13 @@
         <script src="https://kit.fontawesome.com/adf0c2d913.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="css/index.css">
         <link rel="stylesheet" href="css/login.css">
-        <script type="text/javascript" src="js/login.js"></script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+        <!-- <script type="text/javascript" src="./js/jquery.color-2.1.2.min.js"></script> -->
         <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/login.js"></script>
     </head>
 
-    <body onload="initializeScripts()">
+    <body>
         <nav id="navbar">
             <div id="logo">
                 <a href="./01-home.html" target="_self"><img src="./img/logo.png" alt="Logo da SA-SHREK"/></a>
@@ -38,8 +40,8 @@
                 <div class="form-wrapper active">
                     <button type="button" class="switcher switcher-login">LOGIN</button>
 
-                    <form id="login" class="form form-login active">
-                        <fieldset class="invisible">
+                    <form id="login" class="form form-login active invisible-content">
+                        <fieldset>
                             <div class="input-block">
                                 <label for="login-email">Email</label><br>
                                 <input id="login-email" type="email" required>
@@ -50,33 +52,35 @@
                                 <input id="login-password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,30}" minlength="8" maxlength="30" required>
                             </div>
 
-                            <p id="forgot-button" class="small-btn">Esqueci minha senha</p>
+                            <p id="forgot-button" class="text-btn">Esqueci minha senha</p>
                         </fieldset>
 
-                        <span class="error-message invisible"></span>
+                        <span class="error-message"></span>
 
-                        <button form="login" type="submit" class="big-btn full-btn invisible">Login</button>
+                        <button form="login" type="submit" class="big-btn full-btn">Login</button>
                     </form>
 
-                    <form id="recovery" class="form form-recovery">
-                        <fieldset class="invisible">
+                    <form id="recovery" class="form form-recovery invisible-content no-display">
+                        <fieldset>
                             <div class="input-block">
                                 <label for="recovery-email">Email cadastrado:</label><br>
                                 <input id="recovery-email" type="email" required>
                             </div>
                         </fieldset>
 
-                        <span class="error-message invisible"></span>
+                        <span class="error-message"></span>
 
-                        <button form="recovery" type="submit" class="big-btn full-btn invisible">Recuperar Senha</button>
+                        <button form="recovery" type="submit" class="big-btn full-btn">Recuperar Senha</button>
+
+                        <p id="recovery-back" class="text-btn">Voltar</p>
                     </form>
                 </div>
 
                 <div class="form-wrapper">
                     <button type="button" class="switcher switcher-signup">CRIAR CONTA</button>
 
-                    <form id="signup" name="signup" class="form form-signup">
-                        <fieldset class="invisible">
+                    <form id="signup" name="signup" class="form form-signup invisible-content">
+                        <fieldset>
                             <div class="input-block">
                                 <label for="signup-email">Email</label><br>
                                 <input id="signup-email" type="email" name="email" required>
@@ -101,12 +105,12 @@
                             </div>
                         </fieldset>
 
-                        <span class="error-message invisible"></span>
+                        <span class="error-message"></span>
                         
-                        <button onclick="return validateSignup('signup')" form="signup" type="submit" class="big-btn void-btn invisible">Continuar</button>
+                        <button onclick="validateSignup('signup')" form="signup" type="button" class="big-btn void-btn">Continuar</button>
                     </form>
 
-                    <form id="full-signup" name="fullSignup" class="form form-full-signup">
+                    <form id="full-signup" name="fullSignup" class="form form-full-signup invisible-content no-display">
                         <fieldset>
                             <div class="input-block">
                                 <label for="signup-name">Nome completo</label><br>
@@ -120,11 +124,6 @@
                         </fieldset>
     
                         <fieldset>
-                            <!-- <div class="input-block">
-                                <label for="signup-rg">RG</label><br>
-                                <input id="signup-rg" type="text" name="RG" title="0.000.000-0" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" maxlength="11" required>
-                            </div> -->
-    
                             <div class="input-block">
                                 <label for="signup-cpf">CPF</label><br>
                                 <input id="signup-cpf" name="CPF" type="text" title="000.000.000-00" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" minlength="" maxlength="14" required>
@@ -138,9 +137,11 @@
                             </div>
                         </fieldset>
 
-                        <span class="error-message invisible"></span>
+                        <span class="error-message"></span>
     
-                        <button onclick="return validateSignup('fullSignup')" form="full-signup" type="submit" class="big-btn full-btn">Registrar</button>
+                        <button onclick="validateSignup('fullSignup')" form="full-signup" type="button" class="big-btn full-btn">Registrar</button>
+
+                        <p id="signup-back" class="text-btn">Voltar</p>
                     </form>
                 </div>
 
@@ -171,7 +172,6 @@
             <hr class ="end">
             <p id="credits">© 2020 SA-SHREK. Todos os direitos reservados. Tema desenvolvido por Avião, Flip, Rafaela, Phineas e Bia.</p>
         </footer>
-
     </body>
 
 

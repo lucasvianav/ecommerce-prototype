@@ -58,11 +58,16 @@ main {
 }
 
 .form-login {
-	animation: hideLogin .3s ease-out forwards;
+	background-color: #fff;
+	transform: translate(35%, -20px) scaleY(1);
 }
 
-.form-wrapper.active .form-login {
-	animation: showLogin .3s ease-in forwards;
+.hide-login {
+	animation: hideLogin .4s ease-out forwards;
+}
+
+.show-login {
+	animation: showLogin .4s ease-in forwards;
 }
 
 @keyframes showLogin {
@@ -93,11 +98,16 @@ main {
 	}
 }
 
-.form-recovery {
+.form-recovery{
+	background-color: #fff;
+	transform: translate(35%, -20px) scaleY(1);
+}
+
+.hide-recovery {
 	animation: hideRecovery .3s ease-out forwards;
 }
 
-.form-wrapper.active .form-recovery {
+.show-recovery {
 	animation: showRecovery .3s ease-in forwards;
 }
 
@@ -130,11 +140,16 @@ main {
 }
 
 .form-signup {
-	animation: hideSignup .3s ease-out forwards;
+	background: #d7e7f1;
+	transform: translate(-40%, 10px) scaleY(.8);
 }
 
-.form-wrapper.active .form-signup {
-	animation: showSignup .3s ease-in forwards;
+.hide-signup {
+	animation: hideSignup .4s ease-out forwards;
+}
+
+.show-signup {
+	animation: showSignup .4s ease-in forwards;
 }
 
 @keyframes showSignup {
@@ -165,6 +180,47 @@ main {
 	}
 }
 
+.form-full-signup {
+	background: #d7e7f1;
+	transform: translate(-40%, 10px) scaleY(.8);
+}
+
+.hide-full-signup {
+	animation: hideFullSignup .4s ease-out forwards;
+}
+
+.show-full-signup {
+	animation: showFullSignup .4s ease-in forwards;
+}
+
+@keyframes showFullSignup {
+	0% {
+		background: #d7e7f1;
+		transform: translate(-40%, 10px) scaleY(.7);
+	}
+	50% {
+		transform: translate(0, 0) scaleY(.7);
+	}
+	100% {
+		background-color: #fff;
+		transform: translate(-35%, -20px) scaleY(1);
+	}
+}
+
+@keyframes hideFullSignup {
+	0% {
+		background-color: #fff;
+		transform: translate(-35%, -20px) scaleY(1);
+	}
+	50% {
+		transform: translate(0, 0) scaleY(.7);
+	}
+	100% {
+		background: #d7e7f1;
+		transform: translate(-40%, 10px) scaleY(.7);
+	}
+}
+
 .form fieldset {
     border: none;
     position: relative;
@@ -178,8 +234,7 @@ main {
 }
 
 .form {
-    display: block;
-    width: 40%;
+	width: 40%;
     margin: auto;
     padding-top: 7%;
     padding-bottom: 7%;
@@ -190,11 +245,6 @@ main {
 	min-width: 260px;
 	transform-origin: top;
 }
-
-.form-recovery {
-    display: none;
-}
-
 .form-wrapper .error-message {
 	color: red;
 	font-size: smaller;
@@ -219,6 +269,10 @@ main {
 	border: none;
 	outline: none;
     transition: all .3s ease-out;
+}
+
+.switcher:hover {
+	cursor: pointer;
 }
 
 .form-wrapper.active .switcher {
@@ -253,63 +307,6 @@ main {
     border-radius: 11px;
 }
 
-.small-btn {
-    width: 52%;
-    min-width: 120px;
-    margin: auto;
-    margin-top: 4%;
-    font-size: 14px;
-    color: #92a5a5;
-}
-
-.small-btn:hover {
-    cursor: pointer;
-    transition-duration: 0.2s;
-    opacity: 0.7;
-    
-}
-
-.big-btn {
-    display: block;
-    min-width: 120px;
-    margin: auto;
-    margin-top: 6%;
-    margin-bottom: 1%;
-    font-size: 18px;
-    line-height: 40px;
-    border-radius: 25px;
-    border: none;
-}
-
-.full-btn {
-    color: white;
-    background-color: #a7e245;
-}
-
-.full-btn:hover {
-    transition-duration: .2s;
-    background-color: #b5e46b;
-}
-
-
-.void-btn {
-    color: #a7e245;
-    border: 2px solid #a7e245;
-    background-color: transparent;
-}
-
-.void-btn:hover {
-    transition-duration: .3s;
-    background-color: #a7e245;
-    color: white;
-}
-
-.void-btn:active {
-    transition-duration: 0;
-    background-color: #45c3e2;
-    border: 2px solid #45c3e2;
-}
-
 .input-block label {
     font-size: 14px;
     color: #92a5a5;
@@ -317,6 +314,11 @@ main {
 
 
 .form-wrapper.active .invisible {
+	opacity: 1;
+	visibility: visible;
+}
+
+.form-wrapper.active form.invisible-content * {
 	opacity: 1;
 	visibility: visible;
 }
