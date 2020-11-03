@@ -132,15 +132,15 @@ function validateSignup(forms){
             return false
         }
 
-        // Validar CPF
-        else if(){
+        // // VALIDAR CPF
+        // else if(){
 
-        }
+        // }
 
-        // Validar celular
-        else if(){
+        // // VALIDAR CELULAR
+        // else if(){
 
-        }
+        // }
 
         else{
             return true
