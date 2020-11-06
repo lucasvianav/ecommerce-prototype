@@ -180,20 +180,51 @@ function handleFullSignup(){
 function validateSignup(forms){
     if(forms === 'signup'){
         // Gets input data
+        let email = signup.email
         let pw = signup.pw
         let pwConf = signup.pwConfirmation
 
         // Error message element
-        let error = document.querySelector('#signup').querySelector('.error-message')
+        let error = $('#signup .error-message')
+    
+        /** Email Regex Explanation
+         * email format: username@thirdlevel.secondlevel.com, in which "com" is the higher level domain
+         * [\\w!#$%&’*+/=?`{|}~^-] - allows all characters as by RFC 5322 (which governs the email messa format)
+         * (?:\\.[\\w!#$%&’*+/=?`{|}~^-]+) -  restrict leading, trailing or consecutive dots in the username
+         * @(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6} - the domains can contain only lower and uppercase letters as well as digits and must contain at least one dot
+         * [a-zA-Z]{2,6} - the higher level domain (last part after the dot) must consist of two to six letter only
+         */
+        let emailRegex = RegExp("[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}")
+
+        /** Password Regex Explanation
+         * (?=\S*?[0-9]) - a digit must occur at least once
+         * (?=\S*?[a-z]) - a lower case letter must occur at least once
+         * (?=\S*?[A-Z]) - an upper case letter must occur at least once
+         * \S{8,} - at least 8 characters
+         * \S - no whitespace allowed
+         */
+        let pwRegex = RegExp("(?=\\S*?[0-9])(?=\\S*?[a-z])(?=\\S*?[A-Z])\\S{8,}")
+
+        // Validates the email
+        if(email.value === "" || !emailRegex.test(email.value)){
+            error.text("O email inserido é inválido.")
+            email.focus()
+        }
 
         // Validates the password
-        if(pw.value != pwConf.value){
-            error.innerHTML = "Ambas as senhas devem ser idênticas."
+        else if(!pwRegex.test(pw.value)){
+            error.text("A senha inserida é inválida.")
+            pw.focus()
+        }
+
+        // Validates the password confirmation
+        else if(pw.value != pwConf.value){
+            error.text("Ambas as senhas devem ser idênticas.")
             pwConf.focus()
         }
 
         else{
-            error.innerHTML = ""
+            error.text("")
             handleFullSignup()
         }
     }
@@ -235,8 +266,13 @@ function validateSignup(forms){
         let year = parts[2]
         let birthdate = new Date(year, month-1, day)
 
+        // Validates the name
+        if(name.value === "" || name.value.length < 6){
+            name.focus()
+        }
+
         // Validates the birthdate
-        if(!isValidDate(birthday.value)){
+        else if(birthday.value === "" || !isValidDate(birthday.value)){
             let errorMsg = "A data de nascimento inserida é inválida"
 
             if((new Date).getFullYear() - year < 0){
@@ -260,13 +296,13 @@ function validateSignup(forms){
         }
 
         // Validates the CPF
-        else if(!(new CPF).validate(cpf.value)){
+        else if(cpf.value === "" || !(new CPF).validate(cpf.value)){
             error.text("O CPF inserido é inválido.")
             cpf.focus()
         }
 
         // Validates the phonenumber
-        if(phone.value.substring(1,2) == '0' || phone.value.substring(1,3) == '10' || phone.value.substring(5,6) != '9'){
+        else if(phone.value === "" || phone.value.substring(1,2) === '0' || phone.value.substring(1,3) === '10' || phone.value.substring(5,6) != '9'){
             error.text("O número de celular inserido é inválido.")
             phone.focus()
         }
