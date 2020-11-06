@@ -88,12 +88,18 @@ html, body {
     color: inherit;
 }
 
-.active-tab {
+.past-tab {
     font-weight: bolder;
     cursor: pointer;
 }
 
-.inactive-tab:hover {
+.past-tab::after {
+    content: " > ";
+    cursor: initial;
+    font-weight: initial;
+}
+
+.current-tab:hover {
     cursor: initial;
 }
 
