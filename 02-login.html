@@ -43,12 +43,12 @@
                         <fieldset>
                             <div class="input-block">
                                 <label for="login-email">Email</label><br>
-                                <input id="login-email" type="email" required>
+                                <input id="login-email" type="email" name="email" required>
                             </div>
 
                             <div class="input-block">
                                 <label for="login-password">Senha</label><br>
-                                <input id="login-password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,30}" minlength="8" maxlength="30" required>
+                                <input id="login-password" type="password" name="pw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,30}" minlength="8" maxlength="30" required>
                             </div>
 
                             <p id="forgot-button" class="text-btn disable-selection">Esqueci minha senha</p>

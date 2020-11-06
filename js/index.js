@@ -1,44 +1,46 @@
 var currentModalId;
 
 function handleEsc(e){
-    // 'esc' = 27
-    if(e.which === 27) { closeModal(); }
+    if(e.key === 'Escape') { closeModal() }
 }
 
 function handleWindowClick(e) {
     let modal = document.querySelector('.modal#'+currentModalId)
 
     // If the modal is open, close it
-    if (e.target === modal){ closeModal(); } 
+    if (e.target === modal){ closeModal() } 
 }
 
 function openModal(id){
-    let modal = document.querySelector('.modal#'+id)
-    let scrollBarWidth = document.body.offsetWidth - document.body.clientWidth;
+    let modal = $('.modal#'+id)
+    let scrollBarWidth = parseFloat(document.body.offsetWidth - document.body.clientWidth)
 
     // Prevents the body (everything under the modal) to scroll
-    document.body.style.overflow = "hidden";
+    $('html').css('overflow-y', 'hidden')
+
     // Creates a margin to compensate the loss of the scrollbar width, so the document.body won't shift right
-    document.body.style.marginRight = scrollBarWidth + "px";
+    $('html').css('margin-right', scrollBarWidth + 'px')
+    // document.body.style.marginRight = scrollBarWidth + "px";
 
     // Shows the modal
-    modal.style.display = "block"
+    modal.show()
 
     currentModalId = id
-    document.addEventListener("keydown", handleEsc);
-    window.addEventListener("click", handleWindowClick);
+    document.addEventListener("keydown", handleEsc)
+    window.addEventListener("click", handleWindowClick)
 }
 
 function closeModal(){
-    let modal = document.querySelector('.modal#'+currentModalId)
+    let modal = $('.modal#'+currentModalId)
 
     // Lets the body scroll again
-    document.body.style.overflow = "auto";
+    $('html').css('overflow-y', 'auto')
+
     // Removes the scrollbar-compensation margin
-    document.body.style.marginRight = "0px";
+    $('html').css('margin-right', '0')
 
     // Hides the modal
-    modal.style.display = "none"
+    modal.hide()
     
     // currentModalId = null
     document.removeEventListener("keydown", handleEsc);

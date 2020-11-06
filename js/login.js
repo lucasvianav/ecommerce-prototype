@@ -208,18 +208,21 @@ function validateSignup(forms){
         // Validates the email
         if(email.value === "" || !emailRegex.test(email.value)){
             error.text("O email inserido é inválido.")
+            // $(email).css('border-color', 'red')
             email.focus()
         }
-
+        
         // Validates the password
         else if(!pwRegex.test(pw.value)){
             error.text("A senha inserida é inválida.")
+            // $(pw).css('border-color', 'red')
             pw.focus()
         }
-
+        
         // Validates the password confirmation
         else if(pw.value != pwConf.value){
             error.text("Ambas as senhas devem ser idênticas.")
+            // $(pwConf).css('border-color', 'red')
             pwConf.focus()
         }
 
