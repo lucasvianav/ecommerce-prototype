@@ -1,3 +1,43 @@
+$(function(){
+    $('#products-button').on('mouseenter mouseleave', handleNavbarDropdown)
+    $('#events-button').on('mouseenter mouseleave', handleNavbarDropdown)
+})
+
+function handleNavbarDropdown(e){
+    let dropdownMenu = $(e.target.parentElement).hasClass('dropdown') ? $(e.target.parentElement) : $('.dropdown', e.target.parentElement)
+
+    if(e.type === 'mouseenter'){
+        // Sets divisor padding
+        $('.divisor'. dropdownMenu).css('padding', dropdownMenu.css('width'))
+
+        dropdownMenu.show()
+
+        // Menu's full height
+        let previousHeight = $('ul', dropdownMenu).css('height')
+
+        // Animates from height 0 to full height
+        $('ul', dropdownMenu).css('height', '0')
+        $('ul', dropdownMenu).animate({ height: previousHeight }, 150)
+    }
+    
+    else if(e.type === 'mouseleave'){
+        // Animates from full height to height 0
+        $('ul', dropdownMenu).animate(
+            { height: '0'}, 
+            100, 
+            function(){ 
+                // Hides the menu
+                dropdownMenu.hide() 
+
+                // And sets it's height to automatic
+                $('ul', dropdownMenu).css('height', 'auto')
+            }
+        )
+    }
+}
+
+
+// Modal box
 var currentModalId;
 
 function handleEsc(e){
@@ -47,10 +87,12 @@ function closeModal(){
     window.removeEventListener("click", handleWindowClick);
 }
 
+
 // String function to title case
 String.prototype.title = function () {
     return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 }
+
 
 // CPF Validation
 class CPF {

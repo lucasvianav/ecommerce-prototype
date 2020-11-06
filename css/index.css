@@ -2,8 +2,6 @@
     font-family: Ubuntu, Roboto;
 }
 
-/* NAVBAR */
-
 html, body {
     font-family: Ubuntu, Roboto;
     padding: 0;
@@ -14,12 +12,18 @@ html, body {
     overflow-x: hidden;
 }
 
+
+/* NAVBAR */
+
 #navbar {
     background-color: #202020;
     text-align: center;
     display: flex;
-    padding-top: 1%;
-    padding-bottom: 1%;
+    flex-direction: row;
+    flex-flow: now;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    padding: 1% 0% 1% 0%;
     width: 100%;
     position: fixed;
     top: 0;
@@ -40,9 +44,8 @@ html, body {
 #logo {
     float: left;
     width: 12%;
-    margin: auto;
+    margin-left: 2%;
 }
-
 
 #logo img {
     width: 100%;
@@ -50,25 +53,56 @@ html, body {
 }
 
 #central-buttons {
-    margin: auto;
-    width: 18%;
+    width: 20%;
 }
 
 #navbar ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    flex-flow: row;
+    justify-content: space-evenly;
     list-style-type: none;
+    color: #f1eff1;
     padding: 0;
 }
 
-#navbar li {
-    display: inline-block;
-    color: #f1eff1;
-    margin-right: 2.5%;
-    margin-left: 2.5%;
+#navbar .dropdown {
+    display: flex;
+    flex-direction: column;
+    flex-flow: column;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+}
+
+#navbar .dropdown ul {
+    display: flex;
+    flex-direction: column;
+    flex-flow: column;
+    flex-wrap: nowrap;
+    margin-top: .5%;
+    padding: 0.7% 0.7% 0.3% 0.7%;
+    background-color: #202020;
+    border-top: 2px solid lightgrey;
+    position: absolute;
+    opacity: 0.95;
+    max-width: 100px;
+}
+
+#navbar .dropdown li {
+    margin: auto auto 20% auto;
+}
+
+#navbar .dropdown .divisor {
+    padding: 2%;
+    position: absolute;
 }
 
 #right-buttons {
     float: right;
-    margin: auto;
+    padding: 0;
+    margin-right: 1%;
     width: 10%;
 } 
 
@@ -123,48 +157,6 @@ main {
     background-color: white;
     border: solid 1px #cddbef;
     border-radius: 0.7rem;
-}
-
-.disable-selection {
-    -webkit-user-select: none;  
-    -moz-user-select: none;    
-    -ms-user-select: none;      
-    user-select: none;
-}
-
-.no-display {
-    display: none;
-}
-
-.invisible {
-    opacity: 0;
-	visibility: hidden;
-}
-
-.invisible-content * {
-    opacity: 0;
-    visibility: hidden;
-}
-
-.green {
-    color: #a7e245;
-}
-
-.underlined {
-    text-decoration: underline;
-}
-
-.clicker:hover {
-    transition-duration: 0.15s;
-    cursor: pointer;
-    opacity: 0.95;
-}
-
-.title {
-    font-size: x-large;
-    font-weight: 550;
-    margin: 0;
-    padding: 1% 0 1% 0;
 }
 
 
@@ -391,4 +383,49 @@ section{
 #editarDados{
     right: 0;
     margin-left: auto;
+}
+
+
+/* AUXILIAR */
+
+.disable-selection {
+    -webkit-user-select: none;  
+    -moz-user-select: none;    
+    -ms-user-select: none;      
+    user-select: none;
+}
+
+.no-display {
+    display: none;
+}
+
+.invisible {
+    opacity: 0;
+	visibility: hidden;
+}
+
+.invisible-content * {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.green {
+    color: #a7e245;
+}
+
+.underlined {
+    text-decoration: underline;
+}
+
+.clicker:hover {
+    transition-duration: 0.15s;
+    cursor: pointer;
+    opacity: 0.95;
+}
+
+.title {
+    font-size: x-large;
+    font-weight: 550;
+    margin: 0;
+    padding: 1% 0 1% 0;
 }
