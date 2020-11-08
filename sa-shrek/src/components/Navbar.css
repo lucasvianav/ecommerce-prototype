@@ -1,0 +1,92 @@
+/* NAVBAR */
+
+#navbar {
+    background-color: #202020;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    flex-flow: now;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    padding: 1% 0% 1% 0%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 5;
+}
+  
+#navbar a {
+    color: inherit;
+    text-decoration: inherit;
+}
+  
+#navbar button {
+    background-color: transparent;
+    border: none;
+    color: inherit;
+}
+  
+#logo {
+    float: left;
+    width: 12%;
+    margin-left: 2%;
+}
+  
+#logo img {
+    width: 100%;
+    padding: 0;
+}
+  
+#central-buttons {
+    width: 20%;
+}
+  
+#navbar ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    flex-flow: row;
+    justify-content: space-evenly;
+    list-style-type: none;
+    color: #f1eff1;
+    padding: 0;
+}
+  
+#navbar .dropdown {
+    display: flex;
+    flex-direction: column;
+    flex-flow: column;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+}
+  
+#navbar .dropdown ul {
+    display: flex;
+    flex-direction: column;
+    flex-flow: column;
+    flex-wrap: nowrap;
+    margin-top: .5%;
+    padding: 0.7% 0.7% 0.3% 0.7%;
+    background-color: #202020;
+    border-top: 2px solid lightgrey;
+    position: absolute;
+    opacity: 0.95;
+    max-width: 100px;
+}
+  
+#navbar .dropdown li {
+    margin: auto auto 20% auto;
+}
+  
+#navbar .dropdown .divisor {
+    padding: 2%;
+    position: absolute;
+}
+  
+#right-buttons {
+    float: right;
+    padding: 0;
+    margin-right: 1%;
+    width: 10%;
+} 

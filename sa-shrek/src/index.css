@@ -1,0 +1,262 @@
+* {
+  font-family: 'Ubuntu', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Oxygen',
+    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+
+body {
+  font-family: 'Ubuntu', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Oxygen',
+    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  padding: 0;
+  margin: 0;
+  background-color: #f1eff1;
+  /* background-color: green; */
+  overflow-x: hidden;
+  height: 100%;
+}
+
+#root {
+  /* height: 100%; */
+  /* height: 100%; */
+  margin: 0;
+  padding: 0;
+  /* background-color: blue; */
+}
+
+:root {
+  /* background-color: red; */
+}
+
+/* TABS */
+
+.tabs-history {
+  margin-bottom: 0.5%;
+  margin-left: 0.3%;
+  font-size: 15px;
+  padding: 0;
+  color: black;
+}
+
+.tabs-history a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.past-tab {
+  font-weight: bolder;
+  cursor: pointer;
+}
+
+.past-tab::after {
+  content: " > ";
+  cursor: initial;
+  font-weight: initial;
+}
+
+.current-tab:hover {
+  cursor: initial;
+}
+
+
+/* MAIN */
+
+main {
+  margin: auto;
+  width: 85%;
+  /* height: 100vh; */
+  margin-top: 6%;
+  margin-bottom: 4%;
+  /* min-height: 520px; */
+}
+
+.content-box {
+  margin: auto;
+  width: auto;
+  height: auto;
+  padding: 3% 4% 3% 4%;
+  background-color: white;
+  border: solid 1px #cddbef;
+  border-radius: 0.7rem;
+}
+
+
+/* POPUPS */
+
+.modal {
+  z-index: 1;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.9);
+  transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+  display: none;
+  overflow-y: auto;
+}
+
+.modal .content-box {
+  width: 55%;
+  height: auto;
+  padding: 0.5% 1% 1% 1%;
+  margin-top: 2%;
+  margin-bottom: 3.5%;
+  text-align: center;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+
+/* BUTTONS */
+
+.text-btn {
+  width: 52%;
+  margin: auto;
+  margin-top: 4%;
+  font-size: 14px;
+  color: #a7e245;
+  border-radius: 25px;
+}
+
+.big-btn {
+  display: block;
+  min-width: 120px;
+  margin: auto;
+  margin-top: 6%;
+  margin-bottom: 1%;
+  font-size: 18px;
+  line-height: 40px;
+  border-radius: 25px;
+  border: none;
+}
+
+.text-btn:hover {
+  cursor: pointer;
+  transition-duration: 0.2s;
+  opacity: 0.7;
+  text-decoration: underline;
+}
+
+.big-btn:hover {
+  cursor: pointer;
+  transition-duration: 0.2s;
+  opacity: 0.7;
+}
+
+.full-btn {
+  color: white;
+  background-color: #a7e245;
+}
+
+.full-btn:hover {
+  background-color: #b5e46b;
+}
+
+
+.void-btn {
+  color: #a7e245;
+  border: 2px solid #a7e245;
+  background-color: transparent;
+}
+
+.void-btn:hover {
+  background-color: #a7e245;
+  color: white;
+}
+
+.void-btn:active {
+  transition-duration: 0;
+  background-color: #45c3e2;
+  border: 2px solid #45c3e2;
+}
+
+/* ACCOUNT PAGES */
+
+/* .container{
+  margin-top: 80pt;
+}
+
+section{
+  margin-bottom: 20pt;
+}
+
+.no-space{
+  margin: 0;
+  padding: 0;
+}
+
+.no-space p{
+  margin: 0;
+  padding: 0;
+}
+
+#loginInfo{
+  flex-direction: column;
+}
+
+#loginInfoMobile{
+  flex-direction: column;
+}
+
+#altSenha{
+  right: 0;
+  margin-left: auto;
+}
+
+#produtosCadastrados{
+  flex-direction: column;
+}
+
+#dadosPessoais{
+  flex-direction: column;
+}
+
+#editarDados{
+  right: 0;
+  margin-left: auto;
+} */
+
+
+/* AUXILIAR */
+
+.disable-selection {
+  -webkit-user-select: none;  
+  -moz-user-select: none;    
+  -ms-user-select: none;      
+  user-select: none;
+}
+
+.no-display {
+  display: none;
+}
+
+.invisible {
+  opacity: 0;
+visibility: hidden;
+}
+
+.invisible-content * {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.green {
+  color: #a7e245;
+}
+
+.underlined {
+  text-decoration: underline;
+}
+
+.clicker:hover {
+  transition-duration: 0.15s;
+  cursor: pointer;
+  opacity: 0.95;
+}
+
+.title {
+  font-size: x-large;
+  font-weight: 550;
+  margin: 0;
+  padding: 1% 0 1% 0;
+}

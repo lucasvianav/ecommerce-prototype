@@ -1,0 +1,12 @@
+.scroll-gallery ul {
+    list-style-type: none;
+    width: 100%;
+    display: flex;
+    margin: auto;
+    overflow-x: scroll;
+    padding: 1%;
+}
+
+.scroll-gallery img {
+    width: 23.45vw;
+}
