@@ -1,26 +1,26 @@
 body, #root, :root {
-	background-color: #3b4f65;
 	/* background-color: #653b63; */
+	background-color: #3b4f65;
 }   
 
-main {
+main.Login {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
     align-items: center;
 }
 
-#forms-panel {
+.Login #forms-panel {
     text-align: center;
 	display: flex;
 	align-items: flex-start;
 }
 
-.form-wrapper {
+.Login .form-wrapper {
 	animation: hideLayer .3s ease-out forwards;
 }
 
-.form-wrapper.active {
+.Login .form-wrapper.active {
 	animation: showLayer .3s ease-in forwards;
 }
 
@@ -42,26 +42,26 @@ main {
 	}
 }
 
-.form-wrapper.active .switcher-login {
+.Login .form-wrapper.active .switcher-login {
 	color: #fff;
 	transform: translateX(90px);
 }
 
-.form-wrapper.active .switcher-signup {
+.Login .form-wrapper.active .switcher-signup {
 	color: #fff;
 	transform: translateX(-90px);
 }
 
-.form-login {
+.Login .form-login {
 	background-color: #fff;
 	transform: translate(35%, -20px) scaleY(1);
 }
 
-.hide-login {
+.Login .hide-login {
 	animation: hideLogin .4s ease-out forwards;
 }
 
-.show-login {
+.Login .show-login {
 	animation: showLogin .4s ease-in forwards;
 }
 
@@ -93,16 +93,16 @@ main {
 	}
 }
 
-.form-recovery{
+.Login .form-recovery{
 	background-color: #fff;
 	transform: translate(35%, -20px) scaleY(1);
 }
 
-.hide-recovery {
+.Login .hide-recovery {
 	animation: hideRecovery .3s ease-out forwards;
 }
 
-.show-recovery {
+.Login .show-recovery {
 	animation: showRecovery .3s ease-in forwards;
 }
 
@@ -134,16 +134,16 @@ main {
 	}
 }
 
-.form-signup {
+.Login .form-signup {
 	background: #d7e7f1;
 	transform: translate(-40%, 10px) scaleY(.8);
 }
 
-.hide-signup {
+.Login .hide-signup {
 	animation: hideSignup .4s ease-out forwards;
 }
 
-.show-signup {
+.Login .show-signup {
 	animation: showSignup .4s ease-in forwards;
 }
 
@@ -175,16 +175,16 @@ main {
 	}
 }
 
-.form-full-signup {
+.Login .form-full-signup {
 	background: #d7e7f1;
 	transform: translate(-40%, 10px) scaleY(.8);
 }
 
-.hide-full-signup {
+.Login .hide-full-signup {
 	animation: hideFullSignup .4s ease-out forwards;
 }
 
-.show-full-signup {
+.Login .show-full-signup {
 	animation: showFullSignup .4s ease-in forwards;
 }
 
@@ -216,7 +216,7 @@ main {
 	}
 }
 
-.form fieldset {
+.Login .form fieldset {
     border: none;
     position: relative;
 	margin: 0;
@@ -224,11 +224,11 @@ main {
 	transition: all .3s ease-out;
 }
 
-.form-wrapper.active fieldset {
+.Login .form-wrapper.active fieldset {
 	transition: opacity .4s ease-in, transform .35s ease-in;
 }
 
-.form {
+.Login .form {
 	width: 40%;
     margin: auto;
     padding-top: 7%;
@@ -241,15 +241,7 @@ main {
 	transform-origin: top;
 }
 
-.form-wrapper .error-message {
-	color: red;
-	font-size: smaller;
-	margin: auto;
-	font-weight: light;
-	text-align: left;
-}
-
-.switcher {
+.Login .switcher {
 	position: relative;
 	display: block;
     margin: auto;
@@ -267,11 +259,11 @@ main {
     transition: all .3s ease-out;
 }
 
-.switcher:hover {
+.Login .switcher:hover {
 	cursor: pointer;
 }
 
-.form-wrapper.active .switcher {
+.Login .form-wrapper.active .switcher {
     font-weight: bolder;
     padding: 0;
     padding-bottom: 2px;
@@ -279,7 +271,7 @@ main {
     border-bottom: 2px solid;
 }
 
-.input-block {
+.Login .input-block {
     padding: 0;
     width: 80%;
     margin: auto;
@@ -288,7 +280,7 @@ main {
     text-align: left;
 }
 
-.input-block input {
+.Login .input-block input {
     display: block;
 	width: 90%;
     margin: auto;
@@ -303,18 +295,18 @@ main {
     border-radius: 11px;
 }
 
-.input-block label {
+.Login .input-block label {
     font-size: 14px;
     color: #92a5a5;
 }
 
 
-.form-wrapper.active .invisible {
+.Login .form-wrapper.active .invisible {
 	opacity: 1;
 	visibility: visible;
 }
 
-.form-wrapper.active form.invisible-content * {
+.Login .form-wrapper.active form.invisible-content * {
 	opacity: 1;
 	visibility: visible;
 }

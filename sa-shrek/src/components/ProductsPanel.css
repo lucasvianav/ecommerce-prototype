@@ -1,17 +1,17 @@
-.product-thumb {
+.ProductsPanel .product-thumb {
 	max-width:100% ;
 	display: block;
     align-items: center;
     
 }
 
-.pruducts-panel {
+.ProductsPanel .pruducts-panel {
     display: flex; /*lado a lado*/
     padding: 1.5% 0 2% 0;
     
 }
 
-#panel-title{
+.ProductsPanel #panel-title{
     margin: auto; /*alinhando ao centro*/
     text-align: center;
     color: black;
@@ -19,7 +19,7 @@
     font-size: 20pt;
 }
 
-.product-cards-panel {
+.ProductsPanel .product-cards-panel {
     display: flex;
     flex-flow: row wrap;
     align-items: stretch;
@@ -31,7 +31,7 @@
     padding: 0;
 }
 
-.product-card {
+.ProductsPanel .product-card {
     display: block;
     /* flex-grow: 1; */
     background-color: #fdf9f9;
@@ -44,36 +44,58 @@
     border-radius: 1%;
 }
 
-.product-card a {
+.ProductsPanel .product-card a {
     color: inherit;
     text-decoration: none;
 }
 
-.product-card:hover {
+.ProductsPanel .product-card:hover {
     transition: 0.25s;
     cursor: pointer;
     opacity: 0.95;
 }
 
-.product-price {
+.ProductsPanel .product-title {
+    margin: 5% auto auto auto;
+}
+
+.ProductsPanel .price-line {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: baseline;
+    margin: auto;
+    padding: 0;
+    width: fit-content;
+    height: fit-content;
+}
+
+.ProductsPanel .full-price {
+    text-decoration: line-through;
+    color: #6d6d6d;
+    font-weight: 450;
+    font-size: 94%;
+    margin-right: 1.7%;
+    padding: 0;
+}
+
+.ProductsPanel .sale-price {
     font-weight: bolder;
 }
 
-
 /* FILTROS */
 
-.filters {
+.ProductsPanel .filters {
     margin-left: 2%;
     margin-right: 3%;
     width: fit-content;
 }
 
-.filters-title {
+.ProductsPanel .filters-title {
     color: black;
     font-size: 20px;
 }
 
-.checkboxes {
+.ProductsPanel .checkboxes {
     background-color: #fdf9f9;
     border: 1px solid #cddbef; 
     width: auto;
@@ -82,7 +104,7 @@
     margin-top: 2.5%;
 }
 
-.checkboxes ul {
+.ProductsPanel .checkboxes ul {
     display: flex;
     flex-direction: column;
     list-style-type: none;
@@ -90,7 +112,7 @@
     margin: 0;
 }
 
-.checkboxes li {
+.ProductsPanel .checkboxes li {
     display: flex;
     flex-direction: row;
     flex-flow: row;

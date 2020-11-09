@@ -4,7 +4,7 @@
     sans-serif;
 }
 
-body {
+html, body {
   font-family: 'Ubuntu', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Oxygen',
     'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -13,15 +13,17 @@ body {
   background-color: #f1eff1;
   /* background-color: green; */
   overflow-x: hidden;
-  height: 100%;
+  overflow-y: auto;
+  box-sizing: border-box;
+  /* height: 100%;
+  display: flex;
+  flex-flow: column nowrap; */
 }
 
 #root {
-  /* height: 100%; */
-  /* height: 100%; */
-  margin: 0;
-  padding: 0;
-  /* background-color: blue; */
+  /* height: 100vh; */
+  /* flex-grow: 1; */
+  /* background-color: darkred; */
 }
 
 :root {
@@ -62,11 +64,10 @@ body {
 /* MAIN */
 
 main {
-  margin: auto;
+  box-sizing: border-box;
+  /* margin: auto; */
+  margin: 6% auto 4% auto;
   width: 85%;
-  /* height: 100vh; */
-  margin-top: 6%;
-  margin-bottom: 4%;
   /* min-height: 520px; */
 }
 
@@ -84,7 +85,7 @@ main {
 /* POPUPS */
 
 .modal {
-  z-index: 1;
+  z-index: 5;
   position: fixed;
   left: 0;
   top: 0;
@@ -98,6 +99,8 @@ main {
 
 .modal .content-box {
   width: 55%;
+  display: flex;
+  flex-flow: column nowrap;
   height: auto;
   padding: 0.5% 1% 1% 1%;
   margin-top: 2%;
@@ -259,4 +262,12 @@ visibility: hidden;
   font-weight: 550;
   margin: 0;
   padding: 1% 0 1% 0;
+}
+
+.error-message {
+	color: red;
+	font-size: smaller;
+	margin: auto;
+	font-weight: light;
+	text-align: left;
 }

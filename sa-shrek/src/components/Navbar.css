@@ -2,10 +2,10 @@
 
 #navbar {
     background-color: #202020;
+    opacity: 0.98;
     text-align: center;
     display: flex;
     flex-direction: row;
-    flex-flow: now;
     flex-wrap: nowrap;
     justify-content: space-between;
     padding: 1% 0% 1% 0%;

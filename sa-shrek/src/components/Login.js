@@ -189,7 +189,7 @@ const isValidDate = (date) => {
     let year = parseInt(parts[2], 10)
 
     // Check the ranges of month and year
-    if(date === "" || year < 1920 || year > (new Date).getFullYear() - 15 || month == 0 || month > 12){ return false }
+    if(date === "" || year < 1920 || year > (new Date).getFullYear() - 15 || month === 0 || month > 12){ return false }
 
     // It is not necessary to consider leap years
     let monthLength = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ]
@@ -201,7 +201,7 @@ const isValidDate = (date) => {
 const isValidPhoneNumber = (number) => {
     // +DDI (DDD) 9XXXX-XXXX
     // +00 (00) 90000-0000
-    return !(number === "" || number.substring(5,6) === '0' || number.substring(5,7) === '10' || number.substring(9,10) != '9')
+    return !(number === "" || number.substring(5,6) === '0' || number.substring(5,7) === '10' || number.substring(9,10) !== '9')
 }
 
 // CPF Validation
@@ -217,7 +217,7 @@ class CPF {
         
         this.isValid = function (o) {
             for (var a = o.replace(/\D/g, ""), u = a.substring(0, 9), f = a.substring(9, 11), v = 0; 10 > v; v++)
-                if ("" + u + f == "" + v + v + v + v + v + v + v + v + v + v + v)
+                if ("" + u + f === "" + v + v + v + v + v + v + v + v + v + v + v)
                     return n; var c = r(u), e = t(u + "" + c); return f.toString() === c.toString() + e.toString() ? i : n;
         };
     }
@@ -339,7 +339,7 @@ class Login extends React.Component {
         }
         
         // Validates the password confirmation
-        else if(signupPw != pwConfirmation){
+        else if(signupPw !== pwConfirmation){
             error.text("Ambas as senhas devem ser idênticas.")
             $(forms.pwConfirmation).focus()
             
@@ -443,7 +443,7 @@ class Login extends React.Component {
 
     render(){
         return(
-            <main>
+            <main className="Login">
                 <div id="forms-panel">
                     <div className="form-wrapper active">
                         <button type="button" className="switcher switcher-login">LOGIN</button>
