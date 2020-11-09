@@ -460,7 +460,7 @@ class Login extends React.Component {
                                     <input onChange={this.handleChange} id="login-password" type="password" name="loginPw" value={this.state.pw} pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,30}" minLength="8" maxLength="30" required/>
                                 </div>
 
-                                <p id="forgot-button" className="text-btn disable-selection">Esqueci minha senha</p>
+                                <p id="forgot-button" className="text-btn green disable-selection">Esqueci minha senha</p>
                             </fieldset>
 
                             <span className="error-message"></span>
@@ -480,7 +480,7 @@ class Login extends React.Component {
 
                             <button form="recovery" type="submit" className="big-btn full-btn">Recuperar Senha</button>
 
-                            <p id="recovery-back" className="text-btn disable-selection">Voltar</p>
+                            <p id="recovery-back" className="text-btn green disable-selection">Voltar</p>
                         </form>
                     </div>
 
@@ -549,7 +549,7 @@ class Login extends React.Component {
         
                             <button form="full-signup" type="submit" className="big-btn full-btn">Registrar</button>
 
-                            <p id="signup-back" className="text-btn disable-selection">Voltar</p>
+                            <p id="signup-back" className="text-btn green disable-selection">Voltar</p>
                         </form>
                     </div>
 

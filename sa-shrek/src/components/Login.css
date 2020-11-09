@@ -300,6 +300,14 @@ main.Login {
     color: #92a5a5;
 }
 
+.Login .text-btn {
+	margin-top: 4%;
+}
+
+.Login .big-btn {
+	margin-top: 6%;
+	margin-bottom: 1%;
+}
 
 .Login .form-wrapper.active .invisible {
 	opacity: 1;

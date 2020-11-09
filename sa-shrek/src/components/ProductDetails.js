@@ -142,6 +142,7 @@ class ProductDetails extends React.Component {
 
     render(){
         return(
+            !this.product ? '' :
             <main className="ProductDetails">
                 <div className="tabs-history disable-selection">
                     <Link to='/' className='past-tab'><span>Início</span></Link>

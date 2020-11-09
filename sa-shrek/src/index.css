@@ -115,18 +115,27 @@ main {
 .text-btn {
   width: 52%;
   margin: auto;
-  margin-top: 4%;
   font-size: 14px;
-  color: #a7e245;
   border-radius: 25px;
+  color: inherit;
+  border: none;
+  background: none;
+}
+
+.small-btn {
+  display: block;
+  min-width: 60px;
+  margin: auto;
+  font-size: 18px;
+  line-height: 23px;
+  border-radius: 25px;
+  border: none;
 }
 
 .big-btn {
   display: block;
   min-width: 120px;
   margin: auto;
-  margin-top: 6%;
-  margin-bottom: 1%;
   font-size: 18px;
   line-height: 40px;
   border-radius: 25px;
@@ -140,7 +149,7 @@ main {
   text-decoration: underline;
 }
 
-.big-btn:hover {
+.big-btn:hover, .small-btn:hover {
   cursor: pointer;
   transition-duration: 0.2s;
   opacity: 0.7;
@@ -173,52 +182,6 @@ main {
   border: 2px solid #45c3e2;
 }
 
-/* ACCOUNT PAGES */
-
-/* .container{
-  margin-top: 80pt;
-}
-
-section{
-  margin-bottom: 20pt;
-}
-
-.no-space{
-  margin: 0;
-  padding: 0;
-}
-
-.no-space p{
-  margin: 0;
-  padding: 0;
-}
-
-#loginInfo{
-  flex-direction: column;
-}
-
-#loginInfoMobile{
-  flex-direction: column;
-}
-
-#altSenha{
-  right: 0;
-  margin-left: auto;
-}
-
-#produtosCadastrados{
-  flex-direction: column;
-}
-
-#dadosPessoais{
-  flex-direction: column;
-}
-
-#editarDados{
-  right: 0;
-  margin-left: auto;
-} */
-
 
 /* AUXILIAR */
 
@@ -244,11 +207,19 @@ visibility: hidden;
 }
 
 .green {
-  color: #a7e245;
+  color: #a7e245 !important; 
+}
+
+.grey {
+  color: rgb(107, 115, 116) !important;
 }
 
 .underlined {
   text-decoration: underline;
+}
+
+.not-decorated {
+  text-decoration: none !important;
 }
 
 .clicker:hover {
