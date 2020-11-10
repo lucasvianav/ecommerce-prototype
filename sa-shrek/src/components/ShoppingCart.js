@@ -45,7 +45,7 @@ class ShoppingCart extends React.Component {
         }
 
         this.handleChange = this.handleChange.bind(this)
-        this.handleCoupon = this.handleChange.bind(this)
+        this.handleCoupon = this.handleCoupon.bind(this)
     }
 
     handleChange(e, sku, quantity, specs){
@@ -80,54 +80,15 @@ class ShoppingCart extends React.Component {
                }
             })   
         }
-
-        // if(e.target.name === 'remove' && this.context.deleteFromCart(sku)){
-        //     this.setState(prevState => {
-        //         const newCart = prevState.cart.filter(item => item.sku !== sku)
-        //         const subtotal = newCart.reduce((acc, item) => acc + (item.price * item.quantity), 0)
-
-        //         return {
-        //             cart: newCart,
-        //             subtotal: subtotal,
-        //             total: subtotal - prevState.discount
-        //         }
-        //     })
-        // }
-        
-        // else if(quantity > 0 && this.context.addToCart(sku, quantity, specs)){
-        //     this.setState(prevState => { 
-        //         const newCart = prevState.cart.map(item => {
-        //             if(item.sku === sku){ item.quantity += quantity }
-        //             return item
-        //         })
-        //         const subtotal = newCart.reduce((acc, item) => acc + (item.price * item.quantity), 0)
-
-        //         return {
-        //             cart: newCart,
-
-        //         }
-        //     })
-        // }
-
-        // else if(quantity < 0 && this.context.removeFromCart(sku, Math.abs(quantity))){
-        //     this.setState(prevState => { 
-        //         return {
-        //             cart: prevState.cart.map(item => {
-        //                 if(item.sku === sku){ item.quantity -= Math.abs(quantity) }
-        //                 return item
-        //             })
-        //         }
-        //     })
-        // }
     }
 
-    handleCoupon(e){
-        alert('oi')
+    handleCoupon(){
         const coupon = this.context.coupons.find(item => item.str === this.state.coupon)
 
         let field = $('#coupon')
+
         if(coupon){
-            const discount = (coupon.type === 'percentage') ? this.state.subtotal * coupon.discount/100 : coupon.discount
+            const discount = (coupon.type === 'percentage') ? parseFloat(this.state.subtotal) * parseFloat(coupon.discount)/100 : parseFloat(coupon.discount)
 
             this.setState(prevState => {
                 return {
@@ -227,7 +188,7 @@ class ShoppingCart extends React.Component {
 
                         <div className="coupon row">
                             <input onChange={this.handleChange} id='coupon' name="coupon" value={this.state.coupon} type="text" minLength='1' placeholder="Inserir cupom"/>  
-                            <button type='button' className="small-btn void-btn">OK</button>
+                            <button onClick={this.handleCoupon} type='button' className="small-btn void-btn">OK</button>
                         </div>
                     </div>
 
