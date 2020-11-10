@@ -4,7 +4,7 @@ import $ from 'jquery'
 import {openModal} from '../aux'
 
 import './ProductDetails.css'
-import data from '../data'
+import { DataContext } from '../Context'
 
 // Called when the html completes loading
 $(function(){
@@ -52,25 +52,30 @@ function showSlides(n){
 }
 
 class ProductDetails extends React.Component {
-    constructor(props){
-        super(props)
+    static contextType = DataContext
 
-        const {match: {params: {sku: sku}, path}} = this.props
+    constructor(props, context){
+        super(props, context)
+
+        const {data} = this.context
+
+        const {match: {params: {id: id}, path}} = this.props
         const productList = (path.split('/')[1].toLowerCase() === 'eventos') ? data.events : data.products
         
-        this.product = productList.find(item => item.sku === sku) ? productList.find(item => item.sku === sku) : false
+        this.product = productList.find(item => item.id === id) ? productList.find(item => item.id === id) : false
         this.tab = path.split('/')[1].title()
         
         if(!this.product || !this.product.visibility){ this.props.history.push('/') }
 
         this.state = {
+            color: '',
             template: '',
             size: '',
-            color: '',
-            quantity: 0
+            quantity: 1
         }
 
         this.handleChange = this.handleChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     handleChange(e){
@@ -85,59 +90,42 @@ class ProductDetails extends React.Component {
         // inputs selected (color, template, size)
         let stock = this.product.stock
         if(typeof(stock) === 'object'){
-            stock = this.product.colors.isEmpty() ? stock.noColor : (this.state.color ? eval('stock.' + this.state.color) : 0)
+            stock = this.product.colors.isEmpty() ? stock['VOID'] : (this.state.color ? stock[this.state.color] : 0)
             
             if(typeof(stock) === 'object'){
-                stock = this.product.templates.isEmpty() ? stock.noTemplate : (this.state.template ? eval('stock.' + this.state.template) : 0)
+                stock = this.product.templates.isEmpty() ? stock['VOID'] : (this.state.template ? stock[this.state.template] : 0)
                 
                 if(typeof(stock) === 'object'){
-                    stock = this.product.sizes.isEmpty() ? stock.noSize : (this.state.size ? eval('stock.' + this.state.size) : 0)
+                    stock = this.product.sizes.isEmpty() ? stock['VOID'] : (this.state.size ? stock[this.state.size] : 0)
                 }
             }
         }
 
-        // if(this.tab.toLowerCase() === 'eventos'){ stock = this.product.stock }
-        // else if(!this.product.colors.isEmpty()){
-        //     if(this.state.color){
-        //         if(!this.product.templates.isEmpty()){
-        //             if(this.state.template){
-        //                 if(!this.product.sizes.isEmpty()){
-        //                     if(this.state.size){
-        //                         stock = eval('this.product.stock.' + this.state.color + '.' + this.state.template + '.' + this.state.size)
-        //                     } else{ stock = 0 } }
-        //                 else{ stock = eval('this.product.stock.' + this.state.color + '.' + this.state.template) }
-        //             } else{ stock = 0 } }
-        //         else{
-        //             if(!this.product.sizes.isEmpty()){
-        //                 if(this.state.size){
-        //                     stock = eval('this.product.stock.' + this.state.color + '.' + this.state.size)
-        //                 } else{ stock = 0 } }
-        //             else{ stock = eval('this.product.stock.' + this.state.color) } }
-        //     } else{ stock = 0 } }
-        // else{
-        //     if(!this.product.templates.isEmpty()){
-        //         if(this.state.template){
-        //             if(!this.product.sizes.isEmpty()){
-        //                 if(this.state.size){
-        //                     stock = eval('this.product.stock.' + this.state.template + '.' + this.state.size)
-        //                 } else{ stock = 0 } }
-        //             else{ stock = eval('this.product.stock.' + this.state.template) }
-        //         } else{ stock = 0 } }
-        //     else{
-        //         if(!this.product.sizes.isEmpty()){
-        //             if(this.state.size){
-        //                 stock = eval('this.product.stock.' + this.state.size)
-        //             } else{ stock = 0 } }
-        //         else{ stock = eval('this.product.stock') } }
-        // }
-
-        if(name === 'quantity' && 0 <= value && value <= stock){ 
-            this.setState({quantity: value})
+        if(name === 'quantity' && 0 < value && value <= stock){ 
+            this.setState({quantity: parseInt(value)})
             $('.error-message').text('')
         }
         else if(value > stock){ 
             $('.error-message').text('Infelizmente esse é o estoque máximo deste item.') 
         }
+    }
+
+    handleSubmit(e){
+        const {template, size, color, quantity} = this.state
+
+        let sku = this.tab.substring(0,2).toUpperCase() + '-' + this.product.id
+        let specs = {color: color, template: template, size: size}
+
+        if(this.tab.toLowerCase() === 'produtos'){
+            sku += color ? '-' + color.substring(0,4).toUpperCase() + '-' : '-VOID-'
+            sku += template ? template.substring(0,4).toUpperCase() + '-' : 'VOID-'
+            sku += size ? size : 'VOID'
+        }
+
+        this.context.addToCart(sku, quantity, specs)
+        this.props.history.push('/carrinho')
+
+        e.preventDefault()
     }
 
     render(){
@@ -179,7 +167,7 @@ class ProductDetails extends React.Component {
                         {
                             (this.tab.toLowerCase() === 'eventos')
                             ? (
-                                <form id="product-form">           
+                                <form onSubmit={this.handleSubmit} id="product-form">           
                                     <span><strong>Informações:</strong></span>
                                     <ul>
                                         {this.product.info.location ? <li>Local: {this.product.info.location}</li> : ''}
@@ -201,7 +189,7 @@ class ProductDetails extends React.Component {
                                 </form>
                             )
                             : (
-                                <form id="product-form">
+                                <form onSubmit={this.handleSubmit} id="product-form">
                                     {
                                         (!this.product.colors.isEmpty())
                                         ? (
@@ -301,10 +289,7 @@ class ProductDetails extends React.Component {
                 {
                     (this.tab.toLowerCase() !== 'produtos' || !this.product.img) ? '' :
                     <section id="sizes-modal" className="modal">
-                        <div className="content-box">
-                            <span className="title">Medidas</span>
-                            <img id="size-photo" src={this.product.sizeTable.img} alt={this.product.sizeTable.alt}/>
-                        </div>    
+                        <img id="size-photo" src={this.product.sizeTable.img} alt={this.product.sizeTable.alt}/>
                     </section>
                 }
             </main>

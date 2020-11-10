@@ -1,47 +1,53 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import $ from 'jquery'
-import data from '../data'
 
 import './ProductsPanel.css'
+import { DataContext } from '../Context'
 
 class ProductsPanel extends React.Component {
-    constructor(props){
-        super(props)
+    static contextType = DataContext
+
+    constructor(props, context){
+        super(props, context)
         
+        const {data} = this.context
+
         // Selects product data accordingly to page title (products x events)
-        let fullData
-        if(this.props.title === 'Eventos'){ fullData = data.events.map(item => item) }
-        else if(this.props.title === 'Produtos'){ fullData = data.products.map(item => item) }
+        let products
+        if(this.props.title === 'Eventos'){ products = data.events.map(item => item) }
+        else if(this.props.title === 'Produtos'){ products = data.products.map(item => item) }
         else{ return false }
 
         this.title = this.props.title
 
         this.state = {
-            data: fullData,
-            products: fullData,
+            data: products,
+            products: products,
             activeFilters: 0,
-            categories: fullData.filter(value => value.visibility).map(item => item.category).filter((value, index, self) => (self.indexOf(value) === index))
+            categories: products.filter(value => value.visibility).map(item => item.category).filter((value, index, self) => (self.indexOf(value) === index))
         }
 
         this.handleFilters = this.handleFilters.bind(this)
     }
 
-    componentDidUpdate(e){
+    componentDidUpdate(){
+        const {data} = this.context
+
         if(this.title !== this.props.title){
             // Selects product data accordingly to page title (products x events)
-            let fullData
-            if(this.props.title === 'Eventos'){ fullData = data.events.map(item => item) }
-            else if(this.props.title === 'Produtos'){ fullData = data.products.map(item => item) }
+            let products
+            if(this.props.title === 'Eventos'){ products = data.events.map(item => item) }
+            else if(this.props.title === 'Produtos'){ products = data.products.map(item => item) }
             else{ return false }
 
             this.title = this.props.title
 
             const newState = {
-                data: fullData,
-                products: fullData,
+                data: products,
+                products: products,
                 activeFilters: 0,
-                categories: fullData.filter(value => value.visibility).map(item => item.category).filter((value, index, self) => (self.indexOf(value) === index))
+                categories: products.filter(value => value.visibility).map(item => item.category).filter((value, index, self) => (self.indexOf(value) === index))
             }
 
             this.setState(newState)
@@ -107,7 +113,7 @@ class ProductsPanel extends React.Component {
                         {
                             this.state.products.map((item) =>
                                 item.visibility ?
-                                <div className="product-card" key={item.sku}><Link to={'/' + this.title.toLowerCase() + '/' + item.sku }>
+                                <div className="product-card" key={item.id}><Link to={'/' + this.title.toLowerCase() + '/' + item.id }>
                                     <img className="product-thumb" src={item.img[0].small} alt={item.img[0].alt}/> 
                                     <p className="product-title">{item.name}</p>
                                     <div className="price-line">

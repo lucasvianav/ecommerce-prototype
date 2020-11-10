@@ -107,7 +107,7 @@ class ProductCategoryPanel extends React.Component {
                         {
                             this.state.products.map(item =>
                                 item.visibility ?
-                                <div className="product-card"><Link to={'/' + this.title.toLowerCase() + '/' + item.sku }>
+                                <div className="product-card"><Link to={'/' + this.title.toLowerCase() + '/' + item.id }>
                                     <img className="product-thumb" src={item.img[0].small} alt={item.img[0].alt}/> 
                                     <p className="product-title">{item.name}</p>
                                     <div className="price-line">

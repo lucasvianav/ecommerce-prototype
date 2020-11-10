@@ -2,8 +2,150 @@ import React from 'react'
 import $ from 'jquery'
 
 import './ShoppingCart.css'
+import { DataContext } from '../Context'
+import { Link } from 'react-router-dom'
 
 class ShoppingCart extends React.Component {
+    static contextType = DataContext
+
+    constructor(props, context){
+        super(props, context)
+
+        const {cart, data} = this.context
+        
+        let cartList = []
+        for(let item of cart){
+            let sku = item.sku.split('-')
+            let product = sku[0] === 'PR' 
+                ? data.products.find(el => el.id === sku[1])
+                : data.events.find(el => el.id === sku[1])
+
+            cartList.push({
+                name: product.name,
+                id: sku[1],
+                type: sku[0],
+                sku: item.sku,
+                cover: {img: product.img[0].small, alt: product.img[0].alt},
+                specs: item.specs,
+                quantity: item.quantity,
+                price: product.price.sale,
+            })
+        }
+
+        const subtotal = cartList.reduce((acc, item) => acc + (item.price * item.quantity), 0)
+
+        this.state = {
+            cart: cartList,
+            subtotal: subtotal,
+            coupon: '',
+            hasCoupon: false,
+            activateCoupon: '',
+            discount: 0,
+            total: subtotal
+        }
+
+        this.handleChange = this.handleChange.bind(this)
+        this.handleCoupon = this.handleChange.bind(this)
+    }
+
+    handleChange(e, sku, quantity, specs){
+        if(e.type === 'change' && e.target.name === 'coupon'){
+            this.setState({coupon: e.target.value})
+            return
+        }
+
+        const filter = (e.target.name === 'remove' && this.context.deleteFromCart(sku))
+            ? item => item.sku !== sku
+            : (quantity > 0 && this.context.addToCart(sku, quantity, specs))
+                ? item => { if(item.sku === sku){ item.quantity += quantity }; return item }
+                : (quantity < 0 && this.context.removeFromCart(sku, Math.abs(quantity)))
+                    ? item => { if(item.sku === sku){ item.quantity -= Math.abs(quantity) }; return item }
+                    : false
+
+        if(filter){
+            console.log(filter)
+
+            this.setState(prevState => {
+               const newCart = prevState.cart.filter(filter)
+               const subtotal = newCart.reduce((acc, item) => acc + (item.price * item.quantity), 0)
+
+               console.log(newCart, subtotal)
+
+               return {
+                   cart: newCart,
+                   subtotal: subtotal,
+                   hasCoupon: false,
+                   activatedCoupon: '',
+                   total: subtotal
+               }
+            })   
+        }
+
+        // if(e.target.name === 'remove' && this.context.deleteFromCart(sku)){
+        //     this.setState(prevState => {
+        //         const newCart = prevState.cart.filter(item => item.sku !== sku)
+        //         const subtotal = newCart.reduce((acc, item) => acc + (item.price * item.quantity), 0)
+
+        //         return {
+        //             cart: newCart,
+        //             subtotal: subtotal,
+        //             total: subtotal - prevState.discount
+        //         }
+        //     })
+        // }
+        
+        // else if(quantity > 0 && this.context.addToCart(sku, quantity, specs)){
+        //     this.setState(prevState => { 
+        //         const newCart = prevState.cart.map(item => {
+        //             if(item.sku === sku){ item.quantity += quantity }
+        //             return item
+        //         })
+        //         const subtotal = newCart.reduce((acc, item) => acc + (item.price * item.quantity), 0)
+
+        //         return {
+        //             cart: newCart,
+
+        //         }
+        //     })
+        // }
+
+        // else if(quantity < 0 && this.context.removeFromCart(sku, Math.abs(quantity))){
+        //     this.setState(prevState => { 
+        //         return {
+        //             cart: prevState.cart.map(item => {
+        //                 if(item.sku === sku){ item.quantity -= Math.abs(quantity) }
+        //                 return item
+        //             })
+        //         }
+        //     })
+        // }
+    }
+
+    handleCoupon(e){
+        alert('oi')
+        const coupon = this.context.coupons.find(item => item.str === this.state.coupon)
+
+        let field = $('#coupon')
+        if(coupon){
+            const discount = (coupon.type === 'percentage') ? this.state.subtotal * coupon.discount/100 : coupon.discount
+
+            this.setState(prevState => {
+                return {
+                hasCoupon: true,
+                coupon: '',
+                activateCoupon: coupon,
+                total: prevState.subtotal - discount,
+                discount: discount
+            }})
+
+            field.css('border', '1px solid #cddbef')
+        }
+
+        else{
+            field.css('border', '1px solid red')
+        }
+    }
+
     render(){
         return(
             <main className="ShoppingCart">
@@ -11,52 +153,51 @@ class ShoppingCart extends React.Component {
                     <span className="section-title">Carrinho de compras</span>
 
                     <section className="products-panel">
-                        <ul className="header-row">
-                            <li className='invisible'>Imagem</li>
-                            <li className='name'>Produto</li>
-                            <li className="quantity">Quantidade</li>
-                            <li className='price'>Valor</li>
-                        </ul>
+                        {
+                            this.state.cart.isEmpty() ? <span className='empty grey'>Seu carrinho está vazio.</span> :
+                            <ul className="header-row">
+                                <li className='invisible'>Imagem</li>
+                                <li className='name'>Produto</li>
+                                <li className="quantity">Quantidade</li>
+                                <li className='price'>Valor</li>
+                            </ul>
+                        }
 
-                        <div className="product-list">
-                            <section className='product-card'>
-                                <img src="img/moletom_canguru_back.png"/>
+                        {
+                            this.state.cart.isEmpty() ? '' :
+                            <div className="product-list">
+                                {
+                                    this.state.cart.map(item =>
+                                        <section className='product-card' key={item.sku}>
+                                            <Link to={(item.type === 'PR' ? '/produtos/' : '/eventos/') + item.id} className='link'><img src={item.cover.img} alt={item.cover.alt}/></Link>
 
-                                <span className='name'>Moletom Canguru Shrek</span>
+                                            <div className='product-title'>
+                                            <Link to={(item.type === 'PR' ? '/produtos/' : '/eventos/') + item.id }><span className='name'>{item.name}</span></Link>
 
-                                <div className="quantity">
-                                    <div className='controls'>
-                                        <button type="button"><i className="fa fa-minus "aria-hidden="true"></i></button>
-                                        <input type="number" name="numero" value="1" className="num" id="p1" min="1"/> 
-                                        <button type="button"><i className="fa fa-plus" aria-hidden="true"></i></button>
-                                    </div>
-                                    
-                                    <span className='break-flex'></span>
-                                    <button className="text-btn grey">Excluir Item</button>
-                                </div>
+                                                <div className='info grey'>
+                                                    {!item.specs.color ? '' : <span>{item.specs.color} - </span>}
+                                                    {!item.specs.template ? '' : <span>{item.specs.template} - </span>}
+                                                    {!item.specs.size ? '' : <span>{item.specs.size}</span>}
+                                                </div>
+                                            </div>
 
-                                <span className='price'>R$120,00</span>
-                            </section>
+                                            <div className="quantity">
+                                                <div className='controls'>
+                                                    <button onClick={(e) => this.handleChange(e, item.sku, -1)} name='decrease' type="button"><i className="fa fa-minus" aria-hidden="true"></i></button>
+                                                    <input type="number" className='disable-selection' name={'qty_' + item.sku} value={this.state.cart.find(el => el.sku === item.sku).quantity} min="1" readOnly/> 
+                                                    <button onClick={(e) => this.handleChange(e, item.sku, +1, item.specs)} name='increase' type="button"><i className="fa fa-plus" aria-hidden="true"></i></button>
+                                                </div>
+                                                
+                                                <span className='break-flex'></span>
+                                                <button className="text-btn grey remove disable-selection" name='remove' onClick={(e) => this.handleChange(e, item.sku)}>Excluir item</button>
+                                            </div>
 
-                            <section className='product-card'>
-                                <img src="img/events/ticket-cervejada.png"/>
-
-                                <span className='name'>Cervejada: "Sinta o Pântano!"</span>
-
-                                <div className="quantity">
-                                    <div className='controls'>
-                                        <button type="button"><i className="fa fa-minus "aria-hidden="true"></i></button>
-                                        <input type="number" name="numero" value="1" className="num" id="p1" min="1"/> 
-                                        <button type="button"><i className="fa fa-plus" aria-hidden="true"></i></button>
-                                    </div>
-                                    
-                                    <span className='break-flex'></span>
-                                    <button className="text-btn grey">Excluir Item</button>
-                                </div>
-
-                                <span className='price'>R$40,00</span>
-                            </section>
-                        </div>
+                                            <span className='price'>R${(item.price * item.quantity).toFixed(2).replace('.',',')}</span>
+                                        </section>
+                                    )
+                                }
+                            </div>
+                        }
                     </section>
 
                     <div className="order-summary">
@@ -64,26 +205,29 @@ class ShoppingCart extends React.Component {
                             <h3>Resumo da compra</h3>
 
                             <div className="row">
-                                <p><strong>Itens:</strong></p>
-                                <p>+ R$160,00</p>
+                                <p><strong>Subtotal (produtos):</strong></p>
+                                <p>R${this.state.subtotal.toFixed(2).replace('.',',')}</p>
                             </div>
 
-                            <div className="row">
-                                <p><strong>Cupom de desconto:</strong></p>
-                                <p>- R$15,40</p>
-                            </div>
+                            {
+                                !this.state.hasCoupon ? '' :
+                                <div className="row">
+                                    <p><strong>Cupom de desconto:</strong></p>
+                                    <p>- R${this.state.discount.toFixed(2).replace('.',',')}</p>
+                                </div>
+                            }
 
                             <div className="row total green">
-                                <p>Subtotal:</p>
-                                <p>R$175,40</p>
+                                <p>Total:</p>
+                                <p>R${this.state.total.toFixed(2).replace('.',',')}</p>
                             </div>
 
                             <button className="big-btn full-btn">Continuar</button>
                         </div>
 
                         <div className="coupon row">
-                            <input id='coupon' name="coupon" type="text" placeholder="Inserir cupom"/>  
-                            <button className="small-btn void-btn">OK</button>
+                            <input onChange={this.handleChange} id='coupon' name="coupon" value={this.state.coupon} type="text" minLength='1' placeholder="Inserir cupom"/>  
+                            <button type='button' className="small-btn void-btn">OK</button>
                         </div>
                     </div>
 

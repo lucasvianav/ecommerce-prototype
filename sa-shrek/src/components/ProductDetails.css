@@ -152,19 +152,11 @@ hr.product-divisor {
     margin: 3.5% auto 3.5% 0;
 }
 
-.ProductDetails #sizes-modal.modal .content-box {
-    width: fit-content;
-    height: fit-content;
-    padding-top: 0.3%;
-    margin: 0;
+.ProductDetails #sizes-modal.modal img {
     position: absolute;
     top: 50%;
     right: 50%;
     transform: translate(50%, -50%);
-}
-
-.ProductDetails #sizes-modal.modal .content-box img {
-    margin-top: 0.5%;
 }
 
 .ProductDetails .no-display {
