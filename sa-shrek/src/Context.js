@@ -20,11 +20,19 @@ export class DataProvider extends React.Component {
                         {small: '/img/products/moletom_canguru_back.png', large: '/img/products/moletom_canguru_back.png', alt: `Costas de um moletom branco fundo preto com pontinhos brancos (semelhante a um céu estrelado)`}
                     ],
                     sizeTable: {img: '/img/products/size.png', alt: `Na imagem: Mokup de moletom e Tabela de Medidas. Na tabela há São 6 colunas. Na ordem: Tipo de medidas, P, M, G, GG, Tolerancia. E 3 linhas. Na ordem: Toráx, Comprimento, Comp. Manga. Na coluna P: 53, 69, 70. Na coluna M: 56, 71, 71. Na coluna GG: 62, 75, 73. Na coluna tolerancia: +-1.5, +-1.5, +-1.0. Observação em baixo da tabela: 'medidas em centímetros'.`},
-                    stock: { // stock: { colors: {templates: {sizes: int} } }
-                        VOID: {
-                            Feminino: {PP: 5, P: 5, M: 5, G: 5, GG: 5, EXG: 0},
-                            Masculino: {PP: 5, P: 5, M: 5, G: 5, GG: 5, EXG: 5}
-                        }
+                    stock: {
+                        'PR-P1-VOID-MASC-PP': 5,
+                        'PR-P1-VOID-MASC-P': 5,
+                        'PR-P1-VOID-MASC-M': 5,
+                        'PR-P1-VOID-MASC-G': 5,
+                        'PR-P1-VOID-MASC-GG': 5,
+                        'PR-P1-VOID-MASC-EXG': 5,
+                        'PR-P1-VOID-FEMI-PP': 5,
+                        'PR-P1-VOID-FEMI-P': 5,
+                        'PR-P1-VOID-FEMI-M': 5,
+                        'PR-P1-VOID-FEMI-G': 5,
+                        'PR-P1-VOID-FEMI-GG': 5,
+                        'PR-P1-VOID-FEMI-EXG': 0
                     },
                     id: 'P1'
                 },
@@ -138,7 +146,7 @@ export class DataProvider extends React.Component {
                     info: {location: 'Lorem Ipsum', date: 'dd/mm/yyyy', time: '00h00', link: {text: 'Link para o facebook', url: 'https://facebook.com/'}},
                     price: {full: 50.00, sale: 40.00},
                     img: [{small: '/img/cervejada.png', large: '/img/cervejada.png', alt: ''}],
-                    stock: 10,
+                    stock: {'EV-E1': 10},
                     id: 'E1'
                 },
                 {
@@ -222,20 +230,7 @@ export class DataProvider extends React.Component {
 
         let {cart} = this.state
 
-        // Gets current item's stock accordingly to the
-        // inputs selected (color, template, size)
-        let stock = product.stock
-        if(typeof(stock) === 'object'){
-            stock = product.colors.isEmpty() ? stock['VOID'] : (specs.color ? stock[specs.color] : 0)
-            
-            if(typeof(stock) === 'object'){
-                stock = product.templates.isEmpty() ? stock['VOID'] : (specs.template ? stock[specs.template] : 0)
-                
-                if(typeof(stock) === 'object'){
-                    stock = product.sizes.isEmpty() ? stock['VOID'] : (specs.size ? stock[specs.size] : 0)
-                }
-            }
-        }
+        const stock = product.stock[sku] ? parseInt(product.stock[sku]) : 0
 
         var output = true
 
@@ -289,14 +284,6 @@ export class DataProvider extends React.Component {
     deleteFromCart(sku){
         this.setState(prevState => {return {cart: prevState.cart.filter(item => item.sku !== sku)}})
         return true
-
-        // let cart = this.state.cart.map(item => item)
-
-        // if(cart.some(item => item.sku === sku)){
-        //     cart = cart.filter(item => item.sku !== sku)
-
-        //     this.setState({cart: cart})
-        // }
     }
 
     addToCart = this.addToCart.bind(this)

@@ -63,13 +63,10 @@ class ShoppingCart extends React.Component {
                     : false
 
         if(filter){
-            console.log(filter)
-
             this.setState(prevState => {
                const newCart = prevState.cart.filter(filter)
                const subtotal = newCart.reduce((acc, item) => acc + (item.price * item.quantity), 0)
 
-               console.log(newCart, subtotal)
 
                return {
                    cart: newCart,

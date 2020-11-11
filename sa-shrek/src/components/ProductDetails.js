@@ -42,7 +42,6 @@ class ProductDetails extends React.Component {
         this.product = productList.find(item => item.id === base) ? productList.find(item => item.id === base) : false
         this.tab = tab.title()
         
-        console.log('in', base, this.props, this.product, this.tab)
         if(!this.product || !this.product.visibility){ this.props.history.push('/') }
 
         this.state = {
@@ -54,6 +53,7 @@ class ProductDetails extends React.Component {
 
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.generateSKU = this.generateSKU.bind(this)
     }
 
     componentDidMount(){
@@ -81,6 +81,19 @@ class ProductDetails extends React.Component {
         })
     }
 
+    generateSKU(){
+        const {template, size, color} = this.state
+        
+        let sku = this.tab.substring(0,2).toUpperCase() + '-' + this.product.id
+        if(this.tab.toLowerCase() === 'produtos'){
+            sku += color ? '-' + color.substring(0,4).toUpperCase() + '-' : '-VOID-'
+            sku += template ? template.substring(0,4).toUpperCase() + '-' : 'VOID-'
+            sku += size ? size : 'VOID'
+        }
+
+        return sku
+    }
+
     handleChange(e){
         const {name, value} = e.target
 
@@ -89,25 +102,13 @@ class ProductDetails extends React.Component {
             $('.error-message').text('')
         }
         
-        // Gets current item's stock accordingly to the
-        // inputs selected (color, template, size)
-        let stock = this.product.stock
-        if(typeof(stock) === 'object'){
-            stock = this.product.colors.isEmpty() ? stock['VOID'] : (this.state.color ? stock[this.state.color] : 0)
-            
-            if(typeof(stock) === 'object'){
-                stock = this.product.templates.isEmpty() ? stock['VOID'] : (this.state.template ? stock[this.state.template] : 0)
-                
-                if(typeof(stock) === 'object'){
-                    stock = this.product.sizes.isEmpty() ? stock['VOID'] : (this.state.size ? stock[this.state.size] : 0)
-                }
-            }
-        }
+        const stock = this.product.stock[this.generateSKU()] ? this.product.stock[this.generateSKU()] : 0
 
         if(name === 'quantity' && 0 < value && value <= stock){ 
             this.setState({quantity: parseInt(value)})
             $('.error-message').text('')
         }
+
         else if(value > stock){ 
             $('.error-message').text('Infelizmente esse é o estoque máximo deste item.') 
         }
@@ -116,14 +117,9 @@ class ProductDetails extends React.Component {
     handleSubmit(e){
         const {template, size, color, quantity} = this.state
 
-        let sku = this.tab.substring(0,2).toUpperCase() + '-' + this.product.id
-        let specs = {color: color, template: template, size: size}
-
-        if(this.tab.toLowerCase() === 'produtos'){
-            sku += color ? '-' + color.substring(0,4).toUpperCase() + '-' : '-VOID-'
-            sku += template ? template.substring(0,4).toUpperCase() + '-' : 'VOID-'
-            sku += size ? size : 'VOID'
-        }
+        const specs = {color: color, template: template, size: size}
+        
+        const sku = this.generateSKU()
 
         this.context.addToCart(sku, quantity, specs)
         this.props.history.push('/carrinho')

@@ -21,7 +21,6 @@ class ProductCategoryPanel extends React.Component {
 
         // Selects product data accordingly to tab (products x events)
         const products = data[this.tab].filter(item => item.category.toLowerCase() === this.category)
-        console.log(products)
         
         this.state = { products: products }
         if(products.isEmpty()){ this.props.history.push('/'); return }
