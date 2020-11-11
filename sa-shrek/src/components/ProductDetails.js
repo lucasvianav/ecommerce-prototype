@@ -6,29 +6,6 @@ import {openModal} from '../aux'
 import './ProductDetails.css'
 import { DataContext } from '../Context'
 
-// Called when the html completes loading
-$(function(){
-    let slides = $('.large-photo')
-    let thumbs = $('.product-photo-thumb')
-
-    // Hides all slides
-    slides.each(function(){ $(this).hide() })
-
-    // Deactivates all thumbnails and adds events
-    // listeners to them in order to control the slides
-    for(let i = 0; i < thumbs.length; i++){
-        $(thumbs[i]).removeClass('active')
-        $(thumbs[i]).bind('click', function(){ showSlides(i) }) // Binds evento to handler
-    }
-
-    // Shows the first slide and activates the corresponding thumbnail
-    $(slides[0]).show()
-    $(thumbs[0]).addClass('active')
-
-    // <span className="green underlined clicker disable-selection" onClick={openModal("sizes-modal")}>
-    $('span.green.underlined.clicker.disable-selection').on('click', () => openModal('sizes-modal'))
-})
-
 // Slide of the index currently visible
 var currentSlide = 0;
 
@@ -59,12 +36,13 @@ class ProductDetails extends React.Component {
 
         const {data} = this.context
 
-        const {match: {params: {id: id}, path}} = this.props
-        const productList = (path.split('/')[1].toLowerCase() === 'eventos') ? data.events : data.products
+        const {tab: tab, base: base} = this.props.match.params
+        const productList = (tab.toLowerCase() === 'eventos') ? data.events : data.products
         
-        this.product = productList.find(item => item.id === id) ? productList.find(item => item.id === id) : false
-        this.tab = path.split('/')[1].title()
+        this.product = productList.find(item => item.id === base) ? productList.find(item => item.id === base) : false
+        this.tab = tab.title()
         
+        console.log('in', base, this.props, this.product, this.tab)
         if(!this.product || !this.product.visibility){ this.props.history.push('/') }
 
         this.state = {
@@ -76,6 +54,31 @@ class ProductDetails extends React.Component {
 
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+    }
+
+    componentDidMount(){
+        // Called when the html completes loading
+        $(function(){
+            let slides = $('.large-photo')
+            let thumbs = $('.product-photo-thumb')
+
+            // Hides all slides
+            slides.each(function(){ $(this).hide() })
+
+            // Deactivates all thumbnails and adds events
+            // listeners to them in order to control the slides
+            for(let i = 0; i < thumbs.length; i++){
+                $(thumbs[i]).removeClass('active')
+                $(thumbs[i]).bind('click', function(){ showSlides(i) }) // Binds evento to handler
+            }
+
+            // Shows the first slide and activates the corresponding thumbnail
+            $(slides[0]).show()
+            $(thumbs[0]).addClass('active')
+
+            // <span className="green underlined clicker disable-selection" onClick={openModal("sizes-modal")}>
+            $('span.green.underlined.clicker.disable-selection').on('click', () => openModal('sizes-modal'))
+        })
     }
 
     handleChange(e){
@@ -135,7 +138,7 @@ class ProductDetails extends React.Component {
                 <div className="tabs-history disable-selection">
                     <Link to='/' className='past-tab'><span>Início</span></Link>
                     <Link to={'/' + this.tab.toLowerCase()} className='past-tab'><span>{this.tab}</span></Link>
-                    <Link to={'/' + this.product.category.toLowerCase().replace(' ', '-')} className='past-tab'><span>{this.product.category}</span></Link>
+                    <Link to={'/' + this.tab.toLowerCase() + '/' + this.product.category.toLowerCase().replaceAll(' ', '-')} className='past-tab'><span>{this.product.category}</span></Link>
                     <span className="current-tab">{this.product.name}</span>
                 </div>
 
@@ -156,10 +159,10 @@ class ProductDetails extends React.Component {
                         <div className='price-line'>
                             {
                                 (this.product.price.full > this.product.price.sale)
-                                    ? <h3 className="full-price">R${this.product.price.full.toFixed(2).replace('.',',')}</h3> 
+                                    ? <h3 className="full-price">R${this.product.price.full.toFixed(2).replaceAll('.',',')}</h3> 
                                     : ''
                             }
-                            <h2 className="green sale-price">R${this.product.price.sale.toFixed(2).replace('.',',')}</h2>
+                            <h2 className="green sale-price">R${this.product.price.sale.toFixed(2).replaceAll('.',',')}</h2>
                         </div>
 
                         <hr className="product-divisor"/>
@@ -212,7 +215,7 @@ class ProductDetails extends React.Component {
                                             <div className="templates-line">
                                                 <span><strong>Modelagem:</strong></span>
                                                 <br/>
-                                                { this.product.templates.map((item, index) => <label className="radio-label" key={item + index.toString()}><input type="radio" name="template" value={item.title().replace(' ','')} onChange={this.handleChange} required/>{item.title()}</label>) }
+                                                { this.product.templates.map((item, index) => <label className="radio-label" key={item + index.toString()}><input type="radio" name="template" value={item} onChange={this.handleChange} required/>{item.title()}</label>) }
                                                 <br/><br/>
                                             </div>
                                         )

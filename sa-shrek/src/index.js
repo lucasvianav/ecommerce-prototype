@@ -5,9 +5,10 @@ import reportWebVitals from './reportWebVitals'
 
 import './index.css'
 import './aux'
+import { DataProvider } from './Context'
 
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(<DataProvider><App/></DataProvider>, document.getElementById('root'))
 
 
 // If you want to start measuring performance in your app, pass a function

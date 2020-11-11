@@ -22,8 +22,8 @@ class ProductsPanel extends React.Component {
         this.title = this.props.title
 
         this.state = {
-            data: products,
-            products: products,
+            data: products, // full data
+            products: products, // products being shown
             activeFilters: 0,
             categories: products.filter(value => value.visibility).map(item => item.category).filter((value, index, self) => (self.indexOf(value) === index))
         }
@@ -97,8 +97,8 @@ class ProductsPanel extends React.Component {
                                         {
                                             this.state.categories.map((item, index) => (
                                                 <li key={item + index.toString()}>
-                                                    <input onChange={this.handleFilters} type="checkbox" id={item.replace(' ', '-')} name={item.replace(' ', '')}/>
-                                                    <label htmlFor={item.replace(' ', '-')}>{item}</label>
+                                                    <input onChange={this.handleFilters} type="checkbox" id={item.replaceAll(' ', '-')} name={item.replaceAll(' ', '')}/>
+                                                    <label htmlFor={item.replaceAll(' ', '-')}>{item}</label>
                                                 </li>
                                             ))
                                         }
@@ -119,10 +119,10 @@ class ProductsPanel extends React.Component {
                                     <div className="price-line">
                                         {
                                             (item.price.full > item.price.sale)
-                                                ? <span className="full-price">R${item.price.full.toFixed(2).replace('.',',')}</span> 
+                                                ? <span className="full-price">R${item.price.full.toFixed(2).replaceAll('.',',')}</span> 
                                                 : ''
                                         }
-                                        <p className="sale-price">R${item.price.sale.toFixed(2).replace('.',',')}</p>
+                                        <p className="sale-price">R${item.price.sale.toFixed(2).replaceAll('.',',')}</p>
                                     </div>
                                 </Link></div>
                                 : ''

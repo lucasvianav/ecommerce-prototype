@@ -153,7 +153,7 @@ class ShoppingCart extends React.Component {
                                                 <button className="text-btn grey remove disable-selection" name='remove' onClick={(e) => this.handleChange(e, item.sku)}>Excluir item</button>
                                             </div>
 
-                                            <span className='price'>R${(item.price * item.quantity).toFixed(2).replace('.',',')}</span>
+                                            <span className='price'>R${(item.price * item.quantity).toFixed(2).replaceAll('.',',')}</span>
                                         </section>
                                     )
                                 }
@@ -167,20 +167,20 @@ class ShoppingCart extends React.Component {
 
                             <div className="row">
                                 <p><strong>Subtotal (produtos):</strong></p>
-                                <p>R${this.state.subtotal.toFixed(2).replace('.',',')}</p>
+                                <p>R${this.state.subtotal.toFixed(2).replaceAll('.',',')}</p>
                             </div>
 
                             {
                                 !this.state.hasCoupon ? '' :
                                 <div className="row">
                                     <p><strong>Cupom de desconto:</strong></p>
-                                    <p>- R${this.state.discount.toFixed(2).replace('.',',')}</p>
+                                    <p>- R${this.state.discount.toFixed(2).replaceAll('.',',')}</p>
                                 </div>
                             }
 
                             <div className="row total green">
                                 <p>Total:</p>
-                                <p>R${this.state.total.toFixed(2).replace('.',',')}</p>
+                                <p>R${this.state.total.toFixed(2).replaceAll('.',',')}</p>
                             </div>
 
                             <button className="big-btn full-btn">Continuar</button>

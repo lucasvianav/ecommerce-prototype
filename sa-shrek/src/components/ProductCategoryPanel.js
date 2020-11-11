@@ -1,122 +1,83 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import $ from 'jquery'
-import data from '../data'
 
 import './ProductsPanel.css'
+import { DataContext } from '../Context'
 
 class ProductCategoryPanel extends React.Component {
-    constructor(props){
-        super(props)
+    static contextType = DataContext
+
+    constructor(props, context){
+        super(props, context)
         
-        // Selects product data accordingly to page title (products x events)
-        let fullData
-        if(this.props.title === 'Eventos'){ fullData = data.events.map(item => item) }
-        else if(this.props.title === 'Produtos'){ fullData = data.products.map(item => item) }
-        else{ return false }
+        const {data} = this.context
+        const {match: {params: {tab: tab, base: base}}} = this.props
 
-        this.title = this.props.title
+        this.category = base.toLowerCase().replaceAll('-', ' ')
+        this.tab = tab === 'eventos' ? 'events' : (tab === 'produtos' ? 'products' : false)
+        
+        if(!this.tab){ this.props.history.push('/') }
 
-        this.state = {
-            data: fullData,
-            products: fullData,
-            activeFilters: 0,
-            categories: fullData.map(item => item.category).filter((value, index, self) => { return self.indexOf(value) === index })
-        }
-
-        this.handleFilters = this.handleFilters.bind(this)
+        // Selects product data accordingly to tab (products x events)
+        const products = data[this.tab].filter(item => item.category.toLowerCase() === this.category)
+        console.log(products)
+        
+        this.state = { products: products }
+        if(products.isEmpty()){ this.props.history.push('/'); return }
+        
+        this.category = products[0].category
     }
 
-    componentDidUpdate(e){
-        if(this.title !== this.props.title){
-            // Selects product data accordingly to page title (products x events)
-            let fullData
-            if(this.props.title === 'Eventos'){ fullData = data.events.map(item => item) }
-            else if(this.props.title === 'Produtos'){ fullData = data.products.map(item => item) }
-            else{ return false }
+    componentDidUpdate(){
+        const {data} = this.context
+        const {match: {params: {tab: tab, base: base}}} = this.props
 
-            this.title = this.props.title
+        if(this.category.toLowerCase() !== base.toLowerCase().replaceAll('-', ' ')){
+            this.category = base.toLowerCase().replaceAll('-', ' ')
+            this.tab = tab === 'eventos' ? 'events' : (tab === 'produtos' ? 'products' : false)
 
-            const newState = {
-                data: fullData,
-                products: fullData,
-                activeFilters: 0,
-                categories: fullData.map(item => item.category).filter((value, index, self) => { return self.indexOf(value) === index })
-            }
+            if(!this.tab){ this.props.history.push('/') }
 
-            this.setState(newState)
-        }
-    }
+            const products = data[this.tab].filter(item => item.category.toLowerCase() === this.category)
 
-    handleFilters(e){
-        const category = $('label', $(e.target.parentElement))
-        const modified = this.state.data.map(item => item.category === category.text() ? item : false ).filter((value) => value)
-        let products
+            this.setState({ products: products })
+            if(products.isEmpty()){ this.props.history.push('/'); return }
 
-        if(e.target.checked){
-            if(this.state.activeFilters === 0){ products = modified }
-            
-            else{ products = modified.concat(this.state.products) }
-            
-            this.setState(prevState => ({products: products, activeFilters: prevState.activeFilters + 1}))
-        }
-
-        else{
-            if(this.state.activeFilters === 1){ products = this.state.data }
-
-            else{ products = this.state.products.filter(el => !modified.includes(el)) }
-            
-            this.setState(prevState => ({products: products, activeFilters: prevState.activeFilters - 1}))
+            this.category = products[0].category
         }
     }
 
     render(){
+        const {match: {params: {tab: tab}}} = this.props
+
         return(
-            <main className="ProductCategoryPanel">
-                <div id="panel-title">{this.title.capitalize()}</div>
+            this.state.products.isEmpty() ? '' :
+            <main className="ProductsPanel">
+                <div id="panel-title">{this.category.capitalize()}</div>
 
                 <div className="tabs-history disable-selection">
                     <a href="" className="past-tab"><span>Início</span></a>
-                    <span className="current-tab">{this.title.title()}</span>
+                    <a href="" className="past-tab"><span>{tab.title()}</span></a>
+                    <span className="current-tab">{this.category}</span>
                 </div>
 
                 <div className="content-box pruducts-panel">
-                    {
-                        !this.state.categories.isEmpty()
-                        ? (
-                            <section className="filters">
-                                <span className="filters-title">Filtros</span>
-                                <fieldset className="checkboxes">
-                                    <ul>
-                                        {
-                                            this.state.categories.map((item) => (
-                                                <li>
-                                                    <input onChange={this.handleFilters} type="checkbox" id={item.replace(' ', '-')} name={item.replace(' ', '')}/>
-                                                    <label for={item.replace(' ', '-')}>{item}</label>
-                                                </li>
-                                            ))
-                                        }
-                                    </ul> 
-                                </fieldset>
-                            </section>
-                        )
-                        : ''
-                    }
 
                     <section className="product-cards-panel">
                         {
-                            this.state.products.map(item =>
+                            this.state.products.map((item) =>
                                 item.visibility ?
-                                <div className="product-card"><Link to={'/' + this.title.toLowerCase() + '/' + item.id }>
+                                <div className="product-card" key={item.id}><Link to={'/' + tab + '/' + item.id }>
                                     <img className="product-thumb" src={item.img[0].small} alt={item.img[0].alt}/> 
                                     <p className="product-title">{item.name}</p>
                                     <div className="price-line">
                                         {
                                             (item.price.full > item.price.sale)
-                                                ? <span className="full-price">R${item.price.full.toFixed(2).replace('.',',')}</span> 
+                                                ? <span className="full-price">R${item.price.full.toFixed(2).replaceAll('.',',')}</span> 
                                                 : ''
                                         }
-                                        <p className="sale-price">R${item.price.sale.toFixed(2).replace('.',',')}</p>
+                                        <p className="sale-price">R${item.price.sale.toFixed(2).replaceAll('.',',')}</p>
                                     </div>
                                 </Link></div>
                                 : ''
