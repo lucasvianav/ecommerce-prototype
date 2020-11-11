@@ -127,10 +127,10 @@ class ShoppingCart extends React.Component {
                                         <section className='product-card' key={item.sku}>
                                             <Link to={(item.type === 'PR' ? '/produtos/' : '/eventos/') + item.id} className='link'><img src={item.cover.img} alt={item.cover.alt}/></Link>
 
-                                            <div className='product-title'>
-                                            <Link to={(item.type === 'PR' ? '/produtos/' : '/eventos/') + item.id }><span className='name'>{item.name}</span></Link>
+                                            <div className='product-title disable-selection'>
+                                            <Link to={(item.type === 'PR' ? '/produtos/' : '/eventos/') + item.id } title={item.name}><span className='name'>{item.name}</span></Link>
 
-                                                <div className='info grey'>
+                                                <div className='info grey' title={(!item.specs.color ? '' : item.specs.color + ' - ') + (!item.specs.template ? '' : item.specs.template + ' - ') + (!item.specs.size ? '' : item.specs.size)}>
                                                     {!item.specs.color ? '' : <span>{item.specs.color} - </span>}
                                                     {!item.specs.template ? '' : <span>{item.specs.template} - </span>}
                                                     {!item.specs.size ? '' : <span>{item.specs.size}</span>}

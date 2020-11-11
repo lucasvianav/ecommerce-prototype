@@ -11,7 +11,7 @@ class Home extends React.Component {
             <main>
                 <div className="scroll-gallery">
                     <ul>
-                        {this.context.home.map(item => <li><img className="scroll-gallery-photos" src={item.img} alt={item.alt}/></li>)}
+                        {this.context.home.map((item, index) => <li key={index}><img className="scroll-gallery-photos" src={item.img} alt={item.alt}/></li>)}
                     </ul>
                 </div>
             </main>

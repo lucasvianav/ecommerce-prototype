@@ -96,7 +96,6 @@ export class DataProvider extends React.Component {
     }
 
     addToCart(sku, quantity, specs){
-        console.log('entrou')
         if(quantity < 1){ return false }
 
         const [type, id] = sku.split('-')
@@ -113,13 +112,11 @@ export class DataProvider extends React.Component {
         if(cart.some(item => item.sku === sku)){
             cart = cart.map(item => {
                 if(item.sku === sku){ 
-                    console.log(item.quantity, quantity, parseInt(item.quantity) + parseInt(quantity), parseInt(stock))
                     if(parseInt(item.quantity) + parseInt(quantity) <= parseInt(stock)){ item.quantity += parseInt(quantity) }
                     else{ 
                         output = false
                         item.quantity = parseInt(stock) 
                     }
-                    console.log(item.quantity)
                 }
 
                 return item
