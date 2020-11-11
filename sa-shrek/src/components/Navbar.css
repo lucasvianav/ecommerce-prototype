@@ -10,7 +10,7 @@
     justify-content: space-between;
     padding: 1% 0% 1% 0%;
     width: 100%;
-    position: fixed;
+    /* position: fixed; */
     top: 0;
     z-index: 5;
 }
@@ -72,11 +72,15 @@
     border-top: 2px solid lightgrey;
     position: absolute;
     opacity: 0.95;
-    max-width: 100px;
+    width: 4.5%;
+    /* max-width: 100px; */
 }
   
 #navbar .dropdown li {
+    width: 100%;
     margin: auto auto 20% auto;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
   
 #navbar .dropdown .divisor {

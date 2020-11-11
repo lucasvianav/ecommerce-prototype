@@ -5,17 +5,6 @@ import '../aux'
 
 import './Login.css'
 
-// Initializes js when the HTML has finished loading
-$(() => {
-    // Adds event listeners to the forms' titles buttons
-    $('.switcher').on('click', swapTab)
-    
-    showLoginRecovery()
-    handleForgotPw()
-
-    $('#signup-back').on('click', hideFullSignup)
-})
-
 // Login --> Criar conta | Criar conta --> Login
 const swapTab = (e) => {
     const switcher = e.target
@@ -242,6 +231,27 @@ class Login extends React.Component {
 
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+    }
+
+    componentDidMount(){
+        // Initializes js when the HTML has finished loading
+        $(() => {
+            // Adds event listeners to the forms' titles buttons
+            $('.switcher').on('click', swapTab)
+            
+            showLoginRecovery()
+            handleForgotPw()
+
+            $('#signup-back').on('click', hideFullSignup)
+        })
+
+        $('body').css('backgroundColor', '#3b4f65')
+    }
+    
+    componentWillUnmount(){
+        $('.switcher').off('click', swapTab)
+        $('#signup-back').off('click', hideFullSignup)
+        $('body').css('backgroundColor', 'inherit')
     }
 
     handleChange(e){

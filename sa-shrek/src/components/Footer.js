@@ -1,11 +1,10 @@
 import React from 'react'
-import $ from 'jquery'
 
 import './Footer.css'
 
 const Footer = () => {
     return(
-        <footer>
+        <footer id="footer">
             <div id="footer-info">
                 <ul id="help">
                     <li><p>Política de devolução</p></li>

@@ -35,12 +35,13 @@ class ProductDetails extends React.Component {
         super(props, context)
 
         const {data} = this.context
+        const {tab, base: id} = this.props.match.params
 
-        const {tab: tab, base: base} = this.props.match.params
-        const productList = (tab.toLowerCase() === 'eventos') ? data.events : data.products
+        // const productList = (tab.toLowerCase() === 'eventos') ? data.events : data.products
         
-        this.product = productList.find(item => item.id === base) ? productList.find(item => item.id === base) : false
-        this.tab = tab.title()
+        this.type = tab.substring(0,2).toUpperCase()
+        this.tab = this.type === 'PR' ? 'produtos' : 'eventos'
+        this.product = data.find(item => item.id === id && item.type === this.type) ? data.find(item => item.id === id && item.type === this.type) : false
         
         if(!this.product || !this.product.visibility){ this.props.history.push('/') }
 
@@ -84,8 +85,8 @@ class ProductDetails extends React.Component {
     generateSKU(){
         const {template, size, color} = this.state
         
-        let sku = this.tab.substring(0,2).toUpperCase() + '-' + this.product.id
-        if(this.tab.toLowerCase() === 'produtos'){
+        let sku = this.type + '-' + this.product.id
+        if(this.type === 'PR'){
             sku += color ? '-' + color.substring(0,4).toUpperCase() + '-' : '-VOID-'
             sku += template ? template.substring(0,4).toUpperCase() + '-' : 'VOID-'
             sku += size ? size : 'VOID'
@@ -133,8 +134,8 @@ class ProductDetails extends React.Component {
             <main className="ProductDetails">
                 <div className="tabs-history disable-selection">
                     <Link to='/' className='past-tab'><span>Início</span></Link>
-                    <Link to={'/' + this.tab.toLowerCase()} className='past-tab'><span>{this.tab}</span></Link>
-                    <Link to={'/' + this.tab.toLowerCase() + '/' + this.product.category.toLowerCase().replaceAll(' ', '-')} className='past-tab'><span>{this.product.category}</span></Link>
+                    <Link to={'/' + this.tab} className='past-tab'><span>{this.tab.title()}</span></Link>
+                    <Link to={'/' + this.tab + '/' + this.product.category.toLowerCase().replaceAll(' ', '-')} className='past-tab'><span>{this.product.category}</span></Link>
                     <span className="current-tab">{this.product.name}</span>
                 </div>
 
@@ -164,7 +165,7 @@ class ProductDetails extends React.Component {
                         <hr className="product-divisor"/>
                         
                         {
-                            (this.tab.toLowerCase() === 'eventos')
+                            (this.type === 'EV')
                             ? (
                                 <form onSubmit={this.handleSubmit} id="product-form">           
                                     <span><strong>Informações:</strong></span>
@@ -286,7 +287,7 @@ class ProductDetails extends React.Component {
                 </div>
 
                 {
-                    (this.tab.toLowerCase() !== 'produtos' || !this.product.img) ? '' :
+                    (this.type !== 'PR' || !this.product.img) ? '' :
                     <section id="sizes-modal" className="modal">
                         <img id="size-photo" src={this.product.sizeTable.img} alt={this.product.sizeTable.alt}/>
                     </section>

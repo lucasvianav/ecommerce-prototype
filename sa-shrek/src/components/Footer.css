@@ -1,15 +1,18 @@
 /* FOOTER */
 
-footer {
+#footer {
+    display: block;
     background-color: #202020;
     color: #f1eff1;
     text-align: center;
     padding-bottom: 1.4%;
     padding-top: 1%;
     clear: both;
+    margin: auto auto 0 auto;
+    width: 100%;
 }
 
-footer a {
+#footer a {
     color: inherit;
     text-decoration: inherit;
 }
@@ -24,7 +27,7 @@ footer a {
     width: 100%;
 }
 
-footer ul {
+#footer ul {
     list-style-type: none;
     padding: 0;
     align-self: center;
@@ -32,7 +35,7 @@ footer ul {
     margin: auto;
 }
 
-footer li {
+#footer li {
     display: inline-block;
     margin: auto;
     vertical-align: middle;
@@ -74,7 +77,7 @@ footer li {
     margin-left: 3%;
 }
 
-hr.end {
+#footer hr.end {
     border-top: 0.8px solid;
     color: rgba(65, 65, 65, 0.315);
     margin-right: 3%;

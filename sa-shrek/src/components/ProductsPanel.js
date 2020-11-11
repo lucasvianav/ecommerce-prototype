@@ -12,14 +12,11 @@ class ProductsPanel extends React.Component {
         super(props, context)
         
         const {data} = this.context
+        const base = this.props.match.params.base.substring(0,2).toUpperCase()
 
-        // Selects product data accordingly to page title (products x events)
-        let products
-        if(this.props.title === 'Eventos'){ products = data.events.map(item => item) }
-        else if(this.props.title === 'Produtos'){ products = data.products.map(item => item) }
-        else{ return false }
+        const products = data.filter(item => item.type === base)
 
-        this.title = this.props.title
+        this.title = (base === 'EV') ? 'Eventos' : (base === 'PR' ? 'Produtos' : false)
 
         this.state = {
             data: products, // full data
@@ -29,19 +26,17 @@ class ProductsPanel extends React.Component {
         }
 
         this.handleFilters = this.handleFilters.bind(this)
+
+        if(!this.title){ this.props.history.push('/') }
     }
 
     componentDidUpdate(){
         const {data} = this.context
 
-        if(this.title !== this.props.title){
-            // Selects product data accordingly to page title (products x events)
-            let products
-            if(this.props.title === 'Eventos'){ products = data.events.map(item => item) }
-            else if(this.props.title === 'Produtos'){ products = data.products.map(item => item) }
-            else{ return false }
-
-            this.title = this.props.title
+        if(this.title.substring(0,2).toUpperCase() !== this.props.match.params.base.substring(0,2).toUpperCase()){
+            const base = this.props.match.params.base.substring(0,2).toUpperCase()
+            const products = data.filter(item => item.type === base)
+            this.title = (base === 'EV') ? 'Eventos' : (base === 'PR' ? 'Produtos' : false)
 
             const newState = {
                 data: products,
@@ -51,33 +46,36 @@ class ProductsPanel extends React.Component {
             }
 
             this.setState(newState)
+
+            if(!this.title){ this.props.history.push('/') }
         }
     }
 
     handleFilters(e){
         const category = $('label', $(e.target.parentElement))
-        const modified = this.state.data.map(item => item.category === category.text() ? item : false ).filter((value) => value)
-        let products
+        const modified = this.state.data.filter(item => item.category === category.text()) //.map(item => item.category === category.text() ? item : false).filter((value) => value)
+        let products, modFilters
 
         if(e.target.checked){
             if(this.state.activeFilters === 0){ products = modified }
-            
             else{ products = modified.concat(this.state.products) }
-            
-            this.setState(prevState => ({products: products, activeFilters: prevState.activeFilters + 1}))
+
+            modFilters = 1
         }
 
         else{
             if(this.state.activeFilters === 1){ products = this.state.data }
-
             else{ products = this.state.products.filter(el => !modified.includes(el)) }
-            
-            this.setState(prevState => ({products: products, activeFilters: prevState.activeFilters - 1}))
+
+            modFilters = -1
         }
+        
+        this.setState(prevState => ({products: products, activeFilters: prevState.activeFilters + modFilters}))
     }
 
     render(){
         return(
+            this.state.products.isEmpty() ? '' :
             <main className="ProductsPanel">
                 <div id="panel-title">{this.title.capitalize()}</div>
 
@@ -92,18 +90,16 @@ class ProductsPanel extends React.Component {
                         ? (
                             <section className="filters">
                                 <span className="filters-title">Filtros</span>
-                                <fieldset className="checkboxes">
-                                    <ul>
-                                        {
-                                            this.state.categories.map((item, index) => (
-                                                <li key={item + index.toString()}>
-                                                    <input onChange={this.handleFilters} type="checkbox" id={item.replaceAll(' ', '-')} name={item.replaceAll(' ', '')}/>
-                                                    <label htmlFor={item.replaceAll(' ', '-')}>{item}</label>
-                                                </li>
-                                            ))
-                                        }
-                                    </ul> 
-                                </fieldset>
+                                <ul className="checkboxes">
+                                    {
+                                        this.state.categories.map((item, index) => (
+                                            <li key={item + index.toString()} title={item}>
+                                                <input onChange={this.handleFilters} type="checkbox" id={item.replaceAll(' ', '-')} name={item.replaceAll(' ', '')}/>
+                                                <label htmlFor={item.replaceAll(' ', '-')}>{item}</label>
+                                            </li>
+                                        ))
+                                    }
+                                </ul> 
                             </section>
                         )
                         : ''

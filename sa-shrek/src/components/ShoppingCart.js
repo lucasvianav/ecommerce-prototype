@@ -16,14 +16,12 @@ class ShoppingCart extends React.Component {
         let cartList = []
         for(let item of cart){
             let sku = item.sku.split('-')
-            let product = sku[0] === 'PR' 
-                ? data.products.find(el => el.id === sku[1])
-                : data.events.find(el => el.id === sku[1])
+            let product = data.find(el => el.id === sku[1] && el.type === sku[0])
 
             cartList.push({
                 name: product.name,
-                id: sku[1],
                 type: sku[0],
+                id: sku[1],
                 sku: item.sku,
                 cover: {img: product.img[0].small, alt: product.img[0].alt},
                 specs: item.specs,

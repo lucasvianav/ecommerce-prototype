@@ -4,198 +4,75 @@ export const DataContext = React.createContext()
 
 export class DataProvider extends React.Component {
     state = {
-        data: {
-            products: [
-                {
-                    name: 'Moletom Canguru Shrek',
-                    visibility: true,
-                    category: 'Moletons',
-                    description: {ul: ['Moletom branco modelo canguru com logo da SA-Shrek estampado na frente.', 'Tecido 100% algodão de alta qualidade.', 'Garantia de 6 meses contra erros de fabricação.'], ol: [], txt: ``},
-                    templates: ['Feminino', 'Masculino'],
-                    sizes: ['PP', 'P', 'M', 'G', 'GG', 'EXG'],
-                    colors: [],
-                    price: {full: 130.00, sale: 130.00},
-                    img: [
-                        {small: '/img/moletom_canguru_front.png', large: '/img/moletom_canguru_front.png', alt: `Frente de um moletom branco com uma pequena estampa na frente com o logo da 'SA-Shrek' fundo preto com pontinhos brancos (semelhante a um céu estrelado)`},
-                        {small: '/img/products/moletom_canguru_back.png', large: '/img/products/moletom_canguru_back.png', alt: `Costas de um moletom branco fundo preto com pontinhos brancos (semelhante a um céu estrelado)`}
-                    ],
-                    sizeTable: {img: '/img/products/size.png', alt: `Na imagem: Mokup de moletom e Tabela de Medidas. Na tabela há São 6 colunas. Na ordem: Tipo de medidas, P, M, G, GG, Tolerancia. E 3 linhas. Na ordem: Toráx, Comprimento, Comp. Manga. Na coluna P: 53, 69, 70. Na coluna M: 56, 71, 71. Na coluna GG: 62, 75, 73. Na coluna tolerancia: +-1.5, +-1.5, +-1.0. Observação em baixo da tabela: 'medidas em centímetros'.`},
-                    stock: {
-                        'PR-P1-VOID-MASC-PP': 5,
-                        'PR-P1-VOID-MASC-P': 5,
-                        'PR-P1-VOID-MASC-M': 5,
-                        'PR-P1-VOID-MASC-G': 5,
-                        'PR-P1-VOID-MASC-GG': 5,
-                        'PR-P1-VOID-MASC-EXG': 5,
-                        'PR-P1-VOID-FEMI-PP': 5,
-                        'PR-P1-VOID-FEMI-P': 5,
-                        'PR-P1-VOID-FEMI-M': 5,
-                        'PR-P1-VOID-FEMI-G': 5,
-                        'PR-P1-VOID-FEMI-GG': 5,
-                        'PR-P1-VOID-FEMI-EXG': 0
-                    },
-                    id: 'P1'
-                },
-                {
-                    name: 'Moletom Crewneck Shrek',
-                    visibility: true,
-                    category: 'Moletons',
-                    description: {ul: [], ol: [], txt: ``},
-                    templates: [],
-                    sizes: [],
-                    colors: [],
-                    price: {full: 80.00, sale: 80.00},
-                    img: [{small: '/img/moletom_canguru_front.png', large: '/img/moletom_canguru_front.png', alt: ''}],
-                    sizeTable: {img: '', alt: ''},
-                    stock: 0,
-                    id: 'P2'
-                },
-                {
-                    name: 'Corta-Vento Shrek',
-                    visibility: true,
-                    category: 'Moletons',
-                    description: {ul: [], ol: [], txt: ``},
-                    templates: [],
-                    sizes: [],
-                    colors: [],
-                    price: {full: 99.00, sale: 99.00},
-                    img: [{small: '/img/moletom_canguru_front.png', large: '/img/moletom_canguru_front.png', alt: ''}],
-                    sizeTable: {img: '', alt: ''},
-                    stock: 0,
-                    id: 'P3'
-                },
-                {
-                    name: 'Samba-Canção TUSCA',
-                    visibility: true,
-                    category: 'Kit TUSCA',
-                    description: {ul: [], ol: [], txt: ``},
-                    templates: [],
-                    sizes: [],
-                    colors: [],
-                    price: {full: 30.00, sale: 30.00},
-                    img: [{small: '/img/moletom_canguru_front.png', large: '/img/moletom_canguru_front.png', alt: ''}],
-                    sizeTable: {img: '', alt: ''},
-                    stock: 0,
-                    id: 'P4'
-                },
-                {
-                    name: 'Caneca TUSCA',
-                    visibility: true,
-                    category: 'Kit TUSCA',
-                    description: {ul: [], ol: [], txt: ``},
-                    templates: [],
-                    sizes: [],
-                    colors: [],
-                    price: {full: 15.00, sale: 15.00},
-                    img: [{small: '/img/moletom_canguru_front.png', large: '/img/moletom_canguru_front.png', alt: ''}],
-                    sizeTable: {img: '', alt: ''},
-                    stock: 0,
-                    id: 'P5'
-                },
-                {
-                    name: 'Camiseta TUSCA',
-                    visibility: true,
-                    category: 'Kit TUSCA',
-                    description: {ul: [], ol: [], txt: ``},
-                    templates: [],
-                    sizes: [],
-                    colors: [],
-                    price: {full: 30.00, sale: 30.00},
-                    img: [{small: '/img/moletom_canguru_front.png', large: '/img/moletom_canguru_front.png', alt: ''}],
-                    sizeTable: {img: '', alt: ''},
-                    stock: 0,
-                    id: 'P6'
-                },
-                {
-                    name: 'Camiseta de Bixo 2049',
-                    visibility: true,
-                    category: 'Kit Bixo',
-                    description: {ul: [], ol: [], txt: ``},
-                    templates: [],
-                    sizes: [],
-                    colors: [],
-                    price: {full: 30.00, sale: 30.00},
-                    img: [{small: '/img/moletom_canguru_front.png', large: '/img/moletom_canguru_front.png', alt: ''}],
-                    sizeTable: {img: '', alt: ''},
-                    stock: 0,
-                    id: 'P7'
-                },
-                {
-                    name: 'Caneca de Bixo 2049',
-                    visibility: true,
-                    category: 'Kit Bixo',
-                    description: {ul: [], ol: [], txt: ``},
-                    templates: [],
-                    sizes: [],
-                    colors: [],
-                    price: {full: 15.00, sale: 15.00},
-                    img: [{small: '/img/moletom_canguru_front.png', large: '/img/moletom_canguru_front.png', alt: ''}],
-                    sizeTable: {img: '', alt: ''},
-                    stock: 0,
-                    id: 'P8'
-                }
-        
-            ],
-        
-            events: [
-                {
-                    name: 'Cervejada: "Sinta o pântano!"',
-                    visibility: true,
-                    category: 'Cervejada',
-                    description: {ul: [], ol: [], txt: `A nossa tradicional cervejada do início do ano já chegou! Ela ocorerrá dia 20/03 a partir das 15h! Com muita música boa, com espaço de sobra pra você dançar e é claro muita lama! Você não vai ficar de fora dessa né? Não pastela!!! Corre pra garantir seu ingresso!`},
-                    info: {location: 'Lorem Ipsum', date: 'dd/mm/yyyy', time: '00h00', link: {text: 'Link para o facebook', url: 'https://facebook.com/'}},
-                    price: {full: 50.00, sale: 40.00},
-                    img: [{small: '/img/cervejada.png', large: '/img/cervejada.png', alt: ''}],
-                    stock: {'EV-E1': 10},
-                    id: 'E1'
-                },
-                {
-                    name: 'Minicurso',
-                    visibility: true,
-                    category: 'Minicursos',
-                    description: {ul: [], ol: [], txt: ``},
-                    info: {location: '', date: '', time: '', link: {text: '', url: ''}},
-                    price: {full: 20.00, sale: 20.00},
-                    img: [{small: '/img/cervejada.png', large: '/img/cervejada.png', alt: ''}],
-                    stock: 0,
-                    id: 'E2'
-                },
-                {
-                    name: 'Viagem técnica',
-                    visibility: true,
-                    category: 'Viagem técnica',
-                    description: {ul: [], ol: [], txt: ``},
-                    info: {location: '', date: '', time: '', link: {text: '', url: ''}},
-                    price: {full: 35.00, sale: 35.00},
-                    img: [{small: '/img/cervejada.png', large: '/img/cervejada.png', alt: ''}],
-                    stock: 0,
-                    id: 'E3'
-                },
-                {
-                    name: 'Roda de conversa',
-                    visibility: true,
-                    category: 'Roda de conversa',
-                    description: {ul: [], ol: [], txt: ``},
-                    info: {location: '', date: '', time: '', link: {text: '', url: ''}},
-                    price: {full: 15.00, sale: 15.00},
-                    img: [{small: '/img/cervejada.png', large: '/img/cervejada.png', alt: ''}],
-                    stock: 0,
-                    id: 'E4'
-                }
-            ]
-        },
+        home: [
+            {img: process.env.PUBLIC_URL + '/img/home/moletom001.png', alt: `Menina sorrindo usando um moletom cinza com detalhes pretos com 'ENFERMAGEM UFPG' estampado no centro. Em ambos lados de 'UFPG' há duas linhas horirontais e paralelas.`},
+            {img: process.env.PUBLIC_URL + '/img/home/moletom002.png', alt: `Menina sorrindo usando um moletom cinza com detalhes vermelhos com 'IFCAT ENGENHARIA CIVIL' estampado no centro. Em ambos lados de 'IFCAT' há uma linha horirontal e paralela.`},
+            {img: process.env.PUBLIC_URL + '/img/home/moletom003.png', alt: `Menina usando um moletom branco com detalhes vermelhos com 'ODONTO' estampado no centro. No canto inferior direito há um brasão.`},
+            {img: process.env.PUBLIC_URL + '/img/home/moletom004.png', alt: `Menina sorrindo usando um moletom preto com detalhes verdes com 'NUTRIÇÃO UFGD' estampado no centro. No canto inferior direito há um brasão.`},
+            {img: process.env.PUBLIC_URL + '/img/home/moletom005.png', alt: `Menina sorrindo usando um moletom branco com detalhes pretos com 'MEDICIDA UniCEUB' estampado no centro.`},
+            {img: process.env.PUBLIC_URL + '/img/home/moletom006.png', alt: `Menina usando um moletom azul escuro com detalhes brancos com 'ENFERMAGEM' estampado no centro. Brasão na cor amarela na parte de cima de uma das mangas.`},
+            {img: process.env.PUBLIC_URL + '/img/home/moletom007.png', alt: `Menino usando um moletom preto com detalhes vermelhos e amarelos com 'ATLETICA MALDITA MEDICINA UNEMAT' estampado no centro. No canto inferior direito há um brasão.`}
+        ],
 
-        cart: [
+        data: [
             {
-                sku: 'PR-P1-VOID-MASC-M', // PRroducts?EVents-ID-color's first 4 letters-MASC?FEMI-SIZE
-                quantity: 2,
-                specs: {color: '', template: 'Masculino', size: 'M'}
+                name: 'Moletom Canguru Shrek',
+                type: 'PR', // PRoduct
+                id: 'P1',
+                visibility: true,
+                category: 'Moletons',
+                description: {ul: ['Moletom branco modelo canguru com logo da SA-Shrek estampado na frente.', 'Tecido 100% algodão de alta qualidade.', 'Garantia de 6 meses contra erros de fabricação.'], ol: [], txt: ``},
+                templates: ['Feminino', 'Masculino'],
+                sizes: ['PP', 'P', 'M', 'G', 'GG', 'EXG'],
+                colors: [],
+                price: {full: 130.00, sale: 130.00},
+                img: [
+                    {small: process.env.PUBLIC_URL + '/img/moletom_canguru_front.png', large: process.env.PUBLIC_URL + '/img/moletom_canguru_front.png', alt: `Frente de um moletom branco com uma pequena estampa na frente com o logo da 'SA-Shrek' fundo preto com pontinhos brancos (semelhante a um céu estrelado)`},
+                    {small: process.env.PUBLIC_URL + '/img/products/moletom_canguru_back.png', large: process.env.PUBLIC_URL + '/img/products/moletom_canguru_back.png', alt: `Costas de um moletom branco fundo preto com pontinhos brancos (semelhante a um céu estrelado)`}
+                ],
+                sizeTable: {img: '/img/products/size.png', alt: `Na imagem: Mokup de moletom e Tabela de Medidas. Na tabela há São 6 colunas. Na ordem: Tipo de medidas, P, M, G, GG, Tolerancia. E 3 linhas. Na ordem: Toráx, Comprimento, Comp. Manga. Na coluna P: 53, 69, 70. Na coluna M: 56, 71, 71. Na coluna GG: 62, 75, 73. Na coluna tolerancia: +-1.5, +-1.5, +-1.0. Observação em baixo da tabela: 'medidas em centímetros'.`},
+                stock: {
+                    'PR-P1-VOID-MASC-PP': 5,
+                    'PR-P1-VOID-MASC-P': 5,
+                    'PR-P1-VOID-MASC-M': 5,
+                    'PR-P1-VOID-MASC-G': 5,
+                    'PR-P1-VOID-MASC-GG': 5,
+                    'PR-P1-VOID-MASC-EXG': 5,
+                    'PR-P1-VOID-FEMI-PP': 5,
+                    'PR-P1-VOID-FEMI-P': 5,
+                    'PR-P1-VOID-FEMI-M': 5,
+                    'PR-P1-VOID-FEMI-G': 5,
+                    'PR-P1-VOID-FEMI-GG': 5,
+                    'PR-P1-VOID-FEMI-EXG': 0
+                }
             },
             {
-                sku: 'EV-E1',
-                quantity: 1,
-                specs: {color: '', template: '', size: ''}
+                name: 'Cervejada: "Sinta o pântano!"',
+                type: 'EV', // EVent
+                id: 'E1',
+                visibility: true,
+                category: 'Cervejada',
+                description: {ul: [], ol: [], txt: `A nossa tradicional cervejada do início do ano já chegou! Ela ocorerrá dia 20/03 a partir das 15h! Com muita música boa, com espaço de sobra pra você dançar e é claro muita lama! Você não vai ficar de fora dessa né? Não pastela!!! Corre pra garantir seu ingresso!`},
+                info: {location: 'Lorem Ipsum', date: 'dd/mm/yyyy', time: '00h00', link: {text: 'Link para o facebook', url: 'https://facebook.com/'}},
+                price: {full: 50.00, sale: 40.00},
+                img: [{small: process.env.PUBLIC_URL + '/img/cervejada.png', large: process.env.PUBLIC_URL + '/img/cervejada.png', alt: ''}],
+                stock: {
+                    'EV-E1': 10
+                }
             }
+        ],
+
+        cart: [
+            // {
+            //     sku: 'PR-P1-VOID-MASC-M', // PR = type (PRoduct) --- P1 = id --- VOID = color --- MASC = template (MASC x FEMI) --- M = size
+            //     quantity: 2,
+            //     specs: {color: '', template: 'Masculino', size: 'M'}
+            // },
+            // {
+            //     sku: 'EV-E1', // EV = type (EVent) --- E1 = id
+            //     quantity: 1,
+            //     specs: {color: '', template: '', size: ''}
+            // }
         ],
 
         account: {
@@ -213,7 +90,7 @@ export class DataProvider extends React.Component {
             {
                 str: 'FLIPRULEZ25',
                 type: 'absolute',
-                discount: 25
+                discount: 25 // R$25
             }
         ]
     }
@@ -224,9 +101,7 @@ export class DataProvider extends React.Component {
 
         const [type, id] = sku.split('-')
 
-        const product = (type === 'PR')
-            ? this.state.data.products.find(item => item.id === id)
-            : this.state.data.events.find(item => item.id === id)
+        const product = this.state.data.find(item => (item.id === id && item.type === type))
 
         let {cart} = this.state
 
@@ -278,6 +153,8 @@ export class DataProvider extends React.Component {
             return item
         })
 
+        this.setState({cart: cart})
+
         return output
     }
 
@@ -291,11 +168,11 @@ export class DataProvider extends React.Component {
     deleteFromCart = this.deleteFromCart.bind(this)
 
     render(){
-        const {data, cart, account, coupons} = this.state
+        const {data, cart, account, coupons, home} = this.state
         const {addToCart, removeFromCart, deleteFromCart} = this
 
         return(
-            <DataContext.Provider value={{data, cart, account, coupons, addToCart, removeFromCart, deleteFromCart}}>
+            <DataContext.Provider value={{data, cart, account, coupons, home, addToCart, removeFromCart, deleteFromCart}}>
                 {this.props.children}
             </DataContext.Provider>
         )

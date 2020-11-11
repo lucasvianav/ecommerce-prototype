@@ -46,8 +46,8 @@ class Navbar extends React.Component {
 
         const {data} = this.context
 
-        this.products = data.products.filter(value => value.visibility).map(item => item.category).filter((value, index, self) => (self.indexOf(value) === index)).map(item => item.title())
-        this.events = data.events.filter(value => value.visibility).map(item => item.category).filter((value, index, self) => (self.indexOf(value) === index)).map(item => item.title())
+        this.products = data.filter(value => value.visibility && value.type === 'PR').map(item => item.category).filter((value, index, self) => (self.indexOf(value) === index)).map(item => item.title())
+        this.events = data.filter(value => value.visibility && value.type === 'EV').map(item => item.category).filter((value, index, self) => (self.indexOf(value) === index)).map(item => item.title())
     }
 
     componentDidMount(){
@@ -56,12 +56,17 @@ class Navbar extends React.Component {
             $('#events-button').on('mouseenter mouseleave', handleNavbarDropdown)
         })
     }
+    
+    componentWillUnmount(){
+        $('#products-button').off('mouseenter mouseleave', handleNavbarDropdown)
+        $('#events-button').off('mouseenter mouseleave', handleNavbarDropdown)
+    }
 
     render(){
         return(
             <nav id="navbar">
                 <div id="logo">
-                    <Link to="/"><img src="/img/logo.png" alt="Logo da SA-SHREK"/></Link>
+                    <Link to="/"><img src={process.env.PUBLIC_URL + "/img/logo.png"} alt="Logo da SA-SHREK"/></Link>
                 </div>
 
                 <ul id="central-buttons">
