@@ -1,7 +1,6 @@
 import React from 'react'
-import $ from 'jquery'
 
-import './bootstrap.css'
+import './css/bootstrap.css'
 
 class MyAccount extends React.Component {
     render(){

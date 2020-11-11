@@ -2,7 +2,7 @@ import React from 'react'
 import $ from 'jquery'
 import {Link} from 'react-router-dom'
 
-import './Navbar.css'
+import './css/Navbar.css'
 import { DataContext } from '../Context'
 
 function handleNavbarDropdown(e){

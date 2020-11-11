@@ -1,9 +1,9 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import $ from 'jquery'
-import {openModal} from '../aux'
+import {openModal} from '../Util'
 
-import './ProductDetails.css'
+import './css/ProductDetails.css'
 import { DataContext } from '../Context'
 
 // Slide of the index currently visible

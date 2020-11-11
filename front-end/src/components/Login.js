@@ -1,9 +1,9 @@
 import React from 'react'
 import $ from 'jquery'
 import InputMask from 'react-input-mask'
-import '../aux'
+import '../Util'
 
-import './Login.css'
+import './css/Login.css'
 
 // Login --> Criar conta | Criar conta --> Login
 const swapTab = (e) => {

@@ -2,7 +2,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import $ from 'jquery'
 
-import './ProductsPanel.css'
+import './css/ProductsPanel.css'
 import { DataContext } from '../Context'
 
 class ProductCategoryPanel extends React.Component {

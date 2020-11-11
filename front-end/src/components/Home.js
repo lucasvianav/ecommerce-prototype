@@ -1,6 +1,6 @@
 import React from 'react'
 
-import './Home.css'
+import './css/Home.css'
 import { DataContext } from '../Context'
 
 class Home extends React.Component {

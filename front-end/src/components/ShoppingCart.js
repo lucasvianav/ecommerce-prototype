@@ -1,7 +1,7 @@
 import React from 'react'
 import $ from 'jquery'
 
-import './ShoppingCart.css'
+import './css/ShoppingCart.css'
 import { DataContext } from '../Context'
 import { Link } from 'react-router-dom'
 
