@@ -178,7 +178,7 @@ const isValidDate = (date) => {
     let year = parseInt(parts[2], 10)
 
     // Check the ranges of month and year
-    if(date === "" || year < 1920 || year > (new Date).getFullYear() - 15 || month === 0 || month > 12){ return false }
+    if(date === "" || year < 1920 || year > (new Date()).getFullYear() - 15 || month === 0 || month > 12){ return false }
 
     // It is not necessary to consider leap years
     let monthLength = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ]
@@ -389,7 +389,7 @@ class Login extends React.Component {
         }
 
         // Validates the CPF
-        else if(!(new CPF).isValid(signupCPF)){
+        else if(!(new CPF()).isValid(signupCPF)){
             error.text("O CPF inserido é inválido.")
             $(forms.signupCPF).focus()
             return false

@@ -1,6 +1,5 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import $ from 'jquery'
 
 import './css/ProductsPanel.css'
 import { DataContext } from '../Context'
@@ -28,7 +27,7 @@ class ProductCategoryPanel extends React.Component {
     }
 
     componentDidUpdate(){
-        const {match: {params: {tab: tab, base: base}}} = this.props
+        const {match: {params: {tab, base}}} = this.props
 
         if(this.category.toLowerCase() !== base.toLowerCase().replaceAll('-', ' ')){
             const {data} = this.context

@@ -80,7 +80,7 @@ class ProductsPanel extends React.Component {
                 <div id="panel-title">{this.title.capitalize()}</div>
 
                 <div className="tabs-history disable-selection">
-                    <a href="" className="past-tab"><span>Início</span></a>
+                    <Link to='/' className='past-tab'><span>Início</span></Link>
                     <span className="current-tab">{this.title.title()}</span>
                 </div>
 
