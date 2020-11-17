@@ -1,0 +1,32 @@
+.no-space{
+    margin: 0;
+    padding: 0;
+}
+
+.no-space p{
+    margin: 0;
+    padding: 0;
+}
+
+#loginInfo{
+    flex-direction: column;
+}
+
+#altSenha{
+    right: 0;
+    margin-left: auto;
+}
+
+#dadosPessoais{
+    flex-direction: column;
+}
+
+#editarDados{
+    right: 0;
+    margin-left: auto;
+}
+
+.align-self-top{
+    margin-top: 0;
+    margin-bottom: auto;
+}

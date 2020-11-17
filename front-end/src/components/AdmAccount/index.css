@@ -1,0 +1,13 @@
+
+#produtosCadastrados{
+    flex-direction: column;
+}
+
+#loginInfo{
+    flex-direction: column;
+}
+
+#altSenha{
+    right: 0;
+    margin-left: auto;
+}
