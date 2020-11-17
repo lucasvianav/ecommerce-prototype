@@ -6,7 +6,7 @@ import './css/Navbar.css'
 import { DataContext } from '../Context'
 
 function handleNavbarDropdown(e){
-    let dropdownMenu = $(e.target.parentElement).hasClass('dropdown') ? $(e.target.parentElement) : $('.dropdown', e.target.parentElement)
+    let dropdownMenu = $(e.target.parentElement).hasClass('drop') ? $(e.target.parentElement) : $('.drop', e.target.parentElement)
 
     if(e.type === 'mouseenter'){
         // Sets divisor padding
@@ -69,13 +69,13 @@ class Navbar extends React.Component {
                     <Link to="/"><img src={process.env.PUBLIC_URL + "/img/logo.png"} alt="Logo da SA-SHREK"/></Link>
                 </div>
 
-                <ul id="central-buttons">
+                <ul id="central-buttons" className="align-center">
                     <li><Link to="/">Início</Link></li>
                     <li id="products-button">
                         <Link to="/produtos">Produtos</Link>
                         {
                             this.products.isEmpty() ? '' :
-                            <div className="dropdown" style={{display: 'none'}}>
+                            <div className="drop" style={{display: 'none'}}>
                                 <span className="divisor"></span>
                                 <ul>
                                     { this.products.map((item, index) => <li key={item + index.toString()}><Link to={'/produtos/' + item.toLowerCase().replaceAll(' ', '-')}>{item}</Link></li>) }
@@ -88,7 +88,7 @@ class Navbar extends React.Component {
                         <Link to="/eventos">Eventos</Link>
                         {
                             this.events.isEmpty() ? '' :
-                            <div className="dropdown" style={{display: 'none'}}>
+                            <div className="drop" style={{display: 'none'}}>
                                 <span className="divisor"></span>
                                 <ul>
                                     { this.events.map((item, index) => <li key={item + index.toString()}><Link to={'/eventos/' + item.toLowerCase().replaceAll(' ', '-')}>{item}</Link></li>) }
@@ -98,7 +98,7 @@ class Navbar extends React.Component {
                     </li>
                 </ul>
             
-                <ul id="right-buttons">
+                <ul id="right-buttons" className="align-center">
                     <li><button type="button"><i className="fas fa-search"></i></button></li>
                     <li><Link to="/carrinho"><i className="fas fa-shopping-cart"></i></Link></li>
                     <li><Link to="./login">Login</Link></li>
