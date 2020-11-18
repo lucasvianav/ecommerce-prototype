@@ -116,7 +116,7 @@ class Navbar extends React.Component {
         this.setState({[e.target.name]: e.target.value})
     }
     
-    submitSearch(e){
+    submitSearch(){
         if(this.state.search !== ''){
             this.props.history.push("/search?query=" + this.state.search)
         }
@@ -160,7 +160,7 @@ class Navbar extends React.Component {
             
                 <ul id="right-buttons" className="align-center">
                     <li className="search-bar no-display invisible-content">
-                        <input type="text" name="search" placeholder="Buscar produtos" onChange={this.handleChange} value={this.state.search}/>
+                        <input type="text" name="search" placeholder="Buscar produtos" onChange={this.handleChange} onKeyDown={e => e.key === 'Enter' ? this.submitSearch() : ''} value={this.state.search}/>
                         <button type="button" className="green no-display" onClick={this.submitSearch}><i className="fas fa-arrow-right"></i></button>
                     </li>
                     <div>
