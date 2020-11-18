@@ -1,12 +1,24 @@
-.scroll-gallery ul {
-    list-style-type: none;
-    width: 100%;
+main.Home{
     display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    justify-items: center;
     margin: auto;
-    overflow-x: scroll;
-    padding: 1%;
+    vertical-align: middle;
 }
 
-.scroll-gallery img {
+.Home .scroll-gallery ul {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    list-style-type: none;
+    margin: auto;
+    padding: 1%;
+    overflow-x: scroll;
+}
+
+.Home .scroll-gallery img {
     width: 23.45vw;
 }

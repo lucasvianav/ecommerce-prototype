@@ -16,16 +16,6 @@
     float: left;
 }
 
-.ShoppingCart .empty {
-    display: block;
-    margin: 8% auto;
-    text-align: center;
-    font-size: x-large;
-    font-weight: 500;
-    /* margin: auto; */
-    /* color: grey; */
-}
-
 .ShoppingCart .header-row {
     list-style: none;
     display: flex;

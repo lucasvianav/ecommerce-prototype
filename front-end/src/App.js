@@ -3,7 +3,8 @@ import {
   BrowserRouter, 
   Route, 
   Switch, 
-  Redirect
+  Redirect,
+  useLocation
 } from 'react-router-dom'
 
 import Navbar from './components/Navbar'
@@ -12,6 +13,7 @@ import Home from './components/Home'
 import Login from './components/Login'
 import ProductsPanel from './components/ProductsPanel'
 import ProductCategoryPanel from './components/ProductCategoryPanel'
+import ProductSearch from './components/ProductSearch'
 import ProductDetails from './components/ProductDetails'
 import ShoppingCart from './components/ShoppingCart'
 import { DataContext } from './Context'
@@ -24,7 +26,7 @@ class App extends React.Component {
     return(
       <BrowserRouter>
         <div id='app'>
-          <Navbar/>
+          <Navbar {...this.props}/>
           
           <Switch>
             {/* Pages */}
@@ -52,6 +54,12 @@ class App extends React.Component {
 
               else if(['carrinho', 'cart'].includes(base.toLowerCase())){
                 return <ShoppingCart {...props}/>
+              }
+
+              else if(base.toLowerCase() === 'search'){
+                let query = new URLSearchParams(props.location.search)
+
+                return <ProductSearch {...props} query={query.get('query')}/>
               }
 
               else{

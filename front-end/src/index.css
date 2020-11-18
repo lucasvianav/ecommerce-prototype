@@ -190,9 +190,13 @@ main {
   display: none;
 }
 
+.no-display-content * {
+  display: none;
+}
+
 .invisible {
   opacity: 0;
-visibility: hidden;
+  visibility: hidden;
 }
 
 .invisible-content * {
@@ -206,6 +210,14 @@ visibility: hidden;
 
 .grey {
   color: rgb(107, 115, 116) !important;
+}
+
+.empty {
+  display: block;
+  margin: 8% auto;
+  text-align: center;
+  font-size: x-large;
+  font-weight: 500;
 }
 
 .underlined {
