@@ -83,9 +83,7 @@ class Navbar extends React.Component {
 
         const {data} = this.context
 
-        this.state = {
-            search: ''
-        }
+        this.state = { search: '' }
 
         this.products = data.filter(value => value.visibility && value.type === 'PR').map(item => item.category).filter((value, index, self) => (self.indexOf(value) === index)).map(item => item.title())
         this.events = data.filter(value => value.visibility && value.type === 'EV').map(item => item.category).filter((value, index, self) => (self.indexOf(value) === index)).map(item => item.title())
@@ -109,7 +107,10 @@ class Navbar extends React.Component {
     }
 
     componentDidUpdate(prevProps){
-        if(prevProps.location !== this.props.location && $('.search-bar').css('display') !== 'none'){ toggleSearchBar() }
+        if(prevProps.location !== this.props.location && $('.search-bar').css('display') !== 'none'){ 
+            toggleSearchBar() 
+            this.setState({ search: '' })
+        }
     }
 
     handleChange(e){

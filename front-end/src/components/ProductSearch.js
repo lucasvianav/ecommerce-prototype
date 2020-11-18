@@ -25,6 +25,8 @@ class ProductSearch extends React.Component {
         if(this.query.toLowerCase() !== query.toLowerCase()){
             const {data} = this.context
     
+            this.query = query
+
             const products = data.filter(item => item.category.toLowerCase().includes(query.toLowerCase()) || item.name.toLowerCase().includes(query.toLowerCase()) || item.id.toLowerCase().includes(query.toLowerCase()))
             this.setState({ products: products })
         }
