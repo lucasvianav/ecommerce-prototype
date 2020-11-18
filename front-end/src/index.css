@@ -23,6 +23,19 @@ button:hover {
   cursor: pointer;
 }
 
+a, a:link, a:visited {
+  color: #6363d1;
+}
+
+a:focus, a:hover {
+  color: #aeaeff;
+  font-weight: bold;
+}
+
+a:active {
+  color: blue;
+}
+
 /* TABS */
 
 .tabs-history {
@@ -74,6 +87,13 @@ main {
   border-radius: 0.7rem;
 }
 
+.panel-title {
+  margin: auto; /*alinhando ao centro*/
+  text-align: center;
+  color: black;
+  font-weight: 700;
+  font-size: 20pt;
+}
 
 /* POPUPS */
 

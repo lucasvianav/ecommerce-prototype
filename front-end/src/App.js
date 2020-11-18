@@ -16,6 +16,7 @@ import ProductCategoryPanel from './components/ProductCategoryPanel'
 import ProductSearch from './components/ProductSearch'
 import ProductDetails from './components/ProductDetails'
 import ShoppingCart from './components/ShoppingCart'
+import Accessibility from './components/Accessibility'
 import { DataContext } from './Context'
 
 class App extends React.Component {
@@ -60,6 +61,10 @@ class App extends React.Component {
                 let query = new URLSearchParams(props.location.search)
 
                 return <ProductSearch {...props} query={query.get('query')}/>
+              }
+
+              else if(['acessibilidade', 'accessibility'].includes(base.toLowerCase())){
+                return <Accessibility/>
               }
 
               else{
