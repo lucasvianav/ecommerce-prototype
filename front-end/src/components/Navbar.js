@@ -164,10 +164,18 @@ class Navbar extends React.Component {
                         <input type="text" name="search" placeholder="Buscar produtos" onChange={this.handleChange} onKeyDown={e => e.key === 'Enter' ? this.submitSearch() : ''} value={this.state.search}/>
                         <button type="button" className="green no-display" onClick={this.submitSearch}><i className="fas fa-arrow-right"></i></button>
                     </li>
-                    <div>
+                    <div className='main'>
                         <li><button id="search-button" type="button"><i className="fas fa-search"></i></button></li>
                         <li><Link to="/carrinho"><i className="fas fa-shopping-cart"></i></Link></li>
                         <li><Link to="./login">Login</Link></li>
+                        <li className='theme'>
+                            <i className="fas fa-sun"></i>
+                            <div className='toggle'>
+                                <input type='checkbox' id='theme-checkbox'/>
+                                <label htmlFor='theme-checkbox'/>
+                            </div>
+                            <i className="fas fa-moon"></i>
+                        </li>
                     </div>
                 </ul>
             </nav>
