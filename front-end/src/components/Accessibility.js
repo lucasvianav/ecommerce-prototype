@@ -14,7 +14,12 @@ class Accessibility extends React.Component {
 
                 <div className="content-box">
                     <h3>Ajuste no tamanho do texto (e da tela como um todo)</h3>
-                    <p>Para aumentar ou diminuir o tamanho do text no site, pressione no seu teclado simultaneamente as teclas <strong><em>CTRL</em></strong> + <strong><em>+</em></strong> ou <strong><em>CTRL</em></strong> + <strong><em>-</em></strong>, respectivamente.</p>
+                    <p>Existem atalhos bem útei no teclado para controlar o zoom do site. Considerando que aumentar o zoom, aumenta o tamanho do texto e do site como um todo, temos que as teclas a serem pressionadas simultaneamente são:</p>
+                    <ul>
+                        <li><span><strong><em>Ctrl</em></strong> e <strong><em>+</em></strong>, para aumentar o zoom do site.</span></li>
+                        <li><span><strong><em>Ctrl</em></strong> e <strong><em>-</em></strong>, para diminuir o zoom do site.</span></li>
+                        <li><span><strong><em>Ctrl</em></strong> e <strong><em>0</em></strong>, para resetar o zoom do site para o padrão.</span></li>
+                    </ul>
 
                     <br/>
 
