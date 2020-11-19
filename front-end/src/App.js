@@ -1,10 +1,10 @@
 import React from 'react'
+import $ from 'jquery'
 import {
   BrowserRouter, 
   Route, 
   Switch, 
-  Redirect,
-  useLocation
+  Redirect
 } from 'react-router-dom'
 
 import Navbar from './components/Navbar'

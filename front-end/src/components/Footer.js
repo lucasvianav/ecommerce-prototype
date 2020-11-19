@@ -14,7 +14,7 @@ const Footer = () => {
                     <li><a href="/" className="link"><p>Site institucional</p></a></li>
                 </ul>
                 
-                <p id="divisor">|</p>
+                <p id="divisor" className='disable-selection'>|</p>
 
                 <ul id="social-media">
                     <li><a href="/" className="link"><i className="fab fa-instagram fa-2x"></i></a></li>

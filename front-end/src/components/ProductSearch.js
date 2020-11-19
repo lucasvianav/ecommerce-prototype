@@ -35,7 +35,7 @@ class ProductSearch extends React.Component {
     render(){
         return(
             <main className="ProductsPanel">
-                <div id="panel-title">Busca: {this.query}</div>
+                <div className="panel-title"><span>Busca: "{this.query}"</span></div>
 
                 <div className="tabs-history disable-selection">
                     <Link to='/' className='past-tab'><span>Início</span></Link>
