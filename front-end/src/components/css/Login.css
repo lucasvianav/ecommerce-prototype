@@ -1,14 +1,16 @@
 main.Login {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-    align-items: center;
+	width: fit-content;
+	height: fit-content;
+	margin: auto;
 }
 
 .Login #forms-panel {
     text-align: center;
 	display: flex;
+	flex-flow: row nowrap;
+	justify-content: center;
 	align-items: flex-start;
+	margin: auto;
 }
 
 .Login .form-wrapper {

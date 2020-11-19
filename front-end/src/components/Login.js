@@ -245,13 +245,20 @@ class Login extends React.Component {
             $('#signup-back').on('click', hideFullSignup)
         })
 
-        $('body').css('backgroundColor', '#3b4f65')
+        $('.light-theme body').css('backgroundColor', '#3b4f65')
+        $('.dark-theme body').css('backgroundColor', '#212e3b')
+
+        $('.dark-theme #navbar').css('backgroundColor', 'rgba(18, 18, 18, 0.9)')
+        $('.dark-theme #footer').css('backgroundColor', 'rgba(18, 18, 18, 0.9)')
     }
     
     componentWillUnmount(){
         $('.switcher').off('click', swapTab)
         $('#signup-back').off('click', hideFullSignup)
         $('body').css('backgroundColor', 'inherit')
+
+        $('.dark-theme #navbar').css('backgroundColor', '')
+        $('.dark-theme #footer').css('backgroundColor', '')
     }
 
     handleChange(e){
