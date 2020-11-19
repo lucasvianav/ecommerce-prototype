@@ -10,7 +10,7 @@
     text-align: center;
     padding: 1%;
     width: 100%;
-    /* position: fixed; */
+    position: relative;
     top: 0;
     z-index: 5;
 }
@@ -217,7 +217,6 @@
     transition: all 0.2s ease;
     cursor: pointer;
     position: absolute;
-    /* left: 2px; */
     opacity: 0.9;
     background-color: cyan;
 }
