@@ -248,8 +248,8 @@ class Login extends React.Component {
         $('.light-theme body').css('backgroundColor', '#3b4f65')
         $('.dark-theme body').css('backgroundColor', '#212e3b')
 
-        $('.dark-theme #navbar').css('backgroundColor', 'rgba(18, 18, 18, 0.9)')
-        $('.dark-theme #footer').css('backgroundColor', 'rgba(18, 18, 18, 0.9)')
+        $('.dark-theme #navbar').css('backgroundColor', '#0a0d11')
+        $('.dark-theme #footer').css('backgroundColor', '#0a0d11')
     }
     
     componentWillUnmount(){
