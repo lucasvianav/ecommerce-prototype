@@ -532,5 +532,5 @@ input::placeholder {
 }
 
 .dark-theme .error-message {
-  color: rgb(236, 62, 62);
+  color: #ec3e3e;
 }

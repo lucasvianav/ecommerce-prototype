@@ -167,11 +167,11 @@ class Navbar extends React.Component {
                     <div className='main'>
                         <li><button id="search-button" type="button" title='Pesquisar'><i className="fas fa-search"></i></button></li>
                         <li><Link to="/carrinho" title='Carrinho'><i className="fas fa-shopping-cart"></i></Link></li>
-                        <li><Link to="./login">Login</Link></li>
+                        <li><Link to="/login">Login</Link></li>
                         <li className='theme'>
                             <i className="fas fa-sun" title='Tema claro'></i>
                             <div className='toggle' title='Alterar tema'>
-                                <input type='checkbox' id='theme-checkbox'/>
+                                <input type='checkbox' id='theme-checkbox' checked={this.context.darkTheme} onChange={this.context.toggleTheme}/>
                                 <label htmlFor='theme-checkbox'/>
                             </div>
                             <i className="fas fa-moon" title='Tema escuro'></i>
