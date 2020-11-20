@@ -60,11 +60,11 @@ class App extends React.Component {
                 return <ShoppingCart {...props}/>
               }
               
-              else if(['conta', 'accont'].includes(base.toLowerCase())){
+              else if(['conta', 'account'].includes(base.toLowerCase())){
                 return <MyAccount />
               }
 
-              else if(['adm', 'adimin'].includes(base.toLowerCase())){
+              else if(['adm', 'admin'].includes(base.toLowerCase())){
                 return <AdmAccount />
               }
 
@@ -84,7 +84,7 @@ class App extends React.Component {
             }} exact/>
 
             <Route path='/:tab/:base/:id' render={props => {
-              const {tab, base} = props.match.params
+              const {tab} = props.match.params
 
               if(['editar', 'edit'].includes(tab.toLowerCase())){
                 return <ProductEdit {...props} />
