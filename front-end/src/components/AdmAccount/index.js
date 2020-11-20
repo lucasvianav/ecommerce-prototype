@@ -159,7 +159,7 @@ function AdmAccount(props){
                                     </div>
                                 </Collapse>
                                 <Collapse in={novoProd}>
-                                    <div id="produtoNovo" className="pt-4 p-2 bg-white border border-top-0 tabcontent">
+                                    <div id="produtoNovo" className="pt-4 pl-4 pb-3 bg-white border border-top-0 tabcontent">
                                         <ProductForm mode="new"/>
                                    </div>
                                 </Collapse>
