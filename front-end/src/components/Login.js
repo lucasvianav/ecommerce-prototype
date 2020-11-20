@@ -32,23 +32,43 @@ const showLoginRecovery = () => {
         $('.form-signup').removeClass('hide-signup')
         $('.form-full-signup').removeClass('hide-full-signup')
 
-        $('.form-login').css({
+        $('.light-theme .form-login').css({
             'background-color': '#fff',
             'transform': 'translate(35%, -20px) scaleY(1)'
         })
 
-        $('.form-recovery').css({
+        $('.light-theme .form-recovery').css({
             'background-color': '#fff',
             'transform': 'translate(35%, -20px) scaleY(1)'
         })
 
-        $('.form-signup').css({
+        $('.light-theme .form-signup').css({
             'background-color': '#d7e7f1',
             'transform': 'translate(-40%, 10px) scaleY(.8)'
         })
 
-        $('.form-full-signup').css({
+        $('.light-theme .form-full-signup').css({
             'background-color': '#d7e7f1',
+            'transform': 'translate(-40%, 10px) scaleY(.7)'
+        })
+
+        $('.dark-theme .form-login').css({
+            'background-color': '#3b3b3b',
+            'transform': 'translate(35%, -20px) scaleY(1)'
+        })
+
+        $('.dark-theme .form-recovery').css({
+            'background-color': '#3b3b3b',
+            'transform': 'translate(35%, -20px) scaleY(1)'
+        })
+
+        $('.dark-theme .form-signup').css({
+            'background-color': '#25262c',
+            'transform': 'translate(-40%, 10px) scaleY(.8)'
+        })
+
+        $('.dark-theme .form-full-signup').css({
+            'background-color': '#25262c',
             'transform': 'translate(-40%, 10px) scaleY(.7)'
         })
 
@@ -69,23 +89,43 @@ const showSignup = () => {
         $('.form-login').removeClass('hide-login')
         $('.form-recovery').removeClass('hide-recovery')
 
-        $('.form-signup').css({
+        $('.light-theme .form-signup').css({
             'background-color': '#fff',
             'transform': 'translate(-35%, -20px) scaleY(1)'
         })
 
-        $('.form-full-signup').css({
+        $('.light-theme .form-full-signup').css({
             'background-color': '#fff',
             'transform': 'translate(-35%, -20px) scaleY(1)'
         })
 
-        $('.form-login').css({
+        $('.light-theme .form-login').css({
             'background-color': '#d7e7f1',
             'transform': 'translate(40%, 10px) scaleY(1.2)'
         })
 
-        $('.form-recovery').css({
+        $('.light-theme .form-recovery').css({
             'background-color': '#d7e7f1',
+            'transform': 'translate(40%, 10px) scaleY(1.8)'
+        })
+
+        $('.dark-theme .form-signup').css({
+            'background-color': '#3b3b3b',
+            'transform': 'translate(-35%, -20px) scaleY(1)'
+        })
+
+        $('.dark-theme .form-full-signup').css({
+            'background-color': '#3b3b3b',
+            'transform': 'translate(-35%, -20px) scaleY(1)'
+        })
+
+        $('.dark-theme .form-login').css({
+            'background-color': '#25262c',
+            'transform': 'translate(40%, 10px) scaleY(1.2)'
+        })
+
+        $('.dark-theme .form-recovery').css({
+            'background-color': '#25262c',
             'transform': 'translate(40%, 10px) scaleY(1.8)'
         })
 
@@ -468,12 +508,12 @@ class Login extends React.Component {
                         <form id="login" action="" onSubmit={this.handleSubmit} className="form form-login active invisible-content" name="login">
                             <fieldset>
                                 <div className="input-block">
-                                    <label htmlFor="login-email">Email</label><br/>
+                                    <label className='grey' htmlFor="login-email">Email</label><br/>
                                     <input onChange={this.handleChange} id="login-email" type="email" name="loginEmail" value={this.state.email} required/>
                                 </div>
 
                                 <div className="input-block">
-                                    <label htmlFor="login-password">Senha</label><br/>
+                                    <label className='grey' htmlFor="login-password">Senha</label><br/>
                                     <input onChange={this.handleChange} id="login-password" type="password" name="loginPw" value={this.state.pw} pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,30}" minLength="8" maxLength="30" required/>
                                 </div>
 
@@ -488,7 +528,7 @@ class Login extends React.Component {
                         <form id="recovery" name="recovery" action="" onSubmit={this.handleSubmit} className="form form-recovery invisible-content no-display">
                             <fieldset>
                                 <div className="input-block">
-                                    <label htmlFor="recovery-email">Email cadastrado:</label><br/>
+                                    <label className='grey' htmlFor="recovery-email">Email cadastrado:</label><br/>
                                     <input onChange={this.handleChange} id="recovery-email" name="recoveryEmail" value={this.state.recoveryEmail} type="email" required/>
                                 </div>
                             </fieldset>
@@ -507,12 +547,12 @@ class Login extends React.Component {
                         <form id="signup" name="signup" action="" onSubmit={this.handleSubmit} className="form form-signup invisible-content">
                             <fieldset>
                                 <div className="input-block">
-                                    <label htmlFor="signup-email">Email</label><br/>
+                                    <label className='grey' htmlFor="signup-email">Email</label><br/>
                                     <input onChange={this.handleChange} id="signup-email" type="email" name="signupEmail" value={this.state.email} required/>
                                 </div>
                                 
                                 <div className="input-block">
-                                    <label htmlFor="signup-password">Senha</label><br/>
+                                    <label className='grey' htmlFor="signup-password">Senha</label><br/>
                                     <input onChange={this.handleChange} 
                                     id="signup-password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,30}" maxLength="30" minLength="8"
                                     title="A senha deve conter pelo menos um número, uma letra minúscula e uma letra maiúscula. Deve possuir entre 8 e 30 caracteres."
@@ -521,7 +561,7 @@ class Login extends React.Component {
                                 </div>
                                 
                                 <div className="input-block">
-                                    <label htmlFor="signup-conf-password">Confirmação de senha</label><br/>
+                                    <label className='grey' htmlFor="signup-conf-password">Confirmação de senha</label><br/>
                                     <input onChange={this.handleChange} 
                                     id="signup-conf-password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,30}" 
                                     title="Repita a sua senha." maxLength="30" minLength="8"
@@ -538,27 +578,27 @@ class Login extends React.Component {
                         <form id="full-signup" name="fullSignup" action="" onSubmit={this.handleSubmit} className="form form-full-signup invisible-content no-display">
                             <fieldset>
                                 <div className="input-block">
-                                    <label htmlFor="signup-name">Nome completo</label><br/>
+                                    <label className='grey' htmlFor="signup-name">Nome completo</label><br/>
                                     <input onChange={this.handleChange} id="signup-name" name="signupName" value={this.state.name} type="text" minLength="6" required/>
                                 </div>
         
                                 <div className="input-block">
-                                    <label htmlFor="signup-birthday">Data de nascimento</label><br/>
-                                    <InputMask mask="99/99/9999" maskPlaceholder="dd/mm/aaaa" onChange={this.handleChange} id="signup-birthday" name="signupBirthday" value={this.state.birthday} placeholder="dd/mm/aaaa" title="Idade mínima: 15 anos." required/>
+                                    <label className='grey' htmlFor="signup-birthday">Data de nascimento</label><br/>
+                                    <InputMask mask="99/99/9999" maskPlaceholder="dd/mm/aaaa" type='text' onChange={this.handleChange} id="signup-birthday" name="signupBirthday" value={this.state.birthday} placeholder="dd/mm/aaaa" title="Idade mínima: 15 anos." required/>
                                 </div>
                             </fieldset>
         
                             <fieldset>
                                 <div className="input-block">
-                                    <label htmlFor="signup-cpf">CPF</label><br/>
-                                    <InputMask mask="999.999.999-99" onChange={this.handleChange} id="signup-cpf" name="signupCPF" value={this.state.cpf} required/>
+                                    <label className='grey' htmlFor="signup-cpf">CPF</label><br/>
+                                    <InputMask mask="999.999.999-99" type='text' onChange={this.handleChange} id="signup-cpf" name="signupCPF" value={this.state.cpf} placeholder='000.000.000-00' required/>
                                 </div>
                             </fieldset>
         
                             <fieldset>
                                 <div className="input-block">
-                                    <label htmlFor="signup-phoneNumber">Celular</label><br/>
-                                    <InputMask mask="+55 (99) 99999-9999" onChange={this.handleChange} id="signup-phoneNumber" name="signupPhoneNumber" value={this.state.phoneNumber} required/>
+                                    <label className='grey' htmlFor="signup-phoneNumber">Celular</label><br/>
+                                    <InputMask mask="+55 (99) 99999-9999" type='text' onChange={this.handleChange} id="signup-phoneNumber" name="signupPhoneNumber" value={this.state.phoneNumber} placeholder='(00) 90000-0000' required/>
                                 </div>
                             </fieldset>
 
