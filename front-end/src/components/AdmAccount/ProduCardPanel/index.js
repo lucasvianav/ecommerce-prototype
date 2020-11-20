@@ -45,9 +45,6 @@ function ProductCardPanel(props){
             <div className="card-columns">
                 {data.map(renderProduct)}
             </div>
-            {/* <p className="text-right mr-3">
-                <a href="#">Ver mais</a>
-            </p> */}
         </div>
     );
 }

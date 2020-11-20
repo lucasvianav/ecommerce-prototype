@@ -249,7 +249,7 @@ function ProductForm(props){
             <div className="form-group col-md-6 col-sm-12">
               <label for="nomeProduto">Nome do Produto: *</label>
               <input type="text" className="input-control form-control" id="nomeProduto" 
-                placeholder="Digite o nome do produto" style={{borderRadius: '15px'}}
+                placeholder="Digite o nome do produto" style={{borderRadius: '15px', width: 'calc(100% - 4.5rem)'}}
                 value={nomeProduto} 
                 onChange={(event) => {setNomeProduto(event.target.value)}}
               />
@@ -311,7 +311,7 @@ function ProductForm(props){
                 <label for="novaCategoria">Nome da Nova Categoria: *</label>
                 <input type="text" className="input-control form-control" id="novaCategoria"
                   placeholder="Digite o Nome da Nova Categoria"
-                  value={novaCategoria}
+                  value={novaCategoria} style={{borderRadius: '15px', width: 'calc(100% - 4.5rem)'}}
                   onChange={(event) => {setNovaCategoria(event.target.value)}}
                 />
             </div>
