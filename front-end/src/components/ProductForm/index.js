@@ -249,7 +249,7 @@ function ProductForm(props){
             <div className="form-group col-md-6 col-sm-12">
               <label for="nomeProduto">Nome do Produto: *</label>
               <input type="text" className="input-control form-control" id="nomeProduto" 
-                placeholder="Digite o nome do produto"
+                placeholder="Digite o nome do produto" style={{borderRadius: '15px'}}
                 value={nomeProduto} 
                 onChange={(event) => {setNomeProduto(event.target.value)}}
               />
