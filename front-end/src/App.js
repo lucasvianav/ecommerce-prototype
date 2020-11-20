@@ -19,6 +19,8 @@ import ShoppingCart from './components/ShoppingCart'
 import Accessibility from './components/Accessibility'
 import { DataContext } from './Context'
 
+$('*').addClass('light-theme')
+
 class App extends React.Component {
   static contextType = DataContext
   
