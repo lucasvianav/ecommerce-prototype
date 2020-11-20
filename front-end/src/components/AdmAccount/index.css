@@ -8,6 +8,15 @@
 }
 
 #altSenha{
-    right: 0;
-    margin-left: auto;
+    left: 0;
+    margin-right: auto;
 }
+
+.nav-link{
+    width: 96%;
+    height: 100%;
+    align-items: center;
+}
+
+
+

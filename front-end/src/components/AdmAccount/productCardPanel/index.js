@@ -1,26 +1,37 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import {Link} from 'react-router-dom';
+import $ from 'jquery';
 
+import '../../css/bootstrap.css';
+import { DataContext } from '../../../Context'
 
-import '../../bootstrap/css/bootstrap.css';
-import data from '../../../data'
+function ProductCardPanel(props){
 
-function productCardPanel(props){
+    const context = useContext(DataContext);
+    const data = context.data;
+
     const visibilidade = props.type == "visivel" ? true : false;
 
-    const renderProduct  = (item, index, tipo) => {
+    const renderProduct  = (item, index) => {
+        const tipo = item.type == "PR" ? "Produto" : "Evento";
+        const url = "/edit/produtos" + item.id;
+
         if(visibilidade == item.visibility){
-            return(
-                <div className="card p-0" key={index}>
-                    <div className="card-body m-0 p-2">
-                        <h5 className="card-title">{item.name}</h5>
-                        <span className="badge badge-light">{item.type}</span>
-                        <span className="badge badge-light">{item.category}</span>
-                        <div className="d-flex justify-content-end">
-                            <button className="btn btn-link btn-sm mt-2">Mais Detalhes</button>
-                        </div>
-                    </div>
-                </div>
-            );
+          $("#vazio").addClass("d-none");
+          $("#vazio").removeClass("d-flex");
+
+          return(
+              <div className="card p-0" key={index}>
+                  <div className="card-body m-0 p-2">
+                      <h5 className="card-title">{item.name}</h5>
+                      <span className="badge badge-light">{tipo}</span>
+                      <span className="badge badge-light">{item.category}</span>
+                      <div className="d-flex justify-content-end">
+                          <Link to={url} className="btn btn-link btn-sm mt-2" >Mais Detalhes</Link>
+                      </div>
+                  </div>
+              </div>
+          );
         }else{
             return ('');
         }
@@ -28,15 +39,17 @@ function productCardPanel(props){
 
     return(
         <div>
-            <div className="card-columns">
-                {data.products.map(renderProduct)}
-                {data.events.map(renderProduct)}
+            <div id="vazio" className="d-flex justify-content-center" style={{height: "60px"}}> 
+                <h4>Não há nada aqui!</h4>
             </div>
-            <p className="text-right mr-3">
+            <div className="card-columns">
+                {data.map(renderProduct)}
+            </div>
+            {/* <p className="text-right mr-3">
                 <a href="#">Ver mais</a>
-            </p>
+            </p> */}
         </div>
     );
 }
 
-export default productCardPanel;
+export default ProductCardPanel;

@@ -62,6 +62,17 @@ export class DataProvider extends React.Component {
             }
         ],
 
+        categories: [
+            {
+                name: 'Moletons',
+                parent: 'PR'
+            }, 
+            {
+                name: 'Cervejada',
+                parent: 'EV'
+            }
+        ],
+
         cart: [
             // {
             //     sku: 'PR-P1-VOID-MASC-M', // PR = type (PRoduct) --- P1 = id --- VOID = color --- MASC = template (MASC x FEMI) --- M = size
@@ -165,11 +176,11 @@ export class DataProvider extends React.Component {
     deleteFromCart = this.deleteFromCart.bind(this)
 
     render(){
-        const {data, cart, account, coupons, home} = this.state
+        const {data, cart, account, coupons, home, categories} = this.state
         const {addToCart, removeFromCart, deleteFromCart} = this
 
         return(
-            <DataContext.Provider value={{data, cart, account, coupons, home, addToCart, removeFromCart, deleteFromCart}}>
+            <DataContext.Provider value={{data, cart, account, coupons, home, categories, addToCart, removeFromCart, deleteFromCart}}>
                 {this.props.children}
             </DataContext.Provider>
         )

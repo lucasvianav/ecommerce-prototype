@@ -15,6 +15,9 @@ import ProductCategoryPanel from './components/ProductCategoryPanel'
 import ProductDetails from './components/ProductDetails'
 import ShoppingCart from './components/ShoppingCart'
 import { DataContext } from './Context'
+import MyAccount from './components/MyAccount'
+import AdmAccount from './components/AdmAccount'
+import ProductEdit from './components/ProductEdit'
 
 class App extends React.Component {
   static contextType = DataContext
@@ -53,15 +56,31 @@ class App extends React.Component {
               else if(['carrinho', 'cart'].includes(base.toLowerCase())){
                 return <ShoppingCart {...props}/>
               }
+              
+              else if(['conta', 'accont'].includes(base.toLowerCase())){
+                return <MyAccount />
+              }
+
+              else if(['adm', 'adimin'].includes(base.toLowerCase())){
+                return <AdmAccount />
+              }
 
               else{
                 return <Redirect to='/'/>
               }
             }} exact/>
 
-            <Route path='/:tab/:base' render={props => {
+            <Route path='/:tab/:base/:id' render={props => {
               const {tab, base} = props.match.params
 
+              if(['editar', 'edit'].includes(tab.toLowerCase())){
+                return <ProductEdit {...props} />
+              }
+            }} />
+
+            <Route path='/:tab/:base' render={props => {
+              const {tab, base} = props.match.params
+              
               if(!['eventos', 'events', 'event', 'evento'].includes(tab.toLowerCase()) && !['produtos', 'products', 'produto', 'product'].includes(tab.toLowerCase())){
                 return <Redirect to='/'/>
               }

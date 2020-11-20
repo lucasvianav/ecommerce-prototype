@@ -1,3 +1,7 @@
 .vscode/*
 milestone*.zip
 js/node_modules/core-js/*
+front-end/node_modules
+front-end/node_modules/*
+node_modules/*
+node_modules

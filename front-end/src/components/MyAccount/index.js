@@ -3,7 +3,7 @@ import $ from 'jquery';
 import { Accordion, Card } from 'react-bootstrap';
 
 import './index.css';
-import '../bootstrap/css/bootstrap.css';
+import '../css/bootstrap.css';
 
 class MyAccount extends React.Component {
     render(){

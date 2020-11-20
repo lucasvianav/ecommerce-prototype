@@ -1,0 +1,85 @@
+/*Campo invalido*/
+
+#imagensInseridas .is-invalid{
+    color: #DC3545;
+    border-color: #DC3545;
+}
+
+.form-control .is-invalid, .input-control .is-invalid{
+    width: calc(100% - 3.5rem);
+}
+
+.form-row, .form-group, .input-group{
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+}
+
+.form-row > .col, .form-row > [class*="col-"] {
+    padding: 0 0 0 0;
+}
+
+#imagensInseridas{
+    margin: 0 0 1rem 0;
+    width: calc(100% - 2.5rem);
+}
+
+.div-miniImagem{
+    width: 10%;
+    margin-left: 0.2rem;
+    margin-right: 0.5rem;
+    border-radius: 0.25rem;
+}
+
+.miniImagem{
+    width: 100%;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+
+.excluir-imagem{
+    border-radius: 50%;
+    border: 0px;
+    font-size: 0.9em;
+    background-color: #DC3545;
+    color: white;
+    position: absolute;
+    margin-top: -0.2rem;
+    margin-left: 8.4%;
+
+}
+
+.input-group{
+    width: calc(100% - 1rem);
+}
+
+.input-group, .form-control, .custom-file-label{
+    height: 1.5em;
+}
+
+.custom-file-label, .custom-file-input{
+    cursor: pointer;
+}
+
+.custom-file-label::after {
+    height: 1.5em;
+}
+
+.form-control, .custom-select{
+    display: block;
+    width: calc(100% - 2.5rem);
+}
+
+.modal-backdrop.show{
+    z-index: 1;
+}
+
+.btn-clear{
+    border: 0px;
+    background: transparent;
+}
+
+.align-content-end{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
