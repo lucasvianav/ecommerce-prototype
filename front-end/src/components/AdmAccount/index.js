@@ -3,6 +3,7 @@ import $ from 'jquery';
 import {Nav, Collapse} from 'react-bootstrap';
 import ProductCardPanel from './ProductCardPanel';
 import ProductForm from '../ProductForm';
+import UsersPanel from './UsersPanel';
 
 import '../css/bootstrap.css';
 import './index.css';
@@ -165,10 +166,7 @@ function AdmAccount(props){
                                 </Collapse>
                                 <Collapse in={usuarios}>
                                     <div id="usuarios" className="p-2 bg-flex tabcontent">
-                                        <h6 className="align-right mt-2 text-right">
-                                            <i className="fas fa-search"></i>
-                                            <i className="fas fa-filter"></i>
-                                        </h6>
+                                        <UsersPanel />
                                    </div>
                                 </Collapse>
                         </section>

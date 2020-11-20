@@ -10,7 +10,6 @@ export default function ProductEdit(props) {
 
     const {tab, base, id} = props.match.params;  
 
-
     return(
         <>
           <main>
