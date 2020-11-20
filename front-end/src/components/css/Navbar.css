@@ -244,6 +244,8 @@
     position: absolute;
     opacity: 0.9;
     background-color: #80ac39;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .theme .toggle input#theme-checkbox:checked + label {
