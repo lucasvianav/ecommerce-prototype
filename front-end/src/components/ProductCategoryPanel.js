@@ -49,7 +49,7 @@ class ProductCategoryPanel extends React.Component {
         return(
             this.state.products.isEmpty() ? '' :
             <main className="ProductsPanel">
-                <div id="panel-title">{this.category}</div>
+                <div className="panel-title"><span>{this.category}</span></div>
 
                 <div className="tabs-history disable-selection">
                     <Link to='/' className='past-tab'><span>Início</span></Link>

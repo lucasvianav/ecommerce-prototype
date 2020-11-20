@@ -111,7 +111,7 @@ class ShoppingCart extends React.Component {
                     <section className="products-panel">
                         {
                             this.state.cart.isEmpty() ? <span className='empty grey'>Seu carrinho está vazio.</span> :
-                            <ul className="header-row">
+                            <ul className="header-row grey">
                                 <li className='invisible'>Imagem</li>
                                 <li className='name'>Produto</li>
                                 <li className="quantity">Quantidade</li>
@@ -139,13 +139,13 @@ class ShoppingCart extends React.Component {
 
                                             <div className="quantity">
                                                 <div className='controls'>
-                                                    <button onClick={(e) => this.handleChange(e, item.sku, -1)} name='decrease' type="button"><i className="fa fa-minus" aria-hidden="true"></i></button>
+                                                    <button onClick={(e) => this.handleChange(e, item.sku, -1)} name='decrease' type="button"><span><i className="fa fa-minus" aria-hidden="true"></i></span></button>
                                                     <input type="number" className='disable-selection' name={'qty_' + item.sku} value={this.state.cart.find(el => el.sku === item.sku).quantity} min="1" readOnly/> 
-                                                    <button onClick={(e) => this.handleChange(e, item.sku, +1, item.specs)} name='increase' type="button"><i className="fa fa-plus" aria-hidden="true"></i></button>
+                                                    <button onClick={(e) => this.handleChange(e, item.sku, +1, item.specs)} name='increase' type="button"><span><i className="fa fa-plus" aria-hidden="true"></i></span></button>
                                                 </div>
                                                 
                                                 <span className='break-flex'></span>
-                                                <button className="text-btn grey remove disable-selection" name='remove' onClick={(e) => this.handleChange(e, item.sku)}>Excluir item</button>
+                                                <button className="text-btn grey remove disable-selection" name='remove' onClick={(e) => this.handleChange(e, item.sku)}><span>Excluir item</span></button>
                                             </div>
 
                                             <span className='price'>R${(item.price * item.quantity).toFixed(2).replaceAll('.',',')}</span>

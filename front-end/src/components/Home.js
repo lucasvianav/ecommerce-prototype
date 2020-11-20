@@ -8,7 +8,7 @@ class Home extends React.Component {
 
     render(){
         return(
-            <main>
+            <main className="Home">
                 <div className="scroll-gallery">
                     <ul>
                         {this.context.home.map((item, index) => <li key={index}><img className="scroll-gallery-photos" src={item.img} alt={item.alt}/></li>)}

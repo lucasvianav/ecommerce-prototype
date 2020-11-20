@@ -77,7 +77,7 @@ class ProductsPanel extends React.Component {
         return(
             this.state.products.isEmpty() ? '' :
             <main className="ProductsPanel">
-                <div id="panel-title">{this.title.capitalize()}</div>
+                <div className="panel-title"><span>{this.title.capitalize()}</span></div>
 
                 <div className="tabs-history disable-selection">
                     <Link to='/' className='past-tab'><span>Início</span></Link>
@@ -93,9 +93,9 @@ class ProductsPanel extends React.Component {
                                 <ul className="checkboxes">
                                     {
                                         this.state.categories.map((item, index) => (
-                                            <li key={item + index.toString()} title={item}>
+                                            <li className='checkbox-container' key={item + index.toString()} title={item}>
                                                 <input onChange={this.handleFilters} type="checkbox" id={item.replaceAll(' ', '-')} name={item.replaceAll(' ', '')}/>
-                                                <label htmlFor={item.replaceAll(' ', '-')}>{item}</label>
+                                                <label className='disable-selection' htmlFor={item.replaceAll(' ', '-')}>{item}</label>
                                             </li>
                                         ))
                                     }

@@ -1,19 +1,16 @@
-body, #root, :root {
-	/* background-color: #653b63; */
-	/* background-color: #3b4f65; */
-}   
-
 main.Login {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-    align-items: center;
+	width: fit-content;
+	height: fit-content;
+	margin: auto;
 }
 
 .Login #forms-panel {
     text-align: center;
 	display: flex;
+	flex-flow: row nowrap;
+	justify-content: center;
 	align-items: flex-start;
+	margin: auto;
 }
 
 .Login .form-wrapper {
@@ -53,19 +50,34 @@ main.Login {
 }
 
 .Login .form-login {
-	background-color: #fff;
 	transform: translate(35%, -20px) scaleY(1);
 }
 
-.Login .hide-login {
-	animation: hideLogin .4s ease-out forwards;
+.light-theme .Login .form-login {
+	background-color: #fff;
 }
 
-.Login .show-login {
-	animation: showLogin .4s ease-in forwards;
+.dark-theme .Login .form-login {
+	background-color: #3b3b3b;
 }
 
-@keyframes showLogin {
+.light-theme .Login .hide-login {
+	animation: hideLoginLight .4s ease-out forwards;
+}
+
+.light-theme .Login .show-login {
+	animation: showLoginLight .4s ease-in forwards;
+}
+
+.dark-theme .Login .hide-login {
+	animation: hideLoginDark .4s ease-out forwards;
+}
+
+.dark-theme .Login .show-login {
+	animation: showLoginDark .4s ease-in forwards;
+}
+
+@keyframes showLoginLight {
 	0% {
 		background: #d7e7f1;
 		transform: translate(40%, 10px) scaleY(1.2);
@@ -79,7 +91,7 @@ main.Login {
 	}
 }
 
-@keyframes hideLogin {
+@keyframes hideLoginLight {
 	0% {
 		background-color: #fff;
 		transform: translate(35%, -20px) scale(1);
@@ -93,20 +105,63 @@ main.Login {
 	}
 }
 
+@keyframes showLoginDark {
+	0% {
+		background-color: #25262c;
+		transform: translate(40%, 10px) scaleY(1.2);
+	}
+	50% {
+		transform: translate(0, 0) scaleY(1.1);
+	}
+	100% {
+		background-color: #3b3b3b;
+		transform: translate(35%, -20px) scaleY(1);
+	}
+}
+
+@keyframes hideLoginDark {
+	0% {
+		background-color: #3b3b3b;
+		transform: translate(35%, -20px) scale(1);
+	}
+	50% {
+		transform: translate(0, 0) scale(1.1);
+	}
+	100% {
+		background-color: #25262c;
+		transform: translate(40%, 10px) scaleY(1.2);
+	}
+}
+
 .Login .form-recovery{
-	background-color: #fff;
 	transform: translate(35%, -20px) scaleY(1);
 }
 
-.Login .hide-recovery {
-	animation: hideRecovery .3s ease-out forwards;
+.light-theme .Login .form-recovery{
+	background-color: #fff;
 }
 
-.Login .show-recovery {
-	animation: showRecovery .3s ease-in forwards;
+.dark-theme .Login .form-recovery{
+	background-color: #3b3b3b;
 }
 
-@keyframes showRecovery {
+.light-theme .Login .hide-recovery {
+	animation: hideRecoveryLight .4s ease-out forwards;
+}
+
+.light-theme .Login .show-recovery {
+	animation: showRecoveryLight .4s ease-in forwards;
+}
+
+.dark-theme .Login .hide-recovery {
+	animation: hideRecoveryDark .4s ease-out forwards;
+}
+
+.dark-theme .Login .show-recovery {
+	animation: showRecoveryDark .4s ease-in forwards;
+}
+
+@keyframes showRecoveryLight {
 	0% {
 		background: #d7e7f1;
 		transform: translate(40%, 10px) scaleY(1.8);
@@ -120,7 +175,7 @@ main.Login {
 	}
 }
 
-@keyframes hideRecovery {
+@keyframes hideRecoveryLight {
 	0% {
 		background-color: #fff;
 		transform: translate(35%, -20px) scale(1);
@@ -134,20 +189,63 @@ main.Login {
 	}
 }
 
+@keyframes showRecoveryDark {
+	0% {
+		background-color: #25262c;
+		transform: translate(40%, 10px) scaleY(1.8);
+	}
+	50% {
+		transform: translate(0, 0) scaleY(1.4);
+	}
+	100% {
+		background-color: #3b3b3b;
+		transform: translate(35%, -20px) scaleY(1);
+	}
+}
+
+@keyframes hideRecoveryDark {
+	0% {
+		background-color: #3b3b3b;
+		transform: translate(35%, -20px) scale(1);
+	}
+	50% {
+		transform: translate(0, 0) scale(1.4);
+	}
+	100% {
+		background-color: #25262c;
+		transform: translate(40%, 10px) scaleY(1.8);
+	}
+}
+
 .Login .form-signup {
-	background: #d7e7f1;
 	transform: translate(-40%, 10px) scaleY(.8);
 }
 
-.Login .hide-signup {
-	animation: hideSignup .4s ease-out forwards;
+.light-theme .Login .form-signup {
+	background: #d7e7f1;
 }
 
-.Login .show-signup {
-	animation: showSignup .4s ease-in forwards;
+.dark-theme .Login .form-signup {
+	background: #25262c;
 }
 
-@keyframes showSignup {
+.light-theme .Login .hide-signup {
+	animation: hideSignupLight .4s ease-out forwards;
+}
+
+.light-theme .Login .show-signup {
+	animation: showSignupLight .4s ease-in forwards;
+}
+
+.dark-theme .Login .hide-signup {
+	animation: hideSignupDark .4s ease-out forwards;
+}
+
+.dark-theme .Login .show-signup {
+	animation: showSignupDark .4s ease-in forwards;
+}
+
+@keyframes showSignupLight {
 	0% {
 		background: #d7e7f1;
 		transform: translate(-40%, 10px) scaleY(.8);
@@ -161,7 +259,7 @@ main.Login {
 	}
 }
 
-@keyframes hideSignup {
+@keyframes hideSignupLight {
 	0% {
 		background-color: #fff;
 		transform: translate(-35%, -20px) scaleY(1);
@@ -171,24 +269,67 @@ main.Login {
 	}
 	100% {
 		background: #d7e7f1;
+		transform: translate(-40%, 10px) scaleY(.8);
+	}
+}
+
+@keyframes showSignupDark {
+	0% {
+		background-color: #25262c;
+		transform: translate(-40%, 10px) scaleY(.8);
+	}
+	50% {
+		transform: translate(0, 0) scaleY(.8);
+	}
+	100% {
+		background-color: #3b3b3b;
+		transform: translate(-35%, -20px) scaleY(1);
+	}
+}
+
+@keyframes hideSignupDark {
+	0% {
+		background-color: #3b3b3b;
+		transform: translate(-35%, -20px) scaleY(1);
+	}
+	50% {
+		transform: translate(0, 0) scaleY(.8);
+	}
+	100% {
+		background-color: #25262c;
 		transform: translate(-40%, 10px) scaleY(.8);
 	}
 }
 
 .Login .form-full-signup {
-	background: #d7e7f1;
 	transform: translate(-40%, 10px) scaleY(.8);
 }
 
-.Login .hide-full-signup {
-	animation: hideFullSignup .4s ease-out forwards;
+.light-theme .Login .form-full-signup {
+	background: #d7e7f1;
 }
 
-.Login .show-full-signup {
-	animation: showFullSignup .4s ease-in forwards;
+.dark-theme .Login .form-full-signup {
+	background: #25262c;
 }
 
-@keyframes showFullSignup {
+.light-theme .Login .hide-full-signup {
+	animation: hideFullSignupLight .4s ease-out forwards;
+}
+
+.light-theme .Login .show-full-signup {
+	animation: showFullSignupLight .4s ease-in forwards;
+}
+
+.dark-theme .Login .hide-full-signup {
+	animation: hideFullSignupDark .4s ease-out forwards;
+}
+
+.dark-theme .Login .show-full-signup {
+	animation: showFullSignupDark .4s ease-in forwards;
+}
+
+@keyframes showFullSignupLight {
 	0% {
 		background: #d7e7f1;
 		transform: translate(-40%, 10px) scaleY(.7);
@@ -202,7 +343,7 @@ main.Login {
 	}
 }
 
-@keyframes hideFullSignup {
+@keyframes hideFullSignupLight {
 	0% {
 		background-color: #fff;
 		transform: translate(-35%, -20px) scaleY(1);
@@ -212,6 +353,34 @@ main.Login {
 	}
 	100% {
 		background: #d7e7f1;
+		transform: translate(-40%, 10px) scaleY(.7);
+	}
+}
+
+@keyframes showFullSignupDark {
+	0% {
+		background-color: #25262c;
+		transform: translate(-40%, 10px) scaleY(.7);
+	}
+	50% {
+		transform: translate(0, 0) scaleY(.7);
+	}
+	100% {
+		background-color: #3b3b3b;
+		transform: translate(-35%, -20px) scaleY(1);
+	}
+}
+
+@keyframes hideFullSignupDark {
+	0% {
+		background-color: #3b3b3b;
+		transform: translate(-35%, -20px) scaleY(1);
+	}
+	50% {
+		transform: translate(0, 0) scaleY(.7);
+	}
+	100% {
+		background-color: #25262c;
 		transform: translate(-40%, 10px) scaleY(.7);
 	}
 }
@@ -233,12 +402,20 @@ main.Login {
     margin: auto;
     padding-top: 7%;
     padding-bottom: 7%;
-    background-color: white;
-    border: solid 1px #cddbef;
     border-radius: 10px;
 	overflow: hidden;
 	min-width: 260px;
 	transform-origin: top;
+}
+
+.light-theme .Login .form {
+    background-color: white;
+    border: solid 1px #cddbef;
+}
+
+.dark-theme .Login .form {
+    background-color: #3b3b3b;
+    border: solid 1px rgba(63, 64, 66, 0.151);
 }
 
 .Login .switcher {
@@ -285,19 +462,13 @@ main.Login {
 	width: 90%;
     margin: auto;
     margin-top: 1%;
-	padding-right: 5%;
-	padding-left: 5%;
-	font-size: 16px;
 	line-height: 40px;
-	color: #3b4465;
-    background-color: #eef9fe;
-    border: 1px solid #cddbef;
-    border-radius: 11px;
+	font-size: 16px;
+    border-radius: 8px;
 }
 
 .Login .input-block label {
     font-size: 14px;
-    color: #92a5a5;
 }
 
 .Login .text-btn {

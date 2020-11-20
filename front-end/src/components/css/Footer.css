@@ -2,26 +2,31 @@
 
 #footer {
     display: block;
-    background-color: #202020;
     color: #f1eff1;
     text-align: center;
-    padding-bottom: 1.4%;
-    padding-top: 1%;
+    padding-bottom: 1.5%;
+    padding-top: 2%;
     clear: both;
     margin: auto auto 0 auto;
     width: 100%;
 }
 
-#footer a {
-    color: inherit;
-    text-decoration: inherit;
+.light-theme #footer {
+    background-color: rgba(18, 18, 18, 0.97);
+}
+
+.dark-theme #footer {
+    background-color: rgba(197, 197, 197, 0.1);
+}
+
+#footer p, span {
+    color: #f1eff1;
 }
 
 #footer-info {
     display: flex;
-    justify-items: center;
-    align-content: center;
-    align-self: center;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
     align-items: center;
     padding: 0;
     width: 100%;
@@ -30,62 +35,63 @@
 #footer ul {
     list-style-type: none;
     padding: 0;
-    align-self: center;
-    align-content: center;
-    margin: auto;
+    margin: 0;
 }
 
 #footer li {
     display: inline-block;
-    margin: auto;
-    vertical-align: middle;
+    padding: 0;
+    margin: 0;
+}
+
+#footer-info a {
+    color: inherit;
+    text-decoration: inherit;
 }
 
 #help {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+    align-items: center;
     vertical-align: middle;
-    width: 70%;
-    margin: auto;
-    float: left;
-}
-
-#help li {
-    margin-right: 10%;
-    margin-left: 10%;
-}
-
-#help p {
-    font-size: medium;
+    width: 60%;
+    padding: 0;
+    margin: 0;
 }
 
 #divisor {
     color: #f1eff1;
     font-size: xx-large;
     font-weight: lighter;
-    margin-right: auto;
+    padding: 0;
+    margin: 0;
 }
 
 #social-media {
-    color: #af7430;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+    align-items: center;
     vertical-align: middle;
-    width: 30%;
-    float: right;
+    color: #af7430;
+    width: 25%;
+    padding: 0;
+    margin: 0;
 }
 
 #social-media li {
     font-size: small;
-    margin-right: 3%;
-    margin-left: 3%;
 }
 
 #footer hr.end {
     border-top: 0.8px solid;
-    color: rgba(65, 65, 65, 0.315);
-    margin-right: 3%;
-    margin-left: 3%;
+    margin: 1.5% 3% 1.7% 3%;
 
 }
 
 #credits {
-    margin-top: 2%;
     font-size: small;
+    padding: 0;
+    margin: 0;
 }
