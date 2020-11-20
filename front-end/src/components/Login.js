@@ -1,9 +1,10 @@
-import React from 'react'
+import React, {createContext, useContext} from 'react'
 import $ from 'jquery'
 import InputMask from 'react-input-mask'
 import '../Util'
 
 import './css/Login.css'
+import { DataContext } from '../Context'
 
 // Login --> Criar conta | Criar conta --> Login
 const swapTab = (e) => {
@@ -253,6 +254,9 @@ class CPF {
 }
 
 class Login extends React.Component {
+
+    static contextType = DataContext
+
     constructor(){
         super()
 
@@ -457,7 +461,27 @@ class Login extends React.Component {
     }
 
     submitLogin(){
+        // Input data
+        const {loginEmail, loginPw} = this.state
+        const {accounts} = this.context
+        var ehCadastrado = false
 
+        {  
+           accounts.map(account=>
+                {
+                    if(account.email === loginEmail && account.password === loginPw){
+                       ehCadastrado = true
+                    }
+                }
+            )
+        }
+
+        if(ehCadastrado){
+            alert("Usuário Cadastrado")
+        }else{
+            alert("Senha ou email incorretos")
+        }
+        
     }
 
     submitRecovery(){
