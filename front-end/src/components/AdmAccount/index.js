@@ -97,7 +97,7 @@ function AdmAccount(props){
                             <button id="altSenha" className="btn btn-outline-dark">Alterar Senha</button>
                         </section>
                     
-                        <section id="produtosCadastrados" className="d-flex rounded bg-light shadow-sm mt-3 p-2">
+                        <section id="funcoes" className="d-flex rounded shadow-sm mt-3 p-2">
                                 <Nav fill variant="tabs" defaultActiveKey="/home">
                                     <Nav.Item>
                                     <button className="nav-link active ml-0 mr-0" id="tabPedidos" onClick={() => {showPedidos();}} 
@@ -132,7 +132,7 @@ function AdmAccount(props){
                                 </Nav>
                                 
                                 <Collapse in={pedidos}>
-                                    <div id="pedidos" className="p-2 bg-white border border-top-0 tabcontent">
+                                    <div id="pedidos" className="p-2 bg-flex tabcontent">
                                         <h6 className="align-right mt-2 text-right">
                                             <i className="fas fa-search"></i>
                                             <i className="fas fa-filter"></i>
@@ -141,7 +141,7 @@ function AdmAccount(props){
                                    </div>
                                 </Collapse>
                                 <Collapse in={ativo}>
-                                    <div id="produtosAtivos" className="p-2 bg-white border border-top-0 tabcontent" >
+                                    <div id="produtosAtivos" className="p-2 bg-flex tabcontent" >
                                         <h6 className="align-right mt-2 text-right">
                                             <i className="fas fa-search"></i>
                                             <i className="fas fa-filter"></i>
@@ -150,7 +150,7 @@ function AdmAccount(props){
                                     </div>
                                 </Collapse>
                                 <Collapse in={inativo}>
-                                    <div id="produtosInativos" className="p-2 bg-white border border-top-0 tabcontent">
+                                    <div id="produtosInativos" className="p-2 bg-flex tabcontent">
                                         <h6 className="align-right mt-2 text-right">
                                             <i className="fas fa-search"></i>
                                             <i className="fas fa-filter"></i>
@@ -159,17 +159,16 @@ function AdmAccount(props){
                                     </div>
                                 </Collapse>
                                 <Collapse in={novoProd}>
-                                    <div id="produtoNovo" className="pt-4 pl-4 pb-3 bg-white border border-top-0 tabcontent">
+                                    <div id="produtoNovo" className="pt-4 pl-4 pb-3 bg-flex tabcontent">
                                         <ProductForm mode="new"/>
                                    </div>
                                 </Collapse>
                                 <Collapse in={usuarios}>
-                                    <div id="usuarios" className="p-2 bg-white border border-top-0 tabcontent">
+                                    <div id="usuarios" className="p-2 bg-flex tabcontent">
                                         <h6 className="align-right mt-2 text-right">
                                             <i className="fas fa-search"></i>
                                             <i className="fas fa-filter"></i>
                                         </h6>
-                                        usuarios
                                    </div>
                                 </Collapse>
                         </section>

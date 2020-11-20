@@ -1,5 +1,5 @@
 
-#produtosCadastrados{
+#funcoes{
     flex-direction: column;
 }
 
@@ -18,5 +18,39 @@
     align-items: center;
 }
 
+.dark-theme #funcoes{
+    background-color: black;
+    color: #ffffff;
+}
 
+.light-theme #funcoes{
+    background-color: #EFEFEF;
+    color: black;
+}
 
+.dark-theme .nav-link{
+    background-color: #444444;
+    color: #ffffff;
+}
+
+.dark-theme .nav-link.active{
+    background-color: #232323;
+    border-color: #232323;
+    color: #ffffff;
+}
+
+.dark-theme .bg-flex{
+    background-color: #232323;
+    color: #ffffff;
+    border-color: black;
+}
+
+.light-theme .bg-flex{
+    background-color: white;
+    color: black;
+    border-color: white;
+}
+
+.dark-theme .nav{
+    border-bottom: 1px solid black;
+}

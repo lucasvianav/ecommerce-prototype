@@ -14,7 +14,8 @@ function ProductCardPanel(props){
 
     const renderProduct  = (item, index) => {
         const tipo = item.type == "PR" ? "Produto" : "Evento";
-        const url = "/edit/produtos" + item.id;
+        const url = "../edit/produto/" + item.id;
+        console.log(url);
 
         if(visibilidade == item.visibility){
           $("#vazio").addClass("d-none");
