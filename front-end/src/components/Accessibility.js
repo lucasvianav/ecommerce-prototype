@@ -3,12 +3,14 @@ import TextTab from './TextTab'
 
 class Accessibility extends React.Component {
     render(){
+        // Image panel (row)
         const panel = {
             'display': 'flex',
             'flex-flow': 'row nowrap',
             'margin': 'auto'
         }
 
+        // Figure
         const fig = {
             'display': 'flex',
             'flex-flow': 'column nowrap',

@@ -359,7 +359,9 @@ class Login extends React.Component {
         
         const forms = e.target.name.capitalize()
         
+        // eslint-disable-next-line
         if(eval('this.validate' + forms + '()')){
+            // eslint-disable-next-line
             eval('this.submit' + forms + '()')
         }
     }
