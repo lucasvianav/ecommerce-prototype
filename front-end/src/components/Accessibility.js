@@ -7,7 +7,7 @@ class Accessibility extends React.Component {
             <TextTab title='Acessibilidade'>
                 <h3>Ajuste no tamanho do texto (e da tela como um todo)</h3>
                 <p>Existem atalhos bem útei no teclado para controlar o zoom do site. Considerando que aumentar o zoom, aumenta o tamanho do texto e do site como um todo, temos que as teclas a serem pressionadas simultaneamente são:</p>
-                <ul>
+                <ul className='bullet-list'>
                     <li><span><strong><em>Ctrl</em></strong> e <strong><em>+</em></strong>, para aumentar o zoom do site.</span></li>
                     <li><span><strong><em>Ctrl</em></strong> e <strong><em>-</em></strong>, para diminuir o zoom do site.</span></li>
                     <li><span><strong><em>Ctrl</em></strong> e <strong><em>0</em></strong>, para resetar o zoom do site para o padrão.</span></li>

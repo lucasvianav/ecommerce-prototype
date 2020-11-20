@@ -5,7 +5,7 @@ class TextTab extends React.Component {
     render(){
         return(
             <main className="TextTab">
-                <div className="panel-title">{this.props.title}</div>
+                <div className="panel-title"><span>{this.props.title}</span></div>
 
                 <div className="tabs-history disable-selection">
                     <Link to='/' className='past-tab'><span>Início</span></Link>
