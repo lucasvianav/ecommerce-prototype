@@ -96,52 +96,19 @@ export class DataProvider extends React.Component {
                     type: 'absolute',
                     discount: 25 // R$25
                 }
-        ],
+            ],
 
-        categories: [
-            {
-                name: 'Moletons',
-                parent: 'PR'
-            }, 
-            {
-                name: 'Cervejada',
-                parent: 'EV'
-            }
-        ],
-
-        cart: [
-            // {
-            //     sku: 'PR-P1-VOID-MASC-M', // PR = type (PRoduct) --- P1 = id --- VOID = color --- MASC = template (MASC x FEMI) --- M = size
-            //     quantity: 2,
-            //     specs: {color: '', template: 'Masculino', size: 'M'}
-            // },
-            // {
-            //     sku: 'EV-E1', // EV = type (EVent) --- E1 = id
-            //     quantity: 1,
-            //     specs: {color: '', template: '', size: ''}
-            // }
-        ],
-
-        account: {
-            isLogged: false,
-            accountType: '',
-            email: ''
-        },
-
-        coupons: [
-            {
-                str: 'FLIPRULEZ10',
-                type: 'percentage', // 'percentage' x 'absolute'
-                discount: 10 // 10%
-            },
-            {
-                str: 'FLIPRULEZ25',
-                type: 'absolute',
-                discount: 25 // R$25
-            }
-
-        ],
-    
+            categories: [
+                {
+                    name: 'Moletons',
+                    parent: 'PR'
+                }, 
+                {
+                    name: 'Cervejada',
+                    parent: 'EV'
+                }
+            ],
+        
             darkTheme: this.getInitialTheme()
         }
 
@@ -238,7 +205,7 @@ export class DataProvider extends React.Component {
     deleteFromCart = this.deleteFromCart.bind(this)
 
     render(){
-        const {data, cart, account, coupons, home, categories} = this.state
+        const {data, cart, account, coupons, home, categories, darkTheme} = this.state
         const {addToCart, removeFromCart, deleteFromCart, toggleTheme} = this
 
         return(
