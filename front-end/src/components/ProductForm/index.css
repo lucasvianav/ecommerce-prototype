@@ -74,7 +74,11 @@
 
 .btn{
     border-radius: 15px;
-    padding: 0.4 1rem;
+    padding: 0.5rem 1rem;
+}
+
+.input-group-append .btn{
+    padding: 0rem 1rem;
 }
 
 .modal-backdrop.show{

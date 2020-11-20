@@ -79,11 +79,28 @@ export class DataProvider extends React.Component {
                 // }
             ],
     
-            account: {
-                isLogged: false,
-                accountType: '',
-                email: ''
-            },
+            accounts: [
+                {   name: 'Fiona',
+                    isLogged: false,
+                    accountType: 'client',
+                    email: 'fionagatinha74@gmail.com',
+                    password: 'souLinda123'
+                },
+                {
+                    name: 'Biscoito',
+                    isLogged: false,
+                    accountType: 'client',
+                    email: 'biscoitodamassa@gmail.com',
+                    password: 'nhameNhame123'
+                },
+                {
+                    name: 'Usuario',
+                    isLogged: false,
+                    accountType: 'client',
+                    email: 'teste@gmail.com',
+                    password: 'Teste123'
+                }
+            ],
     
             coupons: [
                 {
@@ -205,11 +222,11 @@ export class DataProvider extends React.Component {
     deleteFromCart = this.deleteFromCart.bind(this)
 
     render(){
-        const {data, cart, account, coupons, home, categories, darkTheme} = this.state
+        const {data, cart, accounts, coupons, home, categories, darkTheme} = this.state
         const {addToCart, removeFromCart, deleteFromCart, toggleTheme} = this
 
         return(
-            <DataContext.Provider value={{data, cart, account, coupons, home, categories, darkTheme, addToCart, removeFromCart, deleteFromCart, toggleTheme}}>
+            <DataContext.Provider value={{data, cart, accounts, coupons, home, categories, darkTheme, addToCart, removeFromCart, deleteFromCart, toggleTheme}}>
                 {this.props.children}
             </DataContext.Provider>
         )

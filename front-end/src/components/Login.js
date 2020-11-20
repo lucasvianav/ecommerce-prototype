@@ -505,7 +505,27 @@ class Login extends React.Component {
     }
 
     submitLogin(){
+        // Input data
+        const {loginEmail, loginPw} = this.state
+        const {accounts} = this.context
+        var ehCadastrado = false
 
+        {  
+           accounts.map(account=>
+                {
+                    if(account.email === loginEmail && account.password === loginPw){
+                       ehCadastrado = true
+                    }
+                }
+            )
+        }
+
+        if(ehCadastrado){
+            alert("Usuário Cadastrado")
+        }else{
+            alert("Senha ou email incorretos")
+        }
+        
     }
 
     submitRecovery(){
