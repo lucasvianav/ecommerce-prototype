@@ -105,7 +105,7 @@ function AdmAccount(props){
                                          Pedidos
                                     </button>
                                     </Nav.Item>
-                                    <Nav.Item clasName="nav-item">
+                                    <Nav.Item className="nav-item">
                                     <button className="nav-link ml-0 mr-0" id="tabProdAtivos" onClick={() => {showProdutosAtivos();}} 
                                      aria-controls="produtosAtivos" aria-expanded={ativo}>
                                          Produtos Ativos

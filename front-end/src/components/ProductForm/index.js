@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect, useRef} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import $ from 'jquery';
 
 import './index.css';
@@ -37,9 +37,7 @@ function ProductForm(props){
   const [modalImgProps, setModalImgProps] = useState({src: '', alt: ''});
   const [modalInfo, setModalInfo] = useState(false);
 
-  const [opcoes, setOpcoes] = useState([{}]);
-  const [opValid, setOpValid] = useState(true);
-  const ref = useRef(null);
+  const [opcoes, setOpcoes] = useState([]);
   
   useEffect( () => {
     if(props.mode === "view"){
@@ -53,9 +51,11 @@ function ProductForm(props){
       setDescricao(descr);
       setTitle("Produto " + props.name);
       setAction("Salvar");
+      setOpcoes(props.opcoes); 
     }
     if(props.mode === "new"){
       setAction("Cadastrar");
+      setOpcoes([{}]);
       setTitle("");
     }
   }, []);
@@ -63,10 +63,11 @@ function ProductForm(props){
   useEffect(() => {
     setArrayCategorias([]);
     var vet = [];
-    categories.map((it) => {
+    categories.map((it, index) => {
       if (it.parent === tipo){
         vet.push(it.name);
       }
+      return '';
     })
     setArrayCategorias(vet);
     if(firstUpdate){
@@ -160,12 +161,6 @@ function ProductForm(props){
       $('#descricao').addClass('is-invalid');
       flag = 1;
     }
-    opcoes.map((op, index) => {
-      if(op.valid === false){
-        setOpValid(false);
-        flag = 1;
-      }
-    });
     
     if(flag === 0){ 
       var exportData = {}
@@ -189,7 +184,7 @@ function ProductForm(props){
             <div className="col-12 d-flex justify-content-end mb-2 pr-1">
                 <div className="custom-control custom-switch mr-2">
                     <input type="checkbox" className="custom-control-input" id="preVenda" />
-                    <label className="custom-control-label" for="preVenda">Pré Venda</label>
+                    <label className="custom-control-label" htmlFor="preVenda">Pré Venda</label>
                 </div>
             </div>
           </div>
@@ -215,7 +210,7 @@ function ProductForm(props){
                       </div>
                     );
                   })}
-                  <em>{(imagens.length == 0) ? "Nenhuma Imagem Adicionada" : ""}</em>
+                  <em>{(imagens.length === 0) ? "Nenhuma Imagem Adicionada" : ""}</em>
               </div>
             </div>
             <div className="input-group">
@@ -230,7 +225,7 @@ function ProductForm(props){
                       setSelectedImg({});
                     }
                     }}/>
-                <label className="custom-file-label" for="imagem" data-browse="Procurar">{
+                <label className="custom-file-label" htmlFor="imagem" data-browse="Procurar">{
                   (typeof selectedImg.name === "undefined") ? "Escolha uma Imagem..." : selectedImg.name
                 }</label>
               </div>
@@ -247,7 +242,7 @@ function ProductForm(props){
           </div>
           <div className="form-row mb-3" id="rowNomePreco">
             <div className="form-group col-md-6 col-sm-12">
-              <label for="nomeProduto">Nome do Produto: *</label>
+              <label htmlFor="nomeProduto">Nome do Produto: *</label>
               <input type="text" className="input-control form-control" id="nomeProduto" 
                 placeholder="Digite o nome do produto" style={{borderRadius: '15px', width: 'calc(100% - 4.5rem)'}}
                 value={nomeProduto} 
@@ -255,7 +250,7 @@ function ProductForm(props){
               />
             </div>
             <div className="form-group col-md-3 col-sm-6">
-              <label for="precoProduto">Preço: *</label>
+              <label htmlFor="precoProduto">Preço: *</label>
               <div className="input-group">
                 <div className="input-group-prepend">
                   <div className="input-group-text">R$</div>
@@ -268,10 +263,10 @@ function ProductForm(props){
               </div>
             </div>
             <div className="form-group col-md-3 col-sm-6">
-              <label for="descontoProduto">Desconto:</label>
+              <label htmlFor="descontoProduto">Desconto:</label>
               <div className="input-group">
                 <div className="input-group-prepend">
-                  <div className="input-group-text">%</div>
+                  <div className="input-group-text">R$</div>
                 </div>
                 <input type="number" className="input-control form-control" id="descontoProduto"  
                   placeholder="00"
@@ -283,18 +278,18 @@ function ProductForm(props){
           </div>
           <div className="form-row mb-3" id="rowTipoCategoria">
             <div className="form-group col-md-3 col-sm-6">
-              <label for="categoria">Tipo: *</label>
+              <label htmlFor="categoria">Tipo: *</label>
               <select className="custom-select" id="tipo"
                 value={tipo}
                 onChange={(event) => {setTipo(event.target.value)}}
               >
-                  <option value="" disabled="true">Selecione</option>
+                  <option value="" disabled={true}>Selecione</option>
                   <option value="PR">Produtos</option>
                   <option value="EV">Eventos</option>
               </select>
           </div>
             <div className="form-group col-md-3 col-sm-6">
-                <label for="categoria">Categoria: *</label>
+                <label htmlFor="categoria">Categoria: *</label>
                 <select className="custom-select" id="categoria"
                 value={categoria}
                 onChange={(event) => {setCategoria(event.target.value)}}
@@ -308,7 +303,7 @@ function ProductForm(props){
                 </select>
             </div>
             <div className="form-group col-md-6 col-sm-12" id="groupNovaCategoria">
-                <label for="novaCategoria">Nome da Nova Categoria: *</label>
+                <label htmlFor="novaCategoria">Nome da Nova Categoria: *</label>
                 <input type="text" className="input-control form-control" id="novaCategoria"
                   placeholder="Digite o Nome da Nova Categoria"
                   value={novaCategoria} style={{borderRadius: '15px', width: 'calc(100% - 4.5rem)'}}
@@ -318,7 +313,7 @@ function ProductForm(props){
           </div>
           <div className="form-row mb-3" id="rowDescricao" >
             <div className="form-group col-12">
-              <label for="descricao">Descrição: *</label> 
+              <label htmlFor="descricao">Descrição: *</label> 
               <button type="button" className="btn-clear" onClick={()=>{setModalInfo(true)}}> 
                 <i className="fas fa-info-circle"></i> 
               </button>
@@ -334,7 +329,7 @@ function ProductForm(props){
               return (
                 <OpCampo key={index} removable={index === 0 ? false : true} index={index}
                   onRemove={(e) => {removeOp(index)}} onChange={(e) => {attOp(e)}}
-                  id={"optionFields"+index} valid={opValid}
+                  id={"optionFields"+index} {...opcoes[index]}
                 />
               )
             })}

@@ -10,10 +10,6 @@ export default function ProductEdit(props) {
 
     const {tab, base, id} = props.match.params;  
 
-    console.log(tab);
-    console.log(base);
-    console.log(id);
-    console.log(data);
 
     return(
         <>
@@ -21,8 +17,30 @@ export default function ProductEdit(props) {
             <div className="content-box">
               {data.map((item, index) => {
                 if(id === item.id){
+                  if(item.colors.length === 0) item.colors.push('VOID');
+                  if(item.templates.length === 0) item.colors.push('VOID');
+                  if(item.sizes.length === 0) item.colors.push('VOID');
+                  
+                  var ops = [], ind = 0;
+                  item.colors.forEach((color, index) => {
+                    item.templates.forEach((template, index) => {
+                      item.sizes.forEach((size, index) => {
+                          var sku = "" + item.type + "-" + item.id;
+                          sku += "-" + color.substring(0, 4).toUpperCase();
+                          sku += "-" + template.substring(0, 4).toUpperCase();
+                          sku += "-" + size.substring(0, 4).toUpperCase();
+
+                          ops[ind] = {};
+                          ops[ind].cor = (color === 'VOID') ? '' : color;
+                          ops[ind].modelagem = (template === 'VOID') ? '' : template;
+                          ops[ind].tamanho = (size === 'VOID') ? '' : size;
+                          ops[ind].estoque = item.stock[sku];
+                          ind++;
+                        })
+                      })
+                    })
                   return(
-                    <ProductForm {...item} mode="view"/>
+                    <ProductForm {...item} opcoes={ops} mode="view"/>
                   );
                 }else{
                   return('');
