@@ -4,6 +4,7 @@ import InputMask from 'react-input-mask'
 import '../Util'
 
 import './css/Login.css'
+import { DataContext } from '../Context'
 
 // Login --> Criar conta | Criar conta --> Login
 const swapTab = (e) => {
@@ -21,16 +22,16 @@ const swapTab = (e) => {
 // Activates animation to show the login and password recovery (leftmost) 
 // forms and hide the signup (leftmost) ones
 const showLoginRecovery = () => {
-    $('.form-login').addClass('show-login')
-    $('.form-recovery').addClass('show-recovery')
+    $('.form-login').addClass('show-login active')
+    $('.form-recovery').addClass('show-recovery active')
     $('.form-signup').addClass('hide-signup')
     $('.form-full-signup').addClass('hide-full-signup')
 
     setTimeout(function(){
         $('.form-login').removeClass('show-login')
         $('.form-recovery').removeClass('show-recovery')
-        $('.form-signup').removeClass('hide-signup')
-        $('.form-full-signup').removeClass('hide-full-signup')
+        $('.form-signup').removeClass('hide-signup active')
+        $('.form-full-signup').removeClass('hide-full-signup active')
 
         $('.light-theme .form-login').css({
             'background-color': '#fff',
@@ -78,16 +79,16 @@ const showLoginRecovery = () => {
 // Activates animation to show the signup (rightmost) forms and hide
 // the login and password recovery (leftmost) ones
 const showSignup = () => {
-    $('.form-signup').addClass('show-signup')
-    $('.form-full-signup').addClass('show-full-signup')
+    $('.form-signup').addClass('show-signup active')
+    $('.form-full-signup').addClass('show-full-signup active')
     $('.form-login').addClass('hide-login')
     $('.form-recovery').addClass('hide-recovery')
 
     setTimeout(function(){
         $('.form-signup').removeClass('show-signup')
         $('.form-full-signup').removeClass('show-full-signup')
-        $('.form-login').removeClass('hide-login')
-        $('.form-recovery').removeClass('hide-recovery')
+        $('.form-login').removeClass('hide-login active')
+        $('.form-recovery').removeClass('hide-recovery active')
 
         $('.light-theme .form-signup').css({
             'background-color': '#fff',
@@ -253,8 +254,10 @@ class CPF {
 }
 
 class Login extends React.Component {
-    constructor(){
-        super()
+    static contextType = DataContext
+
+    constructor(props, context){
+        super(props, context)
 
         this.state = {
             signupName: '',
@@ -266,7 +269,8 @@ class Login extends React.Component {
             signupBirthday: '',
             signupCPF: '',
             signupPhoneNumber: '',
-            recoveryEmail: ''
+            recoveryEmail: '',
+            darkTheme: this.context.darkTheme
         }
 
         this.handleChange = this.handleChange.bind(this)
@@ -299,6 +303,50 @@ class Login extends React.Component {
 
         $('.dark-theme #navbar').css('backgroundColor', '')
         $('.dark-theme #footer').css('backgroundColor', '')
+    }
+
+    componentDidUpdate(prevProps, prevState){
+        if(prevState.darkTheme !== this.context.darkTheme){
+            this.setState({darkTheme: this.context.darkTheme})
+
+            if(this.context.darkTheme){
+                $('.dark-theme body').css('backgroundColor', '#212e3b')
+                $('.dark-theme #navbar').css('backgroundColor', '#0a0d11')
+                $('.dark-theme #footer').css('backgroundColor', '#0a0d11')
+
+                if($('.form-login').hasClass('active')){
+                    $('.dark-theme .form-login').css({'background-color': '#3b3b3b'})
+                    $('.dark-theme .form-recovery').css({'background-color': '#3b3b3b'})
+                    $('.dark-theme .form-signup').css({'background-color': '#25262c'})
+                    $('.dark-theme .form-full-signup').css({'background-color': '#25262c'})
+                }
+                
+                else{
+                    $('.dark-theme .form-login').css({'background-color': '#25262c'})
+                    $('.dark-theme .form-recovery').css({'background-color': '#25262c'})
+                    $('.dark-theme .form-signup').css({'background-color': '#3b3b3b'})
+                    $('.dark-theme .form-full-signup').css({'background-color': '#3b3b3b'})
+                }
+            }
+
+            else{
+                $('.light-theme body').css('backgroundColor', '#3b4f65')
+
+                if($('.form-login').hasClass('active')){
+                    $('.light-theme .form-login').css({'background-color': '#fff'})
+                    $('.light-theme .form-recovery').css({'background-color': '#fff'})
+                    $('.light-theme .form-signup').css({'background-color': '#d7e7f1'})
+                    $('.light-theme .form-full-signup').css({'background-color': '#d7e7f1'})
+                }
+                
+                else{
+                    $('.light-theme .form-login').css({'background-color': '#d7e7f1'})
+                    $('.light-theme .form-recovery').css({'background-color': '#d7e7f1'})
+                    $('.light-theme .form-signup').css({'background-color': '#fff'})
+                    $('.light-theme .form-full-signup').css({'background-color': '#fff'})
+                }
+            }
+        }
     }
 
     handleChange(e){
