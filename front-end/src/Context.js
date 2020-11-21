@@ -79,28 +79,39 @@ export class DataProvider extends React.Component {
                 // }
             ],
     
-            accounts: [
+            accounts: [ 
                 {   name: 'Fiona',
-                    isLogged: false,
                     accountType: 'client',
                     email: 'fionagatinha74@gmail.com',
-                    password: 'souLinda123'
+                    password: 'souLinda123',
+                    birthday: '-',
+                    cpf: '-',
+                    phoneNumber: '-'
                 },
                 {
                     name: 'Biscoito',
-                    isLogged: false,
                     accountType: 'client',
                     email: 'biscoitodamassa@gmail.com',
-                    password: 'nhameNhame123'
+                    password: 'nhameNhame123',
+                    birthday: '-',
+                    cpf: '-',
+                    phoneNumber: '-'
                 },
                 {
                     name: 'Usuario',
-                    isLogged: false,
                     accountType: 'client',
                     email: 'teste@gmail.com',
-                    password: 'Teste123'
+                    password: 'Teste123',
+                    birthday: '-',
+                    cpf: '-',
+                    phoneNumber: '-'
                 }
             ],
+
+            isLogged: {
+                status: false,
+                email: '-'
+            },
     
             coupons: [
                 {
@@ -192,6 +203,8 @@ export class DataProvider extends React.Component {
         this.toggleTheme = this.toggleTheme.bind(this)
         this.activateCoupon = this.activateCoupon.bind(this)
         this.clearCoupon = this.clearCoupon.bind(this)
+        this.changeLoginStatus = this.changeLoginStatus.bind(this)
+        this.addToAccounts = this.addToAccounts.bind(this)
     }
 
     componentDidMount(){
@@ -209,6 +222,28 @@ export class DataProvider extends React.Component {
         
         localStorage.setItem('darkTheme', JSON.stringify(!this.state.darkTheme))
         this.setState(prevState => {return {darkTheme: !prevState.darkTheme}})
+    }
+    
+    changeLoginStatus(email){
+        this.setState({isLogged: {status: true, email: email}})
+    }
+    
+    addToAccounts(signupName, signupEmail, signupPw, signupBirthday, signupCPF, signupPhoneNumber){
+        
+        let {accounts} = this.state
+
+        accounts.push({
+            name: signupName,
+            accountType: 'client',
+            email: signupEmail,
+            password: signupPw,
+            birthday: signupBirthday,
+            cpf: signupCPF,
+            phoneNumber: signupPhoneNumber
+
+        })
+
+        this.setState({accounts: accounts})
     }
 
     addToCart(sku, quantity, specs){
@@ -296,11 +331,11 @@ export class DataProvider extends React.Component {
     deleteFromCart = this.deleteFromCart.bind(this)
 
     render(){
-        const {data, cart, accounts, coupons, home, categories, darkTheme, orders, activeCoupon} = this.state
-        const {addToCart, removeFromCart, deleteFromCart, toggleTheme, activateCoupon, clearCoupon} = this
+        const {data, cart, accounts, coupons, home, categories, darkTheme, orders, activeCoupon, isLogged} = this.state
+        const {addToCart, removeFromCart, deleteFromCart, toggleTheme, activateCoupon, clearCoupon, changeLoginStatus, addToAccounts} = this
 
         return(
-            <DataContext.Provider value={{data, cart, accounts, coupons, home, categories, darkTheme, orders, activeCoupon, addToCart, removeFromCart, deleteFromCart, toggleTheme, activateCoupon, clearCoupon}}>
+            <DataContext.Provider value={{data, cart, accounts, isLogged, coupons, home, categories, darkTheme, orders, activeCoupon, addToCart, removeFromCart, deleteFromCart, toggleTheme, activateCoupon, clearCoupon, changeLoginStatus, addToAccounts}}>
                 {this.props.children}
             </DataContext.Provider>
         )
