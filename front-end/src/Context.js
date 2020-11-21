@@ -125,6 +125,58 @@ export class DataProvider extends React.Component {
                     parent: 'EV'
                 }
             ],
+
+            orders: [
+                /*
+                {
+                    id: '', //id do pedido
+                    product:[
+                        {
+                            id: '',    //id do produto
+                            options: {color: '', template:'', size:''},
+                            quantity: ''    //quantidade
+                        }
+                    ],
+                    client: '',   //email do cliente
+                    date: '',
+                    situation: '',   //AA - aguardando aprovação, AE - aguardando envio, AC - aguanddando chegado, FF - finalizado
+                    adress: ''      //Endereço de Envio
+                },
+                */
+                {
+                    id: '1',
+                    product:[
+                        {
+                            id: 'P1',   
+                            options: {template:'Feminino', size:'GG'},
+                            quantity: '1'   
+                        },
+                        {
+                            id: 'P1',   
+                            options: {template:'Masculino', size:'EXG'},
+                            quantity: '1'   
+                        },
+                    ],
+                    client: 'fionagatinha74@gmail.com', 
+                    date: '20/11/2020',
+                    situation: 'AA',  
+                    adress: 'Tão tão distante'
+                },
+                {
+                    id: '2',
+                    product:[
+                        {
+                            id: 'E1',   
+                            quantity: '2'   
+                        },
+                    ],
+                    client: 'biscoitodamassa@gmail.com', 
+                    date: '16/11/2020',
+                    situation: 'FF',  
+                    adress: 'Tão tão distante'
+                }
+
+            ],
         
             darkTheme: this.getInitialTheme()
         }
@@ -222,11 +274,11 @@ export class DataProvider extends React.Component {
     deleteFromCart = this.deleteFromCart.bind(this)
 
     render(){
-        const {data, cart, accounts, coupons, home, categories, darkTheme} = this.state
+        const {data, cart, accounts, coupons, home, categories, darkTheme, orders} = this.state
         const {addToCart, removeFromCart, deleteFromCart, toggleTheme} = this
 
         return(
-            <DataContext.Provider value={{data, cart, accounts, coupons, home, categories, darkTheme, addToCart, removeFromCart, deleteFromCart, toggleTheme}}>
+            <DataContext.Provider value={{data, cart, accounts, coupons, home, categories, darkTheme, orders, addToCart, removeFromCart, deleteFromCart, toggleTheme}}>
                 {this.props.children}
             </DataContext.Provider>
         )

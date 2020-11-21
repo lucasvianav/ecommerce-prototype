@@ -28,8 +28,13 @@
     color: black;
 }
 
+.light-theme .nav-link{
+    background-color: rgba(196, 196, 196, 0.63);
+    color: black;
+}
+
 .dark-theme .nav-link{
-    background-color: #444444;
+    background-color: #2b2a2a;
     color: #ffffff;
 }
 
