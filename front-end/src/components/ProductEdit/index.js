@@ -16,9 +16,21 @@ export default function ProductEdit(props) {
             <div className="content-box">
               {data.map((item, index) => {
                 if(id === item.id){
-                  if(item.colors.length === 0) item.colors.push('VOID');
-                  if(item.templates.length === 0) item.colors.push('VOID');
-                  if(item.sizes.length === 0) item.colors.push('VOID');
+                  if(typeof item.colors === 'undefined') {
+                    item.colors = [];
+                    item.colors.push('VOID');
+                  }
+                    else if(item.colors.length === 0) item.colors.push('VOID');
+                  if(typeof item.templates === 'undefined') {
+                    item.templates = [];
+                    item.templates.push('VOID');
+                  }
+                   else if(item.templates.length === 0) item.templates.push('VOID');
+                  if(typeof item.sizes === 'undefined') {
+                    item.sizes = [];
+                    item.sizes.push('VOID');
+                  }
+                    else if(item.sizes.length === 0) item.sizes.push('VOID');
                   
                   var ops = [], ind = 0;
                   item.colors.forEach((color, index) => {

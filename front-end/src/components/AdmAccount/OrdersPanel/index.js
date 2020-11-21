@@ -13,20 +13,18 @@ const OrdersPanel = (props) => {
   const context = useContext(DataContext);
   const [orders, setOrders] = useState(context.orders);
   const products = context.data;
-  const clients = context.accounts;
 
   const [modalPedido, setModalPedido] = useState(false);
-  const [propsModal, setPropsModal] = useState({pedido: {product: []}});
+  const [propsModal, setPropsModal] = useState({pedido: {product: [], situation: []}});
 
   const renderProduct  = (item, index) => {
     const defSt = {
                     AA: "Aguardando Aprovação", 
                     AE: "Aguardando Envio", 
-                    AC: "Aguanddando Chegada", 
+                    AC: "Aguardando Chegada", 
                     FF: "Finalizado"
                   }
     const st = defSt[item.situation];
-    const tipo = props.type;
 
     const callModal = (id) => {
       var info = {};
@@ -35,6 +33,7 @@ const OrdersPanel = (props) => {
       orders.forEach((it, index)=>{
         if(it.id === id){ 
           info.pedido = it;
+          info.index = index;
         }
       })
 
@@ -78,7 +77,7 @@ const OrdersPanel = (props) => {
                     })
                   }
                 </ul>
-                <span className={"badge badge-light st" + item.situation}>{st}</span>
+                <span className={"badge badge-light st-" + item.situation}>{st}</span>
                 <div className="d-flex justify-content-end">
                     <button className="btn btn-link btn-sm mt-2" 
                       onClick={(e) => {callModal(item.id)}}
@@ -105,7 +104,9 @@ const OrdersPanel = (props) => {
         {...propsModal}
         onSave = {(e) => {
           if (e.set === true) {
-            console.log(e.new);
+            var vet = orders;
+            vet[e.index].situation = e.new;
+            setOrders(vet);
         }}}
         onHide={() => {setModalPedido(false)}}
       />

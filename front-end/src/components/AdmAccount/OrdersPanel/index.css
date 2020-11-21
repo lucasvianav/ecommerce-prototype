@@ -1,0 +1,25 @@
+.badge.st-AA{
+    background-color:#DC3545;
+    color: white;
+}
+
+.badge.st-AE{
+    background-color:#FFC107;
+}
+
+.badge.st-AC{
+    background-color: #17A2B8;
+    color: white;
+}
+
+.badge.st-FF{
+    background-color: #28A745;
+    color: white;
+}
+
+/*Radio button*/
+.custom-control-input:checked ~ .custom-control-label::before {
+    color: #fff;
+    border-color: green;
+    background-color: green;
+}
