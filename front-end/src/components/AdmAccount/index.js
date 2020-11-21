@@ -4,6 +4,7 @@ import {Nav, Collapse} from 'react-bootstrap';
 import ProductCardPanel from './ProductCardPanel';
 import ProductForm from '../ProductForm';
 import UsersPanel from './UsersPanel';
+import OrdersPanel from './OrdersPanel';
 import FilterDiv from './FilterDiv';
 
 import '../css/bootstrap.css';
@@ -144,7 +145,7 @@ function AdmAccount(props){
                                                 />
                                             </h6>
                                         </div>
-                                        pedidos
+                                        <OrdersPanel />
                                    </div>
                                 </Collapse>
                                 <Collapse in={ativo}>

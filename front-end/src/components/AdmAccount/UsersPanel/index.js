@@ -2,8 +2,6 @@ import React, {useContext, useState} from 'react';
 
 import { DataContext } from '../../../Context';
 
-import FilterDiv from '../FilterDiv';
-
 import './index.css';
 import '../../css/bootstrap.css';
 
@@ -11,13 +9,6 @@ const UsersPanel = (props) => {
 
   const context = useContext(DataContext);
   const users = context.accounts;
-
-  const [filter, setFilter] = useState("none");
-
-  const seletores = [{
-                      title: "Tipo de Usuários",
-                      data: ["Cliente", "Administrador"]
-                    }]
 
   return(
     <>

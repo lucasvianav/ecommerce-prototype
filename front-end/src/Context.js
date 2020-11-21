@@ -172,7 +172,7 @@ export class DataProvider extends React.Component {
                     ],
                     client: 'biscoitodamassa@gmail.com', 
                     date: '16/11/2020',
-                    situation: 'AE',  
+                    situation: 'FF',  
                     adress: 'Tão tão distante'
                 }
 
@@ -274,11 +274,11 @@ export class DataProvider extends React.Component {
     deleteFromCart = this.deleteFromCart.bind(this)
 
     render(){
-        const {data, cart, accounts, coupons, home, categories, darkTheme} = this.state
+        const {data, cart, accounts, coupons, home, categories, darkTheme, orders} = this.state
         const {addToCart, removeFromCart, deleteFromCart, toggleTheme} = this
 
         return(
-            <DataContext.Provider value={{data, cart, accounts, coupons, home, categories, darkTheme, addToCart, removeFromCart, deleteFromCart, toggleTheme}}>
+            <DataContext.Provider value={{data, cart, accounts, coupons, home, categories, darkTheme, orders, addToCart, removeFromCart, deleteFromCart, toggleTheme}}>
                 {this.props.children}
             </DataContext.Provider>
         )

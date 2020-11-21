@@ -1,6 +1,5 @@
 import React, {useState, useContext, useEffect} from 'react';
 import {Modal} from 'react-bootstrap';
-import $ from 'jquery';
 
 import '../../css/bootstrap.css';
 
