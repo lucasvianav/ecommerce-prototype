@@ -1,9 +1,9 @@
 import React from 'react'
-import $ from 'jquery'
+
 import {
-  BrowserRouter, 
-  Route, 
-  Switch, 
+  BrowserRouter,
+  Route,
+  Switch,
   Redirect
 } from 'react-router-dom'
 
@@ -21,16 +21,21 @@ import { DataContext } from './Context'
 import MyAccount from './components/MyAccount'
 import AdmAccount from './components/AdmAccount'
 import ProductEdit from './components/ProductEdit'
+import Checkout from './components/Checkout'
+import { CheckoutProvider } from './components/CheckoutContext'
 
 class App extends React.Component {
   static contextType = DataContext
   
   render(){
     const {data} = this.context
+
     return(
       <BrowserRouter>
         <div id='app'>
-          <Navbar {...this.props}/>
+          <Route path='/:base*' render={props => props.match.params.base === 'checkout' ? '' : <Navbar {...this.props}/>}/>
+          {/* <Navbar {...this.props}/> */}
+          {/* <CheckoutHeader/> */}
           
           <Switch>
             {/* Pages */}
@@ -60,11 +65,11 @@ class App extends React.Component {
                 return <ShoppingCart {...props}/>
               }
               
-              else if(['conta', 'accont'].includes(base.toLowerCase())){
+              else if(['conta', 'account'].includes(base.toLowerCase())){
                 return <MyAccount />
               }
 
-              else if(['adm', 'adimin'].includes(base.toLowerCase())){
+              else if(['adm', 'admin'].includes(base.toLowerCase())){
                 return <AdmAccount />
               }
 
@@ -72,6 +77,10 @@ class App extends React.Component {
                 let query = new URLSearchParams(props.location.search)
 
                 return <ProductSearch {...props} query={query.get('query')}/>
+              }
+
+              else if(base === 'checkout'){
+                return <CheckoutProvider><Checkout/></CheckoutProvider>
               }
 
               else if(['acessibilidade', 'accessibility'].includes(base.toLowerCase())){
@@ -84,7 +93,7 @@ class App extends React.Component {
             }} exact/>
 
             <Route path='/:tab/:base/:id' render={props => {
-              const {tab, base} = props.match.params
+              const {tab} = props.match.params
 
               if(['editar', 'edit'].includes(tab.toLowerCase())){
                 return <ProductEdit {...props} />
@@ -108,7 +117,7 @@ class App extends React.Component {
             }}/>
           </Switch>
 
-          <Footer/>
+          <Route path='/:base*' render={props => props.match.params.base === 'checkout' ? '' : <Footer/>}/>
         </div>
       </BrowserRouter>
     )

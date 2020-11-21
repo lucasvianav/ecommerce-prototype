@@ -126,6 +126,20 @@ main {
   border: solid 1px rgba(205, 219, 239, 0.07);
 }
 
+.content-section {
+  padding: 1%;
+}
+
+.light-theme .content-section {
+  background-color: #fdf9f9;
+  border: 1px solid #cddbef;
+}
+
+.dark-theme .content-section {
+  background-color: rgba(253, 249, 249, 0.1);
+  border: solid 1px rgba(205, 219, 239, 0.1);
+}
+
 .panel-title {
   margin: auto;
   text-align: center;
@@ -219,7 +233,7 @@ input[type='number'] {
   border-color: rgba(255, 255, 255, 0);
 }
 
-label.radio-label input[type='radio'] {
+/* .radio-container input[type='radio'] {
   appearance: none;
   width: 13px;
   height: 13px;
@@ -231,9 +245,8 @@ label.radio-label input[type='radio'] {
 
 }
 
-label.radio-label input[type='radio']:checked::after {
+.radio-container input[type='radio']:checked::after {
   content: '\2022';
-  /* color: #f1eff1; */
   color: #202020;
   font-size: large;
   font-weight: 900;
@@ -244,18 +257,18 @@ label.radio-label input[type='radio']:checked::after {
 
 }
 
-.light-theme label.radio-label input[type='radio'] {
+.light-theme .radio-container input[type='radio'] {
   background-color: rgb(255, 255, 255);
   border: solid 1px rgba(0, 0, 0, 0.3);
 }
 
-.dark-theme label.radio-label input[type='radio'] {
+.dark-theme .radio-container input[type='radio'] {
   background-color: rgba(255, 255, 255, 0.8);
 }
 
-label.radio-label input[type='radio']:checked {
+.radio-container input[type='radio']:checked {
   background-color: #a7e245;
-}
+} */
 
 .checkbox-container input[type='checkbox'] {
   appearance: none;
@@ -296,7 +309,7 @@ label.radio-label input[type='radio']:checked {
 }
 
 .dark-theme .checkbox-container input[type='checkbox'] {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(156, 156, 156, 0.8);
 }
 
 .checkbox-container input[type='checkbox']:checked {
@@ -518,6 +531,22 @@ input::placeholder {
   font-weight: 550;
   margin: 0;
   padding: 1% 0 1% 0;
+}
+
+.section-title {
+  display: block;
+  color: rgb(86, 90, 90);
+  font-size: 24px;
+  font-weight: bold;
+  margin: auto auto 1.5% 0;
+}
+
+.light-theme .section-title {
+  color: rgb(86, 90, 90);
+}
+
+.dark-theme .section-title {
+  color: rgb(115, 121, 121);
 }
 
 .error-message {
