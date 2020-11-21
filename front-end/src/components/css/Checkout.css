@@ -1,0 +1,300 @@
+.Checkout section.content-section {
+    margin-bottom: 2%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.Checkout section.content-section.options {
+    width: 75%;
+}
+
+.Checkout .options .option {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    vertical-align: auto;
+    width: 50%;
+    margin-bottom: 2%;
+}
+
+.Checkout .options .option:first-child {
+    margin-top: 1.5%;
+}
+
+.Checkout .options .option:last-child {
+    margin-bottom: 1.5%;
+}
+
+.Checkout .options .option label {
+    width: 100%;
+    margin: auto auto auto 2.5%;
+    padding: 0;
+    font-weight: bold;
+}
+
+.Checkout .options .option input {
+    margin: auto;
+    padding: 0;
+    align-self: center;
+}
+
+.Checkout .options i {
+    font-size: x-large;
+    margin-right: 2.5%;
+}
+
+.Checkout .void-btn.big-btn, .Checkout .error-message {
+    margin: auto 0 auto auto;
+}
+
+.Checkout .section-title.mini {
+    font-size: larger;
+}
+
+.Checkout section.content-section.order {
+    width: 58%;
+    float: left;
+}
+
+.Checkout .header-row {
+    list-style: none;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    margin: auto 0 auto 0;
+    padding: 0 2%;
+    width: 96%;
+}
+
+.Checkout .header-row li {
+    font-size: 14px;
+    font-weight: 500;
+    width: fit-content;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.light-theme .Checkout .header-row {
+    border-bottom: 2px solid rgba(137, 141, 141, 0.3);
+}
+
+.dark-theme .Checkout .header-row {
+    border-bottom: 2px solid rgba(137, 141, 141, 0.3);
+}
+
+.Checkout .header-row .invisible {
+    width: 12%;
+}
+
+.Checkout .header-row .name {
+    width: 22.5%;
+}
+
+.Checkout .header-row .quantity {
+    width: 20%;
+}
+
+.Checkout .header-row .price {
+    width: 10%;
+    text-align: right;
+}
+
+.Checkout .product-list {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.Checkout .product-card {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1%;
+    margin: 0;
+    border-bottom: 2px solid rgba(137, 141, 141, 0.247);
+}
+
+.Checkout .product-card img {
+    display: block;
+    margin: 0;
+    width: 12%;
+}
+
+.light-theme .Checkout .product-card img {
+    border: 1px solid rgba(32, 32, 32, 0.15);
+}
+
+.dark-theme .Checkout .product-card img {
+    border: 1px solid rgba(241, 239, 241, 0.15);
+}
+
+.Checkout .product-card .product-title {
+    width: 22.5%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.Checkout .product-card .name, 
+.Checkout .product-card .product-title .info {
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.Checkout .product-card .product-title .info {
+    font-size: 13px;
+}
+
+.Checkout .product-card .price {
+    width: 10%;
+    text-align: right;
+    margin-right: 0;
+}
+
+.Checkout .quantity {
+    width: 20%;
+    display: flex;
+    flex-flow: row wrap;
+    padding: 0;
+    text-align: center;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+}
+
+.Checkout .break-flex {
+    flex-basis: 100%;
+    height: 0;
+}
+
+.Checkout .summary {
+    width: 30%;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    float: right;
+}
+
+.Checkout .summary .content-section {
+    width: 100%;
+    padding-top: 2%;
+    padding-bottom: 3.5%;
+}
+
+.Checkout .summary .content-section .section-title.mini {
+    margin-bottom: 3%;
+}
+
+.Checkout .summary .content-section .description {
+    font-size: smaller;
+    text-align: center;
+    margin-bottom: 5%;
+}
+
+.Checkout .summary .row {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    vertical-align: middle;
+    margin: 0;
+    padding: 0;
+    font-weight: 500;
+    width: 100%;
+    font-size: 15px;
+}
+
+.light-theme .Checkout .row:not(.total) p {
+    color: rgb(110, 110, 110);
+}
+
+.dark-theme .Checkout .row:not(.total) p {
+    color: rgb(187, 187, 187);
+}
+
+.light-theme .Checkout .row:not(.total) p strong {
+    color: rgb(33, 34, 36);
+}
+
+.dark-theme .Checkout .row:not(.total) p strong {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.Checkout .summary .content-section .row.total {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 1%;
+    padding-top: 3%;
+}
+
+.light-theme .Checkout .summary .content-section .row.total {
+    border-top: solid 1px rgba(137, 141, 141, 0.3);
+}
+
+.dark-theme .Checkout .summary .content-section .row.total {
+    border-top: solid 1px rgba(175, 179, 179, 0.75);
+}
+
+.Checkout .summary .coupon.row {
+    width: fit-content;
+    display: flex;
+    flex-flow: row nowrap;
+    margin: 4% 0 !important;
+    margin: auto;
+    padding: 0;
+    align-self: center;
+    justify-self: center;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    vertical-align: middle;
+    clear: right;
+    float: right;
+}
+
+.Checkout .summary .coupon button.small-btn {
+    margin: auto auto auto 3%;
+}
+
+.Checkout .summary #coupon {
+    display: block;
+    margin: auto 3% auto auto;
+	width: 35%;
+}
+
+.Checkout .content-section.payment {
+    width: 58%;
+    clear: both;
+    float: left;
+}
+
+.Checkout .payment p {
+    width: 100%;
+}
+
+.Checkout .payment i {
+    font-size: x-large;
+    margin-right: 1%;
+    margin-left: 1.5%;
+}
+
+.Checkout .content-section.payment .text-btn {
+    width: fit-content;
+    margin: auto auto auto 0;
+}
+
+.Checkout .content-box p {
+    clear: both;
+}

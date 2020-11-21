@@ -1,7 +1,7 @@
 import React from 'react'
 import $ from 'jquery'
 
-import './css/CheckoutPayment.css'
+import './css/Checkout.css'
 import { CheckoutContext } from './CheckoutContext'
 
 class CheckoutPayment extends React.Component {
@@ -9,7 +9,7 @@ class CheckoutPayment extends React.Component {
 
     render(){
         return(
-            <main className='CheckoutPayment'>
+            <main className='Checkout'>
                 <div className="content-box">
                     <span className='section-title'>Escolha uma forma de pagamento</span>
 

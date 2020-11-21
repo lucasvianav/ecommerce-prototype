@@ -34,14 +34,6 @@
     border-bottom: 2px solid rgba(137, 141, 141, 0.3);
 }
 
-/* .light-theme .ShoppingCart .header-row li {
-    color:rgb(84, 85, 87);
-}
-
-.dark-theme .ShoppingCart .header-row li {
-    color:rgb(84, 85, 87);
-} */
-
 .ShoppingCart .header-row .invisible {
     width: 12%;
 }
