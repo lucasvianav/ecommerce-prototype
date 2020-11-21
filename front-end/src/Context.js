@@ -125,6 +125,55 @@ export class DataProvider extends React.Component {
                     parent: 'EV'
                 }
             ],
+
+            orders: [
+                /*
+                {
+                    product:[
+                        {
+                            id: '',    //id do produto
+                            options: {color: '', template:'', size:''},
+                            quantity: ''    //quantidade
+                        }
+                    ],
+                    client: '',   //email do cliente
+                    date: '',
+                    situation: '',   //AA - aguardando aprovação, AE - aguardando envio, AC - aguanddando chegado, FF - finalizado
+                    adress: ''      //Endereço de Envio
+                },
+                */
+                {
+                    product:[
+                        {
+                            id: 'P1',   
+                            options: {template:'Feminino', size:'GG'},
+                            quantity: '1'   
+                        },
+                        {
+                            id: 'P1',   
+                            options: {template:'Masculino', size:'EXG'},
+                            quantity: '1'   
+                        },
+                    ],
+                    client: 'fionagatinha74@gmail.com', 
+                    date: '20/11/2020',
+                    situation: 'AA',  
+                    adress: 'Tão tão distante'
+                },
+                {
+                    product:[
+                        {
+                            id: 'E1',   
+                            quantity: '2'   
+                        },
+                    ],
+                    client: 'biscoitodamassa@gmail.com', 
+                    date: '16/11/2020',
+                    situation: 'AE',  
+                    adress: 'Tão tão distante'
+                }
+
+            ],
         
             darkTheme: this.getInitialTheme()
         }

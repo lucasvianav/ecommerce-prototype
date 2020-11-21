@@ -1,8 +1,11 @@
 .filter-div{
     position: absolute;
     background-color: white;
-    width: 200px;
-    margin-left: -11rem;
+    width:300px;
+    padding-right: 0;
+    padding-left: 2em;
+    margin-top: -1.2rem;
+    margin-left: -17.5rem;
 }
 
 .filter-div.show-none{
@@ -32,12 +35,13 @@
 }
 
 .filter-div input{
-    width: calc(100% - 2em);
+    width: calc(100% - 4em);
     border-radius: 15px;
 }
 
 .filter-div .btn-clear{
     border: 0;
+    right: 1em;
     background: transparent;
     margin-bottom: 0.2em;
     margin-top: 0.1em;

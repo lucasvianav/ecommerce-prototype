@@ -263,13 +263,13 @@ function ProductForm(props){
               </div>
             </div>
             <div className="form-group col-md-3 col-sm-6">
-              <label htmlFor="descontoProduto">Desconto:</label>
+              <label htmlFor="descontoProduto">Preço com Desconto:</label>
               <div className="input-group">
                 <div className="input-group-prepend">
                   <div className="input-group-text">R$</div>
                 </div>
                 <input type="number" className="input-control form-control" id="descontoProduto"  
-                  placeholder="00"
+                  placeholder="00,00"
                   value={descontoProduto} 
                   onChange={(event) => {setDescontoProduto(event.target.value)}}
                   />

@@ -140,7 +140,7 @@ function AdmAccount(props){
                                                 <i className="fas fa-filter pointer" onClick={() =>{setFilter("filter")}}></i>
                                                 < FilterDiv show={filter} onHide={() => setFilter("none")} 
                                                     onChange={(event) => {setSelectedFilter(event.value)}}
-                                                    seletores={[{title: "oi", data:["1","2"] }]} 
+                                                    seletores={[{title: "Situação", data:["Aguardando Aprovação","Aguardando Envio","Aguardando Recebimento","Concluído"] }]} 
                                                 />
                                             </h6>
                                         </div>
