@@ -2,6 +2,8 @@ import React from 'react'
 import $ from 'jquery'
 
 import './css/Checkout.css'
+import './css/CheckoutConfirmation.css'
+
 import { DataContext } from '../Context'
 
 class CheckoutConfirmation extends React.Component {
@@ -10,7 +12,7 @@ class CheckoutConfirmation extends React.Component {
     constructor(props, context){
         super(props, context)
 
-        const {cart, data} = this.context
+        const {cart, data, activeCoupon} = this.context
         const {checkout} = this.props
         
         let cartList = []
@@ -38,21 +40,75 @@ class CheckoutConfirmation extends React.Component {
                 ? 'Transferência por PicPay'
                 : ''
 
+        const discount = activeCoupon.status 
+            ? (activeCoupon.coupon.type === 'percentage') ? parseFloat(subtotal) * parseFloat(activeCoupon.coupon.discount)/100 : parseFloat(activeCoupon.coupon.discount)
+            : 0
+
         this.state = {
             cart: cartList,
             subtotal: subtotal,
             coupon: '',
-            hasCoupon: false,
-            activateCoupon: '',
-            discount: 0,
-            total: subtotal,
+            hasCoupon: activeCoupon.status,
+            discount: discount,
+            total: subtotal - discount,
             payment: payment
         }
+
+        this.handleChange = this.handleChange.bind(this)
+        this.handleCoupon = this.handleCoupon.bind(this)
+        this.removeCoupon = this.removeCoupon.bind(this)
+        this.placeOrder = this.placeOrder.bind(this)
+    }
+
+    componentDidUpdate(){
+        if(this.context.activeCoupon.status !== this.state.hasCoupon){
+            this.setState({hasCoupon: this.context.activeCoupon.status})
+        }
+    }
+
+    handleChange(e){
+        if(e.type === 'change' && e.target.name === 'coupon'){
+            this.setState({coupon: e.target.value})
+            return
+        }
+    }
+
+    handleCoupon(){
+        const activeCoupon = this.context.activateCoupon(this.state.coupon)
+
+        let field = $('#coupon')
+        const {status: hasCoupon, coupon} = activeCoupon
+        
+        if(hasCoupon){
+            const discount = (coupon.type === 'percentage') ? parseFloat(this.state.subtotal) * parseFloat(coupon.discount)/100 : parseFloat(coupon.discount)
+
+            this.setState(prevState => {
+                return {
+                coupon: '',
+                total: prevState.subtotal - discount,
+                discount: discount
+            }})
+
+            field.css('border', '1px solid #cddbef')
+        }
+
+        else{
+            field.css('border', '1px solid red')
+        }
+    }
+
+    removeCoupon(){
+        this.context.clearCoupon()
+        this.setState(prevState => ({ total: prevState.subtotal }))
+    }
+
+    placeOrder(){
+        this.props.checkout.orderPlaced()
     }
 
     render(){
         return(
-            <main className='Checkout'>
+            <main className='CheckoutConfirmation'>
                 <div className="content-box">
                     <span className='section-title'>Confira e finalize o pedido</span>
 
@@ -109,7 +165,7 @@ class CheckoutConfirmation extends React.Component {
                             {
                                 !this.state.hasCoupon ? '' :
                                 <div className="row">
-                                    <p><strong>Cupom de desconto:</strong></p>
+                                    <p><strong>Cupom de desconto</strong> <span className='text-btn disable-selection' onClick={this.removeCoupon}>(remover)</span> <strong>:</strong></p>
                                     <p>- R${this.state.discount.toFixed(2).replaceAll('.',',')}</p>
                                 </div>
                             }
@@ -119,15 +175,17 @@ class CheckoutConfirmation extends React.Component {
                                 <p>R${this.state.total.toFixed(2).replaceAll('.',',')}</p>
                             </div>
 
-                            <span className='description grey'>Ao fazer o pedido, você concorda com as as políticas de devolução e de entrega da SA-SHREK. Por favor, as leia para garantir que está de acordo.</span>
+                            <span className='description grey'>Ao realizar o pedido, você concorda com as as políticas de devolução e de entrega da SA-SHREK. Por favor, as leia para garantir que está de acordo.</span>
 
-                            <button type='button' className='full-btn big-btn'>Confirmar pedido</button>
+                            <button type='button' className='full-btn big-btn' onClick={this.placeOrder}>Confirmar pedido</button>
                         </section>
 
+                        
                         <div className="coupon row">
                             <input onChange={this.handleChange} id='coupon' name="coupon" value={this.state.coupon} type="text" minLength='1' placeholder="Inserir cupom"/>  
                             <button onClick={this.handleCoupon} type='button' className="small-btn void-btn">OK</button>
                         </div>
+
                     </div>
 
                     <section className='content-section payment'>
@@ -144,9 +202,9 @@ class CheckoutConfirmation extends React.Component {
                             {this.state.payment}.
                         </p>
 
-                        <span className='text-btn green' onClick={this.props.checkout.changePayment}>(Alterar)</span>
+                        <span className='text-btn disable-selection green' onClick={this.props.checkout.changePayment}>(Alterar)</span>
                     </section>
-
+ 
                     <p>Os pedidos deverão ser retirados na sala da SA-SHREK.</p>
 
                 </div>

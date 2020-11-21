@@ -49,7 +49,7 @@ class CheckoutHeader extends React.Component {
                         <span><i className="fa fa-credit-card"></i></span>
                         <span>Pagamento</span>
                     </li>
-                    <li className={this.context.currentStep === 'confirmation' ? 'current' : ''}>
+                    <li className={['confirmation', 'finished'].includes(this.context.currentStep) ? 'current' : ''}>
                         <span><i className="fa fa-check"></i></span>
                         <span>Conclusão</span>
                     </li>

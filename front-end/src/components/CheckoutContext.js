@@ -18,6 +18,8 @@ export class CheckoutProvider extends React.Component {
 
         this.handleChange = this.handleChange.bind(this)
         this.setPayment = this.setPayment.bind(this)
+        this.changePayment = this.changePayment.bind(this)
+        this.orderPlaced = this.orderPlaced.bind(this)
     }
 
     handleChange(e){
@@ -26,7 +28,7 @@ export class CheckoutProvider extends React.Component {
         $('.CheckoutPayment .error-message').text('')
     }
 
-    setPayment(e){
+    setPayment(){
         const {currentStep, payment} = this.state
 
         if(currentStep === 'payment' && payment !== ''){ 
@@ -39,12 +41,20 @@ export class CheckoutProvider extends React.Component {
         }
     }
 
+    changePayment(){
+        this.setState({currentStep: 'payment', payment: ''})
+    }
+
+    orderPlaced(){
+        this.setState({currentStep: 'finished'})
+    }
+
     render(){
         const {payment, currentStep} = this.state
-        const {handleChange, setPayment} = this
+        const {handleChange, setPayment, changePayment, orderPlaced} = this
 
         return(
-            <CheckoutContext.Provider value={{payment, currentStep, handleChange, setPayment}}>
+            <CheckoutContext.Provider value={{payment, currentStep, handleChange, setPayment, changePayment, orderPlaced}}>
                 {this.props.children}
             </CheckoutContext.Provider>
         )

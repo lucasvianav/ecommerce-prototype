@@ -1,0 +1,246 @@
+.CheckoutConfirmation section.content-section.order {
+    width: 58%;
+    float: left;
+}
+
+.CheckoutConfirmation .header-row {
+    list-style: none;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    margin: auto 0 auto 0;
+    padding: 0 2%;
+    width: 96%;
+}
+
+.CheckoutConfirmation .header-row li {
+    font-size: 14px;
+    font-weight: 500;
+    width: fit-content;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.light-theme .CheckoutConfirmation .header-row {
+    border-bottom: 2px solid rgba(137, 141, 141, 0.3);
+}
+
+.dark-theme .CheckoutConfirmation .header-row {
+    border-bottom: 2px solid rgba(137, 141, 141, 0.3);
+}
+
+.CheckoutConfirmation .header-row .invisible {
+    width: 12%;
+}
+
+.CheckoutConfirmation .header-row .name {
+    width: 40%;
+}
+
+.CheckoutConfirmation .header-row .quantity {
+    width: 20%;
+}
+
+.CheckoutConfirmation .header-row .price {
+    width: 10%;
+    text-align: right;
+}
+
+.CheckoutConfirmation .product-list {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.CheckoutConfirmation .product-card {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1%;
+    margin: 0;
+    border-bottom: 2px solid rgba(137, 141, 141, 0.247);
+}
+
+.CheckoutConfirmation .product-card img {
+    display: block;
+    margin: 0;
+    width: 12%;
+}
+
+.light-theme .CheckoutConfirmation .product-card img {
+    border: 1px solid rgba(32, 32, 32, 0.15);
+}
+
+.dark-theme .CheckoutConfirmation .product-card img {
+    border: 1px solid rgba(241, 239, 241, 0.15);
+}
+
+.CheckoutConfirmation .product-card .product-title {
+    width: 40%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.CheckoutConfirmation .product-card .name, 
+.CheckoutConfirmation .product-card .product-title .info {
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.CheckoutConfirmation .product-card .product-title .info {
+    font-size: 13px;
+}
+
+.CheckoutConfirmation .product-card .price {
+    width: 10%;
+    text-align: right;
+    margin-right: 0;
+}
+
+.CheckoutConfirmation .quantity {
+    width: 20%;
+    display: flex;
+    flex-flow: row wrap;
+    padding: 0;
+    text-align: center;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+}
+
+.CheckoutConfirmation .break-flex {
+    flex-basis: 100%;
+    height: 0;
+}
+
+.CheckoutConfirmation .summary {
+    width: 30%;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    float: right;
+}
+
+.CheckoutConfirmation .summary .content-section {
+    width: 100%;
+    padding: 2% 5% 3.5% 5%;
+}
+
+.CheckoutConfirmation .summary .content-section .section-title.mini {
+    margin-bottom: 3%;
+}
+
+.CheckoutConfirmation .summary .content-section .description {
+    font-size: smaller;
+    text-align: center;
+    margin-bottom: 5%;
+}
+
+.CheckoutConfirmation .summary .row {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    vertical-align: middle;
+    margin: 0;
+    padding: 0;
+    font-weight: 500;
+    width: 100%;
+    font-size: 15px;
+}
+
+.light-theme .CheckoutConfirmation .row:not(.total) p {
+    color: rgb(110, 110, 110);
+}
+
+.dark-theme .CheckoutConfirmation .row:not(.total) p {
+    color: rgb(187, 187, 187);
+}
+
+.light-theme .CheckoutConfirmation .row:not(.total) p strong {
+    color: rgb(33, 34, 36);
+}
+
+.dark-theme .CheckoutConfirmation .row:not(.total) p strong {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.CheckoutConfirmation .summary .content-section .row.total {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 1%;
+    padding-top: 3%;
+}
+
+.light-theme .CheckoutConfirmation .summary .content-section .row.total {
+    border-top: solid 1px rgba(137, 141, 141, 0.3);
+}
+
+.dark-theme .CheckoutConfirmation .summary .content-section .row.total {
+    border-top: solid 1px rgba(175, 179, 179, 0.75);
+}
+
+.row span.text-btn {
+    font-size: 13px;
+}
+
+.CheckoutConfirmation .summary .coupon.row {
+    width: fit-content;
+    display: flex;
+    flex-flow: row nowrap;
+    margin: 4% 0 !important;
+    margin: auto;
+    padding: 0;
+    align-self: center;
+    justify-self: center;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    vertical-align: middle;
+    clear: right;
+    float: right;
+}
+
+.CheckoutConfirmation .summary .coupon button.small-btn {
+    margin: auto auto auto 3%;
+}
+
+.CheckoutConfirmation .summary #coupon {
+    display: block;
+    margin: auto 3% auto auto;
+	width: 35%;
+}
+
+.CheckoutConfirmation .content-section.payment {
+    width: 58%;
+    clear: both;
+    float: left;
+}
+
+.CheckoutConfirmation .payment p {
+    width: 100%;
+}
+
+.CheckoutConfirmation .payment i {
+    font-size: x-large;
+    margin-right: 1%;
+    margin-left: 1.5%;
+}
+
+.CheckoutConfirmation .content-section.payment .text-btn {
+    width: fit-content;
+    margin: auto auto auto 0;
+}
+
+.CheckoutConfirmation .content-box p {
+    clear: both;
+}

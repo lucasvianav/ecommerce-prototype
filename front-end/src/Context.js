@@ -115,6 +115,11 @@ export class DataProvider extends React.Component {
                 }
             ],
 
+            activeCoupon: {
+                status: false,
+                coupon: ''
+            },
+
             categories: [
                 {
                     name: 'Moletons',
@@ -185,6 +190,8 @@ export class DataProvider extends React.Component {
         $('*').addClass(this.state.darkTheme ? 'dark-theme' : 'light-theme')
 
         this.toggleTheme = this.toggleTheme.bind(this)
+        this.activateCoupon = this.activateCoupon.bind(this)
+        this.clearCoupon = this.clearCoupon.bind(this)
     }
 
     componentDidMount(){
@@ -269,16 +276,31 @@ export class DataProvider extends React.Component {
         return true
     }
 
+    activateCoupon(coupon){
+        const c = this.state.coupons.find(item => item.str === coupon)
+
+        if(c){ 
+            this.setState({activeCoupon: {status: true, coupon: c}}) 
+            return {status: true, coupon: c}
+        }
+
+        return {status: false, coupon: ''}
+    }
+
+    clearCoupon(){
+        this.setState({activeCoupon: {status: false, coupon: ''}}) 
+    }
+
     addToCart = this.addToCart.bind(this)
     removeFromCart = this.removeFromCart.bind(this)
     deleteFromCart = this.deleteFromCart.bind(this)
 
     render(){
-        const {data, cart, accounts, coupons, home, categories, darkTheme, orders} = this.state
-        const {addToCart, removeFromCart, deleteFromCart, toggleTheme} = this
+        const {data, cart, accounts, coupons, home, categories, darkTheme, orders, activeCoupon} = this.state
+        const {addToCart, removeFromCart, deleteFromCart, toggleTheme, activateCoupon, clearCoupon} = this
 
         return(
-            <DataContext.Provider value={{data, cart, accounts, coupons, home, categories, darkTheme, orders, addToCart, removeFromCart, deleteFromCart, toggleTheme}}>
+            <DataContext.Provider value={{data, cart, accounts, coupons, home, categories, darkTheme, orders, activeCoupon, addToCart, removeFromCart, deleteFromCart, toggleTheme, activateCoupon, clearCoupon}}>
                 {this.props.children}
             </DataContext.Provider>
         )

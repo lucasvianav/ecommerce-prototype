@@ -36,14 +36,19 @@ class ShoppingCart extends React.Component {
             cart: cartList,
             subtotal: subtotal,
             coupon: '',
-            hasCoupon: false,
-            activateCoupon: '',
+            hasCoupon: this.context.activeCoupon.status,
             discount: 0,
             total: subtotal
         }
 
         this.handleChange = this.handleChange.bind(this)
         this.handleCoupon = this.handleCoupon.bind(this)
+    }
+
+    componentDidUpdate(){
+        if(this.context.activeCoupon.status !== this.state.hasCoupon){
+            this.setState({hasCoupon: this.context.activeCoupon.status})
+        }
     }
 
     handleChange(e, sku, quantity, specs){
@@ -61,16 +66,16 @@ class ShoppingCart extends React.Component {
                     : false
 
         if(filter){
+            this.context.clearCoupon()
+
             this.setState(prevState => {
                const newCart = prevState.cart.filter(filter)
                const subtotal = newCart.reduce((acc, item) => acc + (item.price * item.quantity), 0)
 
-
                return {
                    cart: newCart,
                    subtotal: subtotal,
-                   hasCoupon: false,
-                   activatedCoupon: '',
+                   coupon: prevState.coupon,
                    total: subtotal
                }
             })   
@@ -78,18 +83,17 @@ class ShoppingCart extends React.Component {
     }
 
     handleCoupon(){
-        const coupon = this.context.coupons.find(item => item.str === this.state.coupon)
+        const activeCoupon = this.context.activateCoupon(this.state.coupon)
 
         let field = $('#coupon')
-
-        if(coupon){
+        const {status: hasCoupon, coupon} = activeCoupon
+        
+        if(hasCoupon){
             const discount = (coupon.type === 'percentage') ? parseFloat(this.state.subtotal) * parseFloat(coupon.discount)/100 : parseFloat(coupon.discount)
 
             this.setState(prevState => {
                 return {
-                hasCoupon: true,
                 coupon: '',
-                activateCoupon: coupon,
                 total: prevState.subtotal - discount,
                 discount: discount
             }})
