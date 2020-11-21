@@ -139,7 +139,7 @@ export class DataProvider extends React.Component {
                     ],
                     client: '',   //email do cliente
                     date: '',
-                    situation: '',   //AA - aguardando aprovação, AE - aguardando envio, AC - aguanddando chegado, FF - finalizado
+                    situation: '',   //AA - aguardando aprovação, AE - aguardando envio, AC - aguanddando chegada, FF - finalizado
                     adress: ''      //Endereço de Envio
                 },
                 */
@@ -173,7 +173,7 @@ export class DataProvider extends React.Component {
                     client: 'biscoitodamassa@gmail.com', 
                     date: '16/11/2020',
                     situation: 'FF',  
-                    adress: 'Tão tão distante'
+                    adress: ''
                 }
 
             ],

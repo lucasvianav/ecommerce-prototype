@@ -10,13 +10,17 @@ const ModalPedido = (props) => {
     const context = useContext(DataContext);
     const products = context.data;
     const clients = context.accounts;
-    const [alteracao, setAlteracao] = useState("");
+    const [estado, setEstado] = useState("");
+
+    useEffect( () => {
+      setEstado(props.pedido.situation);
+    }, [props])
 
     const salva = (event) =>{
         var nv = {};
         nv.set = true;
         nv.index = props.index;
-        nv.new = '';
+        nv.new = estado;
         props.onSave(nv);
         props.onHide();
     }
@@ -76,6 +80,46 @@ const ModalPedido = (props) => {
                     })
                   }
                 </div>
+                <div>
+                  <h5>Dados do Cliente:</h5>
+                  <div>
+                    {clients.map((client, index) => {
+                      var end = (props.pedido.adress !== '') ? "Endereço: " : '';
+                      var endereco = (props.pedido.adress !== '') ? props.pedido.adress : '';
+                      if (client.email === props.pedido.client){
+                        return(
+                          <>
+                            <p><strong>Nome: </strong>{client.name}</p>
+                            <p><strong>{end}</strong>{endereco}</p>
+                          </>
+                        )
+                      }
+                    })}
+                  </div>
+                </div>
+                <h5>Situação: </h5>
+                <div id="radiosSituacao">
+                  <div className="custom-control custom-radio">
+                    <input type="radio" id="situacao1" name="situacao" value="AA"
+                    className="custom-control-input" checked={(estado === 'AA')? true : false} onChange={(e)=>{setEstado(e.target.value)}}/>
+                    <label className="custom-control-label" for="situacao1">Aguardando Aprovação</label>
+                  </div>
+                  <div className="custom-control custom-radio">
+                    <input type="radio" id="situacao2" name="situacao" value="AE"
+                    className="custom-control-input" checked={(estado === 'AE')? true : false} onChange={(e)=>{setEstado(e.target.value)}} />
+                    <label className="custom-control-label" for="situacao2">Aguardando Envio</label>
+                  </div>
+                  <div className="custom-control custom-radio">
+                    <input type="radio" id="situacao3" name="situacao" value="AC"
+                    className="custom-control-input" checked={(estado === 'AC')? true : false} onChange={(e)=>{setEstado(e.target.value)}} />
+                    <label className="custom-control-label" for="situacao3">Aguardando Chegada</label>
+                  </div>
+                  <div className="custom-control custom-radio">
+                    <input type="radio" id="situacao4" name="situacao" value="FF"
+                    className="custom-control-input" checked={(estado === 'FF')? true : false} onChange={(e)=>{setEstado(e.target.value)}} />
+                    <label className="custom-control-label" for="situacao4">Finalizado</label>
+                  </div>
+                </div>                  
             </Modal.Body>
             <Modal.Footer>
                 <button onClick={(e) => {salva(e)}}
