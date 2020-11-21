@@ -4,6 +4,7 @@ import {Nav, Collapse} from 'react-bootstrap';
 import ProductCardPanel from './ProductCardPanel';
 import ProductForm from '../ProductForm';
 import UsersPanel from './UsersPanel';
+import FilterDiv from './FilterDiv';
 
 import '../css/bootstrap.css';
 import './index.css';
@@ -15,9 +16,8 @@ function AdmAccount(props){
     const [pedidos, setPedidos] = useState(true);
     const [usuarios, setUsuarios] = useState(false);
 
-    function refreshNav(){
-
-    }
+    const [filter, setFilter] = useState("none");
+    const [selectedFilter, setSelectedFilter] = useState([]);
 
     function showProdutosAtivos(){
         setAtivo(true);
@@ -134,28 +134,46 @@ function AdmAccount(props){
                                 
                                 <Collapse in={pedidos}>
                                     <div id="pedidos" className="p-2 bg-flex tabcontent">
-                                        <h6 className="align-right mt-2 text-right">
-                                            <i className="fas fa-search"></i>
-                                            <i className="fas fa-filter"></i>
-                                        </h6>
+                                        <div className="d-flex justify-content-end" style={{width: '100%'}}>
+                                            <h6 className="align-right mt-2 text-right">
+                                                <i className="fas fa-search pointer" onClick={() =>{setFilter("search")}}></i>
+                                                <i className="fas fa-filter pointer" onClick={() =>{setFilter("filter")}}></i>
+                                                < FilterDiv show={filter} onHide={() => setFilter("none")} 
+                                                    onChange={(event) => {setSelectedFilter(event.value)}}
+                                                    seletores={[{title: "oi", data:["1","2"] }]} 
+                                                />
+                                            </h6>
+                                        </div>
                                         pedidos
                                    </div>
                                 </Collapse>
                                 <Collapse in={ativo}>
                                     <div id="produtosAtivos" className="p-2 bg-flex tabcontent" >
-                                        <h6 className="align-right mt-2 text-right">
-                                            <i className="fas fa-search"></i>
-                                            <i className="fas fa-filter"></i>
-                                        </h6>
+                                        <div className="d-flex justify-content-end" style={{width: '100%'}}>
+                                            <h6 className="align-right mt-2 text-right">
+                                                <i className="fas fa-search pointer" onClick={() =>{setFilter("search")}}></i>
+                                                <i className="fas fa-filter pointer" onClick={() =>{setFilter("filter")}}></i>
+                                                < FilterDiv show={filter} onHide={() => setFilter("none")} 
+                                                    onChange={(event) => {setSelectedFilter(event.value)}}
+                                                    seletores={[{title: "oi", data:["1","2"] }]} 
+                                                />
+                                            </h6>
+                                        </div>
                                         <ProductCardPanel type="visivel" />
                                     </div>
                                 </Collapse>
                                 <Collapse in={inativo}>
                                     <div id="produtosInativos" className="p-2 bg-flex tabcontent">
-                                        <h6 className="align-right mt-2 text-right">
-                                            <i className="fas fa-search"></i>
-                                            <i className="fas fa-filter"></i>
-                                        </h6>
+                                        <div className="d-flex justify-content-end" style={{width: '100%'}}>
+                                            <h6 className="align-right mt-2 text-right">
+                                                <i className="fas fa-search pointer" onClick={() =>{setFilter("search")}}></i>
+                                                <i className="fas fa-filter pointer" onClick={() =>{setFilter("filter")}}></i>
+                                                < FilterDiv show={filter} onHide={() => setFilter("none")} 
+                                                    onChange={(event) => {setSelectedFilter(event.value)}}
+                                                    seletores={[{title: "oi", data:["1","2"] }]} 
+                                                />
+                                            </h6>
+                                        </div>
                                         <ProductCardPanel type="invisible" />
                                     </div>
                                 </Collapse>
@@ -166,6 +184,16 @@ function AdmAccount(props){
                                 </Collapse>
                                 <Collapse in={usuarios}>
                                     <div id="usuarios" className="p-2 bg-flex tabcontent">
+                                        <div className="d-flex justify-content-end" style={{width: '100%'}}>
+                                            <h6 className="align-right mt-2 text-right">
+                                                <i className="fas fa-search pointer" onClick={() =>{setFilter("search")}}></i>
+                                                <i className="fas fa-filter pointer" onClick={() =>{setFilter("filter")}}></i>
+                                                < FilterDiv show={filter} onHide={() => setFilter("none")} 
+                                                    onChange={(event) => {setSelectedFilter(event.value)}}
+                                                    seletores={[{title: "Tipo de usuário", data:["Cliente","Administrador"] }]} 
+                                                />
+                                            </h6>
+                                        </div>
                                         <UsersPanel />
                                    </div>
                                 </Collapse>
