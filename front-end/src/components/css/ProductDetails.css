@@ -99,6 +99,15 @@
     margin-right: 3%;
 }
 
+.ProductDetails label.radio-label {
+    margin: auto 0 auto 0;
+    margin-right: 5%;
+}
+
+.ProductDetails label.radio-label span {
+    margin-left: 7%;
+}
+
 .ProductDetails .select-line {
     display: flex;
     flex-flow: row nowrap;

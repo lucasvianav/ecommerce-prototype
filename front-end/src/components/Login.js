@@ -292,7 +292,7 @@ class Login extends React.Component {
         $('.light-theme body').css('backgroundColor', '#3b4f65')
         $('.dark-theme body').css('backgroundColor', '#212e3b')
 
-        $('.dark-theme #navbar').css('backgroundColor', '#0a0d11')
+        $('.dark-theme #navbar, .dark-theme .CheckoutHeader').css('backgroundColor', '#0a0d11')
         $('.dark-theme #footer').css('backgroundColor', '#0a0d11')
     }
     
@@ -301,7 +301,7 @@ class Login extends React.Component {
         $('#signup-back').off('click', hideFullSignup)
         $('body').css('backgroundColor', 'inherit')
 
-        $('.dark-theme #navbar').css('backgroundColor', '')
+        $('.dark-theme #navbar, .dark-theme .CheckoutHeader').css('backgroundColor', '')
         $('.dark-theme #footer').css('backgroundColor', '')
     }
 

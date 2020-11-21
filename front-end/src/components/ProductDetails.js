@@ -212,7 +212,7 @@ class ProductDetails extends React.Component {
                                             <div className="templates-line">
                                                 <span><strong>Modelagem:</strong></span>
                                                 <br/>
-                                                { this.product.templates.map((item, index) => <label className="radio-label" key={item + index.toString()}><input type="radio" name="template" value={item} onChange={this.handleChange} required/>{item.title()}</label>) }
+                                                { this.product.templates.map((item, index) => <label className="radio-label" key={item + index.toString()}><input type="radio" name="template" value={item} onChange={this.handleChange} required/><span>{item.title()}</span></label>) }
                                                 <br/><br/>
                                             </div>
                                         )

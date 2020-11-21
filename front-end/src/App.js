@@ -1,9 +1,9 @@
 import React from 'react'
-import $ from 'jquery'
+
 import {
-  BrowserRouter, 
-  Route, 
-  Switch, 
+  BrowserRouter,
+  Route,
+  Switch,
   Redirect
 } from 'react-router-dom'
 
@@ -21,16 +21,21 @@ import { DataContext } from './Context'
 import MyAccount from './components/MyAccount'
 import AdmAccount from './components/AdmAccount'
 import ProductEdit from './components/ProductEdit'
+import Checkout from './components/Checkout'
+import { CheckoutProvider } from './components/CheckoutContext'
 
 class App extends React.Component {
   static contextType = DataContext
   
   render(){
     const {data} = this.context
+
     return(
       <BrowserRouter>
         <div id='app'>
-          <Navbar {...this.props}/>
+          <Route path='/:base*' render={props => props.match.params.base === 'checkout' ? '' : <Navbar {...this.props}/>}/>
+          {/* <Navbar {...this.props}/> */}
+          {/* <CheckoutHeader/> */}
           
           <Switch>
             {/* Pages */}
@@ -74,6 +79,10 @@ class App extends React.Component {
                 return <ProductSearch {...props} query={query.get('query')}/>
               }
 
+              else if(base === 'checkout'){
+                return <CheckoutProvider><Checkout/></CheckoutProvider>
+              }
+
               else if(['acessibilidade', 'accessibility'].includes(base.toLowerCase())){
                 return <Accessibility/>
               }
@@ -108,7 +117,7 @@ class App extends React.Component {
             }}/>
           </Switch>
 
-          <Footer/>
+          <Route path='/:base*' render={props => props.match.params.base === 'checkout' ? '' : <Footer/>}/>
         </div>
       </BrowserRouter>
     )
