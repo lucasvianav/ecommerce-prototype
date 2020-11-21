@@ -8,10 +8,18 @@ import CheckoutPayment from './CheckoutPayment'
 import { CheckoutContext } from './CheckoutContext'
 import CheckoutConfirmation from './CheckoutConfirmation'
 import TextTab from './TextTab'
-import { Link } from 'react-router-dom'
+import { DataContext } from '../Context'
 
 class Checkout extends React.Component {
-    static contextType = CheckoutContext
+    static contextType = DataContext
+
+    constructor(props, context){
+        super(props, context)
+
+        if(this.context.cart.isEmpty()){
+            this.props.history.push('/carrinho')
+        }
+    }
 
     render(){
         return(
@@ -19,12 +27,12 @@ class Checkout extends React.Component {
                 { checkout => (
                     <div className='Checkout'>
                         <Header/>
-                        { this.context.currentStep === 'login' ? <Login/> : '' }
-                        { this.context.currentStep === 'payment' ? <CheckoutPayment/> : ''}
-                        { this.context.currentStep === 'confirmation' ? <CheckoutConfirmation checkout={{...checkout}}/> : ''}
+                        { checkout.currentStep === 'login' ? <Login/> : '' }
+                        { checkout.currentStep === 'payment' ? <CheckoutPayment/> : ''}
+                        { checkout.currentStep === 'confirmation' ? <CheckoutConfirmation checkout={{...checkout}}/> : ''}
 
                         { 
-                            !(this.context.currentStep === 'finished') ? '' : 
+                            !(checkout.currentStep === 'finished') ? '' : 
                             <TextTab link={{text: 'Voltar para o início', to: '/'}}>
                                 <div className='center-text'>
                                     <h1 className='green title'><i class="fa fa-check-circle"></i> Seu pedido foi realizado com sucesso!</h1>

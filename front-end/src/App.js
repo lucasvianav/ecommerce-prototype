@@ -80,7 +80,7 @@ class App extends React.Component {
               }
 
               else if(base === 'checkout'){
-                return <CheckoutProvider><Checkout/></CheckoutProvider>
+                return <CheckoutProvider><Checkout {...props}/></CheckoutProvider>
               }
 
               else if(['acessibilidade', 'accessibility'].includes(base.toLowerCase())){
