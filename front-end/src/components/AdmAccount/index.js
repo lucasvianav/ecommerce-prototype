@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import $ from 'jquery';
 import {Nav, Collapse} from 'react-bootstrap';
 import ProductCardPanel from './ProductCardPanel';
@@ -7,10 +7,16 @@ import UsersPanel from './UsersPanel';
 import OrdersPanel from './OrdersPanel';
 import FilterDiv from './FilterDiv';
 
+import { DataContext } from '../../Context';
+
 import '../css/bootstrap.css';
 import './index.css';
 
 function AdmAccount(props){
+
+    const context = useContext(DataContext);
+    const categories = context.categories;
+
     const [ativo, setAtivo] = useState(false);
     const [inativo, setInativo] = useState(false);
     const [novoProd, setNovoProd] = useState(false);
@@ -19,6 +25,16 @@ function AdmAccount(props){
 
     const [filter, setFilter] = useState("none");
     const [selectedFilter, setSelectedFilter] = useState([]);
+    const [arrayCategorias, setArrayCategorias] = useState([]);
+
+    useEffect( () => {
+        var vet = [];
+        categories.forEach((category, index) => {
+            vet.push(category.name);
+        })
+        console.log(vet)
+        setArrayCategorias(vet);
+    }, [categories])
 
     function showProdutosAtivos(){
         setAtivo(true);
@@ -156,7 +172,7 @@ function AdmAccount(props){
                                                 <i className="fas fa-filter pointer" onClick={() =>{setFilter("filter")}}></i>
                                                 < FilterDiv show={filter} onHide={() => setFilter("none")} 
                                                     onChange={(event) => {setSelectedFilter(event.value)}}
-                                                    seletores={[{title: "oi", data:["1","2"] }]} 
+                                                    seletores={[{title: "Categorias", data: arrayCategorias }]} 
                                                 />
                                             </h6>
                                         </div>
@@ -171,7 +187,7 @@ function AdmAccount(props){
                                                 <i className="fas fa-filter pointer" onClick={() =>{setFilter("filter")}}></i>
                                                 < FilterDiv show={filter} onHide={() => setFilter("none")} 
                                                     onChange={(event) => {setSelectedFilter(event.value)}}
-                                                    seletores={[{title: "oi", data:["1","2"] }]} 
+                                                    seletores={[{title: "Categorias", data: arrayCategorias }]} 
                                                 />
                                             </h6>
                                         </div>

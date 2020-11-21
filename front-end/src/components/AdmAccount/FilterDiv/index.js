@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 import '../../css/bootstrap.css';
 import './index.css';
@@ -6,6 +6,10 @@ import './index.css';
 const FilterDiv = (props) => {
 
   const [seletores, setSeletores] = useState(props.seletores);
+
+  useEffect( () => {
+    setSeletores(props.seletores)
+  }, [props])
 
   return (
     <div className={"filter-div pl-3 pb-3 shadow rouded show-"+props.show}>

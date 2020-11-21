@@ -21,11 +21,10 @@ const OrdersPanel = (props) => {
     const defSt = {
                     AA: "Aguardando Aprovação", 
                     AE: "Aguardando Envio", 
-                    AC: "Aguanddando Chegada", 
+                    AC: "Aguardando Chegada", 
                     FF: "Finalizado"
                   }
     const st = defSt[item.situation];
-    const tipo = props.type;
 
     const callModal = (id) => {
       var info = {};
