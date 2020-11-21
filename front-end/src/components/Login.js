@@ -512,22 +512,20 @@ class Login extends React.Component {
         const {accounts} = this.context
         var ehCadastrado = false
 
-        {  
-           accounts.map(account=>
-                {
-                    if(account.email === loginEmail && account.password === loginPw){
-                       ehCadastrado = true
-                    }
-                }
-            )
+        for(let account of accounts){
+            if(account.email === loginEmail && account.password === loginPw){
+                ehCadastrado = true
+                this.context.changeLoginStatus(account.email)  
+            }
         }
 
         if(ehCadastrado){
             alert("Usuário Cadastrado")
+
         }else{
             alert("Senha ou email incorretos")
         }
-        
+   
     }
 
     submitRecovery(){
@@ -564,6 +562,12 @@ class Login extends React.Component {
         //         fullSignup.submit()
         //     }
         // })
+
+        // Input data
+        const {signupName, signupEmail, signupPw, signupBirthday, signupCPF, signupPhoneNumber} = this.state
+
+        this.context.addToAccounts(signupName, signupEmail, signupPw, signupBirthday, signupCPF, signupPhoneNumber)
+
 
         alert("foi")
     }
