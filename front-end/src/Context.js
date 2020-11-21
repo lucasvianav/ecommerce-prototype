@@ -129,6 +129,7 @@ export class DataProvider extends React.Component {
             orders: [
                 /*
                 {
+                    id: '', //id do pedido
                     product:[
                         {
                             id: '',    //id do produto
@@ -143,6 +144,7 @@ export class DataProvider extends React.Component {
                 },
                 */
                 {
+                    id: '1',
                     product:[
                         {
                             id: 'P1',   
@@ -161,6 +163,7 @@ export class DataProvider extends React.Component {
                     adress: 'Tão tão distante'
                 },
                 {
+                    id: '2',
                     product:[
                         {
                             id: 'E1',   
