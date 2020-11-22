@@ -97,6 +97,7 @@ class Navbar extends React.Component {
         $(function(){
             $('#products-button').on('mouseenter mouseleave', handleNavbarDropdown)
             $('#events-button').on('mouseenter mouseleave', handleNavbarDropdown)
+            $('#my-account').on('mouseenter mouseleave', handleNavbarDropdown)
             $('#search-button').on('click', toggleSearchBar)
         })
     }
@@ -104,6 +105,7 @@ class Navbar extends React.Component {
     componentWillUnmount(){
         $('#products-button').off('mouseenter mouseleave', handleNavbarDropdown)
         $('#events-button').off('mouseenter mouseleave', handleNavbarDropdown)
+        $('#my-account').off('mouseenter mouseleave', handleNavbarDropdown)
         $('#search-button').off('click', toggleSearchBar)
     }
 
@@ -168,7 +170,23 @@ class Navbar extends React.Component {
                     <div className='main'>
                         <li><button id="search-button" type="button" title='Pesquisar'><i className="fas fa-search"></i></button></li>
                         <li><Link to="/carrinho" title='Carrinho'><i className="fas fa-shopping-cart"></i></Link></li>
-                        <li><Link to="/login">Login</Link></li>
+                        <li id='my-account'>
+                            {
+                                this.context.isLogged.status 
+                                    ? <Link to='minhaconta'>{this.context.accounts.find(el => el.email === this.context.isLogged.email).name.split(' ')[0]}</Link> 
+                                    : <Link to="/login">Login</Link>
+                            }
+                            {
+                                !this.context.isLogged.status ? '' :
+                                <div className='drop' style={{display: 'none'}}>
+                                    <span className='divisor'></span>
+                                    <ul>
+                                        <li><Link to='/minhaconta'>Minha conta</Link></li>
+                                        <li><span className='disable-selection' onClick={this.context.logout}>Sair</span></li>
+                                    </ul>
+                                </div>
+                            }
+                        </li>
                         <li><ThemeToggler/></li>
                     </div>
                 </ul>
