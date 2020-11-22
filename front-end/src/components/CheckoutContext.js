@@ -9,10 +9,9 @@ export class CheckoutProvider extends React.Component {
 
     constructor(props, context){
         super(props, context)
-        console.log(this.context)
 
         this.state = {
-            currentStep: 'payment',
+            currentStep: '',
             payment: ''
         }
 
@@ -20,6 +19,11 @@ export class CheckoutProvider extends React.Component {
         this.setPayment = this.setPayment.bind(this)
         this.changePayment = this.changePayment.bind(this)
         this.orderPlaced = this.orderPlaced.bind(this)
+        this.checkLogin = this.checkLogin.bind(this)
+    }
+
+    checkLogin(status){
+        this.setState({currentStep: status ? 'payment' : 'login'})
     }
 
     handleChange(e){
@@ -51,10 +55,10 @@ export class CheckoutProvider extends React.Component {
 
     render(){
         const {payment, currentStep} = this.state
-        const {handleChange, setPayment, changePayment, orderPlaced} = this
+        const {handleChange, setPayment, changePayment, orderPlaced, checkLogin} = this
 
         return(
-            <CheckoutContext.Provider value={{payment, currentStep, handleChange, setPayment, changePayment, orderPlaced}}>
+            <CheckoutContext.Provider value={{payment, currentStep, handleChange, setPayment, changePayment, orderPlaced, checkLogin}}>
                 {this.props.children}
             </CheckoutContext.Provider>
         )

@@ -67,16 +67,16 @@ export class DataProvider extends React.Component {
             ],
     
             cart: [
-                // {
-                //     sku: 'PR-P1-VOID-MASC-M', // PR = type (PRoduct) --- P1 = id --- VOID = color --- MASC = template (MASC x FEMI) --- M = size
-                //     quantity: 2,
-                //     specs: {color: '', template: 'Masculino', size: 'M'}
-                // },
-                // {
-                //     sku: 'EV-E1', // EV = type (EVent) --- E1 = id
-                //     quantity: 1,
-                //     specs: {color: '', template: '', size: ''}
-                // }
+                {
+                    sku: 'PR-P1-VOID-MASC-M', // PR = type (PRoduct) --- P1 = id --- VOID = color --- MASC = template (MASC x FEMI) --- M = size
+                    quantity: 2,
+                    specs: {color: '', template: 'Masculino', size: 'M'}
+                },
+                {
+                    sku: 'EV-E1', // EV = type (EVent) --- E1 = id
+                    quantity: 1,
+                    specs: {color: '', template: '', size: ''}
+                }
             ],
     
             accounts: [ 
@@ -110,7 +110,7 @@ export class DataProvider extends React.Component {
 
             isLogged: {
                 status: false,
-                email: '-'
+                email: ''
             },
     
             coupons: [
@@ -203,8 +203,9 @@ export class DataProvider extends React.Component {
         this.toggleTheme = this.toggleTheme.bind(this)
         this.activateCoupon = this.activateCoupon.bind(this)
         this.clearCoupon = this.clearCoupon.bind(this)
-        this.changeLoginStatus = this.changeLoginStatus.bind(this)
-        this.addToAccounts = this.addToAccounts.bind(this)
+        this.login = this.login.bind(this)
+        this.logout = this.logout.bind(this)
+        this.signup = this.signup.bind(this)
     }
 
     componentDidMount(){
@@ -224,23 +225,25 @@ export class DataProvider extends React.Component {
         this.setState(prevState => {return {darkTheme: !prevState.darkTheme}})
     }
     
-    changeLoginStatus(email){
+    login(email){
         this.setState({isLogged: {status: true, email: email}})
     }
     
-    addToAccounts(signupName, signupEmail, signupPw, signupBirthday, signupCPF, signupPhoneNumber){
-        
+    logout(){
+        this.setState({isLogged: {status: false, email: ''}})
+    }
+    
+    signup(info){
         let {accounts} = this.state
 
         accounts.push({
-            name: signupName,
+            name: info.signupName,
             accountType: 'client',
-            email: signupEmail,
-            password: signupPw,
-            birthday: signupBirthday,
-            cpf: signupCPF,
-            phoneNumber: signupPhoneNumber
-
+            email: info.signupEmail,
+            password: info.signupPw,
+            birthday: info.signupBirthday,
+            cpf: info.signupCPF,
+            phoneNumber: info.signupPhoneNumber
         })
 
         this.setState({accounts: accounts})
@@ -332,10 +335,10 @@ export class DataProvider extends React.Component {
 
     render(){
         const {data, cart, accounts, coupons, home, categories, darkTheme, orders, activeCoupon, isLogged} = this.state
-        const {addToCart, removeFromCart, deleteFromCart, toggleTheme, activateCoupon, clearCoupon, changeLoginStatus, addToAccounts} = this
+        const {addToCart, removeFromCart, deleteFromCart, toggleTheme, activateCoupon, clearCoupon, login, logout, signup} = this
 
         return(
-            <DataContext.Provider value={{data, cart, accounts, isLogged, coupons, home, categories, darkTheme, orders, activeCoupon, addToCart, removeFromCart, deleteFromCart, toggleTheme, activateCoupon, clearCoupon, changeLoginStatus, addToAccounts}}>
+            <DataContext.Provider value={{data, cart, accounts, isLogged, coupons, home, categories, darkTheme, orders, activeCoupon, addToCart, removeFromCart, deleteFromCart, toggleTheme, activateCoupon, clearCoupon, login, logout, signup}}>
                 {this.props.children}
             </DataContext.Provider>
         )

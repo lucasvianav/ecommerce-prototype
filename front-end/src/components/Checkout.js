@@ -8,17 +8,19 @@ import CheckoutPayment from './CheckoutPayment'
 import { CheckoutContext } from './CheckoutContext'
 import CheckoutConfirmation from './CheckoutConfirmation'
 import TextTab from './TextTab'
-import { DataContext } from '../Context'
 
 class Checkout extends React.Component {
-    static contextType = DataContext
+    static contextType = CheckoutContext
 
     constructor(props, context){
         super(props, context)
 
-        if(this.context.cart.isEmpty()){
+        if(this.props.ctx.cart.isEmpty()){
             this.props.history.push('/carrinho')
+            return
         }
+
+        this.context.checkLogin(this.props.ctx.isLogged.status)
     }
 
     render(){

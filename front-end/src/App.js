@@ -65,7 +65,7 @@ class App extends React.Component {
                 return <ShoppingCart {...props}/>
               }
               
-              else if(['conta', 'account'].includes(base.toLowerCase())){
+              else if(['minhaconta', 'myaccount'].includes(base.toLowerCase())){
                 return <MyAccount />
               }
 
@@ -80,7 +80,7 @@ class App extends React.Component {
               }
 
               else if(base === 'checkout'){
-                return <CheckoutProvider><Checkout {...props}/></CheckoutProvider>
+                return <CheckoutProvider><Checkout {...props} ctx={{...this.context}}/></CheckoutProvider>
               }
 
               else if(['acessibilidade', 'accessibility'].includes(base.toLowerCase())){

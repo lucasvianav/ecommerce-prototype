@@ -275,6 +275,8 @@ class Login extends React.Component {
 
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+
+        if(this.context.isLogged.status){ this.props.history.push('/minhaconta') }
     }
 
     componentDidMount(){
@@ -352,6 +354,7 @@ class Login extends React.Component {
     handleChange(e){
         const {name, value} = e.target
         this.setState({[name]: value}) 
+        $('.error-message').text('')
     }
 
     handleSubmit(e){
@@ -431,7 +434,7 @@ class Login extends React.Component {
 
         // Validates the signupEmail
         if(!isValidEmail(signupEmail)){
-            error.text("O signupEmail inserido é inválido.")
+            error.text("O email inserido é inválido.")
             $(forms.signupEmail).focus()
             
             return false
@@ -510,25 +513,48 @@ class Login extends React.Component {
         // Input data
         const {loginEmail, loginPw} = this.state
         const {accounts} = this.context
-        var ehCadastrado = false
-
+        
+        let exists = false
         for(let account of accounts){
             if(account.email === loginEmail && account.password === loginPw){
-                ehCadastrado = true
-                this.context.changeLoginStatus(account.email)  
+                exists = true
+                this.context.login(loginEmail)
+                break
             }
         }
 
-        if(ehCadastrado){
-            alert("Usuário Cadastrado")
-
-        }else{
-            alert("Senha ou email incorretos")
+        if(exists){
+            $('.error-message').text('')
+            const {base} = this.props.match.params
+            if(base === 'login'){ this.props.history.push('/') }
+        }
+        
+        else{
+            $('.form-login .error-message').text('Email e/ou senha incorretos.')
         }
    
     }
 
     submitRecovery(){
+        const {recoveryEmail} = this.state
+        const {accounts} = this.context
+        let exists = false
+
+        for(let account of accounts){
+            if(account.email === recoveryEmail){
+                exists = true
+                break
+            }
+        }
+
+        if(exists){ 
+            $('#form').trigger('reset')
+            $('#recovery-back').trigger('click')
+
+            alert('Um deveria ser enviado para a recuperação :)') 
+        }
+
+        else{ $('.form-recovery .error-message').text('Não existe uma conta com esse email.') }
         
     }
 
@@ -565,11 +591,18 @@ class Login extends React.Component {
 
         // Input data
         const {signupName, signupEmail, signupPw, signupBirthday, signupCPF, signupPhoneNumber} = this.state
+        this.context.signup({signupName, signupEmail, signupPw, signupBirthday, signupCPF, signupPhoneNumber})
 
-        this.context.addToAccounts(signupName, signupEmail, signupPw, signupBirthday, signupCPF, signupPhoneNumber)
+        $('.form-signup').trigger('reset')
+        $('.form-full-signup').trigger('reset')
 
+        $('.form-login').show()
+        $('.form-recovery').hide()
 
-        alert("foi")
+        $('.switcher-login').trigger('click')
+        $('#signup-back').trigger('click')
+
+        alert('Sua conta foi criada com sucesso.')
     }
 
     render(){
@@ -622,12 +655,12 @@ class Login extends React.Component {
                             <fieldset>
                                 <div className="input-block">
                                     <label className='grey' htmlFor="signup-email">Email</label><br/>
-                                    <input onChange={this.handleChange} id="signup-email" type="email" name="signupEmail" value={this.state.email} required/>
+                                    <input form='signup' onChange={this.handleChange} id="signup-email" type="email" name="signupEmail" value={this.state.email} required/>
                                 </div>
                                 
                                 <div className="input-block">
                                     <label className='grey' htmlFor="signup-password">Senha</label><br/>
-                                    <input onChange={this.handleChange} 
+                                    <input form='signup' onChange={this.handleChange} 
                                     id="signup-password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,30}" maxLength="30" minLength="8"
                                     title="A senha deve conter pelo menos um número, uma letra minúscula e uma letra maiúscula. Deve possuir entre 8 e 30 caracteres."
                                     type="password" name="signupPw" value={this.state.pw} required
@@ -636,7 +669,7 @@ class Login extends React.Component {
                                 
                                 <div className="input-block">
                                     <label className='grey' htmlFor="signup-conf-password">Confirmação de senha</label><br/>
-                                    <input onChange={this.handleChange} 
+                                    <input form='signup' onChange={this.handleChange} 
                                     id="signup-conf-password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,30}" 
                                     title="Repita a sua senha." maxLength="30" minLength="8"
                                     type="password" name="pwConfirmation" value={this.state.pwConfirmation} required
@@ -653,26 +686,26 @@ class Login extends React.Component {
                             <fieldset>
                                 <div className="input-block">
                                     <label className='grey' htmlFor="signup-name">Nome completo</label><br/>
-                                    <input onChange={this.handleChange} id="signup-name" name="signupName" value={this.state.name} type="text" minLength="6" required/>
+                                    <input form='full-signup' onChange={this.handleChange} id="signup-name" name="signupName" value={this.state.name} type="text" minLength="6" required/>
                                 </div>
         
                                 <div className="input-block">
                                     <label className='grey' htmlFor="signup-birthday">Data de nascimento</label><br/>
-                                    <InputMask mask="99/99/9999" maskPlaceholder="dd/mm/aaaa" type='text' onChange={this.handleChange} id="signup-birthday" name="signupBirthday" value={this.state.birthday} placeholder="dd/mm/aaaa" title="Idade mínima: 15 anos." required/>
+                                    <InputMask form='full-signup' mask="99/99/9999" maskPlaceholder="dd/mm/aaaa" type='text' onChange={this.handleChange} id="signup-birthday" name="signupBirthday" value={this.state.birthday} placeholder="dd/mm/aaaa" title="Idade mínima: 15 anos." required/>
                                 </div>
                             </fieldset>
         
                             <fieldset>
                                 <div className="input-block">
                                     <label className='grey' htmlFor="signup-cpf">CPF</label><br/>
-                                    <InputMask mask="999.999.999-99" type='text' onChange={this.handleChange} id="signup-cpf" name="signupCPF" value={this.state.cpf} placeholder='000.000.000-00' required/>
+                                    <InputMask form='full-signup' mask="999.999.999-99" type='text' onChange={this.handleChange} id="signup-cpf" name="signupCPF" value={this.state.cpf} placeholder='000.000.000-00' required/>
                                 </div>
                             </fieldset>
         
                             <fieldset>
                                 <div className="input-block">
                                     <label className='grey' htmlFor="signup-phoneNumber">Celular</label><br/>
-                                    <InputMask mask="+55 (99) 99999-9999" type='text' onChange={this.handleChange} id="signup-phoneNumber" name="signupPhoneNumber" value={this.state.phoneNumber} placeholder='(00) 90000-0000' required/>
+                                    <InputMask form='full-signup' mask="+55 (99) 99999-9999" type='text' onChange={this.handleChange} id="signup-phoneNumber" name="signupPhoneNumber" value={this.state.phoneNumber} placeholder='(00) 90000-0000' required/>
                                 </div>
                             </fieldset>
 

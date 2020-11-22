@@ -182,7 +182,7 @@ class ShoppingCart extends React.Component {
                                 <p>R${this.state.total.toFixed(2).replaceAll('.',',')}</p>
                             </div>
 
-                            <button className="big-btn full-btn">Continuar</button>
+                            <button className="big-btn full-btn" onClick={() => this.props.history.push('/checkout')}>Continuar</button>
                         </div>
 
                         <div className="coupon row">

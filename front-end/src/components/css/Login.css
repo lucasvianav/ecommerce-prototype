@@ -493,3 +493,7 @@ main.Login {
 	opacity: 1;
 	visibility: visible;
 }
+
+#forgot-button {
+	margin-bottom: 2%;
+}
