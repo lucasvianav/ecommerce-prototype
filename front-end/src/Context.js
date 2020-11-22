@@ -153,8 +153,8 @@ export class DataProvider extends React.Component {
                     type: 'client', // client x admin
                     email: 'fionagatinha74@gmail.com',
                     password: 'souLinda123',
-                    birthday: '',
-                    cpf: '',
+                    birthday: '01/01/2000',
+                    cpf: '666.666.666-66',
                     phoneNumber: ''
                 },
                 {
@@ -162,8 +162,8 @@ export class DataProvider extends React.Component {
                     type: 'client',
                     email: 'biscoitodamassa@gmail.com',
                     password: 'nhameNhame123',
-                    birthday: '',
-                    cpf: '',
+                    birthday: '01/01/2000',
+                    cpf: '666.666.666-66',
                     phoneNumber: ''
                 },
                 {
@@ -171,8 +171,8 @@ export class DataProvider extends React.Component {
                     type: 'client',
                     email: 'teste@gmail.com',
                     password: 'Teste123',
-                    birthday: '',
-                    cpf: '',
+                    birthday: '01/01/2000',
+                    cpf: '666.666.666-66',
                     phoneNumber: ''
                 },
                 {
@@ -249,6 +249,7 @@ export class DataProvider extends React.Component {
         this.updateProduct = this.updateProduct.bind(this)
         this.deleteProduct = this.deleteProduct.bind(this)
         this.placeOrder = this.placeOrder.bind(this)
+        this.editUser = this.editUser.bind(this)
     }
 
     componentDidMount(){
@@ -298,6 +299,18 @@ export class DataProvider extends React.Component {
         }
 
         else{ return false }
+    }
+
+    editUser(userName, bday, cpf, cell){
+        
+
+        this.setState.getCurrentAccount({accounts:
+            {name:userName,
+            birthday: bday,
+            cpf: cpf,
+            phoneNumber: cell
+            }
+        })
     }
 
     addToCart(sku, quantity, specs){
@@ -487,10 +500,10 @@ export class DataProvider extends React.Component {
 
     render(){
         const {data, cart, accounts, coupons, home, categories, darkTheme, orders, activeCoupon, isLogged} = this.state
-        const {addToCart, removeFromCart, deleteFromCart, toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, getId, createProduct, updateProduct, deleteProduct, placeOrder} = this
+        const {addToCart, removeFromCart, deleteFromCart, toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, getId, createProduct, updateProduct, deleteProduct, placeOrder, editUser} = this
 
         return(
-            <DataContext.Provider value={{data, cart, accounts, isLogged, coupons, home, categories, darkTheme, orders, activeCoupon, addToCart, removeFromCart, deleteFromCart, toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, getId, createProduct, updateProduct, deleteProduct, placeOrder}}>
+            <DataContext.Provider value={{data, cart, accounts, isLogged, coupons, home, categories, darkTheme, orders, activeCoupon, addToCart, removeFromCart, deleteFromCart, toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, getId, createProduct, updateProduct, deleteProduct, placeOrder, editUser}}>
                 {this.props.children}
             </DataContext.Provider>
         )

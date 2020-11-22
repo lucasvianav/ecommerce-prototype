@@ -1,139 +1,213 @@
 import React from 'react'
 
+import $, { ready } from 'jquery';
+import { Accordion, Card } from 'react-bootstrap';
 import './css/bootstrap.css'
+import './css/MyAccount.css'
+import { DataContext } from '../Context';
+
+
 
 class MyAccount extends React.Component {
+
+    static contextType = DataContext
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            userName: '',
+            bday:'',
+            cpf:'',
+            cell:'',
+        }
+        this.hide = this.hide.bind(this);
+        this.hideTxt = this.hideTxt.bind(this);
+        this.editAccount = this.editAccount.bind(this);
+        this.handleChange= this.handleChange.bind(this);
+
+    }
+
+    
+    hide(){
+        var elemento = document.getElementsByClassName('client');
+        var campo = document.getElementsByClassName('userField');
+        var i; 
+        for (i = 0; i< elemento.length; i++){
+            if (elemento[i].style.display == "none"){
+                elemento[i].style.display = "block";
+                campo[i].style.display = "none";
+                document.getElementById('enviarDados').style.display = "inline";
+                
+            }
+            else{
+                elemento[i].style.display="none";
+                campo[i].style.display = "block";
+                document.getElementById('enviarDados').style.display = "none";
+                
+            }    
+        }
+    }
+    
+    hideTxt(){
+        var elemento = document.getElementsByClassName('userText');
+        var aux = document.getElementsByClassName('client');
+        var i; 
+        for (i = 0; i< elemento.length; i++){
+            if (aux[i].style.display == "none"){
+                elemento[i].style.display = "block";
+            }
+            else {
+                elemento[i].style.display = "none";
+            } 
+        }
+    }
+
+    editAccount(){
+        const {userName, bday, cpf, cell} = this.state
+
+        this.context.editUser(userName, bday, cpf, cell);
+
+    }
+    handleChange(e){
+        const {name, value} = e.target
+        this.setState({[name]: value})
+        
+    }
+    componentDidMount(){
+        console.log(this.context);
+    }
+
     render(){
         return(
             <main className="MyAccount">
                 <div className="content-box">
                     <h1>Minha Conta</h1>
                     <hr/>
-                    <div className="row">
-                        <div className="col-md-6 col-sm-12">
+                    <div className="row align-items-top">
+                        <div className="col-md-6 col-sm-12 align-self-top">
                             <section id="loginInfo" className="d-flex no-space">
-                                <h2>Olá, Fulaninho!</h2>
-                                <p><strong>Email: </strong>fulaninho@example.com</p>
-                                <button id="altSenha" className="btn btn-outline-dark">Alterar Senha</button>
+                                <h2>Olá, {this.context.getCurrentAccount().name}! </h2>
+                                <p><strong>Email: </strong>{this.context.getCurrentAccount().email}</p>
+
+                                {/*<button id="altSenha" className="btn btn-outline-dark">Alterar Senha</button>*/}
+
                             </section>
                             <section id="dadosPessoais" className="d-flex">
+                                <p></p>
+                                <p></p>
+                                <form onSubmit={this.editAccount}>
                                 <h2>Dados Pessoais</h2>
+                                
                                 <div className="d-flex justify-content-between">
-                                    <p><strong>Nome Completo: </strong>Fulaninho de Souza</p>
-                                    <p><strong>Data de Nacimento: </strong>00/00/00</p>
+                                    <p> 
+                                        <strong>Nome Completo:</strong>
+                                        <div className="userField">
+                                        {this.context.getCurrentAccount().name} 
+                                        </div>
+                                        <input type="text" name="userName" placeholder={this.context.getCurrentAccount().name} className="client hide"
+                                        value = {this.state.name} onChange={this.handleChange}></input>
+                                    </p>
+                                    <p> 
+                                        <strong>Data de Nacimento:</strong>
+                                        <div className="userField">
+                                        {this.context.getCurrentAccount().birthday}
+                                        </div>
+                                        <input type="date" name="bday" className="client hide" placeholder={this.context.getCurrentAccount().birthday} 
+                                        value = {this.state.birthday} onChange={this.handleChange}></input>
+                                    </p>
+
                                 </div>
-                                <p className="no-space"><strong>CPF: </strong>000.000.000.00</p>
-                                <button id="editarDados" className="btn btn-outline-dark mt-0">Editar</button>
-                            </section>
-                            <section id="endereco">
-                                <h2>Endereços</h2>    
-                                <div className="card">
-                                    <div className="card-body no-space">
-                                        <div className="d-flex justify-content-between">
-                                            <h5>
-                                                Minha Casa
-                                            </h5>
-                                            <p>
-                                                <i className="fas fa-pen"></i>
-                                            </p>
-                                        </div>
-                                        <p><strong>CEP: </strong>0000-000</p>
-                                        <p>Rua dos fulaninho <strong>N </strong>0<strong> - </strong> Apto 0</p>
-                                        <div className="d-flex justify-content-between no-space">
-                                            <p><strong>Bairo: </strong>Jardim dos Fulanos</p>
-                                            <p><strong>Cidade: </strong>São Carlos-SP</p>
-                                        </div>
+                                <p className="no-space">
+                                    <strong>CPF:</strong> 
+                                    <div className="userField">
+                                    {this.context.getCurrentAccount().cpf}
                                     </div>
-                                </div>
+                                    <input type="text" name="cpf" placeholder= {this.context.getCurrentAccount().cpf} className="client hide"
+                                    value = {this.state.cpf} onChange={this.handleChange}></input>
+                                </p>
+                                <p>
+                                    <strong>Celular:</strong> 
+                                    <div className="userField">
+                                    {this.context.getCurrentAccount().phoneNumber}
+                                    </div>
+                                    <input type="text" name="cell" placeholder= {this.context.getCurrentAccount().phoneNumber} className="client hide"
+                                    value = {this.state.phoneNumber} onChange={this.handleChange}></input>
+                                </p>
+                                <p>
+                                    <button id="enviarDados" type="submit" className="btn btn-outline-dark mt-0 botao hide" >
+                                        Salvar
+                                    </button>
+                                </p>
+                                </form>
+
+                                <button id="editarDados" className="btn btn-outline-dark mt-0 botao" onClick={this.hide}>
+                                    Editar
+                                </button>
+
                             </section>
+                            
                         </div>
-                        <div className="col-md-4 offset-md-1 col-sm-12">
-                            <section id="pedidos">
+                        <div className="col-md-4 offset-md-1 col-sm-12 align-self-top" >
+                            <section id="pedidos" className="mt-2 mb-3">
                                 <h2>Pedidos</h2>
                                 <div className="d-flex justify-content-end pr-3">
                                     <span><a href="#">Ver todos</a></span>
                                 </div>
-                                <div className="accordion" id="accordionExample">
-                                    <div className="card">
-                                        <div className="card-header bg-white" id="headingOne">
-                                            <h2 className="mb-0">
-                                            <button className="btn btn-link btn-block text-left collapsed text-dark" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                <Accordion id="pedidos" >
+                                    <Card>
+                                       <Accordion.Toggle as={Card.Header} eventKey="0">
+                                            <h5 className="mb-0">
                                                 Aguardando Aprovação
-                                            </button>
-                                            </h2>
-                                        </div>
+                                            </h5>
+                                        </Accordion.Toggle>
                                     
-                                        <div id="collapseOne" className="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                                            <div className="card-body">
+                                        <Accordion.Collapse eventKey="0">
+                                            <Card.Body>
                                                 <div className="row justify-content-around no-space">
                                                     <div className="card no-space" style={{width: '45%'}}>
-                                                        <img src="img/casaco.jpg" className="card-img-top" alt="Casaco engenharia civíl"/>
+                                                        <img src="img/casaco.jpg" className="card-img-top" alt="Casaco engenharia civil"/>
                                                         <div className="card-body no-space">
                                                         <p className="card-text"><a href="#">Casaco Guindaste</a></p>
                                                         </div>
                                                     </div>
                                                     <div className="card no-space" style={{width: '45%'}}>
-                                                        <img src="img/casaco.jpg" className="card-img-top" alt="Casaco engenharia civíl"/>
+                                                        <img src="img/casaco.jpg" className="card-img-top" alt="Casaco engenharia civil"/>
                                                         <div className="card-body no-space">
                                                         <p className="card-text"><a href="#">Casaco Guindaste</a></p>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div className="d-flex justify-content-end pr-3">
-                                                <p><a href="#">Ver mais</a></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="card">
-                                        <div className="card-header bg-white" id="headingTwo">
-                                            <h2 className="mb-0">
-                                            <button className="btn btn-link btn-block text-left collapsed text-dark" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                <div className="d-flex justify-content-end pr-3">
+                                                    <p><a href="#">Ver mais</a></p>
+                                                </div>
+                                            </Card.Body>
+                                        </Accordion.Collapse>
+                                    </Card>
+                                    <Card>
+                                        <Accordion.Toggle as={Card.Header} eventKey="1">
+                                            <h5 className="mb-0">
                                                 Aguardando Recebimento
-                                            </button>
-                                            </h2>
-                                        </div>
-                                        <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                                            <div className="card-body">
-                                                Não há nada aqui!
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="card">
-                                        <div className="card-header bg-white" id="headingThree">
-                                            <h2 className="mb-0">
-                                            <button className="btn btn-link btn-block text-left collapsed text-dark" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                Finalizados
-                                            </button>
-                                            </h2>
-                                        </div>
-                                        <div id="collapseThree" className="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                                            <div className="card-body">
-                                                Não há nada aqui!
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-                            <section id="cartoes">
-                                <h2>Cartões</h2>
-                                <div className="card">
-                                    <div className="card-body no-space">
-                                        <div className="d-flex justify-content-between">
-                                            <h5>
-                                                <i className="fab fa-cc-mastercard"></i>
-                                                Cartão: Meu Cartão
                                             </h5>
-                                            <p>
-                                                <i className="fas fa-times"></i>
-                                            </p>
-                                        </div>
-                                        <p> 
-                                            Final: 0000 <br/>
-                                            CPF: 000.000.000-00
-                                        </p>
-                                    </div>
-                                </div>
+                                        </Accordion.Toggle>
+                                        <Accordion.Collapse eventKey="1">
+                                            <Card.Body>
+                                                Não há nada aqui!
+                                            </Card.Body>
+                                        </Accordion.Collapse>
+                                    </Card>
+                                    <Card>
+                                        <Accordion.Toggle as={Card.Header} eventKey="2">
+                                            <h5 className="mb-0">
+                                                Finalizados
+                                            </h5>
+                                        </Accordion.Toggle>
+                                        <Accordion.Collapse eventKey="2">
+                                            <Card.Body>
+                                                Não há nada aqui!
+                                            </Card.Body>
+                                        </Accordion.Collapse>
+                                    </Card>
+                                </Accordion>
                             </section>
                         </div>
                     </div>
