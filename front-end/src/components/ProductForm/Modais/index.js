@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Modal} from 'react-bootstrap';
 
 import '../../css/bootstrap.css';
@@ -80,4 +80,6 @@ const ModalInfo = (props) => {
     );
 }
 
-export default {ModalImg, ModalInfo};
+const output = {ModalImg, ModalInfo}
+
+export default output

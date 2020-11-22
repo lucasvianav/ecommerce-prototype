@@ -34,8 +34,6 @@ class App extends React.Component {
       <BrowserRouter>
         <div id='app'>
           <Route path='/:base*' render={props => props.match.params.base === 'checkout' ? '' : <Navbar {...this.props}/>}/>
-          {/* <Navbar {...this.props}/> */}
-          {/* <CheckoutHeader/> */}
           
           <Switch>
             {/* Pages */}
