@@ -1,11 +1,18 @@
 .filter-div{
     position: absolute;
-    background-color: white;
     width:300px;
     padding-right: 0;
     padding-left: 2em;
     margin-top: -1.2rem;
     margin-left: -17.5rem;
+}
+
+.light-theme .filter-div {
+    background-color: white;
+}
+
+.dark-theme .filter-div {
+    background-color: #202020;
 }
 
 .filter-div.show-none{

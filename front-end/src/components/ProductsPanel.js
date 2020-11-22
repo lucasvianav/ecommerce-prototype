@@ -75,7 +75,6 @@ class ProductsPanel extends React.Component {
 
     render(){
         return(
-            this.state.products.isEmpty() ? '' :
             <main className="ProductsPanel">
                 <div className="panel-title"><span>{this.title.capitalize()}</span></div>
 
@@ -86,45 +85,50 @@ class ProductsPanel extends React.Component {
 
                 <div className="content-box pruducts-panel">
                     {
-                        !this.state.categories.isEmpty()
-                        ? (
-                            <section className="filters">
-                                <span className="filters-title">Filtros</span>
-                                <ul className="checkboxes">
-                                    {
-                                        this.state.categories.map((item, index) => (
-                                            <li className='checkbox-container' key={item + index.toString()} title={item}>
-                                                <input onChange={this.handleFilters} type="checkbox" id={item.replaceAll(' ', '-')} name={item.replaceAll(' ', '')}/>
-                                                <label className='disable-selection' htmlFor={item.replaceAll(' ', '-')}>{item}</label>
-                                            </li>
-                                        ))
-                                    }
-                                </ul> 
-                            </section>
-                        )
-                        : ''
-                    }
-
-                    <section className="product-cards-panel">
-                        {
-                            this.state.products.map((item) =>
-                                item.visibility ?
-                                <div className="product-card" key={item.id}><Link to={'/' + this.title.toLowerCase() + '/' + item.id }>
-                                    <img className="product-thumb" src={item.img[0].small} alt={item.img[0].alt}/> 
-                                    <p className="product-title">{item.name}</p>
-                                    <div className="price-line">
-                                        {
-                                            (item.price.full > item.price.sale)
-                                                ? <span className="full-price">R${item.price.full.toFixed(2).replaceAll('.',',')}</span> 
-                                                : ''
-                                        }
-                                        <p className="sale-price">R${item.price.sale.toFixed(2).replaceAll('.',',')}</p>
-                                    </div>
-                                </Link></div>
+                        this.state.products.isEmpty() ? <h2 className='section-title' style={{margin: 'auto'}}>Não há nenhum {this.title.toLowerCase().replace(/s$/, '')} disponível.</h2> :
+                        <>
+                            {
+                                !this.state.categories.isEmpty()
+                                ? (
+                                    <section className="filters">
+                                        <span className="filters-title">Filtros</span>
+                                        <ul className="checkboxes">
+                                            {
+                                                this.state.categories.map((item, index) => (
+                                                    <li className='checkbox-container' key={item + index.toString()} title={item}>
+                                                        <input onChange={this.handleFilters} type="checkbox" id={item.replaceAll(' ', '-')} name={item.replaceAll(' ', '')}/>
+                                                        <label className='disable-selection' htmlFor={item.replaceAll(' ', '-')}>{item}</label>
+                                                    </li>
+                                                ))
+                                            }
+                                        </ul> 
+                                    </section>
+                                )
                                 : ''
-                            )
-                        }
-                    </section>
+                            }
+
+                            <section className="product-cards-panel">
+                                {
+                                    this.state.products.map((item) =>
+                                        item.visibility ?
+                                        <div className="product-card" key={item.id}><Link to={'/' + this.title.toLowerCase() + '/' + item.id }>
+                                            <img className="product-thumb" src={item.img[0].small} alt={item.img[0].alt}/> 
+                                            <p className="product-title">{item.name}</p>
+                                            <div className="price-line">
+                                                {
+                                                    (item.price.full > item.price.sale)
+                                                        ? <span className="full-price">R${item.price.full.toFixed(2).replaceAll('.',',')}</span> 
+                                                        : ''
+                                                }
+                                                <p className="sale-price">R${item.price.sale.toFixed(2).replaceAll('.',',')}</p>
+                                            </div>
+                                        </Link></div>
+                                        : ''
+                                    )
+                                }
+                            </section>
+                        </>
+                    }
                 </div>
             </main>
         )

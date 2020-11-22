@@ -173,7 +173,7 @@ class Navbar extends React.Component {
                         <li id='my-account'>
                             {
                                 this.context.isLogged.status 
-                                    ? <Link to='minhaconta'>{this.context.accounts.find(el => el.email === this.context.isLogged.email).name.split(' ')[0]}</Link> 
+                                    ? <Link to='/minhaconta'>{this.context.accounts.find(el => el.email === this.context.isLogged.email).name.split(' ')[0]}</Link> 
                                     : <Link to="/login">Login</Link>
                             }
                             {

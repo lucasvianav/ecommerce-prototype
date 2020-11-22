@@ -1,29 +1,30 @@
 import React, {useState, useContext, useEffect} from 'react';
 import {Modal} from 'react-bootstrap';
-import $ from 'jquery';
 
 import { DataContext } from '../../../../Context';
 
 import '../../../css/bootstrap.css';
+import './index.css'
 
 const ModalPedido = (props) => {
     const context = useContext(DataContext);
     const products = context.data;
-    const clients = context.accounts;
     const [estado, setEstado] = useState("");
-
+    
     useEffect( () => {
       setEstado(props.pedido.situation);
     }, [props])
 
     const salva = (event) =>{
-        var nv = {};
-        nv.set = true;
-        nv.index = props.index;
-        nv.new = estado;
-        props.onSave(nv);
-        props.onHide();
+      var nv = {};
+      nv.set = true;
+      nv.index = props.index;
+      nv.new = estado;
+      props.onSave(nv);
+      props.onHide();
     }
+      
+    const client = context.accounts.find((cl) => props.pedido.client === cl.email)
 
     return (
         <Modal className="modal"
@@ -32,12 +33,12 @@ const ModalPedido = (props) => {
             aria-labelledby="contained-modal-title-vcenter"
             centered
         >
-            <Modal.Header closeButton>
+            <Modal.Header className='modal-color' closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
-                Detalhes do Pedido #{props.pedido.id}:
+                <span>Detalhes do Pedido #{props.pedido.id}:</span>
             </Modal.Title>
             </Modal.Header>
-            <Modal.Body className="justify-content-center">
+            <Modal.Body className="modal-color justify-content-center">
                 <h5>Produtos:</h5>
                 <div className="d-flex">
                   {
@@ -45,18 +46,18 @@ const ModalPedido = (props) => {
                       
                       var p = {};
                       products.forEach((prod, index) => {
-                        if(prod.id === pr.id) {
+                        if(prod.id === pr.sku.split('-')[1]) {
                           p = prod;
                         }
                       })
 
                       var ops = '';
-                      if(typeof pr.options !== 'undefined'){
-                        ops += (typeof pr.options.cor !== 'undefined') ? pr.options.cor : '';
+                      if(typeof pr.specs !== 'undefined'){
+                        ops += (typeof pr.specs.cor !== 'undefined') ? pr.specs.cor : '';
                         ops += ' ';
-                        ops += (typeof pr.options.template !== 'undefined') ? pr.options.template : '';
+                        ops += (typeof pr.specs.template !== 'undefined') ? pr.specs.template : '';
                         ops += ' ';
-                        ops += (typeof pr.options.size !== 'undefined') ? pr.options.size : '';
+                        ops += (typeof pr.specs.size !== 'undefined') ? pr.specs.size : '';
                         ops += ' ';
                       }
                       return (
@@ -82,20 +83,15 @@ const ModalPedido = (props) => {
                 </div>
                 <div>
                   <h5>Dados do Cliente:</h5>
-                  <div>
-                    {clients.map((client, index) => {
-                      var end = (props.pedido.adress !== '') ? "Endereço: " : '';
-                      var endereco = (props.pedido.adress !== '') ? props.pedido.adress : '';
-                      if (client.email === props.pedido.client){
-                        return(
-                          <>
-                            <p><strong>Nome: </strong>{client.name}</p>
-                            <p><strong>{end}</strong>{endereco}</p>
-                          </>
-                        )
-                      }
-                    })}
-                  </div>
+                  {
+                    !client ? '' :
+                    <div>
+                      <p><strong>Nome: </strong>{client.name}</p>
+                      <p><strong>Email: </strong>{client.email}</p>
+                      <p><strong>Celular: </strong>{client.phoneNumber}</p>
+                      <p><strong>CPF: </strong>{client.cpf}</p>
+                    </div>
+                  }
                 </div>
                 <h5>Situação: </h5>
                 <div id="radiosSituacao">
@@ -105,14 +101,14 @@ const ModalPedido = (props) => {
                     <label className="custom-control-label" for="situacao1">Aguardando Aprovação</label>
                   </div>
                   <div className="custom-control custom-radio">
-                    <input type="radio" id="situacao2" name="situacao" value="AE"
-                    className="custom-control-input" checked={(estado === 'AE')? true : false} onChange={(e)=>{setEstado(e.target.value)}} />
-                    <label className="custom-control-label" for="situacao2">Aguardando Envio</label>
+                    <input type="radio" id="situacao2" name="situacao" value="PA"
+                    className="custom-control-input" checked={(estado === 'PA')? true : false} onChange={(e)=>{setEstado(e.target.value)}} />
+                    <label className="custom-control-label" for="situacao2">Pagamento Aprovado</label>
                   </div>
                   <div className="custom-control custom-radio">
-                    <input type="radio" id="situacao3" name="situacao" value="AC"
-                    className="custom-control-input" checked={(estado === 'AC')? true : false} onChange={(e)=>{setEstado(e.target.value)}} />
-                    <label className="custom-control-label" for="situacao3">Aguardando Chegada</label>
+                    <input type="radio" id="situacao3" name="situacao" value="PPR"
+                    className="custom-control-input" checked={(estado === 'PPR')? true : false} onChange={(e)=>{setEstado(e.target.value)}} />
+                    <label className="custom-control-label" for="situacao3">Pronto Para Retirada</label>
                   </div>
                   <div className="custom-control custom-radio">
                     <input type="radio" id="situacao4" name="situacao" value="FF"
@@ -121,7 +117,7 @@ const ModalPedido = (props) => {
                   </div>
                 </div>                  
             </Modal.Body>
-            <Modal.Footer>
+            <Modal.Footer className='modal-color'>
                 <button onClick={(e) => {salva(e)}}
                     className="btn btn-success" style={{width: '20%'}}
                 >

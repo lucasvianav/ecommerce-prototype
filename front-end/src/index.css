@@ -299,7 +299,7 @@ input[type='number'] {
   color: #f1eff1;
 }
 
-.light-theme .checkbox-container input[type='checkbox']:checked::after {
+.dark-theme .checkbox-container input[type='checkbox']:checked::after {
   color: #202020;
 }
 
@@ -312,7 +312,11 @@ input[type='number'] {
   background-color: rgba(156, 156, 156, 0.8);
 }
 
-.checkbox-container input[type='checkbox']:checked {
+.light-theme .checkbox-container input[type='checkbox']:checked {
+  background-color: #749e2a;
+}
+
+.dark-theme .checkbox-container input[type='checkbox']:checked {
   background-color: #a7e245;
 }
 
@@ -556,10 +560,10 @@ input::placeholder {
 	text-align: left;
 }
 
-.light-theme .error-message {
-  color: red;
+.light-theme *.error-message {
+  color: red !important
 }
 
-.dark-theme .error-message {
-  color: #ec3e3e;
+.dark-theme *.error-message {
+  color: #ec3e3e !important
 }

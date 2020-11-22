@@ -16,9 +16,9 @@ const UsersPanel = (props) => {
           <table className="table table-hover border rounded">
               <thead>
                 <tr>
-                  <th scope="col">Nome</th>
-                  <th scope="col">Email</th>
-                  <th scope="col">Tipo</th>
+                  <th scope="col"><span>Nome</span></th>
+                  <th scope="col"><span>Email</span></th>
+                  <th scope="col"><span>Tipo</span></th>
                   <th className="text-right"></th>
                 </tr>
               </thead>
@@ -27,9 +27,9 @@ const UsersPanel = (props) => {
 
                   return (
                     <tr id={"user"+index} key={index}>
-                        <td>{user.name}</td>
-                        <td>{user.email}</td>
-                        <td>{user.accountType}</td>
+                        <td><span>{user.name}</span></td>
+                        <td><span>{user.email}</span></td>
+                        <td><span>{user.type}</span></td>
                         <td className="text-right"></td>
                     </tr>
                   );

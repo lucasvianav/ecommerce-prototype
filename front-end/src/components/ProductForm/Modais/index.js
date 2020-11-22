@@ -27,12 +27,12 @@ const ModalImg = (props) => {
             aria-labelledby="contained-modal-title-vcenter"
             centered
         >
-            <Modal.Header closeButton>
+            <Modal.Header className='dark-bg' closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
                 Detalhes da Imagem:
             </Modal.Title>
             </Modal.Header>
-            <Modal.Body className="justify-content-center">
+            <Modal.Body className="justify-content-center dark-bg">
                 <div className="d-flex justify-content-center">
                     <img src={props.src} alt={props.alt} style={{width: '50%'}} className="shadow rounded"/>
                 </div>
@@ -47,7 +47,7 @@ const ModalImg = (props) => {
                     </form>
                 </div>
             </Modal.Body>
-            <Modal.Footer>
+            <Modal.Footer className='dark-bg'>
                 <button onClick={(e) => {salva(e)}}
                     className="btn btn-success" style={{width: '20%'}}
                 >
@@ -68,12 +68,12 @@ const ModalInfo = (props) => {
             aria-labelledby="contained-modal-title-vcenter"
             centered
         >
-            <Modal.Header closeButton>
+            <Modal.Header className='dark-bg' closeButton>
             </Modal.Header>
-            <Modal.Body className="justify-content-center">
+            <Modal.Body className="justify-content-center dark-bg">
                 {props.children}
             </Modal.Body>
-            <Modal.Footer>
+            <Modal.Footer className='dark-bg'>
                 <button onClick={props.onHide} className="btn btn-secondary" style={{width: '20%'}}>Entendi</button>
             </Modal.Footer>
         </Modal>

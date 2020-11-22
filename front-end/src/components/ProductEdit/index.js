@@ -2,62 +2,61 @@ import React, {useContext} from 'react';
 
 import ProductForm from '../ProductForm';
 import { DataContext } from '../../Context';
+import { Redirect } from 'react-router-dom';
 
 export default function ProductEdit(props) {
 
     const context = useContext(DataContext);
     const data = context.data;
 
-    const {tab, base, id} = props.match.params;  
+    const {base, id} = props.match.params;  
 
+    const product = data.find(item => item.id === id)
+
+    if(!['product', 'produto', 'event', 'evento'].includes(base) || !product){ 
+      return <Redirect to='/'/>
+    }
+    
+    let ops = []
+    let sku = product.type + '-' + product.id
+    
+    if(product.type === 'PR'){
+      const colors = (!product.colors.isEmpty()) ? product.colors : [false]
+      const templates = (!product.templates.isEmpty()) ? product.templates : [false]
+      const sizes = (!product.sizes.isEmpty()) ? product.sizes : [false]
+
+      colors.forEach(color => {
+        templates.forEach(template => {
+          sizes.forEach(size => {
+              sku += color ? '-' + color.substring(0,4).toUpperCase() + '-' : '-VOID-'
+              sku += template ? template.substring(0,4).toUpperCase() + '-' : 'VOID-'
+              sku += size ? size : 'VOID'
+
+              ops.push({
+                cor: color ? color : '',
+                modelagem: template ? template : '',
+                tamanho: size ? size : '',
+                estoque: product.stock[sku]
+              })
+          })
+        })
+      })
+    }
+
+    else{
+      ops.push({
+        cor: '',
+        modelagem: '',
+        tamanho: '',
+        estoque: product.stock[sku]
+      })
+    }
+      
     return(
         <>
           <main>
             <div className="content-box">
-              {data.map((item, index) => {
-                if(id === item.id){
-                  if(typeof item.colors === 'undefined') {
-                    item.colors = [];
-                    item.colors.push('VOID');
-                  }
-                    else if(item.colors.length === 0) item.colors.push('VOID');
-                  if(typeof item.templates === 'undefined') {
-                    item.templates = [];
-                    item.templates.push('VOID');
-                  }
-                   else if(item.templates.length === 0) item.templates.push('VOID');
-                  if(typeof item.sizes === 'undefined') {
-                    item.sizes = [];
-                    item.sizes.push('VOID');
-                  }
-                    else if(item.sizes.length === 0) item.sizes.push('VOID');
-                  
-                  var ops = [], ind = 0;
-                  item.colors.forEach((color, index) => {
-                    item.templates.forEach((template, index) => {
-                      item.sizes.forEach((size, index) => {
-                          var sku = "" + item.type + "-" + item.id;
-                          sku += "-" + color.substring(0, 4).toUpperCase();
-                          sku += "-" + template.substring(0, 4).toUpperCase();
-                          sku += "-" + size.substring(0, 4).toUpperCase();
-
-                          ops[ind] = {};
-                          ops[ind].cor = (color === 'VOID') ? '' : color;
-                          ops[ind].modelagem = (template === 'VOID') ? '' : template;
-                          ops[ind].tamanho = (size === 'VOID') ? '' : size;
-                          ops[ind].estoque = item.stock[sku];
-                          ind++;
-                        })
-                      })
-                    })
-                  return(
-                    <ProductForm {...item} opcoes={ops} mode="view"/>
-                  );
-                }else{
-                  return('');
-                }
-              })
-              }
+              <ProductForm {...product} {...props} opcoes={ops} mode="view"/>
             </div>
           </main>
         </>

@@ -1,5 +1,4 @@
 import React, {useContext, useState} from 'react';
-import $ from 'jquery';
 
 import ModalPedido from './ModalPedido';
 
@@ -9,7 +8,6 @@ import './index.css';
 import '../../css/bootstrap.css';
 
 const OrdersPanel = (props) => {
-
   const context = useContext(DataContext);
   const [orders, setOrders] = useState(context.orders);
   const products = context.data;
@@ -20,8 +18,8 @@ const OrdersPanel = (props) => {
   const renderProduct  = (item, index) => {
     const defSt = {
                     AA: "Aguardando Aprovação", 
-                    AE: "Aguardando Envio", 
-                    AC: "Aguardando Chegada", 
+                    PA: "Pagamento Aprovado", 
+                    PPR: "Pronto Para Retirada", 
                     FF: "Finalizado"
                   }
     const st = defSt[item.situation];
@@ -42,7 +40,7 @@ const OrdersPanel = (props) => {
     }
 
     return(
-        <div className="card p-0" key={index}>
+        <div className="card p-0" key={item.date + item.id + index}>
             <div className="card-body m-0 p-2">
                 <h5 className="card-title">Pedido #{item.id}</h5>
                 <h6>Data: {item.date}</h6>
@@ -52,25 +50,15 @@ const OrdersPanel = (props) => {
 
                       var nomePr = '';
                       products.forEach((p, index) => {
-                        if(p.id === pr.id) {
+                        if(p.id === pr.sku.split('-')[1]) {
                           nomePr = p.name;
                         }
                       })
 
-                      var ops = '';
-                      if(typeof pr.options !== 'undefined'){
-                        ops += (typeof pr.options.cor !== 'undefined') ? pr.options.cor : '';
-                        ops += ' ';
-                        ops += (typeof pr.options.template !== 'undefined') ? pr.options.template : '';
-                        ops += ' ';
-                        ops += (typeof pr.options.size !== 'undefined') ? pr.options.size : '';
-                        ops += ' ';
-                      }
-
                       return(
                           <li>
                             {nomePr + ' '} 
-                            ({ops}) <br />
+                            ({pr.sku}) <br />
                             {pr.quantity} item(s)
                           </li>
                       )

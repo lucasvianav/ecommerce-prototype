@@ -10,13 +10,13 @@ function ProductCardPanel(props){
     const context = useContext(DataContext);
     const data = context.data;
 
-    const visibilidade = props.type == "visivel" ? true : false;
+    const visibilidade = props.type === "visivel" ? true : false;
 
     const renderProduct  = (item, index) => {
-        const tipo = item.type == "PR" ? "Produto" : "Evento";
-        const url = "../edit/produto/" + item.id;
+        const tipo = item.type === "PR" ? "Produto" : "Evento";
+        const url = "./edit/" + tipo.toLowerCase() + '/' + item.id;
 
-        if(visibilidade == item.visibility){
+        if(visibilidade === item.visibility){
           $("#vazio").addClass("d-none");
           $("#vazio").removeClass("d-flex");
 
@@ -26,6 +26,7 @@ function ProductCardPanel(props){
                       <h5 className="card-title">{item.name}</h5>
                       <span className="badge badge-light">{tipo}</span>
                       <span className="badge badge-light">{item.category}</span>
+                      <span className="badge badge-light">{item.id}</span>
                       <div className="d-flex justify-content-end">
                           <Link to={url} className="btn btn-link btn-sm mt-2" >Mais Detalhes</Link>
                       </div>

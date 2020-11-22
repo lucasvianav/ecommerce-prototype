@@ -32,7 +32,6 @@ function AdmAccount(props){
         categories.forEach((category, index) => {
             vet.push(category.name);
         })
-        console.log(vet)
         setArrayCategorias(vet);
     }, [categories])
 
@@ -102,16 +101,15 @@ function AdmAccount(props){
     }
 
     return(
-        <main>
+        <main className='adm'>
+            <h1 className='panel-title'>Página do Adiministrador</h1>
             <div className="content-box">
-                <h1>Página do Adiministrador</h1>
-                <hr />
                 <div className="row">
                     <div className="col-sm-12">
                         <section id="loginInfo" className="d-md-flex no-space d-xs-none d-sm-none">
-                            <h2>Olá Adiministrador Fulaninho</h2>
-                            <p><strong>Email: </strong>fulaninho@example.com</p>
-                            <button id="altSenha" className="btn btn-outline-dark">Alterar Senha</button>
+                            <h2>Olá, {context.getCurrentAccount().name}!</h2>
+                            <p><strong>Email: </strong>{context.isLogged.email}</p>
+                            <button id="altSenha" className="btn void-btn">Alterar Senha</button>
                         </section>
                     
                         <section id="funcoes" className="d-flex rounded shadow-sm mt-3 p-2">

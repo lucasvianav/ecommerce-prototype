@@ -30,9 +30,9 @@ const FilterDiv = (props) => {
                       {
                         seletor.data.map((selet, index) => {
                           return (
-                              <li className='checkbox-container' key={"seletor" + index} title={selet}>
+                              <li className='checkbox-container' key={"seletor" + selet + index} title={selet}>
                                 <input type="checkbox" value="" id={selet} />
-                                <label for={selet} >
+                                <label htmlFor={selet} >
                                   {selet}
                                 </label>
                               </li>

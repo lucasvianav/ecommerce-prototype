@@ -267,30 +267,26 @@ class ProductDetails extends React.Component {
                     <div className="product-description">
                         <hr className="product-divisor"/>
                         <span className="title">Descrição</span>
+                        {console.log(this.product.description.ul.isEmpty())}
                         {
-                            (this.product.description.ul)
-                            ? (
-                                <ul className='bullet-list'>
-                                    {this.product.description.ul.map((item, index) => <li key={item + index.toString()}><span>{item}</span></li>)}
-                                </ul>
-                            )
-                            : ''
+                            this.product.description.ul.isEmpty() ? '' :
+                            <ul className='bullet-list'>
+                                {this.product.description.ul.map((item, index) => <li key={item + index.toString()}><span>{item}</span></li>)}
+                            </ul>
                         }
+                        {console.log(this.product.description.ol.isEmpty())}
                         {
-                            (this.product.description.ol)
-                            ? (
-                                <ol>
-                                    {this.product.description.ol.map((item, index) => <li key={item + index.toString()}><span>{item}</span></li>)}
-                                </ol>
-                            )
-                            : ''
+                            this.product.description.ol.isEmpty() ? '' :
+                            <ol>
+                                {this.product.description.ol.map((item, index) => <li key={item + index.toString()}><span>{item}</span></li>)}
+                            </ol>
                         }
                         <p>{this.product.description.txt}</p>
                     </div>
                 </div>
 
                 {
-                    (this.type !== 'PR' || !this.product.img) ? '' :
+                    (this.type !== 'PR' || !this.product.sizeTable.img) ? '' :
                     <section id="sizes-modal" className="modal">
                         <img id="size-photo" src={this.product.sizeTable.img} alt={this.product.sizeTable.alt}/>
                     </section>

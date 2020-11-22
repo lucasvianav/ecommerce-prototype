@@ -12,55 +12,63 @@ const OpCampo = (props) => {
     useEffect (() => {
       var e = {};
       e.index = props.index;
-      e.dado = {};
 
-      e.dado.modelagem = modelagem;
-      e.dado.tamanho = tamanho;
-      e.dado.estoque = estoque;
+      e.dado = {
+        template: modelagem ? modelagem : '',
+        size: tamanho ? tamanho : '',
+        color: cor ? cor : '',
+        stock: estoque ? estoque : -1
+      }
+
       props.onChange(e);
     },[])
 
     useEffect( () => {
       var e = {};
       e.index = props.index;
-      e.dado = {};
 
-      e.dado.modelagem = modelagem;
-      e.dado.tamanho = tamanho;
-      e.dado.estoque = estoque;
+      e.dado = {
+        template: modelagem ? modelagem : '',
+        size: tamanho ? tamanho : '',
+        color: cor ? cor : '',
+        stock: estoque ? estoque : -1
+      }
+
       props.onChange(e);
-    },[modelagem, tamanho, estoque])
+    },[modelagem, tamanho, estoque, cor])
 
     return (
       <>
         <div className="form-row mb-3 " id={props.id}>
           <div className="form-group col-3">
             <label htmlFor="categoria">Modelagem: </label>
-            <input className="input-control form-control" id={"modelagemOp" + props.index}
+            <input className="input-control form-control bg-white" id={"modelagemOp" + props.index}
               value={modelagem} placeholder="Deixe em Branco para Geral"
               onChange={(event) => {setModelagem(event.target.value)}}
             />                
         </div>
         <div className="form-group col-3">
             <label htmlFor="categoria">Tamanho: </label>
-            <input className="input-control form-control" id={"tamanhoOp"+props.index}
+            <input className="input-control form-control bg-white" id={"tamanhoOp"+props.index}
             value={tamanho} placeholder="Deixe em Branco para Geral"
             onChange={(event) => {setTamanho(event.target.value)}}
           />
         </div>
         <div className="form-group col-3">
             <label htmlFor="categoria">Cor: </label>
-            <input className="input-control form-control" id={"corOp"+props.index}
+            <input className="input-control form-control bg-white" id={"corOp"+props.index}
             value={cor} placeholder="Deixe em Branco para Geral"
             onChange={(event) => {setCor(event.target.value)}}
           />
         </div>
         <div className="form-group col-2">
             <label htmlFor="estoque">Estoque: </label>
-            <input type="number" className="input-control form-control" id={"estoqueOp"+props.index}
+            <input type="number" className="input-control form-control bg-white" id={"estoqueOp"+props.index}
               placeholder="Estoque Da Opção"
               value={estoque}
+              min='1'
               onChange={(event) => {setEstoque(event.target.value)}}
+              required
             />
         </div>
         <div className="form-group col-1 align-content-center">

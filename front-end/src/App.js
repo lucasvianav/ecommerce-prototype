@@ -70,11 +70,9 @@ class App extends React.Component {
 
                 else if(this.context.getCurrentAccount().type === 'client'){ return <MyAccount/> }
 
-                else if(this.context.getCurrentAccount().type === 'admin'){ return <AdmAccount/> }
-              }
+                else if(this.context.getCurrentAccount().type === 'admin'){ return <AdmAccount /> }
 
-              else if(['adm', 'admin'].includes(base.toLowerCase())){
-                return <AdmAccount />
+                else{ return <Redirect to='/'/> }
               }
 
               else if(base.toLowerCase() === 'search'){
@@ -99,8 +97,12 @@ class App extends React.Component {
             <Route path='/:tab/:base/:id' render={props => {
               const {tab} = props.match.params
 
-              if(['editar', 'edit'].includes(tab.toLowerCase())){
+              if(['editar', 'edit'].includes(tab.toLowerCase()) && this.context.isLogged.status && this.context.getCurrentAccount().type === 'admin'){
                 return <ProductEdit {...props} />
+              }
+
+              else{
+                return <Redirect to='/'/>
               }
             }} />
 

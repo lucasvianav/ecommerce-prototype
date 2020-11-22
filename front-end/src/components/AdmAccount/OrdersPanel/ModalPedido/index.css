@@ -1,0 +1,7 @@
+.dark-theme .modal-color {
+    background-color: #202020;
+}
+
+.dark-theme .badge-light {
+    background-color: rgba(255, 255, 255, 0.2)
+}

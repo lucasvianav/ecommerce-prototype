@@ -79,32 +79,92 @@ export class DataProvider extends React.Component {
                 }
             ],
     
+            orders: [
+                /*
+                {
+                    id: '', //id do pedido
+                    product:[
+                        {
+                            sku: '',    //sku do produto
+                            quantity: '',    //quantidade (número)
+                            specs: {color: '', template:'', size:''}
+                        }
+                    ],
+                    client: '',   //email do cliente
+                    date: '',
+                    situation: '',   //AA - aguardando aprovação, PA - pagamento aprovado, PPR - pronto para retirada, FF - finalizado
+                    adress: ''      //Endereço de Envio
+                },
+                */
+                {
+                    id: '1',
+                    product:[
+                        {
+                            sku: 'PR-P1-VOID-FEMI-GG',   
+                            quantity: '1',
+                            specs: {color: '', template:'Feminino', size:'GG'}
+                        },
+                        {
+                            sku: 'PR-P1-VOID-MASC-EXG',   
+                            quantity: '1',
+                            specs: {color: '', template:'Masculino', size:'EXG'}
+                        },
+                    ],
+                    client: 'fionagatinha74@gmail.com', 
+                    date: '20/11/2020',
+                    situation: 'AA',  
+                },
+                {
+                    id: '2',
+                    product:[
+                        {
+                            sku: 'EV-E1',   
+                            quantity: '2',
+                            specs: {color: '', template: '', size: ''}
+                        },
+                    ],
+                    client: 'biscoitodamassa@gmail.com', 
+                    date: '16/11/2020',
+                    situation: 'FF',  
+                }
+
+            ],
+
             accounts: [ 
                 {   name: 'Fiona',
-                    accountType: 'client', // client x admin
+                    type: 'client', // client x admin
                     email: 'fionagatinha74@gmail.com',
                     password: 'souLinda123',
-                    birthday: '-',
-                    cpf: '-',
-                    phoneNumber: '-'
+                    birthday: '',
+                    cpf: '',
+                    phoneNumber: ''
                 },
                 {
                     name: 'Biscoito',
-                    accountType: 'client',
+                    type: 'client',
                     email: 'biscoitodamassa@gmail.com',
                     password: 'nhameNhame123',
-                    birthday: '-',
-                    cpf: '-',
-                    phoneNumber: '-'
+                    birthday: '',
+                    cpf: '',
+                    phoneNumber: ''
                 },
                 {
                     name: 'Usuario',
-                    accountType: 'client',
+                    type: 'client',
                     email: 'teste@gmail.com',
                     password: 'Teste123',
-                    birthday: '-',
-                    cpf: '-',
-                    phoneNumber: '-'
+                    birthday: '',
+                    cpf: '',
+                    phoneNumber: ''
+                },
+                {
+                    name: 'admin',
+                    type: 'admin',
+                    email: 'admin@admin.adm',
+                    password: 'Admin123',
+                    birthday: '01/01/2000',
+                    cpf: '666.666.666-66',
+                    phoneNumber: ''
                 }
             ],
 
@@ -142,59 +202,12 @@ export class DataProvider extends React.Component {
                 }
             ],
 
-            orders: [
-                /*
-                {
-                    id: '', //id do pedido
-                    product:[
-                        {
-                            id: '',    //id do produto
-                            options: {color: '', template:'', size:''},
-                            quantity: ''    //quantidade
-                        }
-                    ],
-                    client: '',   //email do cliente
-                    date: '',
-                    situation: '',   //AA - aguardando aprovação, AE - aguardando envio, AC - aguanddando chegada, FF - finalizado
-                    adress: ''      //Endereço de Envio
-                },
-                */
-                {
-                    id: '1',
-                    product:[
-                        {
-                            id: 'P1',   
-                            options: {template:'Feminino', size:'GG'},
-                            quantity: '1'   
-                        },
-                        {
-                            id: 'P1',   
-                            options: {template:'Masculino', size:'EXG'},
-                            quantity: '1'   
-                        },
-                    ],
-                    client: 'fionagatinha74@gmail.com', 
-                    date: '20/11/2020',
-                    situation: 'AA',  
-                    adress: 'Tão tão distante'
-                },
-                {
-                    id: '2',
-                    product:[
-                        {
-                            id: 'E1',   
-                            quantity: '2'   
-                        },
-                    ],
-                    client: 'biscoitodamassa@gmail.com', 
-                    date: '16/11/2020',
-                    situation: 'FF',  
-                    adress: ''
-                }
+            darkTheme: this.getInitialTheme(),
 
-            ],
-        
-            darkTheme: this.getInitialTheme()
+            id: {
+                PR: 1,
+                EV: 1
+            }
         }
 
         $('*').removeClass('dark-theme light-theme')
@@ -207,6 +220,10 @@ export class DataProvider extends React.Component {
         this.logout = this.logout.bind(this)
         this.signup = this.signup.bind(this)
         this.getCurrentAccount = this.getCurrentAccount.bind(this)
+        this.getId = this.getId.bind(this)
+        this.createProduct = this.createProduct.bind(this)
+        this.updateProduct = this.updateProduct.bind(this)
+        this.deleteProduct = this.deleteProduct.bind(this)
     }
 
     componentDidMount(){
@@ -239,7 +256,7 @@ export class DataProvider extends React.Component {
 
         accounts.push({
             name: info.signupName,
-            accountType: 'client',
+            type: 'client',
             email: info.signupEmail,
             password: info.signupPw,
             birthday: info.signupBirthday,
@@ -336,16 +353,54 @@ export class DataProvider extends React.Component {
         this.setState({activeCoupon: {status: false, coupon: ''}}) 
     }
 
+    getId(type){
+        if(!['EV', 'PR'].includes(type)){ return }
+
+        const newId = type.substring(0,1) + (this.state.id[type] + 1).toString()
+
+        this.setState(prevState => ({
+            id: {
+                PR: prevState.id.PR + (type === 'PR' ? 1 : 0),
+                EV: prevState.id.EV + (type === 'EV' ? 1 : 0)
+            }
+        }))
+
+        return newId
+    }
+
+    createProduct(data){
+        let {data: products} = this.state
+        products.push(data)
+
+        let {categories} = this.state
+        if(this.state.categories.every(item => item.name !== data.category)){
+            categories.push({
+                name: data.category,
+                parent: data.type
+            })
+        }
+
+        this.setState({data: products, categories: categories})
+    }
+
+    updateProduct(data){
+        this.setState(prevState => ({data: prevState.data.map(item => item.id === data.id ? data : item)}), () => console.log(this.state.data))
+    }
+
+    deleteProduct(id){
+        this.setState(prevState => ({data: prevState.data.filter(item => item.id !== id)}), () => console.log(this.state.data))
+    }
+
     addToCart = this.addToCart.bind(this)
     removeFromCart = this.removeFromCart.bind(this)
     deleteFromCart = this.deleteFromCart.bind(this)
 
     render(){
         const {data, cart, accounts, coupons, home, categories, darkTheme, orders, activeCoupon, isLogged} = this.state
-        const {addToCart, removeFromCart, deleteFromCart, toggleTheme, activateCoupon, clearCoupon, login, logout, signup, getCurrentAccount} = this
+        const {addToCart, removeFromCart, deleteFromCart, toggleTheme, activateCoupon, clearCoupon, login, logout, signup, getCurrentAccount, getId, createProduct, updateProduct, deleteProduct} = this
 
         return(
-            <DataContext.Provider value={{data, cart, accounts, isLogged, coupons, home, categories, darkTheme, orders, activeCoupon, addToCart, removeFromCart, deleteFromCart, toggleTheme, activateCoupon, clearCoupon, login, logout, signup, getCurrentAccount}}>
+            <DataContext.Provider value={{data, cart, accounts, isLogged, coupons, home, categories, darkTheme, orders, activeCoupon, addToCart, removeFromCart, deleteFromCart, toggleTheme, activateCoupon, clearCoupon, login, logout, signup, getCurrentAccount, getId, createProduct, updateProduct, deleteProduct}}>
                 {this.props.children}
             </DataContext.Provider>
         )
