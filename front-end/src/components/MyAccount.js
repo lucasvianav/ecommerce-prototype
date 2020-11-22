@@ -24,6 +24,7 @@ class MyAccount extends React.Component {
         this.hideTxt = this.hideTxt.bind(this);
         this.editAccount = this.editAccount.bind(this);
         this.handleChange= this.handleChange.bind(this);
+        this.handleClick = this.handleClick.bind(this);
 
     }
 
@@ -76,6 +77,12 @@ class MyAccount extends React.Component {
     componentDidMount(){
         console.log(this.context);
     }
+    handleClick(){
+        const {userName, bday, cpf, cell} = this.state
+    
+        this.hide();
+        this.context.editUser(userName, bday, cpf, cell);
+    }
 
     render(){
         return(
@@ -87,22 +94,21 @@ class MyAccount extends React.Component {
                         <div className="col-md-6 col-sm-12 align-self-top">
                             <section id="loginInfo" className="d-flex no-space">
                                 <h2>Olá, {this.context.getCurrentAccount().name}! </h2>
-                                <p><strong>Email: </strong>{this.context.getCurrentAccount().email}</p>
-
-                                {/*<button id="altSenha" className="btn btn-outline-dark">Alterar Senha</button>*/}
+                                <p><strong>Email: </strong>{this.context.getCurrentAccount().email}
+                                </p>
 
                             </section>
                             <section id="dadosPessoais" className="d-flex">
                                 <p></p>
                                 <p></p>
-                                <form onSubmit={this.editAccount}>
+
                                 <h2>Dados Pessoais</h2>
-                                
+
                                 <div className="d-flex justify-content-between">
                                     <p> 
                                         <strong>Nome Completo:</strong>
                                         <div className="userField">
-                                        {this.context.getCurrentAccount().name} 
+                                        {this.context.getCurrentAccount().name}
                                         </div>
                                         <input type="text" name="userName" placeholder={this.context.getCurrentAccount().name} className="client hide"
                                         value = {this.state.name} onChange={this.handleChange}></input>
@@ -117,6 +123,7 @@ class MyAccount extends React.Component {
                                     </p>
 
                                 </div>
+                                <div className="d-flex justify-content-between">
                                 <p className="no-space">
                                     <strong>CPF:</strong> 
                                     <div className="userField">
@@ -133,13 +140,12 @@ class MyAccount extends React.Component {
                                     <input type="text" name="cell" placeholder= {this.context.getCurrentAccount().phoneNumber} className="client hide"
                                     value = {this.state.phoneNumber} onChange={this.handleChange}></input>
                                 </p>
+                                </div>
                                 <p>
-                                    <button id="enviarDados" type="submit" className="btn btn-outline-dark mt-0 botao hide" >
+                                    <button id="enviarDados" className="btn btn-outline-dark mt-0 botao hide" onClick={this.handleClick}>
                                         Salvar
                                     </button>
                                 </p>
-                                </form>
-
                                 <button id="editarDados" className="btn btn-outline-dark mt-0 botao" onClick={this.hide}>
                                     Editar
                                 </button>

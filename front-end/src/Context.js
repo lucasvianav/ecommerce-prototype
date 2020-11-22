@@ -302,15 +302,21 @@ export class DataProvider extends React.Component {
     }
 
     editUser(userName, bday, cpf, cell){
-        
 
-        this.setState.getCurrentAccount({accounts:
-            {name:userName,
-            birthday: bday,
-            cpf: cpf,
-            phoneNumber: cell
-            }
-        })
+        this.setState(prevState =>({
+            accounts:
+        prevState.accounts.map(item =>{
+            if(item.email ===
+                prevState.isLogged.email){
+                    item.name = userName
+                    item.birthday= bday
+                    item.cpf = cpf
+                    item.phoneNumber = cell
+                }
+                return item
+            })
+        }))
+
     }
 
     addToCart(sku, quantity, specs){
