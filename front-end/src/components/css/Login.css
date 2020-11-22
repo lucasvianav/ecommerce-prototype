@@ -5,7 +5,7 @@ main.Login {
 	position: absolute;
 	top: 50%;
 	right: 50%;
-	transform: translate(50%, -65%);
+	transform: translate(50%, -60%);
 }
 
 .Login #forms-panel {

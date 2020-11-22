@@ -187,3 +187,11 @@ hr.product-divisor {
 .ProductDetails .no-display {
     display: none;
 }
+
+.light-theme #product-form span.error-message {
+    color: red !important
+}
+  
+  .dark-theme #product-form span.error-message {
+    color: #ec3e3e !important
+}

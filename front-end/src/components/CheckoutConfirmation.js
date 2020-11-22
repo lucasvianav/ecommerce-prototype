@@ -40,17 +40,12 @@ class CheckoutConfirmation extends React.Component {
                 ? 'Transferência por PicPay'
                 : ''
 
-        const discount = activeCoupon.status 
-            ? (activeCoupon.coupon.type === 'percentage') ? parseFloat(subtotal) * parseFloat(activeCoupon.coupon.discount)/100 : parseFloat(activeCoupon.coupon.discount)
-            : 0
-
         this.state = {
             cart: cartList,
             subtotal: subtotal,
             coupon: '',
             hasCoupon: activeCoupon.status,
-            discount: discount,
-            total: subtotal - discount,
+            total: subtotal - this.context.activeCoupon.discount,
             payment: payment
         }
 
@@ -74,19 +69,17 @@ class CheckoutConfirmation extends React.Component {
     }
 
     handleCoupon(){
-        const activeCoupon = this.context.activateCoupon(this.state.coupon)
+        const activeCoupon = this.context.redeemCoupon(this.state.coupon, this.state.subtotal)
 
         let field = $('#coupon')
-        const {status: hasCoupon, coupon} = activeCoupon
+        const {status: hasCoupon, discount} = activeCoupon
         
         if(hasCoupon){
-            const discount = (coupon.type === 'percentage') ? parseFloat(this.state.subtotal) * parseFloat(coupon.discount)/100 : parseFloat(coupon.discount)
 
             this.setState(prevState => {
                 return {
                 coupon: '',
                 total: prevState.subtotal - discount,
-                discount: discount
             }})
 
             field.css('border', '1px solid #cddbef')
@@ -103,7 +96,9 @@ class CheckoutConfirmation extends React.Component {
     }
 
     placeOrder(){
-        this.props.checkout.orderPlaced()
+        const {total, payment} = this.state
+        const wasSuccessful = this.context.placeOrder(total, payment)
+        if(wasSuccessful){ this.props.checkout.orderPlaced() }
     }
 
     render(){
@@ -166,7 +161,7 @@ class CheckoutConfirmation extends React.Component {
                                 !this.state.hasCoupon ? '' :
                                 <div className="row">
                                     <p><strong>Cupom de desconto</strong> <span className='text-btn disable-selection' onClick={this.removeCoupon}>(remover)</span> <strong>:</strong></p>
-                                    <p>- R${this.state.discount.toFixed(2).replaceAll('.',',')}</p>
+                                    <p>- R${this.context.activeCoupon.discount.toFixed(2).replaceAll('.',',')}</p>
                                 </div>
                             }
 

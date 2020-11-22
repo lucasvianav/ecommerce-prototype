@@ -222,7 +222,7 @@
 
 .CheckoutConfirmation .content-section.payment {
     width: 58%;
-    clear: both;
+    clear: left;
     float: left;
 }
 
@@ -243,5 +243,5 @@
 
 .CheckoutConfirmation .content-box .content-section.takeaway {
     width: 58%;
-    clear: both;
+    clear: left;
 }

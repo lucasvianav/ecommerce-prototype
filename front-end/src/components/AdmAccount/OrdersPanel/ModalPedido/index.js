@@ -40,7 +40,7 @@ const ModalPedido = (props) => {
             </Modal.Header>
             <Modal.Body className="modal-color justify-content-center">
                 <h5>Produtos:</h5>
-                <div className="d-flex">
+                <div className="product-cards d-flex">
                   {
                     props.pedido.product.map((pr, index) => {
                       
@@ -61,16 +61,17 @@ const ModalPedido = (props) => {
                         ops += ' ';
                       }
                       return (
-                        <div class="card mb-3 mr-3" style={{width: 'calc(50% - 1rem)'}}>
-                          <div class="row no-gutters">
-                            <div class="col-md-4">
+                        <div className="card mb-3 mr-3" style={{width: 'calc(50% - 1rem)'}} key={pr.name + pr.sku + index}>
+                          <div className="row no-gutters">
+                            <div className="col-md-4">
                               <img src={p.img[0].small} className="card-img-top" alt={p.img[0].alt} style={{width: "8rem", marginRight : 'auto', marginLeft : 'auto'}} />
                             </div>
-                            <div class="col-md-8">
-                              <div class="card-body">
+                            <div className="col-md-8">
+                              <div className="card-body">
                                 <h5 className="card-title">{p.name}</h5>
                                 <p>{ ops }</p>
                                 <div className="d-flex justify-content-end">
+                                  <span className="badge badge-light">Preço: {pr.price}</span>
                                   <span className="badge badge-light">Quantidade: {pr.quantity}</span>
                                 </div>
                               </div>
@@ -81,41 +82,62 @@ const ModalPedido = (props) => {
                     })
                   }
                 </div>
-                <div>
-                  <h5>Dados do Cliente:</h5>
-                  {
-                    !client ? '' :
-                    <div>
-                      <p><strong>Nome: </strong>{client.name}</p>
-                      <p><strong>Email: </strong>{client.email}</p>
-                      <p><strong>Celular: </strong>{client.phoneNumber}</p>
-                      <p><strong>CPF: </strong>{client.cpf}</p>
-                    </div>
-                  }
+
+                <div className='info-data'>
+                  <div className='client'>
+                    <h5>Dados do cliente:</h5>
+                    {
+                      !client ? '' :
+                      <div>
+                        <p><strong>Nome: </strong>{client.name}</p>
+                        <p><strong>Email: </strong>{client.email}</p>
+                        <p><strong>Celular: </strong>{client.phoneNumber}</p>
+                        <p><strong>CPF: </strong>{client.cpf}</p>
+                      </div>
+                    }
+                  </div>
+
+                  <div className='order'>
+                    <h5>Dados do pedido:</h5>
+                    <p><strong>Data: </strong>{props.pedido.date}</p>
+                    <p><strong>Horário: </strong>{props.pedido.time}</p>
+                    <div className='payment'><p title={props.pedido.payment}><strong>Forma de pagamento: </strong>{props.pedido.payment}</p></div>
+                    {
+                      !parseFloat(props.pedido.discount) > 0 ? '' :
+                      <>
+                        <p><strong>Subtotal: </strong>R${(parseFloat(props.pedido.total) + parseFloat(props.pedido.discount)).toFixed(2).replaceAll('.',',')}</p>
+                        <p><strong>Desconto: </strong>R${parseFloat(props.pedido.discount).toFixed(2).replaceAll('.',',')}</p>
+                      </>
+                    }
+                    <p className='total'><strong>Total: </strong>R${parseFloat(props.pedido.total).toFixed(2).replaceAll('.',',')}</p>
+                  </div>
                 </div>
-                <h5>Situação: </h5>
-                <div id="radiosSituacao">
-                  <div className="custom-control custom-radio">
-                    <input type="radio" id="situacao1" name="situacao" value="AA"
-                    className="custom-control-input" checked={(estado === 'AA')? true : false} onChange={(e)=>{setEstado(e.target.value)}}/>
-                    <label className="custom-control-label" for="situacao1">Aguardando Aprovação</label>
+
+                <div className='situations'>
+                  <h5>Situação: </h5>
+                  <div id="radiosSituacao">
+                    <div className="custom-control custom-radio">
+                      <input type="radio" id="situacao1" name="situacao" value="AA"
+                      className="custom-control-input" checked={(estado === 'AA')? true : false} onChange={(e)=>{setEstado(e.target.value)}}/>
+                      <label className="custom-control-label" htmlFor="situacao1">Aguardando Aprovação</label>
+                    </div>
+                    <div className="custom-control custom-radio">
+                      <input type="radio" id="situacao2" name="situacao" value="PA"
+                      className="custom-control-input" checked={(estado === 'PA')? true : false} onChange={(e)=>{setEstado(e.target.value)}} />
+                      <label className="custom-control-label" htmlFor="situacao2">Pagamento Aprovado</label>
+                    </div>
+                    <div className="custom-control custom-radio">
+                      <input type="radio" id="situacao3" name="situacao" value="PPR"
+                      className="custom-control-input" checked={(estado === 'PPR')? true : false} onChange={(e)=>{setEstado(e.target.value)}} />
+                      <label className="custom-control-label" htmlFor="situacao3">Pronto Para Retirada</label>
+                    </div>
+                    <div className="custom-control custom-radio">
+                      <input type="radio" id="situacao4" name="situacao" value="FF"
+                      className="custom-control-input" checked={(estado === 'FF')? true : false} onChange={(e)=>{setEstado(e.target.value)}} />
+                      <label className="custom-control-label" htmlFor="situacao4">Finalizado</label>
+                    </div>
                   </div>
-                  <div className="custom-control custom-radio">
-                    <input type="radio" id="situacao2" name="situacao" value="PA"
-                    className="custom-control-input" checked={(estado === 'PA')? true : false} onChange={(e)=>{setEstado(e.target.value)}} />
-                    <label className="custom-control-label" for="situacao2">Pagamento Aprovado</label>
-                  </div>
-                  <div className="custom-control custom-radio">
-                    <input type="radio" id="situacao3" name="situacao" value="PPR"
-                    className="custom-control-input" checked={(estado === 'PPR')? true : false} onChange={(e)=>{setEstado(e.target.value)}} />
-                    <label className="custom-control-label" for="situacao3">Pronto Para Retirada</label>
-                  </div>
-                  <div className="custom-control custom-radio">
-                    <input type="radio" id="situacao4" name="situacao" value="FF"
-                    className="custom-control-input" checked={(estado === 'FF')? true : false} onChange={(e)=>{setEstado(e.target.value)}} />
-                    <label className="custom-control-label" for="situacao4">Finalizado</label>
-                  </div>
-                </div>                  
+                </div>
             </Modal.Body>
             <Modal.Footer className='modal-color'>
                 <button onClick={(e) => {salva(e)}}

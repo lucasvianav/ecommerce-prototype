@@ -43,7 +43,7 @@ class Checkout extends React.Component {
                             !(checkout.currentStep === 'finished') ? '' : 
                             <TextTab link={{text: 'Voltar para o início', to: '/'}}>
                                 <div className='center-text'>
-                                    <h1 className='green title'><i class="fa fa-check-circle"></i> Seu pedido foi realizado com sucesso!</h1>
+                                    <h1 className='green title'><i className="fa fa-check-circle"></i> Seu pedido foi realizado com sucesso!</h1>
                                     <p>Agradecemos a sua compra!</p>
                                     <p>Você receberá um email com os dados para o pagamento. Uma vez que esse seja efetuado, envie o comprovante para sa-shrek@usp.br</p>
                                     <p>Mediante a confirmação do pagamento, você receberá um email com as informações para retirar o pedido na sala da SA-SHREK.</p>

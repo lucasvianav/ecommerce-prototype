@@ -1,14 +1,11 @@
 import React from 'react'
 import $ from 'jquery'
-import { DataProvider } from '../Context'
 
 export const CheckoutContext = React.createContext()
 
 export class CheckoutProvider extends React.Component {
-    static contextType = DataProvider
-
-    constructor(props, context){
-        super(props, context)
+    constructor(props){
+        super(props)
 
         this.state = {
             currentStep: '',

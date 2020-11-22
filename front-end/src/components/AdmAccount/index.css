@@ -63,3 +63,10 @@
 .dark-theme .nav{
     border-bottom: 1px solid black;
 }
+
+.card .btn.text-btn.green {
+    margin-right: 0;
+    text-align: right;
+    padding: 0;
+    width: fit-content;
+}

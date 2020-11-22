@@ -28,12 +28,14 @@ function ProductCardPanel(props){
                       <span className="badge badge-light">{item.category}</span>
                       <span className="badge badge-light">{item.id}</span>
                       <div className="d-flex justify-content-end">
-                          <Link to={url} className="btn btn-link btn-sm mt-2" >Mais Detalhes</Link>
+                          <Link to={url} className="btn text-btn green" >Mais Detalhes</Link>
                       </div>
                   </div>
               </div>
           );
-        }else{
+        }
+        
+        else{
             return ('');
         }
     }

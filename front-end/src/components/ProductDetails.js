@@ -116,16 +116,20 @@ class ProductDetails extends React.Component {
     }
 
     handleSubmit(e){
+        e.preventDefault()
+
         const {template, size, color, quantity} = this.state
 
+        if(quantity <= 0){
+            $('.error-message').text('A quantidade mínima é 1.')
+            return
+        }
+
         const specs = {color: color, template: template, size: size}
-        
         const sku = this.generateSKU()
 
         this.context.addToCart(sku, quantity, specs)
         this.props.history.push('/carrinho')
-
-        e.preventDefault()
     }
 
     render(){
@@ -230,7 +234,7 @@ class ProductDetails extends React.Component {
                                                         <option value="" readOnly></option>
                                                         { this.product.sizes.map((item, index) => <option value={item} key={item + index.toString()} readOnly>{item}</option>) }
                                                     </select>
-                                                    <span className='arrow'><i class="fas fa-angle-down"></i></span>
+                                                    <span className='arrow'><i className="fas fa-angle-down"></i></span>
                                                 </div>
                                                 <br/><br/>
                                             </div>
@@ -267,14 +271,12 @@ class ProductDetails extends React.Component {
                     <div className="product-description">
                         <hr className="product-divisor"/>
                         <span className="title">Descrição</span>
-                        {console.log(this.product.description.ul.isEmpty())}
                         {
                             this.product.description.ul.isEmpty() ? '' :
                             <ul className='bullet-list'>
                                 {this.product.description.ul.map((item, index) => <li key={item + index.toString()}><span>{item}</span></li>)}
                             </ul>
                         }
-                        {console.log(this.product.description.ol.isEmpty())}
                         {
                             this.product.description.ol.isEmpty() ? '' :
                             <ol>

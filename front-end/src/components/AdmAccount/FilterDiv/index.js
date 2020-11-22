@@ -22,7 +22,7 @@ const FilterDiv = (props) => {
           {
             seletores.map((seletor, index) => {
               return (
-                <>
+                <div key={seletor.title + index}>
                 <p style={{display: 'block'}}>
                   {seletor.title}
                 </p>
@@ -39,7 +39,7 @@ const FilterDiv = (props) => {
                         )})
                       }
                   </ul> 
-                  </>
+                  </div>
               )})
           }
         </div>

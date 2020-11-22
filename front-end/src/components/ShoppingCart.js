@@ -37,8 +37,7 @@ class ShoppingCart extends React.Component {
             subtotal: subtotal,
             coupon: '',
             hasCoupon: this.context.activeCoupon.status,
-            discount: 0,
-            total: subtotal
+            total: subtotal - this.context.activeCoupon.discount
         }
 
         this.handleChange = this.handleChange.bind(this)
@@ -83,19 +82,17 @@ class ShoppingCart extends React.Component {
     }
 
     handleCoupon(){
-        const activeCoupon = this.context.activateCoupon(this.state.coupon)
+        const activeCoupon = this.context.redeemCoupon(this.state.coupon, this.state.subtotal)
 
         let field = $('#coupon')
-        const {status: hasCoupon, coupon} = activeCoupon
+        const {status: hasCoupon, discount} = activeCoupon
         
         if(hasCoupon){
-            const discount = (coupon.type === 'percentage') ? parseFloat(this.state.subtotal) * parseFloat(coupon.discount)/100 : parseFloat(coupon.discount)
 
             this.setState(prevState => {
                 return {
                 coupon: '',
                 total: prevState.subtotal - discount,
-                discount: discount
             }})
 
             field.css('border', '1px solid #cddbef')
@@ -149,7 +146,7 @@ class ShoppingCart extends React.Component {
                                                 </div>
                                                 
                                                 <span className='break-flex'></span>
-                                                <button className="text-btn grey remove disable-selection" name='remove' onClick={(e) => this.handleChange(e, item.sku)}><span>Excluir item</span></button>
+                                                <button className="text-btn grey remove disable-selection" name='remove' onClick={(e) => this.handleChange(e, item.sku)}>Excluir item</button>
                                             </div>
 
                                             <span className='price'>R${(item.price * item.quantity).toFixed(2).replaceAll('.',',')}</span>
@@ -173,7 +170,7 @@ class ShoppingCart extends React.Component {
                                 !this.state.hasCoupon ? '' :
                                 <div className="row">
                                     <p><strong>Cupom de desconto:</strong></p>
-                                    <p>- R${this.state.discount.toFixed(2).replaceAll('.',',')}</p>
+                                    <p>- R${this.context.activeCoupon.discount.toFixed(2).replaceAll('.',',')}</p>
                                 </div>
                             }
 

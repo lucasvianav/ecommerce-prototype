@@ -691,7 +691,7 @@ class Login extends React.Component {
         
                                 <div className="input-block">
                                     <label className='grey' htmlFor="signup-birthday">Data de nascimento: *</label><br/>
-                                    <InputMask form='full-signup' mask="99/99/9999" maskPlaceholder="dd/mm/aaaa" type='text' onChange={this.handleChange} id="signup-birthday" name="signupBirthday" value={this.state.birthday} placeholder="dd/mm/aaaa" title="Idade mínima: 15 anos." required/>
+                                    <InputMask form='full-signup' mask="99/99/9999" maskplaceholder="dd/mm/aaaa" type='text' onChange={this.handleChange} id="signup-birthday" name="signupBirthday" value={this.state.birthday} placeholder="dd/mm/aaaa" title="Idade mínima: 15 anos." required/>
                                 </div>
                             </fieldset>
         

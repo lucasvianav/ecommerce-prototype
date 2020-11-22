@@ -5,3 +5,64 @@
 .dark-theme .badge-light {
     background-color: rgba(255, 255, 255, 0.2)
 }
+
+.dark-theme .card {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.info-data {
+    margin: auto;
+    display: flex;
+    flex-flow: row nowrap !important;
+    justify-content: space-around !important;
+    overflow: hidden;
+}
+
+.info-data .client {
+    width: 40%;
+    text-align: left;
+    padding: 0;
+}
+
+.info-data .order {
+    width: 40%;
+    text-align: right;
+    padding: 0;
+}
+
+.info-data .order p:not(.total) {
+    font-size: 15px;
+}
+
+.info-data .order .total {
+    width: fit-content;
+    padding: 0;
+    margin: auto 0 auto auto;
+    font-size: 18px;
+    border-bottom: solid 1px;
+}
+
+div.d-flex.product-cards {
+    width: 100%;
+    flex-flow: row wrap !important;
+    justify-content: center;
+    margin: auto;
+    padding: 0;
+}
+
+div.d-flex.product-cards .card {
+    width: 47% !important;
+}
+
+div.order .payment {
+    width: 100%;
+}
+
+div.order .payment p {
+    width: 95%;
+    margin-right: 0;
+    margin-left: auto;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}

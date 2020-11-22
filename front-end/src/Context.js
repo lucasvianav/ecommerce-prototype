@@ -57,6 +57,9 @@ export class DataProvider extends React.Component {
                     visibility: true,
                     category: 'Cervejada',
                     description: {ul: [], ol: [], txt: `A nossa tradicional cervejada do início do ano já chegou! Ela ocorerrá dia 20/03 a partir das 15h! Com muita música boa, com espaço de sobra pra você dançar e é claro muita lama! Você não vai ficar de fora dessa né? Não pastela!!! Corre pra garantir seu ingresso!`},
+                    templates: [],
+                    sizes: [],
+                    colors: [],
                     info: {location: 'Lorem Ipsum', date: 'dd/mm/yyyy', time: '00h00', link: {text: 'Link para o facebook', url: 'https://facebook.com/'}},
                     price: {full: 50.00, sale: 40.00},
                     img: [{small: process.env.PUBLIC_URL + '/img/cervejada.png', large: process.env.PUBLIC_URL + '/img/cervejada.png', alt: ''}],
@@ -87,32 +90,42 @@ export class DataProvider extends React.Component {
                         {
                             sku: '',    //sku do produto
                             quantity: '',    //quantidade (número)
-                            specs: {color: '', template:'', size:''}
+                            specs: {color: '', template:'', size:''},
+                            price: '' // preço do produto no momento da compra
                         }
                     ],
                     client: '',   //email do cliente
-                    date: '',
+                    date: '', // data do pedido
+                    time: '', // horário do pedido
+                    payment: '', // método de pagamento escolhido
                     situation: '',   //AA - aguardando aprovação, PA - pagamento aprovado, PPR - pronto para retirada, FF - finalizado
-                    adress: ''      //Endereço de Envio
+                    discount: '',      // Desconto provindo de cupon, em R$ (número)
+                    total: '' // Valor total da compra
                 },
                 */
                 {
                     id: '1',
-                    product:[
+                    product: [
                         {
                             sku: 'PR-P1-VOID-FEMI-GG',   
                             quantity: '1',
-                            specs: {color: '', template:'Feminino', size:'GG'}
+                            specs: {color: '', template:'Feminino', size:'GG'},
+                            price: 130
                         },
                         {
                             sku: 'PR-P1-VOID-MASC-EXG',   
                             quantity: '1',
-                            specs: {color: '', template:'Masculino', size:'EXG'}
+                            specs: {color: '', template:'Masculino', size:'EXG'},
+                            price: 130
                         },
                     ],
                     client: 'fionagatinha74@gmail.com', 
                     date: '20/11/2020',
-                    situation: 'AA',  
+                    time: '11:45:45 AM',
+                    payment: 'Transferência/Depósito bancário',
+                    situation: 'AA',
+                    discount: 10,
+                    total: 250
                 },
                 {
                     id: '2',
@@ -120,12 +133,17 @@ export class DataProvider extends React.Component {
                         {
                             sku: 'EV-E1',   
                             quantity: '2',
-                            specs: {color: '', template: '', size: ''}
+                            specs: {color: '', template: '', size: ''},
+                            price: 40
                         },
                     ],
                     client: 'biscoitodamassa@gmail.com', 
                     date: '16/11/2020',
-                    situation: 'FF',  
+                    time: '7:31:12 PM',
+                    payment: 'Transferência por Picpay',
+                    situation: 'FF',
+                    discount: 0,
+                    total: 40
                 }
 
             ],
@@ -188,7 +206,8 @@ export class DataProvider extends React.Component {
 
             activeCoupon: {
                 status: false,
-                coupon: ''
+                coupon: '',
+                discount: 0
             },
 
             categories: [
@@ -206,24 +225,30 @@ export class DataProvider extends React.Component {
 
             id: {
                 PR: 1,
-                EV: 1
+                EV: 1,
+                order: 2
             }
         }
 
         $('*').removeClass('dark-theme light-theme')
         $('*').addClass(this.state.darkTheme ? 'dark-theme' : 'light-theme')
 
+        this.addToCart = this.addToCart.bind(this)
+        this.removeFromCart = this.removeFromCart.bind(this)
+        this.deleteFromCart = this.deleteFromCart.bind(this)
         this.toggleTheme = this.toggleTheme.bind(this)
-        this.activateCoupon = this.activateCoupon.bind(this)
+        this.redeemCoupon = this.redeemCoupon.bind(this)
         this.clearCoupon = this.clearCoupon.bind(this)
         this.login = this.login.bind(this)
         this.logout = this.logout.bind(this)
         this.signup = this.signup.bind(this)
         this.getCurrentAccount = this.getCurrentAccount.bind(this)
         this.getId = this.getId.bind(this)
+        this.getOrderId = this.getOrderId.bind(this)
         this.createProduct = this.createProduct.bind(this)
         this.updateProduct = this.updateProduct.bind(this)
         this.deleteProduct = this.deleteProduct.bind(this)
+        this.placeOrder = this.placeOrder.bind(this)
     }
 
     componentDidMount(){
@@ -271,6 +296,8 @@ export class DataProvider extends React.Component {
         if(this.state.isLogged.status){
             return this.state.accounts.find(el => el.email === this.state.isLogged.email)
         }
+
+        else{ return false }
     }
 
     addToCart(sku, quantity, specs){
@@ -311,6 +338,7 @@ export class DataProvider extends React.Component {
         }
 
         this.setState({cart: cart})
+        this.clearCoupon()
 
         return output
     }
@@ -334,23 +362,24 @@ export class DataProvider extends React.Component {
     }
 
     deleteFromCart(sku){
-        this.setState(prevState => {return {cart: prevState.cart.filter(item => item.sku !== sku)}})
+        this.setState(prevState => ({cart: prevState.cart.filter(item => item.sku !== sku)}))
         return true
     }
 
-    activateCoupon(coupon){
+    redeemCoupon(coupon, subtotal){
         const c = this.state.coupons.find(item => item.str === coupon)
-
+        
         if(c){ 
-            this.setState({activeCoupon: {status: true, coupon: c}}) 
-            return {status: true, coupon: c}
+            const discount = (c.type === 'percentage') ? parseFloat(subtotal) * parseFloat(c.discount)/100 : parseFloat(c.discount)
+            this.setState({activeCoupon: {status: true, coupon: c, discount: discount}}) 
+            return {status: true, coupon: c, discount: discount}
         }
 
-        return {status: false, coupon: ''}
+        return {status: false, coupon: '', discount: 0}
     }
 
     clearCoupon(){
-        this.setState({activeCoupon: {status: false, coupon: ''}}) 
+        this.setState({activeCoupon: {status: false, coupon: '', discount: 0}}) 
     }
 
     getId(type){
@@ -361,9 +390,22 @@ export class DataProvider extends React.Component {
         this.setState(prevState => ({
             id: {
                 PR: prevState.id.PR + (type === 'PR' ? 1 : 0),
-                EV: prevState.id.EV + (type === 'EV' ? 1 : 0)
+                EV: prevState.id.EV + (type === 'EV' ? 1 : 0),
+                order: prevState.id.order
             }
         }))
+
+        return newId
+    }
+
+    getOrderId(){
+        const newId = this.state.id.order + 1
+
+        this.setState(prevState => ({id: {
+            PR: prevState.id.PR,
+            EV: prevState.id.EV,
+            order: prevState.id.order + 1
+        }}))
 
         return newId
     }
@@ -384,23 +426,71 @@ export class DataProvider extends React.Component {
     }
 
     updateProduct(data){
-        this.setState(prevState => ({data: prevState.data.map(item => item.id === data.id ? data : item)}), () => console.log(this.state.data))
+        this.setState(prevState => ({data: prevState.data.map(item => item.id === data.id ? data : item)}))
     }
 
     deleteProduct(id){
-        this.setState(prevState => ({data: prevState.data.filter(item => item.id !== id)}), () => console.log(this.state.data))
+        this.setState(prevState => ({data: prevState.data.filter(item => item.id !== id)}))
     }
 
-    addToCart = this.addToCart.bind(this)
-    removeFromCart = this.removeFromCart.bind(this)
-    deleteFromCart = this.deleteFromCart.bind(this)
+    placeOrder(total, payment){
+        if(!this.state.isLogged.status || this.state.cart.isEmpty()){ return }
+        
+        let subtotal = 0
+        const cart = this.state.cart.map(item => {
+            let id = item.sku.split('-')[1]
+            item.price = this.state.data.find(el => id === el.id).price.sale
+            subtotal += parseFloat(item.price) * parseInt(item.quantity)
+            return item
+        })
+        
+        const order = {
+            id: this.getOrderId(),
+            product: cart,
+            client: this.state.isLogged.email,
+            date: (new Date()).toLocaleDateString().replace(/(^\d\d)\/(\d\d)/mg, '$2/$1'),
+            time: (new Date()).toLocaleTimeString(),
+            payment: payment,
+            situation: 'AA',
+            discount: this.state.activeCoupon.discount,
+            total: subtotal - this.state.activeCoupon.discount
+        }
+
+        // data = [{sku: string, quantity: number}]
+        const updateStock = (data) => {
+            let {data: products} = this.state
+
+            for(let item of data){
+                if(isNaN(item.quantity) || parseInt(item.quantity) === 0){ continue }
+
+                let id = item.sku.split('-')[1]
+                let product = products.find(el => el.id === id)
+                product.stock[item.sku] = parseInt(product.stock[item.sku]) - parseInt(item.quantity)
+            }
+
+            this.setState({data: products})
+
+            return true
+        }
+        
+        if(total !== order.total || !updateStock(cart.map(item => ({sku: item.sku, quantity: parseInt(item.quantity)})))){
+            alert('Erro!')
+            return false
+        }
+
+        let {orders} = this.state
+        orders.push(order)
+        this.setState({orders: orders})
+
+        return true
+    }
 
     render(){
         const {data, cart, accounts, coupons, home, categories, darkTheme, orders, activeCoupon, isLogged} = this.state
-        const {addToCart, removeFromCart, deleteFromCart, toggleTheme, activateCoupon, clearCoupon, login, logout, signup, getCurrentAccount, getId, createProduct, updateProduct, deleteProduct} = this
+        const {addToCart, removeFromCart, deleteFromCart, toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, getId, createProduct, updateProduct, deleteProduct, placeOrder} = this
 
         return(
-            <DataContext.Provider value={{data, cart, accounts, isLogged, coupons, home, categories, darkTheme, orders, activeCoupon, addToCart, removeFromCart, deleteFromCart, toggleTheme, activateCoupon, clearCoupon, login, logout, signup, getCurrentAccount, getId, createProduct, updateProduct, deleteProduct}}>
+            <DataContext.Provider value={{data, cart, accounts, isLogged, coupons, home, categories, darkTheme, orders, activeCoupon, addToCart, removeFromCart, deleteFromCart, toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, getId, createProduct, updateProduct, deleteProduct, placeOrder}}>
                 {this.props.children}
             </DataContext.Provider>
         )

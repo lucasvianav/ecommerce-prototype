@@ -15,7 +15,7 @@ class TextTab extends React.Component {
                     </div>
                 }
 
-                {this.props.link ? <Link to={this.props.link.to} className='grey' style={{'margin-left': '0.5%'}}>{'< ' + this.props.link.text}</Link> : ''}
+                {this.props.link ? <Link to={this.props.link.to} className='grey' style={{'marginLeft': '0.5%'}}>{'< ' + this.props.link.text}</Link> : ''}
 
                 <div className="content-box">
                     {this.props.children}

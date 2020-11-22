@@ -43,7 +43,8 @@ const OrdersPanel = (props) => {
         <div className="card p-0" key={item.date + item.id + index}>
             <div className="card-body m-0 p-2">
                 <h5 className="card-title">Pedido #{item.id}</h5>
-                <h6>Data: {item.date}</h6>
+                <h6>Valor total: R${item.total}</h6>
+                <h6>Data: {item.date + ' - ' + item.time}</h6>
                 <ul>
                   {
                     item.product.map((pr, index) => {
@@ -56,10 +57,10 @@ const OrdersPanel = (props) => {
                       })
 
                       return(
-                          <li>
+                          <li key={pr.name + pr.sku + pr.index}>
                             {nomePr + ' '} 
                             ({pr.sku}) <br />
-                            {pr.quantity} item(s)
+                            {pr.quantity} item(s) * R${parseInt(pr.price).toFixed(2).replaceAll('.',',')} = R${(parseInt(pr.quantity) * parseFloat(pr.price)).toFixed(2).replaceAll('.',',')}
                           </li>
                       )
                     })
@@ -67,7 +68,7 @@ const OrdersPanel = (props) => {
                 </ul>
                 <span className={"badge badge-light st-" + item.situation}>{st}</span>
                 <div className="d-flex justify-content-end">
-                    <button className="btn btn-link btn-sm mt-2" 
+                    <button className="btn text-btn green" 
                       onClick={(e) => {callModal(item.id)}}
                     >Mais Detalhes</button>
                 </div>
