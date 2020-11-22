@@ -66,7 +66,11 @@ class App extends React.Component {
               }
               
               else if(['minhaconta', 'myaccount'].includes(base.toLowerCase())){
-                return <MyAccount />
+                if(!this.context.isLogged.status){ return <Redirect to='/'/> }
+
+                else if(this.context.getCurrentAccount().type === 'client'){ return <MyAccount/> }
+
+                else if(this.context.getCurrentAccount().type === 'admin'){ return <AdmAccount/> }
               }
 
               else if(['adm', 'admin'].includes(base.toLowerCase())){

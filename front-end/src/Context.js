@@ -81,7 +81,7 @@ export class DataProvider extends React.Component {
     
             accounts: [ 
                 {   name: 'Fiona',
-                    accountType: 'client',
+                    accountType: 'client', // client x admin
                     email: 'fionagatinha74@gmail.com',
                     password: 'souLinda123',
                     birthday: '-',
@@ -206,6 +206,7 @@ export class DataProvider extends React.Component {
         this.login = this.login.bind(this)
         this.logout = this.logout.bind(this)
         this.signup = this.signup.bind(this)
+        this.getCurrentAccount = this.getCurrentAccount.bind(this)
     }
 
     componentDidMount(){
@@ -230,7 +231,7 @@ export class DataProvider extends React.Component {
     }
     
     logout(){
-        this.setState({isLogged: {status: false, email: ''}})
+        this.setState({isLogged: {status: false, email: ''}}, window.location.reload())
     }
     
     signup(info){
@@ -247,6 +248,12 @@ export class DataProvider extends React.Component {
         })
 
         this.setState({accounts: accounts})
+    }
+
+    getCurrentAccount(){
+        if(this.state.isLogged.status){
+            return this.state.accounts.find(el => el.email === this.state.isLogged.email)
+        }
     }
 
     addToCart(sku, quantity, specs){
@@ -335,10 +342,10 @@ export class DataProvider extends React.Component {
 
     render(){
         const {data, cart, accounts, coupons, home, categories, darkTheme, orders, activeCoupon, isLogged} = this.state
-        const {addToCart, removeFromCart, deleteFromCart, toggleTheme, activateCoupon, clearCoupon, login, logout, signup} = this
+        const {addToCart, removeFromCart, deleteFromCart, toggleTheme, activateCoupon, clearCoupon, login, logout, signup, getCurrentAccount} = this
 
         return(
-            <DataContext.Provider value={{data, cart, accounts, isLogged, coupons, home, categories, darkTheme, orders, activeCoupon, addToCart, removeFromCart, deleteFromCart, toggleTheme, activateCoupon, clearCoupon, login, logout, signup}}>
+            <DataContext.Provider value={{data, cart, accounts, isLogged, coupons, home, categories, darkTheme, orders, activeCoupon, addToCart, removeFromCart, deleteFromCart, toggleTheme, activateCoupon, clearCoupon, login, logout, signup, getCurrentAccount}}>
                 {this.props.children}
             </DataContext.Provider>
         )

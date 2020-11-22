@@ -22,6 +22,12 @@ class Checkout extends React.Component {
 
         this.context.checkLogin(this.props.ctx.isLogged.status)
     }
+    
+    componentDidUpdate(){
+        if(this.props.ctx.isLogged.status && this.context.currentStep === 'login'){
+            this.context.checkLogin(this.props.ctx.isLogged.status)
+        }
+    }
 
     render(){
         return(
@@ -29,9 +35,9 @@ class Checkout extends React.Component {
                 { checkout => (
                     <div className='Checkout'>
                         <Header/>
-                        { checkout.currentStep === 'login' ? <Login/> : '' }
-                        { checkout.currentStep === 'payment' ? <CheckoutPayment/> : ''}
-                        { checkout.currentStep === 'confirmation' ? <CheckoutConfirmation checkout={{...checkout}}/> : ''}
+                        { this.context.currentStep === 'login' ? <Login {...this.props}/> : '' }
+                        { this.context.currentStep === 'payment' ? <CheckoutPayment/> : ''}
+                        { this.context.currentStep === 'confirmation' ? <CheckoutConfirmation checkout={{...checkout}}/> : ''}
 
                         { 
                             !(checkout.currentStep === 'finished') ? '' : 

@@ -204,9 +204,12 @@ class CheckoutConfirmation extends React.Component {
 
                         <span className='text-btn disable-selection green' onClick={this.props.checkout.changePayment}>(Alterar)</span>
                     </section>
- 
-                    <p>Os pedidos deverão ser retirados na sala da SA-SHREK.</p>
 
+                    <section className='content-section takeaway'>
+                        <span className='section-title mini'>Retirada do pedido</span>
+                        <p>O pedido deverá ser retirada na sala da SA-SHREK, a princípio apenas por {this.context.getCurrentAccount().name}, mediante apresentação de documento com foto.</p>
+                        <p>Mais informações serão enviadas por email, que pode ser respondido caso necessário permitir a retirada por um terceiro.</p>
+                    </section>
                 </div>
             </main>
         )

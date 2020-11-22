@@ -241,6 +241,7 @@
     margin: auto auto auto 0;
 }
 
-.CheckoutConfirmation .content-box p {
+.CheckoutConfirmation .content-box .content-section.takeaway {
+    width: 58%;
     clear: both;
 }

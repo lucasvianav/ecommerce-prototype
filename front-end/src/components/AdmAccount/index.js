@@ -102,8 +102,7 @@ function AdmAccount(props){
     }
 
     return(
-        <>
-            <main>
+        <main>
             <div className="content-box">
                 <h1>Página do Adiministrador</h1>
                 <hr />
@@ -119,32 +118,32 @@ function AdmAccount(props){
                                 <Nav fill variant="tabs" defaultActiveKey="/home">
                                     <Nav.Item>
                                     <button className="nav-link active ml-0 mr-0" id="tabPedidos" onClick={() => {showPedidos();}} 
-                                     aria-controls="pedidos" aria-expanded={pedidos}>
-                                         Pedidos
+                                    aria-controls="pedidos" aria-expanded={pedidos}>
+                                        Pedidos
                                     </button>
                                     </Nav.Item>
                                     <Nav.Item className="nav-item">
                                     <button className="nav-link ml-0 mr-0" id="tabProdAtivos" onClick={() => {showProdutosAtivos();}} 
-                                     aria-controls="produtosAtivos" aria-expanded={ativo}>
-                                         Produtos Ativos
+                                    aria-controls="produtosAtivos" aria-expanded={ativo}>
+                                        Produtos Ativos
                                     </button>
                                     </Nav.Item>
                                     <Nav.Item>
                                     <button className="nav-link ml-0 mr-0" id="tabProdInativos" onClick={() => {showProdutosInativos();}} 
-                                     aria-controls="produtosInativos" aria-expanded={inativo}>
-                                         Produtos Inativos
+                                    aria-controls="produtosInativos" aria-expanded={inativo}>
+                                        Produtos Inativos
                                     </button>
                                     </Nav.Item>
                                     <Nav.Item>
                                     <button className="nav-link ml-0 mr-0" id="tabNovoProd" onClick={() => {showProdutoNovo();}} 
-                                     aria-controls="produtoNovo" aria-expanded={novoProd}>
-                                         Novo Produto
+                                    aria-controls="produtoNovo" aria-expanded={novoProd}>
+                                        Novo Produto
                                     </button>
                                     </Nav.Item>
                                     <Nav.Item>
                                     <button className="nav-link ml-0 mr-0" id="tabUsuarios" onClick={() => {showUsuarios();}} 
-                                     aria-controls="usuarios" aria-expanded={usuarios}>
-                                         Usuários
+                                    aria-controls="usuarios" aria-expanded={usuarios}>
+                                        Usuários
                                     </button>
                                     </Nav.Item>
                                 </Nav>
@@ -162,7 +161,7 @@ function AdmAccount(props){
                                             </h6>
                                         </div>
                                         <OrdersPanel />
-                                   </div>
+                                </div>
                                 </Collapse>
                                 <Collapse in={ativo}>
                                     <div id="produtosAtivos" className="p-2 bg-flex tabcontent" >
@@ -197,7 +196,7 @@ function AdmAccount(props){
                                 <Collapse in={novoProd}>
                                     <div id="produtoNovo" className="pt-4 pl-4 pb-3 bg-flex tabcontent">
                                         <ProductForm mode="new"/>
-                                   </div>
+                                </div>
                                 </Collapse>
                                 <Collapse in={usuarios}>
                                     <div id="usuarios" className="p-2 bg-flex tabcontent">
@@ -212,14 +211,13 @@ function AdmAccount(props){
                                             </h6>
                                         </div>
                                         <UsersPanel />
-                                   </div>
+                                </div>
                                 </Collapse>
                         </section>
                     </div>
                 </div>
             </div>
-            </main>
-        </>
+        </main>
     );
 }
 

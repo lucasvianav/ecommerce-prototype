@@ -52,7 +52,7 @@ const OrdersPanel = (props) => {
 
                       var nomePr = '';
                       products.forEach((p, index) => {
-                        if(p.id == pr.id) {
+                        if(p.id === pr.id) {
                           nomePr = p.name;
                         }
                       })
