@@ -38,7 +38,7 @@
     border: 0px;
     font-size: 0.9em;
     background-color: #DC3545;
-    color: white;
+    color: white !important;
     position: absolute;
     margin-top: -0.2rem;
     margin-left: 8.4%;
@@ -97,6 +97,12 @@
 
 input[type='text'].input-control{
     border-radius: 15px;
+}
+
+.custom-control-input:checked ~ .custom-control-label::before {
+    color: #fff;
+    border-color: #28A745;
+    background-color: #28A745;
 }
 
 .light-theme input[type='number'].input-control, .light-theme .custom-file-label, 

@@ -24,8 +24,12 @@ function AdmAccount(props){
     const [usuarios, setUsuarios] = useState(false);
 
     const [filter, setFilter] = useState("none");
-    const [selectedFilter, setSelectedFilter] = useState([]);
     const [arrayCategorias, setArrayCategorias] = useState([]);
+
+    const [selectedFilter1, setSelectedFilter1] = useState([]);
+    const [selectedFilter2, setSelectedFilter2] = useState([]);
+    const [selectedFilter3, setSelectedFilter3] = useState([]);
+    const [selectedFilter4, setSelectedFilter4] = useState([]);
 
     useEffect( () => {
         var vet = [];
@@ -153,12 +157,12 @@ function AdmAccount(props){
                                                 <i className="fas fa-search pointer" onClick={() =>{setFilter("search")}}></i>
                                                 <i className="fas fa-filter pointer" onClick={() =>{setFilter("filter")}}></i>
                                                 < FilterDiv show={filter} onHide={() => setFilter("none")} 
-                                                    onChange={(event) => {setSelectedFilter(event.value)}}
-                                                    seletores={[{title: "Situação", data:["Aguardando Aprovação","Pagamento Aprovado","Pronto para Retirada","Concluído"] }]} 
+                                                    onChange={(event) => {setSelectedFilter1(event)}}
+                                                    seletores={[{title: "Situação", property: "situation", labels:["Aguardando Aprovação","Pagamento Aprovado","Pronto para Retirada","Finalizado"], values: ["AA", "PA", "PPR", "FF"] }]} 
                                                 />
                                             </h6>
                                         </div>
-                                        <OrdersPanel type='admin'/>
+                                        <OrdersPanel type='admin'filter={selectedFilter1}/>
                                 </div>
                                 </Collapse>
                                 <Collapse in={ativo}>
@@ -168,12 +172,12 @@ function AdmAccount(props){
                                                 <i className="fas fa-search pointer" onClick={() =>{setFilter("search")}}></i>
                                                 <i className="fas fa-filter pointer" onClick={() =>{setFilter("filter")}}></i>
                                                 < FilterDiv show={filter} onHide={() => setFilter("none")} 
-                                                    onChange={(event) => {setSelectedFilter(event.value)}}
-                                                    seletores={[{title: "Categorias", data: arrayCategorias }]} 
+                                                    onChange={(event) => {setSelectedFilter2(event)}}
+                                                    seletores={[{title: "Categorias", property:"category", labels: arrayCategorias , values: arrayCategorias}]} 
                                                 />
                                             </h6>
                                         </div>
-                                        <ProductCardPanel type="visivel" />
+                                        <ProductCardPanel type="visivel" filter={selectedFilter2} />
                                     </div>
                                 </Collapse>
                                 <Collapse in={inativo}>
@@ -183,12 +187,12 @@ function AdmAccount(props){
                                                 <i className="fas fa-search pointer" onClick={() =>{setFilter("search")}}></i>
                                                 <i className="fas fa-filter pointer" onClick={() =>{setFilter("filter")}}></i>
                                                 < FilterDiv show={filter} onHide={() => setFilter("none")} 
-                                                    onChange={(event) => {setSelectedFilter(event.value)}}
-                                                    seletores={[{title: "Categorias", data: arrayCategorias }]} 
+                                                    onChange={(event) => {setSelectedFilter3(event)}}
+                                                    seletores={[{title: "Categorias", property:"category", labels: arrayCategorias , values: arrayCategorias}]} 
                                                 />
                                             </h6>
                                         </div>
-                                        <ProductCardPanel type="invisible" />
+                                        <ProductCardPanel type="invisible" filter={selectedFilter3} />
                                     </div>
                                 </Collapse>
                                 <Collapse in={novoProd}>
@@ -203,12 +207,12 @@ function AdmAccount(props){
                                                 <i className="fas fa-search pointer" onClick={() =>{setFilter("search")}}></i>
                                                 <i className="fas fa-filter pointer" onClick={() =>{setFilter("filter")}}></i>
                                                 < FilterDiv show={filter} onHide={() => setFilter("none")} 
-                                                    onChange={(event) => {setSelectedFilter(event.value)}}
-                                                    seletores={[{title: "Tipo de usuário", data:["Cliente","Administrador"] }]} 
+                                                    onChange={(event) => {setSelectedFilter4(event)}}
+                                                    seletores={[{title: "Tipo de usuário", property: "type", labels:["Cliente","Administrador"], values: ["client","admin"]}]} 
                                                 />
                                             </h6>
                                         </div>
-                                        <UsersPanel />
+                                        <UsersPanel filter={selectedFilter4} />
                                 </div>
                                 </Collapse>
                         </section>
