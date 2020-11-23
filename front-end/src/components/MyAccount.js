@@ -89,7 +89,7 @@ class MyAccount extends React.Component {
                         </section>
                     </div>
 
-                    <section className="myOrders">
+                    <section className="myOrders" style={{width: '100%'}}>
                         <Accordion id="pedidos">
                             <Card className='accordion-card'>
                                 <Accordion.Toggle as={Card.Header} className='pointer' eventKey="0">

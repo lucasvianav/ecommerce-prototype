@@ -71,7 +71,7 @@ const ModalPedido = (props) => {
                                 <h5 className="card-title">{p.name}</h5>
                                 <p>{ ops }</p>
                                 <div className="d-flex justify-content-end">
-                                  <span className="badge badge-light">Preço: {pr.price}</span>
+                                  <span className="badge badge-light mr-1">Preço: {pr.price}</span>
                                   <span className="badge badge-light">Quantidade: {pr.quantity}</span>
                                 </div>
                               </div>
