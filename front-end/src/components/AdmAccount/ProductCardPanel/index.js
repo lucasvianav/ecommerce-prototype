@@ -24,9 +24,9 @@ function ProductCardPanel(props){
               <div className="card p-0" key={index}>
                   <div className="card-body m-0 p-2">
                       <h5 className="card-title">{item.name}</h5>
-                      <span className="badge badge-light">{tipo}</span>
-                      <span className="badge badge-light">{item.category}</span>
-                      <span className="badge badge-light">{item.id}</span>
+                      <span className="badge badge-light mr-1">{tipo}</span>
+                      <span className="badge badge-light mr-1">{item.category}</span>
+                      <span className="badge badge-light mr-1">{item.id}</span>
                       <div className="d-flex justify-content-end">
                           <Link to={url} className="btn text-btn green" >Mais Detalhes</Link>
                       </div>

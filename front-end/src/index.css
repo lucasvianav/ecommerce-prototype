@@ -420,8 +420,8 @@ input::placeholder {
 }
 
 .light-theme .full-btn {
-  color: white;
-  background-color: #a7e245;
+  color: white !important;
+  background-color: #28A745;
 }
 
 .dark-theme .full-btn {
@@ -440,13 +440,13 @@ input::placeholder {
 }
 
 .light-theme .void-btn {
-  color: #a7e245;
-  border: 2px solid #a7e245;
+  color: #28A745 !important;
+  border: 2px solid #28A745;
 }
 
 .dark-theme .void-btn {
-  color: rgb(116, 158, 42);
-  border: 2px solid rgb(116, 158, 42);
+  color:rgb(130, 179, 47) !important;
+  border: 2px solid rgb(130, 179, 47);
 }
 
 .void-btn:hover {
@@ -455,15 +455,19 @@ input::placeholder {
 }
 
 .light-theme .void-btn:hover {
-  color: white;
-  background-color: #a7e245;
+  color: white !important;
+  background-color: #28A745;
 }
 
 .dark-theme .void-btn:hover {
-  color: white;
+  color: white !important;
   background-color: rgb(130, 179, 47);
 }
 
+.dark-theme input::placeholder, 
+.dark-theme textarea::placeholder{
+    color: #c7c6c7;
+}
 
 /* AUXILIAR */
 
@@ -494,7 +498,7 @@ input::placeholder {
 }
 
 .light-theme .green {
-  color: #a7e245 !important; 
+  color: #28A745 !important; 
 }
 
 .dark-theme .green {

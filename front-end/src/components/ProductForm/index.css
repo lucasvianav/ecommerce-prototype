@@ -163,11 +163,11 @@ button.kk.big-btn.void-btn {
 .light-theme #product-form input, .light-theme #product-form input:focus,
 .light-theme #product-form textarea:focus, .light-theme #product-form select:focus,
 .light-theme #product-form * {
-    color: black !important;
+    color: black;
 }
 
 .dark-theme #product-form input, .dark-theme #product-form input:focus,
 .dark-theme #product-form textarea:focus, .dark-theme #product-form select:focus,
 .dark-theme #product-form * {
-    color: #f1eff1 !important;
+    color: #f1eff1;
 }
