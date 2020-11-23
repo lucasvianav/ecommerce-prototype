@@ -28,6 +28,7 @@ export default function ProductEdit(props) {
       colors.forEach(color => {
         templates.forEach(template => {
           sizes.forEach(size => {
+              sku = product.type + '-' + product.id
               sku += color ? '-' + color.substring(0,4).toUpperCase() + '-' : '-VOID-'
               sku += template ? template.substring(0,4).toUpperCase() + '-' : 'VOID-'
               sku += size ? size : 'VOID'

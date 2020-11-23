@@ -355,7 +355,7 @@ function ProductForm(props){
               </div>
             </div>
             <div className="form-group col-md-3 col-sm-6">
-              <label htmlFor="displayPrice">Preço de venda (com desconto, se houver):</label>
+              <label htmlFor="displayPrice">Preço de venda (com desconto):</label>
               <div className="input-group">
                 <div className="input-group-prepend">
                   <div className="input-group-text bg-white"><span>R$</span></div>
