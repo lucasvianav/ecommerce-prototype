@@ -155,7 +155,7 @@ export class DataProvider extends React.Component {
                     password: 'souLinda123',
                     birthday: '01/01/2000',
                     cpf: '666.666.666-66',
-                    phoneNumber: ''
+                    phoneNumber: '+55 99 99999-9999'
                 },
                 {
                     name: 'Biscoito',
@@ -164,7 +164,7 @@ export class DataProvider extends React.Component {
                     password: 'nhameNhame123',
                     birthday: '01/01/2000',
                     cpf: '666.666.666-66',
-                    phoneNumber: ''
+                    phoneNumber: '+55 99 99999-9999'
                 },
                 {
                     name: 'Usuario',
@@ -173,7 +173,7 @@ export class DataProvider extends React.Component {
                     password: 'Teste123',
                     birthday: '01/01/2000',
                     cpf: '666.666.666-66',
-                    phoneNumber: ''
+                    phoneNumber: '+55 99 99999-9999'
                 },
                 {
                     name: 'admin',
@@ -182,7 +182,7 @@ export class DataProvider extends React.Component {
                     password: 'Admin123',
                     birthday: '01/01/2000',
                     cpf: '666.666.666-66',
-                    phoneNumber: ''
+                    phoneNumber: '+55 99 99999-9999'
                 }
             ],
 
@@ -249,7 +249,7 @@ export class DataProvider extends React.Component {
         this.updateProduct = this.updateProduct.bind(this)
         this.deleteProduct = this.deleteProduct.bind(this)
         this.placeOrder = this.placeOrder.bind(this)
-        this.editUser = this.editUser.bind(this)
+        this.updateAccount = this.updateAccount.bind(this)
     }
 
     componentDidMount(){
@@ -301,22 +301,14 @@ export class DataProvider extends React.Component {
         else{ return false }
     }
 
-    editUser(userName, bday, cpf, cell){
-
-        this.setState(prevState =>({
-            accounts:
-        prevState.accounts.map(item =>{
-            if(item.email ===
-                prevState.isLogged.email){
-                    item.name = userName
-                    item.birthday= bday
-                    item.cpf = cpf
-                    item.phoneNumber = cell
-                }
-                return item
+    updateAccount(phoneNumber){
+        this.setState(prevState => ({
+                accounts: prevState.accounts.map(item =>{
+                    if(item.email === prevState.isLogged.email){ item.phoneNumber = phoneNumber }
+                    return item
+                })
             })
-        }))
-
+        )
     }
 
     addToCart(sku, quantity, specs){
@@ -487,7 +479,7 @@ export class DataProvider extends React.Component {
                 product.stock[item.sku] = parseInt(product.stock[item.sku]) - parseInt(item.quantity)
             }
 
-            this.setState({data: products})
+            this.setState({data: products, cart: [], activeCoupon: {status: false, coupon: '', discount: 0}})
 
             return true
         }
@@ -506,10 +498,10 @@ export class DataProvider extends React.Component {
 
     render(){
         const {data, cart, accounts, coupons, home, categories, darkTheme, orders, activeCoupon, isLogged} = this.state
-        const {addToCart, removeFromCart, deleteFromCart, toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, getId, createProduct, updateProduct, deleteProduct, placeOrder, editUser} = this
+        const {addToCart, removeFromCart, deleteFromCart, toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, getId, createProduct, updateProduct, deleteProduct, placeOrder, updateAccount} = this
 
         return(
-            <DataContext.Provider value={{data, cart, accounts, isLogged, coupons, home, categories, darkTheme, orders, activeCoupon, addToCart, removeFromCart, deleteFromCart, toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, getId, createProduct, updateProduct, deleteProduct, placeOrder, editUser}}>
+            <DataContext.Provider value={{data, cart, accounts, isLogged, coupons, home, categories, darkTheme, orders, activeCoupon, addToCart, removeFromCart, deleteFromCart, toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, getId, createProduct, updateProduct, deleteProduct, placeOrder, updateAccount}}>
                 {this.props.children}
             </DataContext.Provider>
         )
