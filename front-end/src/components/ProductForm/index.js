@@ -361,7 +361,7 @@ function ProductForm(props){
                   <div className="input-group-text bg-white"><span>R$</span></div>
                 </div>
                 <input type="number" className="input-control form-control" id="displayPrice"  
-                  placeholder="00,00"
+                  placeholder="0,00"
                   value={displayPrice} 
                   onChange={(event) => {setDisplayPrice(event.target.value)}}
                   />
@@ -410,7 +410,7 @@ function ProductForm(props){
                 <i className="fas fa-info-circle"></i> 
               </button>
               <textarea className="form-control" id="descricao" rows="5"
-                value={descricao}
+                value={descricao} placeholder="Digite a Descrição do Seu Produto"
                 onChange={(event) => {setDescricao(event.target.value)}}
               ></textarea>
             </div>

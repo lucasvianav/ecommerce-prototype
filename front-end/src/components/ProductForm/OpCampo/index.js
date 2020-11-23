@@ -48,21 +48,21 @@ const OpCampo = (props) => {
         <div className="form-row mb-3 " id={props.id}>
           <div className="form-group col-3">
             <label htmlFor="categoria">Modelagem: </label>
-            <input className="input-control form-control bg-white" id={"modelagemOp" + props.index}
+            <input type="text" className="input-control form-control bg-white" id={"modelagemOp" + props.index}
               value={modelagem} placeholder="Deixe em Branco para Geral"
               onChange={(event) => {setModelagem(event.target.value)}}
             />                
         </div>
         <div className="form-group col-3">
             <label htmlFor="categoria">Tamanho: </label>
-            <input className="input-control form-control bg-white" id={"tamanhoOp"+props.index}
+            <input type="text" className="input-control form-control bg-white" id={"tamanhoOp"+props.index}
             value={tamanho} placeholder="Deixe em Branco para Geral"
             onChange={(event) => {setTamanho(event.target.value)}}
           />
         </div>
         <div className="form-group col-3">
             <label htmlFor="categoria">Cor: </label>
-            <input className="input-control form-control bg-white" id={"corOp"+props.index}
+            <input type="text" className="input-control form-control bg-white" id={"corOp"+props.index}
             value={cor} placeholder="Deixe em Branco para Geral"
             onChange={(event) => {setCor(event.target.value)}}
           />
