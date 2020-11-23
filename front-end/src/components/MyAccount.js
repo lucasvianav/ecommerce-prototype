@@ -1,10 +1,12 @@
 import React from 'react'
+import $ from 'jquery'
 
-import $, { ready } from 'jquery';
 import { Accordion, Card } from 'react-bootstrap';
 import './css/bootstrap.css'
 import './css/MyAccount.css'
 import { DataContext } from '../Context';
+import InputMask from 'react-input-mask'
+import OrdersPanel from './OrdersPanel';
 
 
 
@@ -12,211 +14,96 @@ class MyAccount extends React.Component {
 
     static contextType = DataContext
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            userName: '',
-            bday:'',
-            cpf:'',
-            cell:'',
-        }
-        this.hide = this.hide.bind(this);
-        this.hideTxt = this.hideTxt.bind(this);
-        this.editAccount = this.editAccount.bind(this);
+    constructor(props, context) {
+        super(props, context)
+
+        this.state = { phoneNumber: this.context.getCurrentAccount().phoneNumber }
+
+        this.toggleEdit = this.toggleEdit.bind(this);
         this.handleChange= this.handleChange.bind(this);
-        this.handleClick = this.handleClick.bind(this);
-
+        this.submitChange = this.submitChange.bind(this);
     }
 
-    
-    hide(){
-        var elemento = document.getElementsByClassName('client');
-        var campo = document.getElementsByClassName('userField');
-        var i; 
-        for (i = 0; i< elemento.length; i++){
-            if (elemento[i].style.display == "none"){
-                elemento[i].style.display = "block";
-                campo[i].style.display = "none";
-                document.getElementById('enviarDados').style.display = "inline";
-                
-            }
-            else{
-                elemento[i].style.display="none";
-                campo[i].style.display = "block";
-                document.getElementById('enviarDados').style.display = "none";
-                
-            }    
-        }
-    }
-    
-    hideTxt(){
-        var elemento = document.getElementsByClassName('userText');
-        var aux = document.getElementsByClassName('client');
-        var i; 
-        for (i = 0; i< elemento.length; i++){
-            if (aux[i].style.display == "none"){
-                elemento[i].style.display = "block";
-            }
-            else {
-                elemento[i].style.display = "none";
-            } 
-        }
+    toggleEdit(){
+        this.setState({phoneNumber: this.context.getCurrentAccount().phoneNumber})
+        $('.standard').toggle()
+        $('.editing').toggle()
     }
 
-    editAccount(){
-        const {userName, bday, cpf, cell} = this.state
-
-        this.context.editUser(userName, bday, cpf, cell);
-
-    }
     handleChange(e){
         const {name, value} = e.target
         this.setState({[name]: value})
-        
     }
+
+    submitChange(){
+        this.context.updateAccount(this.state.phoneNumber)
+        this.toggleEdit()
+    }
+
     componentDidMount(){
-        console.log(this.context);
-    }
-    handleClick(){
-        const {userName, bday, cpf, cell} = this.state
-    
-        this.hide();
-        this.context.editUser(userName, bday, cpf, cell);
+        $('.pointer').trigger('click')
     }
 
     render(){
         return(
             <main className="MyAccount">
+                <h1 className='panel-title'>Minha Conta</h1>
                 <div className="content-box">
-                    <h1>Minha Conta</h1>
-                    <hr/>
-                    <div className="row align-items-top">
-                        <div className="col-md-6 col-sm-12 align-self-top">
-                            <section id="loginInfo" className="d-flex no-space">
-                                <h2>Olá, {this.context.getCurrentAccount().name}! </h2>
-                                <p><strong>Email: </strong>{this.context.getCurrentAccount().email}
-                                </p>
+                    <div className="left-content col-md-6 col-sm-12 align-self-top">
+                        <section id="loginInfo" className="d-flex no-space">
+                            <h2>Olá, {this.context.getCurrentAccount().name}! </h2>
+                            <span><strong>Email: </strong>{this.context.getCurrentAccount().email}</span>
+                        </section>
 
-                            </section>
-                            <section id="dadosPessoais" className="d-flex">
-                                <p></p>
-                                <p></p>
+                        <section id="dadosPessoais" className="d-flex">
+                            <h2>Dados pessoais</h2>
 
-                                <h2>Dados Pessoais</h2>
-
-                                <div className="d-flex justify-content-between">
-                                    <p> 
-                                        <strong>Nome Completo:</strong>
-                                        <div className="userField">
-                                        {this.context.getCurrentAccount().name}
-                                        </div>
-                                        <input type="text" name="userName" placeholder={this.context.getCurrentAccount().name} className="client hide"
-                                        value = {this.state.name} onChange={this.handleChange}></input>
-                                    </p>
-                                    <p> 
-                                        <strong>Data de Nacimento:</strong>
-                                        <div className="userField">
-                                        {this.context.getCurrentAccount().birthday}
-                                        </div>
-                                        <input type="date" name="bday" className="client hide" placeholder={this.context.getCurrentAccount().birthday} 
-                                        value = {this.state.birthday} onChange={this.handleChange}></input>
-                                    </p>
-
+                            <div className="d-flex justify-content-between">
+                                <div> 
+                                    <span><strong>Nome Completo:</strong></span> <br/>
+                                    <span>{this.context.getCurrentAccount().name}</span> <br/><br/>
                                 </div>
-                                <div className="d-flex justify-content-between">
-                                <p className="no-space">
-                                    <strong>CPF:</strong> 
-                                    <div className="userField">
-                                    {this.context.getCurrentAccount().cpf}
+                                <div style={{textAlign: 'right'}}> 
+                                    <span><strong>Data de Nacimento:</strong></span> <br/>
+                                    <span>{this.context.getCurrentAccount().birthday}</span> <br/><br/>
+                                </div>
+                            </div>
+
+                            <div className="d-flex justify-content-between">
+                                <div>
+                                    <span><strong>CPF:</strong></span> <br/>
+                                    <span>{this.context.getCurrentAccount().cpf}</span> <br/><br/>
+                                </div>
+                                <div style={{textAlign: 'right'}}>
+                                    <span><strong>Celular:</strong></span> <br/>
+                                    <span className='standard'>{this.context.getCurrentAccount().phoneNumber}</span> 
+                                    <InputMask mask="+55 (99) 99999-9999" type='text' onChange={this.handleChange} name="phoneNumber" className='editing no-display' value={this.state.phoneNumber} placeholder='(00) 90000-0000'/>
+
+                                    <span className="text-btn green standard" onClick={this.toggleEdit}>Editar celular</span>
+                                    <div className='editing-controls'>
+                                        <span className="text-btn green no-display editing" onClick={this.toggleEdit}>Cancelar</span>
+                                        <span className="text-btn green no-display editing" onClick={this.submitChange}>Salvar</span>
                                     </div>
-                                    <input type="text" name="cpf" placeholder= {this.context.getCurrentAccount().cpf} className="client hide"
-                                    value = {this.state.cpf} onChange={this.handleChange}></input>
-                                </p>
-                                <p>
-                                    <strong>Celular:</strong> 
-                                    <div className="userField">
-                                    {this.context.getCurrentAccount().phoneNumber}
-                                    </div>
-                                    <input type="text" name="cell" placeholder= {this.context.getCurrentAccount().phoneNumber} className="client hide"
-                                    value = {this.state.phoneNumber} onChange={this.handleChange}></input>
-                                </p>
                                 </div>
-                                <p>
-                                    <button id="enviarDados" className="btn btn-outline-dark mt-0 botao hide" onClick={this.handleClick}>
-                                        Salvar
-                                    </button>
-                                </p>
-                                <button id="editarDados" className="btn btn-outline-dark mt-0 botao" onClick={this.hide}>
-                                    Editar
-                                </button>
-
-                            </section>
-                            
-                        </div>
-                        <div className="col-md-4 offset-md-1 col-sm-12 align-self-top" >
-                            <section id="pedidos" className="mt-2 mb-3">
-                                <h2>Pedidos</h2>
-                                <div className="d-flex justify-content-end pr-3">
-                                    <span><a href="#">Ver todos</a></span>
-                                </div>
-                                <Accordion id="pedidos" >
-                                    <Card>
-                                       <Accordion.Toggle as={Card.Header} eventKey="0">
-                                            <h5 className="mb-0">
-                                                Aguardando Aprovação
-                                            </h5>
-                                        </Accordion.Toggle>
-                                    
-                                        <Accordion.Collapse eventKey="0">
-                                            <Card.Body>
-                                                <div className="row justify-content-around no-space">
-                                                    <div className="card no-space" style={{width: '45%'}}>
-                                                        <img src="img/casaco.jpg" className="card-img-top" alt="Casaco engenharia civil"/>
-                                                        <div className="card-body no-space">
-                                                        <p className="card-text"><a href="#">Casaco Guindaste</a></p>
-                                                        </div>
-                                                    </div>
-                                                    <div className="card no-space" style={{width: '45%'}}>
-                                                        <img src="img/casaco.jpg" className="card-img-top" alt="Casaco engenharia civil"/>
-                                                        <div className="card-body no-space">
-                                                        <p className="card-text"><a href="#">Casaco Guindaste</a></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="d-flex justify-content-end pr-3">
-                                                    <p><a href="#">Ver mais</a></p>
-                                                </div>
-                                            </Card.Body>
-                                        </Accordion.Collapse>
-                                    </Card>
-                                    <Card>
-                                        <Accordion.Toggle as={Card.Header} eventKey="1">
-                                            <h5 className="mb-0">
-                                                Aguardando Recebimento
-                                            </h5>
-                                        </Accordion.Toggle>
-                                        <Accordion.Collapse eventKey="1">
-                                            <Card.Body>
-                                                Não há nada aqui!
-                                            </Card.Body>
-                                        </Accordion.Collapse>
-                                    </Card>
-                                    <Card>
-                                        <Accordion.Toggle as={Card.Header} eventKey="2">
-                                            <h5 className="mb-0">
-                                                Finalizados
-                                            </h5>
-                                        </Accordion.Toggle>
-                                        <Accordion.Collapse eventKey="2">
-                                            <Card.Body>
-                                                Não há nada aqui!
-                                            </Card.Body>
-                                        </Accordion.Collapse>
-                                    </Card>
-                                </Accordion>
-                            </section>
-                        </div>
+                            </div>
+                        </section>
                     </div>
+
+                    <section className="myOrders">
+                        <Accordion id="pedidos">
+                            <Card className='accordion-card'>
+                                <Accordion.Toggle as={Card.Header} className='pointer' eventKey="0">
+                                    <h5 className="pointer disable-selection mb-0">Meus pedidos</h5>
+                                </Accordion.Toggle>
+                            
+                                <Accordion.Collapse eventKey="0">
+                                    <Card.Body className='accordion-body'>
+                                        <OrdersPanel type='client'/>
+                                    </Card.Body>
+                                </Accordion.Collapse>
+                            </Card>
+                        </Accordion>
+                    </section>
                 </div>
             </main>
         )

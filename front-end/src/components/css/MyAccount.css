@@ -1,4 +1,9 @@
 /* ACCOUNT PAGES */
+.MyAccount .content-box {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-start;
+}
 
 .MyAccount .container{
   margin-top: 80pt;
@@ -37,6 +42,12 @@
 
 .MyAccount #dadosPessoais{
   flex-direction: column;
+  justify-content: center;
+  margin-top: 3%;
+}
+
+.MyAccount #dadosPessoais .d-flex {
+  width: 60%;
 }
 
 .MyAccount #editarDados{
@@ -48,9 +59,71 @@
   display: none;
 }
 
-
 .MyAccount #enviarDados{
     right: 100;
     margin-left: auto;
 }
 
+.MyAccount .editing-controls {
+  width: 70%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  margin: 0 0 0 auto;
+}
+
+.MyAccount .editing-controls .text-btn {
+  margin: 0;
+  text-align: center;
+  padding: 0;
+}
+
+.MyAccount input.editing {
+  width: 60%;
+  margin: 0 0 0 auto;
+}
+
+.MyAccount .standard.text-btn {
+  display: block;
+  margin: 0 0 0 auto;
+}
+
+.MyAccount span.text-btn {
+  width: fit-content;
+  font-size: 14px !important;
+}
+
+.MyAccount .card-columns {
+  column-count: 1 !important;
+}
+
+.MyAccount .OrdersPanel li span:last-child {
+  float: right;
+  margin-right: 7%;
+}
+
+.MyAccount .OrdersPanel li {
+  clear: both;
+}
+
+.MyAccount .pointer {
+  cursor: pointer;
+}
+
+.MyAccount .pointer:hover {
+  cursor: pointer;
+}
+
+.MyAccount .accordion-body {
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.MyAccount .myOrders {
+  float: right;
+}
+
+.MyAccount .myOrders #pedidos, .MyAccount .myOrders #pedidos .accordion-card {
+  width: 100%;
+  margin: auto;
+}

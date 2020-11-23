@@ -1,9 +1,9 @@
 import React, {useState, useContext, useEffect} from 'react';
 import {Modal} from 'react-bootstrap';
 
-import { DataContext } from '../../../../Context';
+import { DataContext } from '../../../Context';
 
-import '../../../css/bootstrap.css';
+import '../../css/bootstrap.css';
 import './index.css'
 
 const ModalPedido = (props) => {
@@ -28,10 +28,10 @@ const ModalPedido = (props) => {
 
     return (
         <Modal className="modal"
-            {...props}
-            size="lg"
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
+          {...props}
+          size="lg"
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
         >
             <Modal.Header className='modal-color' closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
@@ -84,20 +84,23 @@ const ModalPedido = (props) => {
                 </div>
 
                 <div className='info-data'>
-                  <div className='client'>
-                    <h5>Dados do cliente:</h5>
-                    {
-                      !client ? '' :
-                      <div>
-                        <p><strong>Nome: </strong>{client.name}</p>
-                        <p><strong>Email: </strong>{client.email}</p>
-                        <p><strong>Celular: </strong>{client.phoneNumber}</p>
-                        <p><strong>CPF: </strong>{client.cpf}</p>
-                      </div>
-                    }
-                  </div>
+                  {
+                    props.type !== 'admin' ? '' :
+                    <div className='client'>
+                      <h5>Dados do cliente:</h5>
+                      {
+                        !client ? '' :
+                        <div>
+                          <p><strong>Nome: </strong>{client.name}</p>
+                          <p><strong>Email: </strong>{client.email}</p>
+                          <p><strong>Celular: </strong>{client.phoneNumber}</p>
+                          <p><strong>CPF: </strong>{client.cpf}</p>
+                        </div>
+                      }
+                    </div>
+                  }
 
-                  <div className='order'>
+                  <div className={'order-' + props.type}>
                     <h5>Dados do pedido:</h5>
                     <p><strong>Data: </strong>{props.pedido.date}</p>
                     <p><strong>Horário: </strong>{props.pedido.time}</p>
@@ -113,6 +116,8 @@ const ModalPedido = (props) => {
                   </div>
                 </div>
 
+              {
+                props.type !== 'admin' ? '' :
                 <div className='situations'>
                   <h5>Situação: </h5>
                   <div id="radiosSituacao">
@@ -138,15 +143,20 @@ const ModalPedido = (props) => {
                     </div>
                   </div>
                 </div>
+              }
+
             </Modal.Body>
-            <Modal.Footer className='modal-color'>
-                <button onClick={(e) => {salva(e)}}
-                    className="btn btn-success" style={{width: '20%'}}
-                >
-                    Salvar
-                </button>
-                <button onClick={props.onHide} className="btn btn-secondary" style={{width: '20%'}}>Fechar</button>
-            </Modal.Footer>
+            {
+              props.type !== 'admin' ? '' :
+              <Modal.Footer className='modal-color'>
+                  <button onClick={(e) => {salva(e)}}
+                      className="btn btn-success" style={{width: '20%'}}
+                  >
+                      Salvar
+                  </button>
+                  <button onClick={props.onHide} className="btn btn-secondary" style={{width: '20%'}}>Fechar</button>
+              </Modal.Footer>
+            }
         </Modal>
     );
 }

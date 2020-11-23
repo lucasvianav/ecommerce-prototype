@@ -4,7 +4,7 @@ import {Nav, Collapse} from 'react-bootstrap';
 import ProductCardPanel from './ProductCardPanel';
 import ProductForm from '../ProductForm';
 import UsersPanel from './UsersPanel';
-import OrdersPanel from './OrdersPanel';
+import OrdersPanel from '../OrdersPanel';
 import FilterDiv from './FilterDiv';
 
 import { DataContext } from '../../Context';
@@ -109,7 +109,7 @@ function AdmAccount(props){
                         <section id="loginInfo" className="d-md-flex no-space d-xs-none d-sm-none">
                             <h2>Olá, {context.getCurrentAccount().name}!</h2>
                             <p><strong>Email: </strong>{context.isLogged.email}</p>
-                            <button id="altSenha" className="btn void-btn">Alterar Senha</button>
+                            {/* <button id="altSenha" className="btn void-btn">Alterar Senha</button> */}
                         </section>
                     
                         <section id="funcoes" className="d-flex rounded shadow-sm mt-3 p-2">
@@ -158,7 +158,7 @@ function AdmAccount(props){
                                                 />
                                             </h6>
                                         </div>
-                                        <OrdersPanel />
+                                        <OrdersPanel type='admin'/>
                                 </div>
                                 </Collapse>
                                 <Collapse in={ativo}>

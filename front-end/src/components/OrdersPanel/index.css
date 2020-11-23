@@ -16,3 +16,8 @@
     background-color: #28A745;
     color: white;
 }
+
+.OrdersPanel li {
+    margin-bottom: 1.5%;
+    width: 100%;
+}

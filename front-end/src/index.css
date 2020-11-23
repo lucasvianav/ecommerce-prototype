@@ -142,6 +142,7 @@ main {
 
 .panel-title {
   margin: auto;
+  margin-bottom: 1%;
   text-align: center;
   font-weight: 700;
   font-size: 20pt;

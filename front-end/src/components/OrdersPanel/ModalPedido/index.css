@@ -24,17 +24,17 @@
     padding: 0;
 }
 
-.info-data .order {
+.info-data .order-admin {
     width: 40%;
     text-align: right;
     padding: 0;
 }
 
-.info-data .order p:not(.total) {
+.info-data .order-admin p:not(.total) {
     font-size: 15px;
 }
 
-.info-data .order .total {
+.info-data .order-admin .total {
     width: fit-content;
     padding: 0;
     margin: auto 0 auto auto;
@@ -54,15 +54,30 @@ div.d-flex.product-cards .card {
     width: 47% !important;
 }
 
-div.order .payment {
+div.order-admin .payment {
     width: 100%;
 }
 
-div.order .payment p {
+div.order-admin .payment p {
     width: 95%;
     margin-right: 0;
     margin-left: auto;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+}
+
+.info-data .order-client {
+    margin: auto auto auto 0;
+}
+  
+.info-data .order-client p:not(.total) {
+    font-size: 15px;
+}
+  
+.info-data .order-client .total {
+    width: fit-content;
+    padding: 0;
+    font-size: 18px;
+    border-bottom: solid 1px;
 }
