@@ -208,7 +208,7 @@ Esse comando iniciará um host local para a visualização de desenvolvimento do
   
   - Sincronizar dados entre os diversos componentes da árvore;
   
-  - Validação de formluários em _client-side_;  
+  - Validação de formulários em _client-side_;  
   
   - Uso de máscaras nos formulários, para campos que deveriam ser formatados segundo um padrão rígido, como CPF: 000.000.000-00;
   
