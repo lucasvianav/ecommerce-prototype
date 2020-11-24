@@ -1,12 +1,11 @@
+# Grupo - 1: Site de Secretaria Acadêmica - SA-SHREK
 
-__Nome:                     | nºUSP:__  
-_Beatriz Helena Dias Rocha   | 11300051_  
-_Juliana Bernardes Freitas   | 11317928_  
-_Lucas Henrique Sant'Anna    | 10748521_  
-_Lucas Viana Vilela          | 10748409_  
-_Rafaela Cristina Bull       | 11233651_  
-
-__Grupo - 1: SITE SA-SHREK__ 
+__Nome e nºUSP:__  
+_Beatriz Helena Dias Rocha    11300051_  
+_Juliana Bernardes Freitas    11317928_  
+_Lucas Henrique Sant'Anna     10748521_  
+_Lucas Viana Vilela           10748409_  
+_Rafaela Cristina Bull        11233651_  
   
 ------------------------------------------  
   
@@ -15,59 +14,77 @@ __Grupo - 1: SITE SA-SHREK__
 
 ### 1. Requerimentos  
 
+Os requerimentos pedidos e adicionados particularmente para esse projeto foram:  
+
+  - Dois tipos de usuários: cliente e administradores;
+  
+  - A loja deve vender produtos, serviços, eventos ou todos. No caso de produtos ou eventos, o item pode ser selecionado e sua quantidade escolhida, bem como outras opções (como modelagem, cor e tamanho). O pagamento será feito por meio de transferência bancária ou por PicPay. A quantidade do produto comprado é decrementada do número em estoque;
+  
+  - Uma conta (cliente ou administrador) deve ter ao menos os seguinter dados: nome, email, CPF, número de celular e data de nascimento.
+  
+  - Administradores têm acesso crud aos produtos, eventos e serviçoes;
+    
+  - Os produtos devem ter ao menos os parêmetros: nome, id, fotos, descrição, preço e quantidade em estoque;
+   
+  - O administrador consegue criar/atualizar/ler/deletar produtos. Essa funcionalidade foi implementada perfeitamente;  
+  
+  - Implentar uma funcionalidade única à loja.
+  
+  - O sistema deve ser responsivo, ter acessibilidade e usabilidade.
+  
+  
+  
+  
+    
+    
+    
+
 -----------------------------
 ### 2. Descrição do Projeto  
 
   
-  A descrição do projeto em sua versão final requeria para a presente etapa já algumas funcionalidades. Porém como o e-commerce aqui implementado é voltado para servir a uma entidade universitária para suas eventuais vendas de artigos e eventos, algumas particularidades foram adicionadas aos requerimentos iniciais. E resumo os requerimentos são estes:  
-  - Dois tipos de usuários:  
-    - Cliente - Esse tipo de conta conseguem escolher os produtos que deseja comprar e percorrer todo o processo para realizar o pedido. 
+O e-commerce aqui implementado é voltado para o uso de uma extracurricular universitária (especificamente, uma Secretaria Acadêmica) para suas eventuais vendas de produtos (como peças de roupas) e eventos (como viagens técnicas ou cursos).
     
-    - Administrador - Uma conta de administrador consegue adicionar novos administradores e gerencia-los, assim como pode fazer o mesmo para contas cliente. Também gerencia o estoque dos itens e o fluxo de pedidos. 
-    
-    
- - Como a SA-SHREK vende produtos então seguimos os requerimentos correspondetes a tal. Isto é, o cliente pode escolher entre produtos e eventos. Selecionando, quando habilitado, as especificação do item (tamanho, quantidade e modelagem) e adicionando-o ao carrinho de compras. Passando por todo o processo até concluir a compra e escolhendo no caminho outras especifiações do pedido, como por exemplo a forma de pagamento. Nas especificações fornecidas cosntava o cartão de crédito como uma forma de pagamento, utilizamos na implementação apenas transferências por essa ser a opção mais dentro do contexto onde a loja está inserida, mas para a versão final planeja-se incluir a opção sugerida para fins de demonstração. Foi incluido ainda nesse projeto a funcionalidade de cupons de desconto.  
+ - O cliente pode escolher entre visualizar as páginas de produtos e eventos. Para comprar, seleciona as especificação do item (tamanho, quantidade, modelagem e quantidade) e adiciona-o ao carrinho de compras, tendo a possibilidade de inserir um  cupom de desconto. Então, seleciona-se a forma de pagamento e confirma-se a compra, para concluí-la.
  
- - Clientes, Administradores e os Itens da Loja guardam diversos registros que os classificam, idetificam e carregam com sigo propriedades para serem usadas dentro a implementação. Esses registros estão abaixo:   
-   - __Registros dos Clientes:__ name, type (que nesse caso será 'client'), e-mail, password, birthday, cpf, phoneNumber;  
+ - Contas e itens (produtos ou eventos) guardam diversos registros que os classificam, idetificam e carregam com sigo propriedades para serem usadas dentro a implementação. Dentre essas, destaca-se:
+    - __Contas:__ nome, tipo da conta (cliente ou administrador), email, senha, data de nascimento, CPF e número de telefone;  
    
-   - __Registros dos Administradores:__ name, type (admin), e-mail, password, birthday, cpf, phoneNumber;  
-   
-   - __Registros de Itens:__ Devemos aqui fazer uma pequena distição entre os dois tipos de itens vendidos na loja. Podemos perceber muitors registros semelhantes, mas entre o tipo Produtos e Eventos há particularidades que melhor representam aquilo que será vendido. Muitas vezes alguns desses registros não são utilizados, deixam seu valor em _null_.  
+    - __Itens:__
        
-       _Produtos:_ name, type(os produtos são do tipo 'PR'), id, visibility, category, description, templates, sizes, colors, price(full, sale), img, sizeTable (uma imagem que contêm todos os tamanhos do produto), stock(quantidade em estoque).  
+       - _Produtos:_ nome, tipo (nesse caso, produto), id, visibilidade, categoria, descrição, modelagens, tamanhos, cores, preço, imagem, imagem com as medidas do produto e estoque.  
        
-       _Eventos:_  name, type('EV'), id, visibility, description, templates, sizes, colors, info(location, date, time, link), price(full, sale), stock.  
+        - _Eventos:_  nome, tipo (nesse caso, evento), id, visibilidade, categoria, descrição, informações (local, data, horário, link relacionado), preço e estoque.  
    
- - O gerenciamento dos Produtos, e até mesmo de usuários, é realizado pelos administradores. Esses usuários especiais administram a loja pela __Página do Administrador__ onde conseguem ter o controle de todos os produtos que são vendidos na loja, podendo editar suas propriedades (Nome, Imagens, texto da Imagem, Preço, Preço com desconto, Tipo, Categoria, Descrição e Quantidade) e opção de escolha (Modelagem, Tamanho e Cor). Conseguem ver os pedidos realizados e seus status, assim como produtos cadastrados no site, mas que não estão visíveis aos clietes. Outra aba desta página é a Novo Pedido, onde há a opção de cadastras novos produtos especificando as propriedades já citadas. A ultima aba contém todos os usuários cadastrados, por ela se administra tanto cliente quanto administradores dependendo da hierarquia. 
+- O gerenciamento dos itens é realizado pelos administradores, através da __Página do Administrador__, em conseguem visualizar e editar todos os produtos cadastrados (inclusive os que não estão visíveis aos clientes), podendo alterar todas suas propriedades e também criar produtos novos. Além disso, conseguem ver os pedidos realizados e seus status, bem como atualizá-los. Por fim, podem visualizar todos os usuários cadastrados e seus principais dados - a edição dos usuários será implementada para a próxima entrega, juntamente com a edição e cadastro de cupons de desconto. 
  
    
+ A funcionalidade de cupons foi feita como um diferencial, de forma que os cupons podem atribuir um desconto de valor absoluto ou percentual (em relação ao subtotal to carrinho). Atualmente, os cupons devem ser cadastrados diretamente no código (_hardcoded_), mas para a próxima entrega já se poderá realizar o cadastro e edição de cupons através da __Página do Administrador__.
  
  
- 
- - Foram implementados ao projeto funcionalidades e ferramentas para prover cada um dos itens a seguir:  
-   - __Acessibilidade:__   
-   Além de resursos de acessibilidade padrão, como texto alternativo para imagens, foram implementados recursos de menor presença nos projetos web. O primeiro é a mudança de cores das páginas para torna-las acessiveis para daltônicos. Tal recurso pode ser visualizado mudando o botão na parte direita do cabeçalho. O outro recurso permite dar uma no site, aumentado o tamanho de todos os elementos da página. Essas funcionalidade menos difundidas são apresentas na página _Acessiblidade_ com link no rodapé do site.   
+O projeto foi desenvolvido tendo em vista os aspectos a seguir:  
+- __Acessibilidade:__   
+   Além de resursos de acessibilidade padrão, como texto alternativo para imagens e placeholders em campos de input, foram implementados recursos de menor presença nos projetos web. Dentre eles: a presença de um tema escuro (modo de contraste) para o site e a página _Acessiblidade_, linkada no rodapé do site, que detalha melhor esses elementos.   
    
-      ![Página de desrição das funcionalidades de acessibilidade](./images/acessibilidade.JPG)
+![Página de desrição das funcionalidades de acessibilidade](./images/acessibilidade.JPG)
       
-   - __Usabilidade:__  
-   A aplicação foi implementada até aqui para ser funcional e entregar ao usuário aquilo que ele procura. Em questão de design, o site apresenta páginas limpas que mostram apenas o essencial para que o usuário saiba onde está e o que deve fazer. Botões e links que apresentam suas funções de forma lógica e dentro dos hábitos de navegação dos consumidores. Como o site foi desenvolvido pensando para vendas em uma pequena comunidade e com uma pequena diversidade de produtos, não é mostrado durante o processo de verificação da compra outros produtos além daquele que o usuário selecionou para o seu carrinho de compras. Temos assim um circuito linear e sem ramificações que leva da seleção do produto à confirmação da compra, algo não aconselhável para grades e-commerces, mas que é ideal para o contexto.  
+- __Usabilidade:__  
+A aplicação foi implementada até aqui para ser funcional e entregar ao usuário aquilo que ele procura. Em questão de design, o site apresenta páginas limpas que mostram apenas o essencial para que o usuário saiba onde está e o que deve fazer, além de botões e links que apresentam suas funções de forma lógica e dentro dos hábitos de navegação dos consumidores. Tomou-se cuidado, também, em utilizar cores que não comprometam a legibilidade dos elementos.
    
-      A arquitetura de informação do site é bastante lógica e simples. As conexões entre links, menus e outros elementos são práticos e funcionais. A divisão dos  produtos dentro do site é clara, as duas principais categorias são artigos físicos e eventos, logo ambos aparecem diretamente no menu da cabeçalho. Ao passar o mouse  por cima do botão, um menu _dropdrow_ aparece apresentando as subcategorias. Clicar no botão do menu inicial te leva para uma página de geral com um filtro lateral que mostra só os produtos da subcategoria seleciona. Outro modo de chegar até o produto é digitar seu nome ou da sua subcategoria na caixa de pesquisa.  
+A divisão dos  produtos dentro do site é clara: as duas principais categorias são produtos e eventos, logo ambos aparecem diretamente na barra de navegação. Ao passar o mouse  por cima do botão, um menu _dropdrow_ aparece apresentando as subcategorias. Clicar no botão do menu inicial te leva para uma página de geral, mostrando os itens da categoria selecionada. Outro modo de chegar até o produto é digitar seu nome ou da sua subcategoria na caixa de pesquisa.  
    
-      Muitas facilidades podem ser encontras também para um usuário do tipo administrador. Como o objetivo do administrador é fazer a gestão da loja, todas suas funções foram divididas por abas e  colocadas na já citada __Página do Administrador__. Abaixo é possível visualiazar a página. 
+Tendo em vista que a função do usuário administrador é fazer a gestão da loja, todas funções relacionadas a isso estão inclusas em uma única página, na  __Página do Administrador__:
       
-      ![Página do Administrador do projeto](./images/adminpage.JPG)  
+![Página do Administrador do projeto](./images/adminpage.jpeg)  
       
    - __Responsividade:__  
-   Os componentes da página foram implementados para serem responsivos para qualquer tamanho de tela de computador. Grande parte do site não foi configurado para se adaptar para telas mobile, tendo suas estruturas sido definidas dentro das folhas de estilo CSS. Outros janelas e compoenentes, por serem construídos com o framework Bootstrap, têm responsividade com dispositivos mobile, porém são exceções de modo que não há uma página inteira que se mostre compatível em um table ou celular. 
+Os componentes da página foram implementados e estruturados para serem responsivos para qualquer tamanho de tela de computador, utilizando recursos como _flexbox_. Grande parte do site não foi configurado para se adaptar para telas mobile, tendo em vista o escopo do projeto. Alguns elementos, por serem construídos com uso de Bootstrap, têm responsividade com dispositivos mobile, porém são exceções. 
  
 ------------------------------------ 
 ### 3. Comentários sobre o código  
   
   
-Apesar do projeto estar muito bem estruturado pela organização que o React permite, é necessário explicar alguns ponto de sua estrutura se quisermos iniciar uma análise sobre o código. 
+Por característica do ___React___, tem-se que o arquivo html principal do site, o _index.html_ (abaixo), não possui nenhum conteúdo de fato, apenas uma div vazia. O ___React___ No momento de compilação, o ___React___ insere os componentes na ```div#root```, de acordo com o especificado _App.js_. 
 
 ```
  <body>
@@ -75,16 +92,8 @@ Apesar do projeto estar muito bem estruturado pela organização que o React per
     <div id="root"></div>
   </body>
 ```
-Ao observarmos o <body> do arquivo _index.html_ (pasta _public_), vemos que a única coisa existente é um _div_ de ```id="root"_```. Isso já é parte da utilização da biblioteca __React__ que no arquivo _index.js_ (pasta _src_) utiliza o método abaixo para que  _App.js_ seja o contéudo do elemento com ```id ="root"```.  
-  
-```
-import { DataProvider } from './Context'
 
-ReactDOM.render(<DataProvider><App/></DataProvider>, document.getElementById('root'))
-```
--------> falar do DataProvider
-
-Analisaremos o _App.js_, usando ele como referência dentro do projeto. Afinal ele é o agregador de todas os outros elementos componentes que serão nossas páginas. Veja que da linha 10 a 25 do código temos importações de componentes que como a _Navbar_ e o _Footer_ ou então o conteúdo das páginas.
+Analisaremos o _App.js_, usando ele como referência dentro do projeto, pois é o agregador de todas os outros elementos que compões as páginas. Veja que da linha 10 a 24 de seu código temos importações dos componentes, que, exceto a _Navbar_ e o _Footer_, representam cada uma das páginas.
 
 ``` 
 10  import Navbar from './components/Navbar'
@@ -102,11 +111,9 @@ Analisaremos o _App.js_, usando ele como referência dentro do projeto. Afinal e
 22  import AdmAccount from './components/AdmAccount'
 23  import ProductEdit from './components/ProductEdit'
 24  import Checkout from './components/Checkout'
-25  import { CheckoutProvider } from './components/CheckoutContext'
-
 ```
 
-Temos então todas as páginas serão contruidas por meio do Componente App. Vamos até a linha 35, nela se inicial uma _div_ onde tudo está contido, mas o que nos interessa é linha seguinte. Nela acontece um teste, se o argumento ```props.match.base === 'checkout'``` é verdadeiro ou não, em caso negativo o componente ```<Navbar {...this.props}/>``` aparece na tela, sendo ela a navbar padrão que aparece na página, onde se encontra o Menu, caixa de pesquisa e botão do carrinho de compras, botão de login (ou da conta) e a opção de mudar as cores do site. Isso porque 'checkout' é propriedade que define a navbar do processo de final de compra (Carrinho de compras, Comfirmação de conta, Modo de Pagamento, Confirmação da Compra e Agradecimento pela Compra).  
+Na linha 35 se inicial uma _div_ onde tudo está contido, mas o que nos interessa é linha seguinte. Nela verifica-se se o argumento ```props.match.base === 'checkout'``` é verdadeiro ou não e apenas no caso negativo o componente ```<Navbar {...this.props}/>``` aparece na tela, sendo ela a navbar padrão do site, onde se encontra o menu principal, caixa de pesquisa e os botões do carrinho e de login e a opção de mudar as cores do site. Isso significa que quando o primeiro parâmetro da url ofor 'checkout', a navbar padrão não será utilizada. O motivo disso é  que há uma navbar específica para as telas de finalização da compra (checkout), que está contida na tag <Checkout/>, utilizada mais abaixo no código. O mesmo é feito em relação do footer, na linha 124, pois nenhum footer será utilizado durante o checkout.
 
 ```
 35  <div id='app'>
@@ -119,9 +126,8 @@ Temos então todas as páginas serão contruidas por meio do Componente App. Vam
 
 ``` 
 
-Uma condicional semelhante define o _Footer_ que ira aparecer dependendo do conteúdo da página.  
 
-O conteúdo que aparecerá no componente App é definido de forma semelhante, ou pouco mais complexa, mas de lógica semelhante. Veja um trecho abaixo. 
+O conteúdo que aparecerá no componente App é definido de forma semelhante, porém com uso de elementos importados da bilioteca React Router DOM, que permite a criação de um site com estilo Single-Page Application. Veja um trecho abaixo. 
 
 ```
 <Switch>
@@ -155,9 +161,10 @@ O conteúdo que aparecerá no componente App é definido de forma semelhante, ou
 </Switch>
 
 ```
-Observe que depois que ele define ```const {base} = props.match.params```, a função ```toLowerCase()``` da ```base``` que retorna se a página atual onde o usuário esta é alguma das fornecidas para teste. Assim define-se qual conteúdo deve ser mostrado, sendo que muitas páginas permanem a mesma, mudando apenas componentes internos. No código temos o exemplos de ```eventos```, ```events```, ```event```, ```produtos```, ```products``` e ```product```. Temos que existem condionametos nesse formato para todos os componentes importados lá no código mais para cima.  
 
+As tags de <Route/> servem para renderizar diferentes componentes (páginas) de acordo com os parâmetros passados na URL e o switch, para garantir que apenas uma página seja utilizada por vez. A checagem dos parâmetros é feita utilizando listas com os parâmetros aceitos e a função ```toLowerCase()```, definida no arquivo _Util.js_, juntamente com outras funções auxiliares.
 
+Para possibilitar compartilhamento e sincronia de dados, de forma global, entre os diversos componentes da árvore definida nesse arquivo, utilizou-se a Context API. O arquivo _Context.js_ é o responsável por essa integração, ele armazenando os dados de forma dinâmica durante a execução da aplicação - simulando, inclusive, o que seria o _backend_.
 
 
 
@@ -168,30 +175,24 @@ Observe que depois que ele define ```const {base} = props.match.params```, a fun
 
 --------------------------------  
 
-### 4. Build Procedures  
+### 4. Procedimentos de compilação  
 
-Esse projeto tem um conjunto de passos para que se possa visualizar suas implementações. Primeiramente alguns softwares são necessários:  
-
-  - Um editor de texto para: A escolha de algum em específico é definida pela preferência, mas escolher um que lhe permita uma visualização dos arquivos organizados dentro da pasta do projeto é fundamental.
-  - Node.js: que será nosso ambiente de execução JavaScript no servidor.  
+Esse projeto tem um conjunto de passos para que se possa visualizar suas implementações. Primeiramente, é necessário a instalação de um _package manager_: _Node.js_ ou _Yarn_. Recomendamos o _Yarn_, que utilizaremos para a explicação.
   
-Para baixar o Node.js basta ir até o site https://nodejs.org/pt-br/ e escolher o arquivo especificado para seu computador e depois instalar.  
-
-Com o Node.js instalado, acesse o terminal do seu computador e vá até a pasta __front-end__ do arquivo baixado do GitHub. O próximos comandos serão dados dentro dessa pasta, que é onde esta o arquivo _package.json_.  
-
-É necessário instalar o Jquery, uma biblioteca de funções JavaScript que interage no HTML. Essas funções foram usadas amplamente no projeto e a ausência da biblioteca indicaria erro. Para instalar basta colocar o comando 
+Com o _Yarn_ instalado, acesse o terminal do seu computador e vá até a pasta __front-end__ do repositório. Para instalar as dependências do projeto, como jQuery, listadas no arquivo _package.json_, basta utilizar o comando abaixo:
 
 ```
-npm install jquery --save
+yarn install
 ```
 
-O próximo passo já é a execução do projeto, onde o visualiazamos por meio de um servidor web criado pelo Node.js. Digite o comando abaixo para iniciar esse processo
+
+Em seguida, para visualizar o projeto, utilize o comando abaixo:
 
 ```
-npm start
+yarn start
 ```
 
-No navegador abrirá uma nova aba com a seguinte URL: http://localhost:3000/ e tela a baixo aparecerá  
+Esse comando iniciará um host local para a visualização de desenvolvimento do app, normalmente na porta 3000 do localhost, se estiver disponível - http://localhost:3000., sendo variante se este já estiver em uso por outra aplicação. A tela inicial do site é mostrada abaixo.
 
 
 ![Tela inicial do projeto](./images/home.JPG?w=200)  
@@ -201,46 +202,40 @@ No navegador abrirá uma nova aba com a seguinte URL: http://localhost:3000/ e t
 --------------------------------------------    
 ### 5. Problemas  
 
-  - Durante o desenvolvimento do projeto diversas dificuldades apareceram, muitas delas por falta de experiência com as novas tecnologias necessárias para a implementação de funcionalidades fora do escopo básico. Ou talvez seja melhor avaliado como dificuldades em utilizar tecnologias nada básicas, apesar de úteis e amplamente utilizadas no mercado, como foi o caso de React e Jquery, ou até mesmo CSS. Tranzendo maior especifidade à discussão, os  problemas enfretados até aqui, foram: 
+ Durante o desenvolvimento do projeto diversos obstáculos apareceram e foram superados ao com a familiarização com as tecnologias utilizadas. Dentre elas, destaca-se:
   
-  - Fazer animações com CSS e Jquery se mostrou um trabalho, que apesar de estéticamente importante, também carrega consigo muito conhecimento e minúcia sobre estes dois tópicos, conhecer sua documentação para aplicar o necessário para aquilo que deseja. Foram muitas as vezes que utilizou-se de funções inadequadas para se fazer determinado efeito e isso resultou em tentivas de correção igualmente inadequadas, quando não inúteis;  
+  - Fazer animações com CSS e jQuery;
   
-  - Como em React basicamente tudo é componente, as relações entres eles é imprescindível. Mas sincronizar dados entre eles também se mostra uma tarefa muito complicada, pois os dados fluem naturalmente em um sentido, de ```Componentes Pai_``` para ```Componentes Filho```, mas temos toda uma família de componentes que precisam se relacionar. Felizmente utilizando um componete ```Context``` foi possível cria uma forma viável de sincrozar os componentes que assim necessitavam estar;      
+  - Sincronizar dados entre os diversos componentes da árvore;
   
-  - Há algo que não parece complicado, uma trivialidade para alguém de fora, o site preecher na vertical todo o espaço da tela, independente da quantidade de contúedo contido. Entedner melhor o CSS foi a solução;  
+  - Validação de formulários em _client-side_;  
   
-  - Formulários também se mostraram complicadores, para ser mais especifico no que diz respeito a validação em _client-side_ e _input mask_;  
+  - Uso de máscaras nos formulários, para campos que deveriam ser formatados segundo um padrão rígido, como CPF: 000.000.000-00;
   
-  - Na segunda etapa do projeto, não foi necessário implementar tudo em React, mas também trabalhar com componetes que utilizavam multíplos contextos. Tarefa difícil de gerenciar e que agrava o problemas centreal, a dificuldade de implementar;  
-  
-  - Por fim apareceram pro fim a passagem de toda plataforma para essa nova tecnologia podia deixar pontas soltas, evidenicias erros escondidos ou incompatibilidades. Resumindo pequenos e médios _bugs_ que atrapalharam o desenvolvimento do projeto e que demandavam mais resistência que habilidade. 
+  - Uso de múltiplos contextos em um componente;
   
 
 --------------------------------------------
 ### 6. Comentários  
  
- - Gostariamos de ressaltar a escolha inicial de não utilizar o cartão de crédito como forma de pagamento e da não necessidade de existir no registro o endereço do cliente, pois a entrega de produtos não é uma opção. O site em desenvolvimento é de uma entidade acadêmica representativa dos alunos de um especifico curso, intituto ou departamento, sendo uma comunidade bem restrita e que trabalha de forma substancialmente local. Tanto suas relações sociais, quanto comerciais, se dão em grande parte de modo presencial com seus colaboradores. Nesse contexto, as ferramentas digitais auxiliam na comunicação e no acesso à processos que presencialmente seriam de pouco valor a ambos os lados e gerariam apenas burocracias, isso justifica por si só a existencia dessa plataforma. Dentro dessa comunidade local, a entrega de produtos não apenas não é viável, como também ilógica dada a distância que o fornenedor está dos clientes, sendo que esses transitam frequentemente pelo espaço onde o outro se encontra. Quanto ao cartão de crédito, é de praxe que SAs, CAs ou DAs não trabalhem com cartão de crédito em seus sites, utilizando mais transferencias/depósitos, pagamentos presenciais ou o PicPay, ferramenta muito difundida entre os universitários.  
+Tendo em vista o contexto e escopo do site (de Secretaria Acadêmica) decidiu-se não ser necessário a coleta de endereços e cartões de crédito. Ordinariamente as SAs (e extracurriculares da USP no geral) não trabalham com o envio dos produtos, ou com pagamento via cartão, mas sim de forma substancialmente local, com a retirada dos pedidos na sala da SA e o pagamento via depósito/transferência bancária ou online (como PicPay, ferramente amplamente utilizada entre universitários).
  
- - Algumas informações para andar pelo site são necessárias:  
+Destaca-se algumas informações para a navegação e teste do site:
  
-    - __Login:__ Há algumas contas registradas no site, tanto de cliente como de administrador. Elas dão acesso a possibilidade de comprar, acessar dados privados ou gerenciamento. Todas elas podem ser identificadas em _Context.js_, mas abaixo estão algumas delas para teste. 
+- __Login:__ Há algumas contas pré-cadastradas, como as descritas abaixo:
    
-      >__Conta Cliente:__  
-      >teste@gmail.com  
-      >Teste123  
-      
-      >__Conta Adminis:__  
-      >admin@admin.adm
-      >Admin123
-      
-      
+  >__Conta Cliente:__  
+  >Email: teste@gmail.com  
+  >Senha: Teste123  
+
+  >__Conta Adminis:__  
+  >Email: admin@admin.adm
+  >Senha: Admin123
     
-   - __Cupom:__ Foi aplicado uma funcionalidade de inserir cupons de desconto aos produtos, para realizar o teste escreva.  
-      
-      >__Cupom de 10% de desconto__  
-      >FLIPRULEZ10  
-      
-      >__Cupom de R$25,00__  
-      >FLIPRULEZ25
-      
-      
+- __Cupom:__ Os cupons de desconto cadastrados são:
+
+  >__Cupom de 10% de desconto__  
+  >FLIPRULEZ10  
+
+  >__Cupom de R$25,00 de desconto__  
+  >FLIPRULEZ25
