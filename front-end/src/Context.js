@@ -183,7 +183,7 @@ export class DataProvider extends React.Component {
                     birthday: '01/01/2000',
                     cpf: '666.666.666-66',
                     phoneNumber: '+55 99 99999-9999'
-                }
+                },
             ],
 
             isLogged: {
