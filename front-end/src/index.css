@@ -572,3 +572,17 @@ input::placeholder {
 .dark-theme *.error-message {
   color: #ec3e3e !important
 }
+
+/* option, select option {
+  color: inherit !important;
+} */
+
+.dark-theme select option, .dark-theme option {
+  color: #f1eff1;
+  background-color: #202020;
+}
+
+.light-theme select option, .light-theme option {
+  color: black;
+  background-color: white;
+}
