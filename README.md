@@ -155,7 +155,7 @@ O conteúdo que aparecerá no componente App é definido de forma semelhante, ou
 </Switch>
 
 ```
-Observe que depois que ele define ```const {base} = props.match.params```, a função ```toLowerCase()``` da ```base``` que retorna se a página atual onde o usuário está é alguma dos fornecidas para teste. Assim define-se qual conteúdo deve ser mostrado, sendo que muitas páginas permanem a mesma, mudando apenas componentes internos. No código temos o exemplos de ```eventos```, ```events```, ```event```, ```produtos```, ```products``` e ```product```. Temos que existem condionametos nesse formato para todos os componentes importados lá no código mais para cima.  
+Observe que depois que ele define ```const {base} = props.match.params```, a função ```toLowerCase()``` da ```base``` que retorna se a página atual onde o usuário esta é alguma das fornecidas para teste. Assim define-se qual conteúdo deve ser mostrado, sendo que muitas páginas permanem a mesma, mudando apenas componentes internos. No código temos o exemplos de ```eventos```, ```events```, ```event```, ```produtos```, ```products``` e ```product```. Temos que existem condionametos nesse formato para todos os componentes importados lá no código mais para cima.  
 
 
 
