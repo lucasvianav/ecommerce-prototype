@@ -15,15 +15,45 @@ __Grupo - 1: SITE SA-SHREK__
 
 ### 1. Requerimentos  
 
+Os requerimentos pedidos e adicionados particularmente para esse projeto foram:  
+
+  - Dois tipos de usuários: Cliente e Administrados;
+  
+  - A loja deve vender produtos, serviços ou ambos. No caso de produtos, o item pode ser selecionado e sua quantidade escolhida. O pagamento será feito por meio de cartão de crédito registrado. A quantidade do produto comprado é decrementada do número em estoque. A funcionalidade do cartão de crédito foi retirada, porém as especificações de escola dos produtos aumentaram;  
+  
+  - O cliente deve ter ao menos os seguinter parâmetros: nome, id, telefone e numero.  
+  No projeto foi substituido id por cpf e adicionou-se aniversário, outros adicionados não são dados de perfil. Foi excluido também o endereço com a justificativa;  
+    
+  - O administrador tem as mesmos parâmetros do cliente com as alterações já realizadas;  
+    
+  - Os produtos devem ter ao menos os parêmetros: nome, id, foto, descrição, preço, quantidade em estoque e quantidade vendida.  
+  Outros foram adicionados;  
+   
+  - O administrador consegue criar/atualizar/ler/deletar produtos. Essa funcionalidade foi implementada perfeitamente;  
+  
+  - Implentar uma funcionalidade única à loja. Não implementado, porém considerando que implementação da possibilidade de inserção de cupons de desconto, pode-se dizer que temos algo de diferente;  
+  
+  - O sistema deve ser responsivo, ter acessibilidade e usabilidade. O site respeita os três.  
+  
+  
+  
+  
+    
+    
+    
+
 -----------------------------
 ### 2. Descrição do Projeto  
 
   
-  A descrição do projeto em sua versão final requeria para a presente etapa já algumas funcionalidades. Porém como o e-commerce aqui implementado é voltado para servir a uma entidade universitária para suas eventuais vendas de artigos e eventos, algumas particularidades foram adicionadas aos requerimentos iniciais. E resumo os requerimentos são estes:  
-  - Dois tipos de usuários:  
-    - Cliente - Esse tipo de conta conseguem escolher os produtos que deseja comprar e percorrer todo o processo para realizar o pedido. 
+  A descrição do projeto em sua versão final requeria para a presente etapa já algumas funcionalidades. Porém como o e-commerce aqui implementado é voltado para servir a uma entidade universitária para suas eventuais vendas de artigos e eventos, algumas particularidades foram adicionadas aos requerimentos iniciais. E resumo as implementações foram:  
+- Dois tipos de usuários, a diferenciação entre eles foi realizado por um parâmetro chamado type comum ao objeto:  
+  
+    - Cliente - Esse tipo de conta conseguem escolher os produtos que deseja comprar e percorrer todo o processo para realizar o pedido;   
     
-    - Administrador - Uma conta de administrador consegue adicionar novos administradores e gerencia-los, assim como pode fazer o mesmo para contas cliente. Também gerencia o estoque dos itens e o fluxo de pedidos. 
+    - Administrador - Uma conta de administrador consegue adicionar novos administradores e gerencia-los, assim como pode fazer o mesmo para contas cliente. Também gerencia o estoque dos itens e o fluxo de pedidos.    
+    
+
     
     
  - Como a SA-SHREK vende produtos então seguimos os requerimentos correspondetes a tal. Isto é, o cliente pode escolher entre produtos e eventos. Selecionando, quando habilitado, as especificação do item (tamanho, quantidade e modelagem) e adicionando-o ao carrinho de compras. Passando por todo o processo até concluir a compra e escolhendo no caminho outras especifiações do pedido, como por exemplo a forma de pagamento. Nas especificações fornecidas cosntava o cartão de crédito como uma forma de pagamento, utilizamos na implementação apenas transferências por essa ser a opção mais dentro do contexto onde a loja está inserida, mas para a versão final planeja-se incluir a opção sugerida para fins de demonstração. Foi incluido ainda nesse projeto a funcionalidade de cupons de desconto.  
@@ -82,7 +112,7 @@ import { DataProvider } from './Context'
 
 ReactDOM.render(<DataProvider><App/></DataProvider>, document.getElementById('root'))
 ```
--------> falar do DataProvider
+Outro elemento colocado como contéudo é o ```<DataProvider> </DataProvider>``` que é importado do ```Context```, no qual apronfundaremos mais para frente por sua grande importância dentro dessa aplicação.  
 
 Analisaremos o _App.js_, usando ele como referência dentro do projeto. Afinal ele é o agregador de todas os outros elementos componentes que serão nossas páginas. Veja que da linha 10 a 25 do código temos importações de componentes que como a _Navbar_ e o _Footer_ ou então o conteúdo das páginas.
 
@@ -191,7 +221,7 @@ O próximo passo já é a execução do projeto, onde o visualiazamos por meio d
 npm start
 ```
 
-No navegador abrirá uma nova aba com a seguinte URL: http://localhost:3000/ e tela a baixo aparecerá  
+No navegador abrirá uma nova aba com a seguinte URL: http://localhost:3000, sendo variante se este já estiver em uso por outra aplicação. Ao final a tela abaixo aparecerá  
 
 
 ![Tela inicial do projeto](./images/home.JPG?w=200)  
