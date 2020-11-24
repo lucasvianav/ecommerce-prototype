@@ -187,7 +187,12 @@ O conteúdo que aparecerá no componente App é definido de forma semelhante, ou
 ```
 Observe que depois que ele define ```const {base} = props.match.params```, a função ```toLowerCase()``` da ```base``` que retorna se a página atual onde o usuário esta é alguma das fornecidas para teste. Assim define-se qual conteúdo deve ser mostrado, sendo que muitas páginas permanem a mesma, mudando apenas componentes internos. No código temos o exemplos de ```eventos```, ```events```, ```event```, ```produtos```, ```products``` e ```product```. Temos que existem condionametos nesse formato para todos os componentes importados lá no código mais para cima.  
 
+Uma complicação que nasce com tantos componentes entrelaçados é como passar os dados entre eles. O React cria componentes que os dados só passam de pai para filho. A solução é o ```Context_ ``` , que permite o compartilhamento de informações que serão globais. Perceba que em _Contex.js_ há o seguinte comando
 
+``` 
+export const DataContext = React.createContext()
+```  
+Nele esta sendo criado o objeto Contexto com o nome ```DataContext```. Perceba que o elemento que englobava ```<App/>``` quando esse foi selecionado como contéudo da página html. Esse objeto é importado para praticamente todos os arquivos JavaScript do projeto, afinal a comunicação entre componentes é fundamental. O arquivo _Context.js_ ainda realiza uma função para a demostração do funcionamento do site, ele armazena dados dinâmicos durante a execução da aplicação, para dar a impressão de que há um backend ativo. 
 
 
 
