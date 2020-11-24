@@ -1,12 +1,10 @@
-
-__Nome:                     | nºUSP:__  
-_Beatriz Helena Dias Rocha   | 11300051_  
-_Juliana Bernardes Freitas   | 11317928_  
-_Lucas Henrique Sant'Anna    | 10748521_  
-_Lucas Viana Vilela          | 10748409_  
-_Rafaela Cristina Bull       | 11233651_  
-
-__Grupo - 1: SITE SA-SHREK__ 
+__Grupo - 1: Site de Secretaria Acadêmica - SA-SHREK__ 
+__Nome e nºUSP:__  
+_Beatriz Helena Dias Rocha    11300051_  
+_Juliana Bernardes Freitas    11317928_  
+_Lucas Henrique Sant'Anna     10748521_  
+_Lucas Viana Vilela           10748409_  
+_Rafaela Cristina Bull        11233651_  
   
 ------------------------------------------  
   
@@ -17,23 +15,21 @@ __Grupo - 1: SITE SA-SHREK__
 
 Os requerimentos pedidos e adicionados particularmente para esse projeto foram:  
 
-  - Dois tipos de usuários: Cliente e Administrados;
+  - Dois tipos de usuários: cliente e administradores;
   
-  - A loja deve vender produtos, serviços ou ambos. No caso de produtos, o item pode ser selecionado e sua quantidade escolhida. O pagamento será feito por meio de cartão de crédito registrado. A quantidade do produto comprado é decrementada do número em estoque. A funcionalidade do cartão de crédito foi retirada, porém as especificações de escola dos produtos aumentaram;  
+  - A loja deve vender produtos, serviços, eventos ou todos. No caso de produtos ou eventos, o item pode ser selecionado e sua quantidade escolhida, bem como outras opções (como modelagem, cor e tamanho). O pagamento será feito por meio de transferência bancária ou por PicPay. A quantidade do produto comprado é decrementada do número em estoque;
   
-  - O cliente deve ter ao menos os seguinter parâmetros: nome, id, telefone e numero.  
-  No projeto foi substituido id por cpf e adicionou-se aniversário, outros adicionados não são dados de perfil. Foi excluido também o endereço com a justificativa;  
+  - Uma conta (cliente ou administrador) deve ter ao menos os seguinter dados: nome, email, CPF, número de celular e data de nascimento.
+  
+  - Administradores têm acesso crud aos produtos, eventos e serviçoes;
     
-  - O administrador tem as mesmos parâmetros do cliente com as alterações já realizadas;  
-    
-  - Os produtos devem ter ao menos os parêmetros: nome, id, foto, descrição, preço, quantidade em estoque e quantidade vendida.  
-  Outros foram adicionados;  
+  - Os produtos devem ter ao menos os parêmetros: nome, id, fotos, descrição, preço e quantidade em estoque;
    
   - O administrador consegue criar/atualizar/ler/deletar produtos. Essa funcionalidade foi implementada perfeitamente;  
   
-  - Implentar uma funcionalidade única à loja. Não implementado, porém considerando que implementação da possibilidade de inserção de cupons de desconto, pode-se dizer que temos algo de diferente;  
+  - Implentar uma funcionalidade única à loja.
   
-  - O sistema deve ser responsivo, ter acessibilidade e usabilidade. O site respeita os três.  
+  - O sistema deve ser responsivo, ter acessibilidade e usabilidade.
   
   
   
@@ -46,30 +42,20 @@ Os requerimentos pedidos e adicionados particularmente para esse projeto foram:
 ### 2. Descrição do Projeto  
 
   
-  A descrição do projeto em sua versão final requeria para a presente etapa já algumas funcionalidades. Porém como o e-commerce aqui implementado é voltado para servir a uma entidade universitária para suas eventuais vendas de artigos e eventos, algumas particularidades foram adicionadas aos requerimentos iniciais. E resumo as implementações foram:  
-- Dois tipos de usuários, a diferenciação entre eles foi realizado por um parâmetro chamado type comum ao objeto:  
-  
-    - Cliente - Esse tipo de conta conseguem escolher os produtos que deseja comprar e percorrer todo o processo para realizar o pedido;   
+  O e-commerce aqui implementado é voltado para o uso de uma extracurricular universitária (especificamente, uma Secretaria Acadêmica) para suas eventuais vendas de produtos (como peças de roupas) e eventos (como viagens técnicas ou cursos).
     
-    - Administrador - Uma conta de administrador consegue adicionar novos administradores e gerencia-los, assim como pode fazer o mesmo para contas cliente. Também gerencia o estoque dos itens e o fluxo de pedidos.    
-    
-
-    
-    
- - Como a SA-SHREK vende produtos então seguimos os requerimentos correspondetes a tal. Isto é, o cliente pode escolher entre produtos e eventos. Selecionando, quando habilitado, as especificação do item (tamanho, quantidade e modelagem) e adicionando-o ao carrinho de compras. Passando por todo o processo até concluir a compra e escolhendo no caminho outras especifiações do pedido, como por exemplo a forma de pagamento. Nas especificações fornecidas cosntava o cartão de crédito como uma forma de pagamento, utilizamos na implementação apenas transferências por essa ser a opção mais dentro do contexto onde a loja está inserida, mas para a versão final planeja-se incluir a opção sugerida para fins de demonstração. Foi incluido ainda nesse projeto a funcionalidade de cupons de desconto.  
+ - O cliente pode escolher entre visualizar as páginas de produtos e eventos. Para comprar, seleciona as especificação do item (tamanho, quantidade, modelagem e quantidade) e adiciona-o ao carrinho de compras, tendo a possibilidade de inserir um  cupom de desconto. Então, seleciona-se a forma de pagamento e confirma-se a compra, para concluí-la.
  
- - Clientes, Administradores e os Itens da Loja guardam diversos registros que os classificam, idetificam e carregam com sigo propriedades para serem usadas dentro a implementação. Esses registros estão abaixo:   
-   - __Registros dos Clientes:__ name, type (que nesse caso será 'client'), e-mail, password, birthday, cpf, phoneNumber;  
+ - Contas e itens (produtos ou eventos) guardam diversos registros que os classificam, idetificam e carregam com sigo propriedades para serem usadas dentro a implementação. Dentre essas, destaca-se:
+   - __Contas:__ nome, tipo da conta (cliente ou administrador), email, senha, data de nascimento, CPF e número de telefone;  
    
-   - __Registros dos Administradores:__ name, type (admin), e-mail, password, birthday, cpf, phoneNumber;  
-   
-   - __Registros de Itens:__ Devemos aqui fazer uma pequena distição entre os dois tipos de itens vendidos na loja. Podemos perceber muitors registros semelhantes, mas entre o tipo Produtos e Eventos há particularidades que melhor representam aquilo que será vendido. Muitas vezes alguns desses registros não são utilizados, deixam seu valor em _null_.  
+   - __Itens:__
        
-       _Produtos:_ name, type(os produtos são do tipo 'PR'), id, visibility, category, description, templates, sizes, colors, price(full, sale), img, sizeTable (uma imagem que contêm todos os tamanhos do produto), stock(quantidade em estoque).  
+       _Produtos:_ nome, tipo (nesse caso, produto), id, visibilidade, categoria, descrição, modelagens, tamanhos, cores, preço, imagem, imagem com as medidas do produto e estoque.  
        
-       _Eventos:_  name, type('EV'), id, visibility, description, templates, sizes, colors, info(location, date, time, link), price(full, sale), stock.  
+       _Eventos:_  nome, tipo (nesse caso, evento), id, visibilidade, categoria, descrição, informações (local, data, horário, link relacionado), preço e estoque.  
    
- - O gerenciamento dos Produtos, e até mesmo de usuários, é realizado pelos administradores. Esses usuários especiais administram a loja pela __Página do Administrador__ onde conseguem ter o controle de todos os produtos que são vendidos na loja, podendo editar suas propriedades (Nome, Imagens, texto da Imagem, Preço, Preço com desconto, Tipo, Categoria, Descrição e Quantidade) e opção de escolha (Modelagem, Tamanho e Cor). Conseguem ver os pedidos realizados e seus status, assim como produtos cadastrados no site, mas que não estão visíveis aos clietes. Outra aba desta página é a Novo Pedido, onde há a opção de cadastras novos produtos especificando as propriedades já citadas. A ultima aba contém todos os usuários cadastrados, por ela se administra tanto cliente quanto administradores dependendo da hierarquia. 
+ - O gerenciamento dos itens é realizado pelos administradores. Esses usuários especiais administram a loja pela __Página do Administrador__ onde conseguem ter o controle de todos os produtos que são vendidos na loja, podendo editar suas propriedades (Nome, Imagens, texto da Imagem, Preço, Preço com desconto, Tipo, Categoria, Descrição e Quantidade) e opção de escolha (Modelagem, Tamanho e Cor). Conseguem ver os pedidos realizados e seus status, assim como produtos cadastrados no site, mas que não estão visíveis aos clietes. Outra aba desta página é a Novo Pedido, onde há a opção de cadastras novos produtos especificando as propriedades já citadas. A ultima aba contém todos os usuários cadastrados, por ela se administra tanto cliente quanto administradores dependendo da hierarquia. 
  
    
  
