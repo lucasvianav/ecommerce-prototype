@@ -66,7 +66,7 @@ O projeto foi desenvolvido tendo em vista os aspectos a seguir:
 - __Acessibilidade:__   
    Além de resursos de acessibilidade padrão, como texto alternativo para imagens e placeholders em campos de input, foram implementados recursos de menor presença nos projetos web. Dentre eles: a presença de um tema escuro (modo de contraste) para o site e a página _Acessiblidade_, linkada no rodapé do site, que detalha melhor esses elementos.   
    
-      ![Página de desrição das funcionalidades de acessibilidade](./images/acessibilidade.JPG)
+![Página de desrição das funcionalidades de acessibilidade](./images/acessibilidade.JPG)
       
 - __Usabilidade:__  
 A aplicação foi implementada até aqui para ser funcional e entregar ao usuário aquilo que ele procura. Em questão de design, o site apresenta páginas limpas que mostram apenas o essencial para que o usuário saiba onde está e o que deve fazer, além de botões e links que apresentam suas funções de forma lógica e dentro dos hábitos de navegação dos consumidores. Tomou-se cuidado, também, em utilizar cores que não comprometam a legibilidade dos elementos.
@@ -75,7 +75,7 @@ A divisão dos  produtos dentro do site é clara: as duas principais categorias 
    
 Tendo em vista que a função do usuário administrador é fazer a gestão da loja, todas funções relacionadas a isso estão inclusas em uma única página, na  __Página do Administrador__:
       
-      ![Página do Administrador do projeto](./images/adminpage.jpeg)  
+![Página do Administrador do projeto](./images/adminpage.jpeg)  
       
    - __Responsividade:__  
 Os componentes da página foram implementados e estruturados para serem responsivos para qualquer tamanho de tela de computador, utilizando recursos como _flexbox_. Grande parte do site não foi configurado para se adaptar para telas mobile, tendo em vista o escopo do projeto. Alguns elementos, por serem construídos com uso de Bootstrap, têm responsividade com dispositivos mobile, porém são exceções. 
