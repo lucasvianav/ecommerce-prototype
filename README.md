@@ -88,7 +88,7 @@ Os requerimentos pedidos e adicionados particularmente para esse projeto foram:
    
       Muitas facilidades podem ser encontras também para um usuário do tipo administrador. Como o objetivo do administrador é fazer a gestão da loja, todas suas funções foram divididas por abas e  colocadas na já citada __Página do Administrador__. Abaixo é possível visualiazar a página. 
       
-      ![Página do Administrador do projeto](./images/adminpage.JPG)  
+      ![Página do Administrador do projeto](./images/adminpage.jpeg)  
       
    - __Responsividade:__  
    Os componentes da página foram implementados para serem responsivos para qualquer tamanho de tela de computador. Grande parte do site não foi configurado para se adaptar para telas mobile, tendo suas estruturas sido definidas dentro das folhas de estilo CSS. Outros janelas e compoenentes, por serem construídos com o framework Bootstrap, têm responsividade com dispositivos mobile, porém são exceções de modo que não há uma página inteira que se mostre compatível em um table ou celular. 
