@@ -64,7 +64,7 @@ const ModalPedido = (props) => {
                         <div className="card mb-3 mr-3" style={{width: 'calc(50% - 1rem)'}} key={pr.name + pr.sku + index}>
                           <div className="row no-gutters">
                             <div className="col-md-4">
-                              <img src={p.img[0].small} className="card-img-top" alt={p.img[0].alt} style={{width: "8rem", marginRight : 'auto', marginLeft : 'auto'}} />
+                              <img src={p.img[0].path} className="card-img-top" alt={p.img[0].alt} style={{width: "8rem", marginRight : 'auto', marginLeft : 'auto'}} />
                             </div>
                             <div className="col-md-8">
                               <div className="card-body">

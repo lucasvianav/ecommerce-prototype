@@ -90,13 +90,28 @@ function ProductForm(props){
     }
   },[categoria]);
 
+  const getDataUrl = (pathImg) => {
+    const img = new Image();
+    img.src = pathImg;
+    // Create canvas
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    // Set width and height
+    canvas.width = 500;
+    canvas.height = 500;
+    // Draw the image
+    ctx.drawImage(img, 0, 0);
+    console.log(canvas.toDataURL('image/jpeg'));
+    return canvas.toDataURL('image/jpeg');
+ }
+
   const addImage = () => {
     if(typeof selectedImg.name !== "undefined"){
       if(altImg !== ""){
         var novo = {};
-        novo.small = URL.createObjectURL(selectedImg);
-        novo.large = URL.createObjectURL(selectedImg);
+        novo.path = URL.createObjectURL(selectedImg);
         novo.alt = altImg;
+        novo.file = getDataUrl(novo.path);
         setImagens([...imagens, novo]);
       }
     }else{
@@ -209,15 +224,9 @@ function ProductForm(props){
           if(item.color !== '' && !colors.includes(item.color)){ colors.push(item.color) }
           if(item.size !== '' && !sizes.includes(item.size)){ sizes.push(item.size) }
 
-          let sku = tipo + '-' + newId
-          if(tipo === 'PR'){
-            sku += item.color ? '-' + item.color.substring(0,4).toUpperCase() + '-' : '-VOID-'
-            sku += item.template ? item.template.substring(0,4).toUpperCase() + '-' : 'VOID-'
-            sku += item.size ? item.size : 'VOID'
-          }
-
-          stock[sku] = parseInt(item.stock)
       }
+      
+      console.log(imagens);
 
       var exportData = {
         name: nomeProduto,
@@ -226,13 +235,11 @@ function ProductForm(props){
         visibility: visibility,
         category: cat,
         description: description,
-        info: {location: 'Lorem Ipsum', date: 'dd/mm/yyyy', time: '00h00', link: {text: 'Link para o facebook', url: 'https://facebook.com/'}},
         templates: templates,
         sizes: sizes,
         colors: colors,
         price: {full: parseFloat(precoProduto), sale: parseFloat(displayPrice)},
         img: imagens,
-        sizeTable: {img: '', alt: ''},
         stock: stock
       }
       
@@ -290,10 +297,10 @@ function ProductForm(props){
                         <button type="button" className="excluir-imagem"
                           onClick={()=>{removeImg(index)}}
                         >X</button>
-                        <img src={it.small} alt={it.alt} className="miniImagem"
+                        <img src={it.path} alt={it.alt} className="miniImagem"
                         onClick={(event)=>{
                           var obj = {};
-                          obj.src = it.small;
+                          obj.src = it.path;
                           obj.alt = it.alt;
                           obj.index = index;
                           setModalImgProps(obj);
@@ -421,7 +428,7 @@ function ProductForm(props){
             opcoes.map((op, index)=>{
               return (
                 <OpCampo key={index} removable={index === 0 ? false : true} index={index}
-                  onRemove={(e) => {removeOp(index)}} onChange={(e) => {attOp(e)}}
+                  onRemove={(e) => {removeOp(index)}} onChange={(e) => {attOp(e)}} value={opcoes}
                   id={"optionFields"+index} {...opcoes[index]}
                 />
                 )

@@ -31,8 +31,8 @@ export class DataProvider extends React.Component {
                     colors: [],
                     price: {full: 130.00, sale: 130.00},
                     img: [
-                        {small: process.env.PUBLIC_URL + '/img/moletom_canguru_front.png', large: process.env.PUBLIC_URL + '/img/moletom_canguru_front.png', alt: `Frente de um moletom branco com uma pequena estampa na frente com o logo da 'SA-Shrek' fundo preto com pontinhos brancos (semelhante a um céu estrelado)`},
-                        {small: process.env.PUBLIC_URL + '/img/products/moletom_canguru_back.png', large: process.env.PUBLIC_URL + '/img/products/moletom_canguru_back.png', alt: `Costas de um moletom branco fundo preto com pontinhos brancos (semelhante a um céu estrelado)`}
+                        {path: process.env.PUBLIC_URL + '/img/moletom_canguru_front.png', alt: `Frente de um moletom branco com uma pequena estampa na frente com o logo da 'SA-Shrek' fundo preto com pontinhos brancos (semelhante a um céu estrelado)`},
+                        {path: process.env.PUBLIC_URL + '/img/products/moletom_canguru_back.png', alt: `Costas de um moletom branco fundo preto com pontinhos brancos (semelhante a um céu estrelado)`}
                     ],
                     sizeTable: {img: '/img/products/size.png', alt: `Na imagem: Mokup de moletom e Tabela de Medidas. Na tabela há São 6 colunas. Na ordem: Tipo de medidas, P, M, G, GG, Tolerancia. E 3 linhas. Na ordem: Toráx, Comprimento, Comp. Manga. Na coluna P: 53, 69, 70. Na coluna M: 56, 71, 71. Na coluna GG: 62, 75, 73. Na coluna tolerancia: +-1.5, +-1.5, +-1.0. Observação em baixo da tabela: 'medidas em centímetros'.`},
                     stock: {
@@ -62,7 +62,7 @@ export class DataProvider extends React.Component {
                     colors: [],
                     info: {location: 'Lorem Ipsum', date: 'dd/mm/yyyy', time: '00h00', link: {text: 'Link para o facebook', url: 'https://facebook.com/'}},
                     price: {full: 50.00, sale: 40.00},
-                    img: [{small: process.env.PUBLIC_URL + '/img/cervejada.png', large: process.env.PUBLIC_URL + '/img/cervejada.png', alt: ''}],
+                    img: [{path: process.env.PUBLIC_URL + '/img/cervejada.png', alt: ''}],
                     stock: {
                         'EV-E1': 10
                     }

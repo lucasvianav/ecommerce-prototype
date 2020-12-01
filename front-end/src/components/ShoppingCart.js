@@ -23,7 +23,7 @@ class ShoppingCart extends React.Component {
                 type: sku[0],
                 id: sku[1],
                 sku: item.sku,
-                cover: {img: product.img[0].small, alt: product.img[0].alt},
+                cover: {img: product.img[0].path, alt: product.img[0].alt},
                 specs: item.specs,
                 quantity: item.quantity,
                 price: product.price.sale,

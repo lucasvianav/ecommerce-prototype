@@ -146,11 +146,11 @@ class ProductDetails extends React.Component {
                 <div className="content-box"> 
                     <div className="product-photos">
                         <div className="thumbnail-panel">
-                            { this.product.img.map((image, index) => <img className={'product-photo-thumb' + (index === 0 ? ' active' : '')} src={image.small} alt={image.alt} key={image + index.toString()}/>) }
+                            { this.product.img.map((image, index) => <img className={'product-photo-thumb' + (index === 0 ? ' active' : '')} src={image.path} alt={image.alt} key={image + index.toString()}/>) }
                         </div>
 
                         <div className="large-photos">
-                            { this.product.img.map((image, index) => <img className={'large-photo' + (index > 0 ? ' no-display' : '')} src={image.large} alt={image.alt} key={image + index.toString()}/>) }
+                            { this.product.img.map((image, index) => <img className={'large-photo' + (index > 0 ? ' no-display' : '')} src={image.path} alt={image.alt} key={image + index.toString()}/>) }
                         </div>
                     </div>
 
