@@ -23,15 +23,12 @@ var imgSchema = mongoose.Schema({
 });
 
 var productSchema = mongoose.Schema({
+    _id: String,
     name: {
         type: String,
         required: true
     },
     type: {
-        type: String,
-        required: true
-    },
-    id: {
         type: String,
         required: true
     },
