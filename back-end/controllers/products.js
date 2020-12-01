@@ -1,31 +1,74 @@
 var express = require('express');
+var connection = require('../connection');
 
 var productsModel = require('../models/products');
 
 module.exports = {
-  getAll: async function(req, res, next) {
-    const result = await productsModel.getAll(req.params.page, res);
-    res.send(result);
+  getAll: function(req, res, next) {
+    productsModel.find({}, (err, products) => {
+      if (err) {
+        console.log(err);
+        res.status(500);
+        res.send([]);
+      }else{
+        res.status(200);
+        res.send(products);
+      }
+    });
   },
 
-  getOne: async function(req, res, next) {
-    const result = await productsModel.getOne(req.params.id, res);
-    res.send(result);
+  getOne: function(req, res, next) {
+    productsModel.find({id: req.params.id}, (err, product) => {
+      if (err) {
+        console.log(err);
+        res.status(500);
+        res.send([]);
+      }else{
+        res.status(200);
+        res.send(product);
+      }
+    });
   },
 
-  insert: async function(req, res, next) {
-    const result = await productsModel.insert(req.body, res);
-    res.send(result);
+  insert: function(req, res, next) {
+    productsModel.insertMany([req.body], (err, response) => {
+      if (err) {
+        console.log(err);
+        res.status(500);
+        res.send([]);
+      }else{
+        res.status(200);
+        res.send(response);
+      }
+    });
   },
 
-  update: async function(req, res, next) {
-    console.log(req.body);
-    const result = await productsModel.update(req.params.id, req.body, res);
-    res.send(result);
+  update: function(req, res, next) {
+    productsModel.updateMany({ id: req.params.id }, req.body,
+      (err, response) => {
+        if (err) {
+          console.log(err);
+          res.status(500);
+          res.send([]);
+        }else{
+          res.status(200);
+          res.send(response);
+        }
+    });
   },
 
-  del: async function(req, res, next) {
-    const result = await productsModel.del(req.params.id, res);
-    res.send(result);
+  
+  del: function(req, res, next) {
+    productsModel.deleteMany({ id: req.params.id },
+      (err, response) => {
+        if (err) {
+          console.log(err);
+          res.status(500);
+          res.send([]);
+        }else{
+          res.status(200);
+          res.send(response);
+        }
+    });
   }
 }
