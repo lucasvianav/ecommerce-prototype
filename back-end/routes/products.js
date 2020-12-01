@@ -1,27 +1,16 @@
-var bodyParser = require('body-parser');
 var express = require('express');
 var router = express.Router();
 
-var jsonParser = bodyParser.json();
+var productsController = require('../controllers/products');
 
-router.get('/all/:page', function(req, res, next) {
-  res.send('Rota get');
-});
+router.get('/all/:page', (req, res, next) => {productsController.getAll(req, res, next)});
 
-router.get('/:id', function(req, res, next) {
-  res.send('Rota get');
-});
+router.get('/:id', (req, res, next) => {productsController.getOne(req, res, next)});
 
-router.post('/', jsonParser, function(req, res, next) {
-  res.send('Rota post');
-});
+router.post('/', (req, res, next) => {productsController.insert(req, res, next)});
 
-router.put('/:id', jsonParser, function(req, res, next) {
-  res.send('Rota put');
-});
+router.put('/:id', (req, res, next) => {productsController.update(req, res, next)});
 
-router.delete('/:id', function(req, res, next) {
-  res.send('Rota delete');
-});
+router.delete('/:id', (req, res, next) => {productsController.del(req, res, next)});
 
 module.exports = router;
