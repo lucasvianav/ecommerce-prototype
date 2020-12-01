@@ -275,8 +275,8 @@ function ProductForm(props){
           <div className="form-row" id="rowVisibility">
             <div className="col-12 d-flex justify-content-end mb-2 pr-1">
                 <div className="custom-control custom-switch mr-2">
-                    <input type="checkbox" className="custom-control-input" id="visibility" onChange={e => setVisibility(e.target.checked)} checked={visibility}/>
-                    <label className="custom-control-label" htmlFor="visibility">Produto visível</label>
+                    <input type="checkbox" className="custom-control-input green-radio-input" id="visibility" onChange={e => setVisibility(e.target.checked)} checked={visibility}/>
+                    <label className="custom-control-label green-radio-label" htmlFor="visibility">Produto visível</label>
                 </div>
             </div>
           </div>

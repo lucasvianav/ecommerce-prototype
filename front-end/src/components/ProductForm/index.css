@@ -99,7 +99,7 @@ input[type='text'].input-control{
     border-radius: 15px;
 }
 
-.custom-control-input:checked ~ .custom-control-label::before {
+.green-radio-input:checked ~ .green-radio-label::before {
     color: #fff;
     border-color: #28A745;
     background-color: #28A745;

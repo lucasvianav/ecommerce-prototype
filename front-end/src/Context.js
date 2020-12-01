@@ -70,16 +70,16 @@ export class DataProvider extends React.Component {
             ],
     
             cart: [
-                {
-                    sku: 'PR-P1-VOID-MASC-M', // PR = type (PRoduct) --- P1 = id --- VOID = color --- MASC = template (MASC x FEMI) --- M = size
-                    quantity: 2,
-                    specs: {color: '', template: 'Masculino', size: 'M'}
-                },
-                {
-                    sku: 'EV-E1', // EV = type (EVent) --- E1 = id
-                    quantity: 1,
-                    specs: {color: '', template: '', size: ''}
-                }
+                // {
+                //     sku: 'PR-P1-VOID-MASC-M', // PR = type (PRoduct) --- P1 = id --- VOID = color --- MASC = template (MASC x FEMI) --- M = size
+                //     quantity: 2,
+                //     specs: {color: '', template: 'Masculino', size: 'M'}
+                // },
+                // {
+                //     sku: 'EV-E1', // EV = type (EVent) --- E1 = id
+                //     quantity: 1,
+                //     specs: {color: '', template: '', size: ''}
+                // }
             ],
     
             orders: [
