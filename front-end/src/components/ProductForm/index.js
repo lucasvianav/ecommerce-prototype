@@ -8,6 +8,8 @@ import { DataContext } from '../../Context';
 import Modais from './Modais';
 import OpCampo from './OpCampo';
 
+import ProductsRequests from '../../requests/Products';
+
 function ProductForm(props){
   const context = useContext(DataContext);
   const categories = context.categories;
@@ -39,6 +41,9 @@ function ProductForm(props){
   const [modalInfo, setModalInfo] = useState(false);
 
   const [opcoes, setOpcoes] = useState([]);
+
+  /*State da API*/
+  const [req, setReq] = useState({});
   
   useEffect( () => {
     if(props.mode === "view"){
@@ -217,13 +222,13 @@ function ProductForm(props){
       let colors = []
       let sizes = []
       let templates = []
-      let stock = {}
+      let stock = []
 
       for(let item of opcoes){
           if(item.template !== '' && !templates.includes(item.template)){ templates.push(item.template) }
           if(item.color !== '' && !colors.includes(item.color)){ colors.push(item.color) }
           if(item.size !== '' && !sizes.includes(item.size)){ sizes.push(item.size) }
-
+          stock.push([item.template, item.color, item.size, item.stock])
       }
       
       console.log(imagens);
@@ -249,7 +254,11 @@ function ProductForm(props){
       }
 
       else if(action === 'Cadastrar'){
-        context.createProduct(exportData)
+        var r = {};
+        r.send = "post";
+        r.data = exportData;
+        setReq(r);
+        //context.createProduct(exportData)
         setImagens([])
         setSelectedImg({})
         setAltImg("")
@@ -276,6 +285,7 @@ function ProductForm(props){
 
   return(
     <>
+      <ProductsRequests.InsertProduct {...req} onChange={()=>{setReq({})}}/>
       <h3>{title}</h3>
       <form id='product-form'>
         <div id="cadastroProduto" style={{width: '97%'}}>

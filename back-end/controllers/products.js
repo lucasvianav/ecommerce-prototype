@@ -55,38 +55,42 @@ module.exports = {
   },
 
   insert: async function(req, res, next) {
-    var data = {};
-    data._id = await generateProductId(req.body);
-    data.name = req.body.name;
-    data.type = req.body.type;
-    data.price = req.body.price;
-    data.visibility = req.body.visibility;
-    data.category = req.body.category;
-    data.description = req.body.description;
-    data.sizes = req.body.sizes;
-    data.templates = req.body.templates;
-    data.colors = req.body.colors;
-    data.img = req.body.img;
+    try{
+      var data = {};
+      data._id = await generateProductId(req.body);
+      data.name = req.body.name;
+      data.type = req.body.type;
+      data.price = req.body.price;
+      data.visibility = req.body.visibility;
+      data.category = req.body.category;
+      data.description = req.body.description;
+      data.sizes = req.body.sizes;
+      data.templates = req.body.templates;
+      data.colors = req.body.colors;
+      data.img = req.body.img;
 
-    data.stock = {};
-    await req.body.stock.forEach((item, indice) => {
-      //Formato do stock recebido: ["cor", "template", "size", qtd]
-      var chave = req.body.type + "-" + data._id;
-      chave += (item[0] === "") ? "-VOID" : item[0];
-      chave += (item[1] === "") ? "-VOID" : item[1];
-      chave += (item[2] === "") ? "-VOID" : item[2];
-      data.stock[chave] = item[3];
-    });
+      data.stock = {};
+      await req.body.stock.forEach((item, indice) => {
+        //Formato do stock recebido: ["cor", "template", "size", qtd]
+        var chave = req.body.type + "-" + data._id;
+        chave += (item[0] === "") ? "-VOID" : item[0];
+        chave += (item[1] === "") ? "-VOID" : item[1];
+        chave += (item[2] === "") ? "-VOID" : item[2];
+        data.stock[chave] = item[3];
+      });
 
-    productsModel.insertMany([data], (err, response) => {
-      if (err) {
-        res.status(500);
-        res.send(err);
-      }else{
-        res.status(200);
-        res.send(response);
-      }
-    });
+      productsModel.insertMany([data], (err, response) => {
+        if (err) {
+          res.status(500);
+          res.send(err);
+        }else{
+          res.status(200);
+          res.send(response);
+        }
+      });
+    }catch(err){
+      console.log(err);
+    }
   },
 
   update: function(req, res, next) {

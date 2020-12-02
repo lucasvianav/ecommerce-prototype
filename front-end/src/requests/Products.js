@@ -8,8 +8,8 @@ export default {
   
   GetAllProducts: (props) =>{
       const context = useContext(DataContext);
-    
       useEffect( () => {
+        context.deleteAllProducts();
         console.log("Pegando dados da API");
         api.get("products/all/0", {crossdomain: true})
           .then((response) => {
@@ -27,5 +27,27 @@ export default {
       }, [])
 
       return(<></>);
-  }
+  },
+
+  InsertProduct: (props) =>{
+    const context = useContext(DataContext);
+  
+    useEffect( () => {
+      const data = props.data;
+      if (props.send === 'post') {
+        console.log("Mandando dados para a API");
+        console.log(data)
+        props.onChange();
+        api.post("products", {...data})
+          .then((response) => {
+            alert("Produto inserido com sucesso");
+          })
+          .catch((err) => {
+            console.error("ops! ocorreu um erro" + err);
+          });
+        }
+    }, [props])
+
+    return(<></>);
+}
 }

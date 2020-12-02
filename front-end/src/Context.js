@@ -248,6 +248,7 @@ export class DataProvider extends React.Component {
         this.createProduct = this.createProduct.bind(this)
         this.updateProduct = this.updateProduct.bind(this)
         this.deleteProduct = this.deleteProduct.bind(this)
+        this.deleteAllProducts = this.deleteAllProducts.bind(this)
         this.placeOrder = this.placeOrder.bind(this)
         this.updateAccount = this.updateAccount.bind(this)
     }
@@ -444,6 +445,10 @@ export class DataProvider extends React.Component {
         this.setState(prevState => ({data: prevState.data.filter(item => item.id !== id)}))
     }
 
+    deleteAllProducts(){
+        this.setState(prevState => ({data: prevState.data}))
+    }
+
     placeOrder(total, payment){
         if(!this.state.isLogged.status || this.state.cart.isEmpty()){ return }
         
@@ -498,10 +503,10 @@ export class DataProvider extends React.Component {
 
     render(){
         const {data, cart, accounts, coupons, home, categories, darkTheme, orders, activeCoupon, isLogged} = this.state
-        const {addToCart, removeFromCart, deleteFromCart, toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, getId, createProduct, updateProduct, deleteProduct, placeOrder, updateAccount} = this
+        const {addToCart, removeFromCart, deleteFromCart, toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, getId, createProduct, updateProduct, deleteProduct, deleteAllProducts, placeOrder, updateAccount} = this
 
         return(
-            <DataContext.Provider value={{data, cart, accounts, isLogged, coupons, home, categories, darkTheme, orders, activeCoupon, addToCart, removeFromCart, deleteFromCart, toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, getId, createProduct, updateProduct, deleteProduct, placeOrder, updateAccount}}>
+            <DataContext.Provider value={{data, cart, accounts, isLogged, coupons, home, categories, darkTheme, orders, activeCoupon, addToCart, removeFromCart, deleteFromCart, toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, getId, createProduct, updateProduct, deleteProduct, deleteAllProducts, placeOrder, updateAccount}}>
                 {this.props.children}
             </DataContext.Provider>
         )
