@@ -1,6 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
+var cors = require('cors');
+
+router.use(cors());
+
 var productsController = require('../controllers/products');
 
 router.get('/all/:page', (req, res, next) => {productsController.getAll(req, res, next)});

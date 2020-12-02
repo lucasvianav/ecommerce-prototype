@@ -13,8 +13,14 @@ var descriptionSchema = mongoose.Schema({
 });
 
 var priceSchema = mongoose.Schema({
-    full: Number,
-    sale: Number
+    full: {
+        type: Number,
+        required: true
+    },
+    sale: {
+        type: Number,
+        default: ""
+    }
 });
 
 var imgSchema = mongoose.Schema({
@@ -43,6 +49,9 @@ var productSchema = mongoose.Schema({
     description: {
         type: descriptionSchema,
         required: true
+    },
+    price: {
+        type: priceSchema,
     },
     templates: {
         type: [String],

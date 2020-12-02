@@ -5,6 +5,7 @@ import $ from 'jquery'
 import './css/ProductsPanel.css'
 import { DataContext } from '../Context'
 
+import ProductsRequests from '../requests/Products'
 class ProductsPanel extends React.Component {
     static contextType = DataContext
 
@@ -76,6 +77,7 @@ class ProductsPanel extends React.Component {
     render(){
         return(
             <main className="ProductsPanel">
+                <ProductsRequests.GetAllProducts />
                 <div className="panel-title"><span>{this.title.capitalize()}</span></div>
 
                 <div className="tabs-history disable-selection">
@@ -117,10 +119,10 @@ class ProductsPanel extends React.Component {
                                             <div className="price-line">
                                                 {
                                                     (item.price.full > item.price.sale)
-                                                        ? <span className="full-price">R${item.price.full.toFixed(2).replaceAll('.',',')}</span> 
+                                                        ? <span className="full-price">R${item.price.full}</span> 
                                                         : ''
                                                 }
-                                                <p className="sale-price">R${item.price.sale.toFixed(2).replaceAll('.',',')}</p>
+                                                <p className="sale-price">R${item.price.sale}</p>
                                             </div>
                                         </Link></div>
                                         : ''

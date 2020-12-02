@@ -59,6 +59,7 @@ module.exports = {
     data._id = await generateProductId(req.body);
     data.name = req.body.name;
     data.type = req.body.type;
+    data.price = req.body.price;
     data.visibility = req.body.visibility;
     data.category = req.body.category;
     data.description = req.body.description;
