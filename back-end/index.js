@@ -5,7 +5,7 @@ var cors = require('cors');
 var db = require('./connection');
 var products = require('./routes/products');
 
-app.use(express.json());
+app.use(express.json({limit: '30mb'}));
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/products', products);
