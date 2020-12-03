@@ -101,7 +101,6 @@ function ProductForm(props){
       var imgs = imagens;
       imgs[urlGen.index].file = urlGen.url;
       setImagens(imgs);
-      console.log(imgs);
     }
   },[urlGen])
 
@@ -233,7 +232,7 @@ function ProductForm(props){
           if(item.template !== '' && !templates.includes(item.template)){ templates.push(item.template) }
           if(item.color !== '' && !colors.includes(item.color)){ colors.push(item.color) }
           if(item.size !== '' && !sizes.includes(item.size)){ sizes.push(item.size) }
-          stock.push([item.template, item.color, item.size, item.stock])
+          stock.push([item.color, item.template, item.size, item.stock])
       }
       
       console.log(imagens);

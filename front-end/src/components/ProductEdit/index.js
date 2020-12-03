@@ -39,6 +39,7 @@ export default function ProductEdit(props) {
                 tamanho: size ? size : '',
                 estoque: product.stock[sku]
               })
+              console.log(sku);
           })
         })
       })

@@ -73,9 +73,9 @@ module.exports = {
       await req.body.stock.forEach((item, indice) => {
         //Formato do stock recebido: ["cor", "template", "size", qtd]
         var chave = req.body.type + "-" + data._id;
-        chave += (item[0] === "") ? "-VOID" : item[0];
-        chave += (item[1] === "") ? "-VOID" : item[1];
-        chave += (item[2] === "") ? "-VOID" : item[2];
+        chave += (item[0] === "") ? "-VOID" : "-" + item[0].toUpperCase().substr(0, 4);
+        chave += (item[1] === "") ? "-VOID" : "-" + item[1].toUpperCase().substr(0, 4);
+        chave += (item[2] === "") ? "-VOID" : "-" + item[2].toUpperCase().substr(0, 4);
         data.stock[chave] = item[3];
       });
 

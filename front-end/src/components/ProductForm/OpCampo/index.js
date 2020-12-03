@@ -12,6 +12,8 @@ const OpCampo = (props) => {
     useEffect (() => {
       var e = {};
 
+      console.log(props);
+
       setModelagem(props.modelagem);
       setTamanho(props.tamanho);
       setCor(props.cor);
