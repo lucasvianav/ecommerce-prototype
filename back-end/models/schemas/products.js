@@ -24,7 +24,7 @@ var priceSchema = mongoose.Schema({
 });
 
 var imgSchema = mongoose.Schema({
-    file: Buffer,
+    file: String,
     alt: String
 });
 

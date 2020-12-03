@@ -1,4 +1,5 @@
 import React, {useState, useContext, useEffect} from 'react';
+import Resizer from "react-image-file-resizer";
 import $ from 'jquery';
 
 import './index.css';
@@ -29,7 +30,8 @@ function ProductForm(props){
   const [categoria, setCategoria] = useState("nova");
   const [novaCategoria, setNovaCategoria] = useState("");
   const [descricao, setDescricao] = useState("");
-  const [visibility, setVisibility] = useState(true)
+  const [visibility, setVisibility] = useState(true);
+  const [urlGen, setUrlGen] = useState({});
 
   /*States para alterar o valores de categorias existentes*/
   const [arrayCategorias, setArrayCategorias] = useState([]);
@@ -84,7 +86,6 @@ function ProductForm(props){
     }
   }, [tipo]);
 
-
   useEffect(()=>{
     if(categoria === "nova"){
       $('#groupNovaCategoria').addClass('d-block');
@@ -95,28 +96,32 @@ function ProductForm(props){
     }
   },[categoria]);
 
-  const getDataUrl = (pathImg) => {
-    const img = new Image();
-    img.src = pathImg;
-    // Create canvas
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    // Set width and height
-    canvas.width = 500;
-    canvas.height = 500;
-    // Draw the image
-    ctx.drawImage(img, 0, 0);
-    console.log(canvas.toDataURL('image/jpeg'));
-    return canvas.toDataURL('image/jpeg');
- }
+  useEffect( () => {
+    if(urlGen.index !== undefined){
+      var imgs = imagens;
+      imgs[urlGen.index].file = urlGen.url;
+      setImagens(imgs);
+      console.log(imgs);
+    }
+  },[urlGen])
 
-  const addImage = () => {
+  const resizeFile = (file) => new Promise(resolve => {
+    Resizer.imageFileResizer(file, 300, 300, 'JPEG', 80, 0,
+    uri => {
+      resolve(uri);
+    },
+    'base64', 300, 300
+    );
+  });
+
+  const addImage = async () => {
     if(typeof selectedImg.name !== "undefined"){
       if(altImg !== ""){
         var novo = {};
         novo.path = URL.createObjectURL(selectedImg);
         novo.alt = altImg;
-        novo.file = getDataUrl(novo.path);
+        novo.file = await resizeFile(selectedImg);
+        console.log(novo.file);
         setImagens([...imagens, novo]);
       }
     }else{

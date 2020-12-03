@@ -27,6 +27,27 @@ class ProductsPanel extends React.Component {
         }
 
         this.handleFilters = this.handleFilters.bind(this)
+        this.componentDidUpdate = this.componentDidUpdate.bind(this)
+        this.loadProducts = this.loadProducts.bind(this)
+
+        if(!this.title){ this.props.history.push('/') }
+    }
+
+    loadProducts(){
+        const {data} = this.context
+        
+        const base = this.props.match.params.base.substring(0,2).toUpperCase()
+        const products = data.filter(item => item.type === base)
+        this.title = (base === 'EV') ? 'Eventos' : (base === 'PR' ? 'Produtos' : false)
+
+        const newState = {
+            data: products,
+            products: products,
+            activeFilters: 0,
+            categories: products.filter(value => value.visibility).map(item => item.category).filter((value, index, self) => (self.indexOf(value) === index))
+        }
+
+        this.setState(newState)
 
         if(!this.title){ this.props.history.push('/') }
     }
@@ -77,7 +98,7 @@ class ProductsPanel extends React.Component {
     render(){
         return(
             <main className="ProductsPanel">
-                <ProductsRequests.GetAllProducts />
+                <ProductsRequests.GetAllProducts onChange={() => {this.loadProducts()}}/>
                 <div className="panel-title"><span>{this.title.capitalize()}</span></div>
 
                 <div className="tabs-history disable-selection">

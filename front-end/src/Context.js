@@ -18,56 +18,7 @@ export class DataProvider extends React.Component {
                 {img: process.env.PUBLIC_URL + '/img/home/moletom007.png', alt: `Menino usando um moletom preto com detalhes vermelhos e amarelos com 'ATLETICA MALDITA MEDICINA UNEMAT' estampado no centro. No canto inferior direito há um brasão.`}
             ],
     
-            data: [
-                {
-                    name: 'Moletom Canguru Shrek',
-                    type: 'PR', // PRoduct
-                    id: 'P1',
-                    visibility: true,
-                    category: 'Moletons',
-                    description: {ul: ['Moletom branco modelo canguru com logo da SA-Shrek estampado na frente.', 'Tecido 100% algodão de alta qualidade.', 'Garantia de 6 meses contra erros de fabricação.'], ol: [], txt: ``},
-                    templates: ['Feminino', 'Masculino'],
-                    sizes: ['PP', 'P', 'M', 'G', 'GG', 'EXG'],
-                    colors: [],
-                    price: {full: 130.00, sale: 130.00},
-                    img: [
-                        {path: process.env.PUBLIC_URL + '/img/moletom_canguru_front.png', alt: `Frente de um moletom branco com uma pequena estampa na frente com o logo da 'SA-Shrek' fundo preto com pontinhos brancos (semelhante a um céu estrelado)`},
-                        {path: process.env.PUBLIC_URL + '/img/products/moletom_canguru_back.png', alt: `Costas de um moletom branco fundo preto com pontinhos brancos (semelhante a um céu estrelado)`}
-                    ],
-                    sizeTable: {img: '/img/products/size.png', alt: `Na imagem: Mokup de moletom e Tabela de Medidas. Na tabela há São 6 colunas. Na ordem: Tipo de medidas, P, M, G, GG, Tolerancia. E 3 linhas. Na ordem: Toráx, Comprimento, Comp. Manga. Na coluna P: 53, 69, 70. Na coluna M: 56, 71, 71. Na coluna GG: 62, 75, 73. Na coluna tolerancia: +-1.5, +-1.5, +-1.0. Observação em baixo da tabela: 'medidas em centímetros'.`},
-                    stock: {
-                        'PR-P1-VOID-MASC-PP': 5,
-                        'PR-P1-VOID-MASC-P': 5,
-                        'PR-P1-VOID-MASC-M': 5,
-                        'PR-P1-VOID-MASC-G': 5,
-                        'PR-P1-VOID-MASC-GG': 5,
-                        'PR-P1-VOID-MASC-EXG': 5,
-                        'PR-P1-VOID-FEMI-PP': 5,
-                        'PR-P1-VOID-FEMI-P': 5,
-                        'PR-P1-VOID-FEMI-M': 5,
-                        'PR-P1-VOID-FEMI-G': 5,
-                        'PR-P1-VOID-FEMI-GG': 5,
-                        'PR-P1-VOID-FEMI-EXG': 0
-                    }
-                },
-                {
-                    name: 'Cervejada: "Sinta o pântano!"',
-                    type: 'EV', // EVent
-                    id: 'E1',
-                    visibility: true,
-                    category: 'Cervejada',
-                    description: {ul: [], ol: [], txt: `A nossa tradicional cervejada do início do ano já chegou! Ela ocorerrá dia 20/03 a partir das 15h! Com muita música boa, com espaço de sobra pra você dançar e é claro muita lama! Você não vai ficar de fora dessa né? Não pastela!!! Corre pra garantir seu ingresso!`},
-                    templates: [],
-                    sizes: [],
-                    colors: [],
-                    info: {location: 'Lorem Ipsum', date: 'dd/mm/yyyy', time: '00h00', link: {text: 'Link para o facebook', url: 'https://facebook.com/'}},
-                    price: {full: 50.00, sale: 40.00},
-                    img: [{path: process.env.PUBLIC_URL + '/img/cervejada.png', alt: ''}],
-                    stock: {
-                        'EV-E1': 10
-                    }
-                }
-            ],
+            data: [],
     
             cart: [
                 // {
@@ -446,7 +397,7 @@ export class DataProvider extends React.Component {
     }
 
     deleteAllProducts(){
-        this.setState(prevState => ({data: prevState.data}))
+        this.setState(data => {{}})
     }
 
     placeOrder(total, payment){

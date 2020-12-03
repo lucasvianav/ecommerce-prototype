@@ -12,13 +12,20 @@ export default {
         context.deleteAllProducts();
         console.log("Pegando dados da API");
         api.get("products/all/0", {crossdomain: true})
-          .then((response) => {
-            response.data.forEach((item, index) => {
-              item.id = item._id;
-              item.img.path = item.img.file;
-              console.log(item);
-              context.createProduct(item);
+        .then((response) => {
+          response.data.forEach((item, index) => {
+            item.id = item._id;
+            item.img.forEach((img, index) => {
+              var aux = '';
+              if(typeof img.file !== 'undefined'){
+                img.path = img.file;
+                //aux = (aux !== undefined) ? btoa(aux.reduce((data, byte) => data + String.fromCharCode(byte), '')) : '';
+              }
             })
+            console.log(item);
+            context.createProduct(item);
+          })
+          props.onChange();
           })
           .catch((err) => {
             console.error("ops! ocorreu um erro" + err);
