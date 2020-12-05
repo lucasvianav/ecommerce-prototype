@@ -93,22 +93,50 @@ module.exports = {
     }
   },
 
-  update: function(req, res, next) {
-    productsModel.updateMany({ _id: req.params.id }, req.body,
-      (err, response) => {
-        if (err) {
+  update: async function(req, res, next) {
+    try{
+      var data = {};
+      data._id = req.params.id;
+      data.name = req.body.name;
+      data.type = req.body.type;
+      data.price = req.body.price;
+      data.visibility = req.body.visibility;
+      data.category = req.body.category;
+      data.description = req.body.description;
+      data.sizes = req.body.sizes;
+      data.templates = req.body.templates;
+      data.colors = req.body.colors;
+      data.img = req.body.img;
+   
+      data.stock = {};
+      await req.body.stock.forEach((item, indice) => {
+        //Formato do stock recebido: ["cor", "template", "size", qtd]
+        var chave = req.body.type + "-" + data._id;
+        chave += (item[0] === "") ? "-VOID" : "-" + item[0].toUpperCase().substr(0, 4);
+        chave += (item[1] === "") ? "-VOID" : "-" + item[1].toUpperCase().substr(0, 4);
+        chave += (item[2] === "") ? "-VOID" : "-" + item[2].toUpperCase().substr(0, 4);
+        data.stock[chave] = item[3];
+      });
+
+      productsModel.updateMany({ _id: data._id }, data,
+        (err, response) => {
+          if (err) {
             res.status(500);
-          res.send(err);
-        }else{
-          res.status(200);
-          res.send(response);
-        }
-    });
+            res.send(err);
+            console.log(err)
+          }else{
+            res.status(200);
+            res.send(response);
+          }
+      });
+    }catch(err){
+      console.log(err);
+    }
   },
 
   
   del: function(req, res, next) {
-    productsModel.deleteMany({ id: req.params.id },
+    productsModel.deleteMany({ _id: req.params.id },
       (err, response) => {
         if (err) {
             res.status(500);

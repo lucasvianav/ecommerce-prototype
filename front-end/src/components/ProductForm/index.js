@@ -253,8 +253,12 @@ function ProductForm(props){
       }
       
       if(action === 'Salvar'){
-        context.updateProduct(exportData)
-        alert('O produto foi atualizado com sucesso.')
+        console.log("salvando...");
+        var r = {};
+        r.send = "put";
+        r.id = props.id;
+        r.data = exportData;
+        setReq(r);
       }
 
       else if(action === 'Cadastrar'){
@@ -262,7 +266,6 @@ function ProductForm(props){
         r.send = "post";
         r.data = exportData;
         setReq(r);
-        //context.createProduct(exportData)
         setImagens([])
         setSelectedImg({})
         setAltImg("")
@@ -281,15 +284,19 @@ function ProductForm(props){
   }
 
   const deleteProduct = () => {
-    if(window.confirm('O produto não poderá ser recuperado. Você tem certeza que deseja excluí-lo?')){ 
-      context.deleteProduct(props.id) 
-      props.history.push('/minhaconta')
+    if(window.confirm('O produto não poderá ser recuperado. Você tem certeza que deseja excluí-lo?')){
+      var r = {};
+      r.send = "del";
+      r.id = props.id;
+      setReq(r);
     }
   }
 
   return(
     <>
       <ProductsRequests.InsertProduct {...req} onChange={()=>{setReq({})}}/>
+      <ProductsRequests.EditProduct {...req} onChange={()=>{setReq({})}}/>
+      <ProductsRequests.DeleteProduct {...req} onChange={()=>{setReq({})}}/>
       <h3>{title}</h3>
       <form id='product-form'>
         <div id="cadastroProduto" style={{width: '97%'}}>

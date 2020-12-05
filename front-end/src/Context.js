@@ -397,7 +397,7 @@ export class DataProvider extends React.Component {
     }
 
     deleteAllProducts(){
-        this.setState(data => {{}})
+        this.setState({data: [{}]})
     }
 
     placeOrder(total, payment){
