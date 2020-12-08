@@ -1,48 +1,48 @@
 [
     {
-    "name": "Moletom Canguru Shrek",
-    "type": "PR",
-    "id": "P1",
-    "visibility": true,
-    "category": "Moletons",
-    "description": {"ul": ["Moletom branco modelo canguru com logo da SA-Shrek estampado na frente.", "Tecido 100% algodão de alta qualidade.", "Garantia de 6 meses contra erros de fabricação."], "ol": [], "txt": ""},
-    "templates": ["Feminino", "Masculino"],
-    "sizes": ["PP", "P", "M", "G", "GG", "EXG"],
-    "colors": [],
-    "price": {"full": 130.00, "sale": 130.00},
-    "img": [
-        {"file": {}, "alt": "Frente de um moletom branco com uma pequena estampa na frente com o logo da \"SA-Shrek\" fundo preto com pontinhos brancos (semelhante a um céu estrelado)"},
-        {"file": {}, "alt": "Costas de um moletom branco fundo preto com pontinhos brancos (semelhante a um céu estrelado)"}
-    ],
-    "stock": {
-        "PR-P1-VOID-MASC-PP": 5,
-        "PR-P1-VOID-MASC-P": 5,
-        "PR-P1-VOID-MASC-M": 5,
-        "PR-P1-VOID-MASC-G": 5,
-        "PR-P1-VOID-MASC-GG": 5,
-        "PR-P1-VOID-MASC-EXG": 5,
-        "PR-P1-VOID-FEMI-PP": 5,
-        "PR-P1-VOID-FEMI-P": 5,
-        "PR-P1-VOID-FEMI-M": 5,
-        "PR-P1-VOID-FEMI-G": 5,
-        "PR-P1-VOID-FEMI-GG": 5,
-        "PR-P1-VOID-FEMI-EXG": 0
+        "name": "Moletom Canguru Shrek",
+        "type": "PR",
+        "id": "P1",
+        "visibility": true,
+        "category": "Moletons",
+        "description": {"ul": ["Moletom branco modelo canguru com logo da SA-Shrek estampado na frente.", "Tecido 100% algodão de alta qualidade.", "Garantia de 6 meses contra erros de fabricação."], "ol": [], "txt": ""},
+        "templates": ["Feminino", "Masculino"],
+        "sizes": ["PP", "P", "M", "G", "GG", "EXG"],
+        "colors": [],
+        "price": {"full": 130.00, "sale": 130.00},
+        "img": [
+            {"file": {}, "alt": "Frente de um moletom branco com uma pequena estampa na frente com o logo da \"SA-Shrek\" fundo preto com pontinhos brancos (semelhante a um céu estrelado)"},
+            {"file": {}, "alt": "Costas de um moletom branco fundo preto com pontinhos brancos (semelhante a um céu estrelado)"}
+        ],
+        "stock": {
+            "PR-P1-VOID-MASC-PP": 5,
+            "PR-P1-VOID-MASC-P": 5,
+            "PR-P1-VOID-MASC-M": 5,
+            "PR-P1-VOID-MASC-G": 5,
+            "PR-P1-VOID-MASC-GG": 5,
+            "PR-P1-VOID-MASC-EXG": 5,
+            "PR-P1-VOID-FEMI-PP": 5,
+            "PR-P1-VOID-FEMI-P": 5,
+            "PR-P1-VOID-FEMI-M": 5,
+            "PR-P1-VOID-FEMI-G": 5,
+            "PR-P1-VOID-FEMI-GG": 5,
+            "PR-P1-VOID-FEMI-EXG": 0
+        }
+    },
+    {
+        "name": "Cervejada: \"Sinta o pântano!\"",
+        "type": "EV",
+        "id": "E1",
+        "visibility": true,
+        "category": "Cervejada",
+        "description": {"ul": [], "ol": [], "txt": "A nossa tradicional cervejada do início do ano já chegou! Ela ocorerrá dia 20/03 a partir das 15h! Com muita música boa, com espaço de sobra pra você dançar e é claro muita lama! Você não vai ficar de fora dessa né? Não pastela!!! Corre pra garantir seu ingresso!"},
+        "templates": [],
+        "sizes": [],
+        "colors": [],
+        "price": {"full": 50.00, "sale": 40.00},
+        "img": [{"file": {}, "alt": ""}],
+        "stock": {
+            "EV-E1-VOID-VOID-VOID": 10
+        }
     }
-},
-{
-    "name": "Cervejada: \"Sinta o pântano!\"",
-    "type": "EV",
-    "id": "E1",
-    "visibility": true,
-    "category": "Cervejada",
-    "description": {"ul": [], "ol": [], "txt": "A nossa tradicional cervejada do início do ano já chegou! Ela ocorerrá dia 20/03 a partir das 15h! Com muita música boa, com espaço de sobra pra você dançar e é claro muita lama! Você não vai ficar de fora dessa né? Não pastela!!! Corre pra garantir seu ingresso!"},
-    "templates": [],
-    "sizes": [],
-    "colors": [],
-    "price": {"full": 50.00, "sale": 40.00},
-    "img": [{"file": {}, "alt": ""}],
-    "stock": {
-        "EV-E1-VOID-VOID-VOID": 10
-    }
-}
 ]

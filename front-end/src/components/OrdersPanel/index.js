@@ -10,7 +10,7 @@ import '../css/bootstrap.css';
 
 const OrdersPanel = (props) => {
   const context = useContext(DataContext);
-  const [orders, setOrders] = useState( props.type === 'admin' ? context.orders : context.orders.filter(item => item.client === context.isLogged.email));
+  const [orders, setOrders] = useState( props.type === 'admin' ? context.orders : context.orders.filter(item => item.client === context.isLogged.user.email));
   const products = context.data;
 
   const [modalPedido, setModalPedido] = useState(false);
@@ -49,7 +49,7 @@ const OrdersPanel = (props) => {
     if(flag === 1){
       setOrders(d);
     }else{
-      var ord = (props.type === 'admin') ? context.orders : context.orders.filter(item => item.client === context.isLogged.email)
+      var ord = (props.type === 'admin') ? context.orders : context.orders.filter(item => item.client === context.isLogged.user.email)
       setOrders(ord);
     }
   }, [props, allOrders])

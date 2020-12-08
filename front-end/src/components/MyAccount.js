@@ -8,7 +8,7 @@ import { DataContext } from '../Context';
 import InputMask from 'react-input-mask'
 import OrdersPanel from './OrdersPanel';
 
-
+import api from '../requests/connection'
 
 class MyAccount extends React.Component {
 
@@ -17,7 +17,7 @@ class MyAccount extends React.Component {
     constructor(props, context) {
         super(props, context)
 
-        this.state = { phoneNumber: this.context.getCurrentAccount().phoneNumber }
+        this.state = { phoneNumber: this.context.isLogged.user.phoneNumber }
 
         this.toggleEdit = this.toggleEdit.bind(this);
         this.handleChange= this.handleChange.bind(this);
@@ -25,7 +25,7 @@ class MyAccount extends React.Component {
     }
 
     toggleEdit(){
-        this.setState({phoneNumber: this.context.getCurrentAccount().phoneNumber})
+        this.setState({phoneNumber: this.context.isLogged.user.phoneNumber})
         $('.standard').toggle()
         $('.editing').toggle()
     }
@@ -35,9 +35,13 @@ class MyAccount extends React.Component {
         this.setState({[name]: value})
     }
 
-    submitChange(){
-        this.context.updateAccount(this.state.phoneNumber)
-        this.toggleEdit()
+    async submitChange(){
+        try{
+            await api.put('/accounts', {_id: this.context.isLogged.user._id, updates: {phoneNumber: this.state.phoneNumber}})
+                .then(r => this.context.updateCurrentAccount())
+        }
+
+        finally{ this.toggleEdit() }
     }
 
     componentDidMount(){
@@ -51,8 +55,8 @@ class MyAccount extends React.Component {
                 <div className="content-box">
                     <div className="left-content col-md-6 col-sm-12 align-self-top">
                         <section id="loginInfo" className="d-flex no-space">
-                            <h2>Olá, {this.context.getCurrentAccount().name}! </h2>
-                            <span><strong>Email: </strong>{this.context.getCurrentAccount().email}</span>
+                            <h2>Olá, {this.context.isLogged.user.name}! </h2>
+                            <span><strong>Email: </strong>{this.context.isLogged.user.email}</span>
                         </section>
 
                         <section id="dadosPessoais" className="d-flex">
@@ -61,22 +65,22 @@ class MyAccount extends React.Component {
                             <div className="d-flex justify-content-between">
                                 <div> 
                                     <span><strong>Nome Completo:</strong></span> <br/>
-                                    <span>{this.context.getCurrentAccount().name}</span> <br/><br/>
+                                    <span>{this.context.isLogged.user.name}</span> <br/><br/>
                                 </div>
                                 <div style={{textAlign: 'right'}}> 
                                     <span><strong>Data de Nacimento:</strong></span> <br/>
-                                    <span>{this.context.getCurrentAccount().birthday}</span> <br/><br/>
+                                    <span>{this.context.isLogged.user.birthday}</span> <br/><br/>
                                 </div>
                             </div>
 
                             <div className="d-flex justify-content-between">
                                 <div>
                                     <span><strong>CPF:</strong></span> <br/>
-                                    <span>{this.context.getCurrentAccount().cpf}</span> <br/><br/>
+                                    <span>{this.context.isLogged.user.cpf}</span> <br/><br/>
                                 </div>
                                 <div style={{textAlign: 'right'}}>
                                     <span><strong>Celular:</strong></span> <br/>
-                                    <span className='standard'>{this.context.getCurrentAccount().phoneNumber}</span> 
+                                    <span className='standard'>{this.context.isLogged.user.phoneNumber}</span> 
                                     <InputMask mask="+55 (99) 99999-9999" type='text' onChange={this.handleChange} name="phoneNumber" className='editing no-display' value={this.state.phoneNumber} placeholder='(00) 90000-0000'/>
 
                                     <span className="text-btn green standard" onClick={this.toggleEdit}>Editar celular</span>

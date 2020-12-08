@@ -24,7 +24,7 @@ const ModalPedido = (props) => {
       props.onHide();
     }
       
-    const client = context.accounts.find((cl) => props.pedido.client === cl.email)
+    const client = context.isLogged.user
 
     return (
         <Modal className="modal"

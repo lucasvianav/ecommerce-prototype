@@ -1,12 +1,14 @@
 import React from 'react'
 import $ from 'jquery'
 
+import api from './requests/connection'
+
 export const DataContext = React.createContext()
 
 export class DataProvider extends React.Component {
     constructor(props){
         super(props)
-
+        
         this.state = {
             home: [
                 {img: process.env.PUBLIC_URL + '/img/home/moletom001.png', alt: `Menina sorrindo usando um moletom cinza com detalhes pretos com 'ENFERMAGEM UFPG' estampado no centro. Em ambos lados de 'UFPG' há duas linhas horirontais e paralelas.`},
@@ -137,10 +139,7 @@ export class DataProvider extends React.Component {
                 }
             ],
 
-            isLogged: {
-                status: false,
-                email: ''
-            },
+            isLogged: {status: false, user: {}},
     
             coupons: [
                 {
@@ -201,19 +200,37 @@ export class DataProvider extends React.Component {
         this.deleteProduct = this.deleteProduct.bind(this)
         this.deleteAllProducts = this.deleteAllProducts.bind(this)
         this.placeOrder = this.placeOrder.bind(this)
-        this.updateAccount = this.updateAccount.bind(this)
+        this.updateCurrentAccount = this.updateCurrentAccount.bind(this)
+        this.getInitialLogin = this.getInitialLogin.bind(this)
     }
 
     componentDidMount(){
         localStorage.setItem('darkTheme', JSON.stringify(this.state.darkTheme))
     }
     
-    getInitialTheme() {
+    async getInitialLogin(){
+        const token = JSON.parse(localStorage.getItem('session'))
+        await api.get('/auth/authenticate', { headers: {'Authorization': 'Bearer ' + token} })
+            .then(r => this.setState({isLogged: {status: true, user: r.data}}))
+            .catch(e => {
+                this.setState({isLogged: {status: false, user: null}})
+                localStorage.removeItem('session')
+            })
+    }
+
+    updateCurrentAccount(){
+        if(this.state.isLogged.status){
+            api.get('/accounts/id/' + this.state.isLogged.user._id)
+                .then(r => this.setState({isLogged: {status: true, user: r.data}}))
+        }
+    }
+
+    getInitialTheme(){
         const userPrefersDark = () => !window.matchMedia ? false : window.matchMedia("(prefers-color-scheme: dark)").matches
         return ("darkTheme" in localStorage) ? JSON.parse(localStorage.getItem('darkTheme')) : userPrefersDark()
     }
 
-    toggleTheme() {
+    toggleTheme(){
         $('*').removeClass('dark-theme light-theme')
         $('*').addClass(!this.state.darkTheme ? 'dark-theme' : 'light-theme')
         
@@ -221,46 +238,45 @@ export class DataProvider extends React.Component {
         this.setState(prevState => {return {darkTheme: !prevState.darkTheme}})
     }
     
-    login(email){
-        this.setState({isLogged: {status: true, email: email}})
+    async login(email, password){
+        try{
+            const response = await api.post('/auth/login', {email, password})
+            console.log(response)
+
+            if(response.status === 200){
+                localStorage.setItem('session', JSON.stringify(response.data.token))
+                this.setState({isLogged: {status: true, user: response.data.user}})
+                return true
+            }
+
+            else{ return false }
+        }
+
+        catch(e){ return false }
     }
-    
+
     logout(){
-        this.setState({isLogged: {status: false, email: ''}}, window.location.reload())
+        localStorage.removeItem('session')
+        this.setState({isLogged: {status: false, user: null}}, window.location.reload())
     }
     
-    signup(info){
-        let {accounts} = this.state
-
-        accounts.push({
-            name: info.signupName,
+    async signup(data){
+        const account = {
+            name: data.signupName,
             type: 'client',
-            email: info.signupEmail,
-            password: info.signupPw,
-            birthday: info.signupBirthday,
-            cpf: info.signupCPF,
-            phoneNumber: info.signupPhoneNumber
-        })
+            email: data.signupEmail,
+            password: data.signupPw,
+            birthday: data.signupBirthday,
+            cpf: data.signupCPF,
+            phoneNumber: data.signupPhoneNumber
+        }
 
-        this.setState({accounts: accounts})
+        return await api.post('auth/signup', {...account})
     }
 
     getCurrentAccount(){
-        if(this.state.isLogged.status){
-            return this.state.accounts.find(el => el.email === this.state.isLogged.email)
-        }
-
-        else{ return false }
-    }
-
-    updateAccount(phoneNumber){
-        this.setState(prevState => ({
-                accounts: prevState.accounts.map(item =>{
-                    if(item.email === prevState.isLogged.email){ item.phoneNumber = phoneNumber }
-                    return item
-                })
-            })
-        )
+        const {isLogged} = this.state
+        return isLogged.status ? isLogged.user : null
     }
 
     addToCart(sku, quantity, specs){
@@ -454,10 +470,10 @@ export class DataProvider extends React.Component {
 
     render(){
         const {data, cart, accounts, coupons, home, categories, darkTheme, orders, activeCoupon, isLogged} = this.state
-        const {addToCart, removeFromCart, deleteFromCart, toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, getId, createProduct, updateProduct, deleteProduct, deleteAllProducts, placeOrder, updateAccount} = this
+        const {addToCart, removeFromCart, deleteFromCart, toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, getId, createProduct, updateProduct, deleteProduct, deleteAllProducts, placeOrder, updateCurrentAccount, getInitialLogin} = this
 
         return(
-            <DataContext.Provider value={{data, cart, accounts, isLogged, coupons, home, categories, darkTheme, orders, activeCoupon, addToCart, removeFromCart, deleteFromCart, toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, getId, createProduct, updateProduct, deleteProduct, deleteAllProducts, placeOrder, updateAccount}}>
+            <DataContext.Provider value={{data, cart, accounts, isLogged, coupons, home, categories, darkTheme, orders, activeCoupon, addToCart, removeFromCart, deleteFromCart, toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, getId, createProduct, updateProduct, deleteProduct, deleteAllProducts, placeOrder, updateCurrentAccount, getInitialLogin}}>
                 {this.props.children}
             </DataContext.Provider>
         )

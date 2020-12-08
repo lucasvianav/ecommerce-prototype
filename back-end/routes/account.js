@@ -8,9 +8,11 @@ const accountController = require('../controllers/account')
 
 router.get('/', accountController.find)
 
-router.get('/find', accountController.findByEmail)
+router.get('/email/:email', accountController.findByEmail)
 
-router.get('/check', accountController.checkExitence)
+router.get('/id/:_id', accountController.findById)
+
+router.get('/check/:email', accountController.checkExitence)
 
 router.put('/', accountController.update)
 

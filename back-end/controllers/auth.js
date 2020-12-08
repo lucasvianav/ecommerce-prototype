@@ -28,7 +28,7 @@ const authController = {
         const token = req.get('Authorization').replace('Bearer ', '')
         const user = await authService.authenticate(token)
 
-        return user ? user : res.status(401).json()
+        return user ? res.json(user) : res.status(401).json()
     }
 }
 

@@ -24,6 +24,9 @@ import ProductEdit from './components/ProductEdit'
 import Checkout from './components/Checkout'
 import { CheckoutProvider } from './components/CheckoutContext'
 
+import Async from 'react-async'
+import Spinner from 'react-bootstrap/Spinner'
+
 class App extends React.Component {
   static contextType = DataContext
   
@@ -32,97 +35,110 @@ class App extends React.Component {
 
     return(
       <BrowserRouter>
-        <div id='app'>
-          <Route path='/:base*' render={props => props.match.params.base === 'checkout' ? '' : <Navbar {...this.props}/>}/>
-          
-          <Switch>
-            {/* Pages */}
-            <Route path='/' exact={true}><Home/></Route>
+        <Async promiseFn={this.context.getInitialLogin}>
+          {({ response, error, isPending }) => {
+            return (isPending) 
+            ? 
+              <div id='app'>
+                <Spinner animation="border" role="status" variant={this.context.darkTheme ? 'light' : 'dark'} style={{'margin': 'auto'}}>
+                  <span className="sr-only">Carregando...</span>
+                </Spinner>
+              </div>
+            :
+              <div id='app'>
+                <Route path='/:base*' render={props => props.match.params.base === 'checkout' ? '' : <Navbar {...this.props}/>}/>
+                
+                <Switch>
+                  {/* Pages */}
+                  <Route path='/' exact={true}><Home/></Route>
 
-            <Route path='/:base' render={props => {
-              const {base} = props.match.params
+                  <Route path='/:base' render={props => {
+                    const {base} = props.match.params
 
-              if(['home', 'início'].includes(base.toLowerCase())){
-                return <Redirect to='/'/>
-              }
+                    if(['home', 'início'].includes(base.toLowerCase())){
+                      return <Redirect to='/'/>
+                    }
 
-              else if(base.toLowerCase() === 'login'){
-                return <Login {...props}/>
-              }
+                    else if(base.toLowerCase() === 'login'){
+                      return <Login {...props}/>
+                    }
 
-              else if(['login', 'cadastro', 'cadastrar', 'cadastro', 'signup'].includes(base.toLowerCase())){
-                return <Redirect to='/login'/>
-              }
+                    else if(['login', 'cadastro', 'cadastrar', 'cadastro', 'signup'].includes(base.toLowerCase())){
+                      return <Redirect to='/login'/>
+                    }
 
-              else if(['eventos', 'events', 'event'].includes(base.toLowerCase()) || 
-                ['produtos', 'products', 'product'].includes(base.toLowerCase())){
-                return <ProductsPanel {...props}/>
-              }
+                    else if(['eventos', 'events', 'event'].includes(base.toLowerCase()) || 
+                      ['produtos', 'products', 'product'].includes(base.toLowerCase())){
+                      return <ProductsPanel {...props}/>
+                    }
 
-              else if(['carrinho', 'cart'].includes(base.toLowerCase())){
-                return <ShoppingCart {...props}/>
-              }
-              
-              else if(['minhaconta', 'myaccount'].includes(base.toLowerCase())){
-                if(!this.context.isLogged.status){ return <Redirect to='/'/> }
+                    else if(['carrinho', 'cart'].includes(base.toLowerCase())){
+                      return <ShoppingCart {...props}/>
+                    }
+                    
+                    else if(['minhaconta', 'myaccount'].includes(base.toLowerCase())){
+                      if(!this.context.isLogged.status){ return <Redirect to='/'/> }
 
-                else if(this.context.getCurrentAccount().type === 'client'){ return <MyAccount/> }
+                      else if(this.context.getCurrentAccount().type === 'client'){ return <MyAccount/> }
 
-                else if(this.context.getCurrentAccount().type === 'admin'){ return <AdmAccount /> }
+                      else if(this.context.getCurrentAccount().type === 'admin'){ return <AdmAccount /> }
 
-                else{ return <Redirect to='/'/> }
-              }
+                      else{ return <Redirect to='/'/> }
+                    }
 
-              else if(base.toLowerCase() === 'search'){
-                let query = new URLSearchParams(props.location.search)
+                    else if(base.toLowerCase() === 'search'){
+                      let query = new URLSearchParams(props.location.search)
 
-                return <ProductSearch {...props} query={query.get('query')}/>
-              }
+                      return <ProductSearch {...props} query={query.get('query')}/>
+                    }
 
-              else if(base === 'checkout'){
-                return <CheckoutProvider><Checkout {...props} ctx={{...this.context}}/></CheckoutProvider>
-              }
+                    else if(base === 'checkout'){
+                      return <CheckoutProvider><Checkout {...props} ctx={{...this.context}}/></CheckoutProvider>
+                    }
 
-              else if(['acessibilidade', 'accessibility'].includes(base.toLowerCase())){
-                return <Accessibility/>
-              }
+                    else if(['acessibilidade', 'accessibility'].includes(base.toLowerCase())){
+                      return <Accessibility/>
+                    }
 
-              else{
-                return <Redirect to='/'/>
-              }
-            }} exact/>
+                    else{
+                      return <Redirect to='/'/>
+                    }
+                  }} exact/>
 
-            <Route path='/:tab/:base/:id' render={props => {
-              const {tab} = props.match.params
+                  <Route path='/:tab/:base/:id' render={props => {
+                    const {tab} = props.match.params
 
-              if(['editar', 'edit'].includes(tab.toLowerCase()) && this.context.isLogged.status && this.context.getCurrentAccount().type === 'admin'){
-                return <ProductEdit {...props} />
-              }
+                    if(['editar', 'edit'].includes(tab.toLowerCase()) && this.context.isLogged.status && this.context.getCurrentAccount().type === 'admin'){
+                      return <ProductEdit {...props} />
+                    }
 
-              else{
-                return <Redirect to='/'/>
-              }
-            }} />
+                    else{
+                      return <Redirect to='/'/>
+                    }
+                  }} />
 
-            <Route path='/:tab/:base' render={props => {
-              const {tab, base} = props.match.params
-              
-              if(!['eventos', 'events', 'event', 'evento'].includes(tab.toLowerCase()) && !['produtos', 'products', 'produto', 'product'].includes(tab.toLowerCase())){
-                return <Redirect to='/'/>
-              }
+                  <Route path='/:tab/:base' render={props => {
+                    const {tab, base} = props.match.params
+                    
+                    if(!['eventos', 'events', 'event', 'evento'].includes(tab.toLowerCase()) && !['produtos', 'products', 'produto', 'product'].includes(tab.toLowerCase())){
+                      return <Redirect to='/'/>
+                    }
 
-              else if(data.some(item => item.category.toLowerCase().replaceAll(' ', '-') === base) && tab.toLowerCase().slice(-1) !== 'o'){
-                return <ProductCategoryPanel {...props}/>
-              }
-              
-              else{
-                return <ProductDetails {...props}/>
-              }
-            }}/>
-          </Switch>
+                    else if(data.some(item => item.category.toLowerCase().replaceAll(' ', '-') === base) && tab.toLowerCase().slice(-1) !== 'o'){
+                      return <ProductCategoryPanel {...props}/>
+                    }
+                    
+                    else{
+                      return <ProductDetails {...props}/>
+                    }
+                  }}/>
+                </Switch>
 
-          <Route path='/:base*' render={props => props.match.params.base === 'checkout' ? '' : <Footer/>}/>
-        </div>
+                <Route path='/:base*' render={props => props.match.params.base === 'checkout' ? '' : <Footer/>}/>
+              </div>
+          }}
+
+        </Async>
       </BrowserRouter>
     )
   }

@@ -9,7 +9,7 @@ const accountService = {
 
   checkExistence: async condition => Boolean(await Accounts.findOne(condition)),
 
-  update: async (email, updates) => await Accounts.findOneAndUpdate({email}, updates),
+  update: async (_id, updates) => await Accounts.findByIdAndUpdate(_id, updates),
 
   delete: async email => await Accounts.findOneAndDelete({email})
 }

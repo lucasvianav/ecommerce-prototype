@@ -3,6 +3,8 @@ import $ from 'jquery'
 import InputMask from 'react-input-mask'
 import '../Util'
 
+import api from '../requests/connection'
+
 import './css/Login.css'
 import { DataContext } from '../Context'
 
@@ -159,7 +161,7 @@ const handleForgotPw = () => {
         let loginForm = $('.form-login')
 
         recoveryForm.animate(
-            { height: 0.65*parseFloat(loginForm.css('height')) + 'px' }, 400,
+            { height: 1*parseFloat(loginForm.css('height')) + 'px' }, 400,
             function() {
                 recoveryForm.hide()
                 loginForm.show()
@@ -357,7 +359,7 @@ class Login extends React.Component {
         $('.error-message').text('')
     }
 
-    handleSubmit(e){
+    async handleSubmit(e){
         e.preventDefault()
         
         const forms = e.target.name.capitalize()
@@ -509,24 +511,16 @@ class Login extends React.Component {
         }
     }
 
-    submitLogin(){
+    async submitLogin(){
         // Input data
         const {loginEmail, loginPw} = this.state
-        const {accounts} = this.context
         
-        let exists = false
-        for(let account of accounts){
-            if(account.email === loginEmail && account.password === loginPw){
-                exists = true
-                this.context.login(loginEmail)
-                break
-            }
-        }
+        const logged = await this.context.login(loginEmail, loginPw)
 
-        if(exists){
+        if(logged){
             $('.error-message').text('')
             const {base} = this.props.match.params
-            if(base === 'login'){ this.props.history.push('/') }
+            if(base === 'login'){ this.props.history.push('/minhaconta') }
         }
         
         else{
@@ -535,21 +529,14 @@ class Login extends React.Component {
    
     }
 
-    submitRecovery(){
-        const {recoveryEmail} = this.state
-        const {accounts} = this.context
-        let exists = false
-
-        for(let account of accounts){
-            if(account.email === recoveryEmail){
-                exists = true
-                break
-            }
-        }
+    async submitRecovery(){
+        const exists = (await api.get('accounts/check/' + this.state.recoveryEmail)).data
 
         if(exists){ 
             $('#form').trigger('reset')
             $('#recovery-back').trigger('click')
+
+            this.setState({recoveryEmail: ''})
 
             alert('Um deveria ser enviado para a recuperação :)') 
         }
@@ -560,49 +547,60 @@ class Login extends React.Component {
 
     // Transitions from the basic signup
     // forms to the full signup forms
-    submitSignup(){
-        let signupForm = $('.form-signup')
-        let fullSignupForm = $(".form-full-signup")
+    async submitSignup(){
+        const exists = (await api.get('accounts/check/' + this.state.signupEmail)).data
 
-        // Increases the login form's height (animation)
-        // Hides the first signup form and shows the full one
-        signupForm.animate(
-            { height: 1.3*parseFloat(signupForm.css('height')) + 'px' }, 400,
-            () => {
-                signupForm.hide()
-                fullSignupForm.show()
-                
-                signupForm.css('height', 'auto')
-            }
-        )
+        if(exists){ $('#signup .error-message').text('Já existe uma conta com esse email.') }
+
+        else{
+            let signupForm = $('.form-signup')
+            let fullSignupForm = $(".form-full-signup")
+
+            // Increases the login form's height (animation)
+            // Hides the first signup form and shows the full one
+            signupForm.animate(
+                { height: 1.3*parseFloat(signupForm.css('height')) + 'px' }, 400,
+                () => {
+                    signupForm.hide()
+                    fullSignupForm.show()
+                    
+                    signupForm.css('height', 'auto')
+                }
+            )
+        }
     }
 
     // Submits both signup forms to the server
-    submitFullSignup(){
-        // // Submits both forms
-        // $.ajax({
-        //     type: "POST",
-        //     url: $(signup).attr('action'),
-        //     data: $(signup).serialize(),
-        //     success: function(){
-        //         fullSignup.submit()
-        //     }
-        // })
-
-        // Input data
+    async submitFullSignup(){
         const {signupName, signupEmail, signupPw, signupBirthday, signupCPF, signupPhoneNumber} = this.state
-        this.context.signup({signupName, signupEmail, signupPw, signupBirthday, signupCPF, signupPhoneNumber})
+        const data = {signupName, signupEmail, signupPw, signupBirthday, signupCPF, signupPhoneNumber}
 
-        $('.form-signup').trigger('reset')
-        $('.form-full-signup').trigger('reset')
+        const createdAccount = await this.context.signup({...data})
 
-        $('.form-login').show()
-        $('.form-recovery').hide()
+        if(createdAccount){
+            const logged = await this.context.login(signupEmail, signupPw)
 
-        $('.switcher-login').trigger('click')
-        $('#signup-back').trigger('click')
+            if(logged){
+                const {base} = this.props.match.params
+                if(base === 'login'){ this.props.history.push('/minhaconta') }
+                return
+            }
 
-        alert('Sua conta foi criada com sucesso.')
+            // $('.form-signup').trigger('reset')
+            // $('.form-full-signup').trigger('reset')
+
+            // $('.form-login').show()
+            // $('.form-recovery').hide()
+
+            // $('.switcher-login').trigger('click')
+            // $('#signup-back').trigger('click')
+
+            // alert('Sua conta foi criada com sucesso.')
+        }
+
+        $('#full-signup .error-message').text("Ocorreu um erro. Tente mais tarde.")
+
+        return
     }
 
     render(){

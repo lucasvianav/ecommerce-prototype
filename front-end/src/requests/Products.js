@@ -17,10 +17,10 @@ const getAtt = (idProduct, action, context) => {
           img.path = img.file;
         }
       })
-      if(action == 'update'){
+      if(action === 'update'){
         context.createProduct(item);
       }
-      if(action == 'create'){
+      if(action === 'create'){
         context.updateProduct(item);
       }
     })
@@ -30,8 +30,7 @@ const getAtt = (idProduct, action, context) => {
 }
 
 
-export default {
-  
+const productRequests = {
   GetAllProducts: (props) =>{
       const context = useContext(DataContext);
       useEffect( () => {
@@ -134,3 +133,4 @@ export default {
   }
 }
 
+export default productRequests
