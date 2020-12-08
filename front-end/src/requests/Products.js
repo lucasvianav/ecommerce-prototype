@@ -1,5 +1,4 @@
 import React, {useEffect, useContext} from 'react';
-import context from 'react-bootstrap/esm/AccordionContext';
 
 import { DataContext } from '../Context';
 
@@ -62,7 +61,6 @@ const productRequests = {
         props.onChange();
         api.post("products", {...data})
           .then((response) => {
-            console.log(response.data._id);
             getAtt(response.data, "create", context);
             alert("Produto inserido com sucesso");
           })
@@ -83,14 +81,15 @@ const productRequests = {
       const id = props.id;
       if (props.send === 'put') {
         console.log("Mandando dados para a API");
-        console.log(id)
-        console.log(data);
         props.onChange();
         api.put("products/"+id, {...data})
           .then((response) => {
-            getAtt(id, "update", context);
-            alert("Produto atualizado com sucesso");
-            props.history.push('/minhaconta');
+            api.get("products/"+id).then((res) => {
+              getAtt(res.data[0], "update", context);
+            }).catch((err) => {
+              console.error("ops! ocorreu um erro" + err);
+            });
+            alert("Produto atualizado com sucesso!");
           })
           .catch((err) => {
             console.error("ops! ocorreu um erro" + err);

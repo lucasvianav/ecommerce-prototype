@@ -8,6 +8,7 @@ import OrdersPanel from '../OrdersPanel';
 import FilterDiv from './FilterDiv';
 
 import { DataContext } from '../../Context';
+import ProductsRequests from '../../requests/Products'
 
 import '../css/bootstrap.css';
 import './index.css';
@@ -106,6 +107,7 @@ function AdmAccount(props){
 
     return(
         <main className='adm'>
+            <ProductsRequests.GetAllProducts onChange={() => {this.loadProducts()}}/>
             <h1 className='panel-title'>Página do Adiministrador</h1>
             <div className="content-box">
                 <div className="row">

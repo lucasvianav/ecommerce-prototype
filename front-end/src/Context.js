@@ -160,16 +160,7 @@ export class DataProvider extends React.Component {
                 discount: 0
             },
 
-            categories: [
-                {
-                    name: 'Moletons',
-                    parent: 'PR'
-                }, 
-                {
-                    name: 'Cervejada',
-                    parent: 'EV'
-                }
-            ],
+            categories: [{}],
 
             darkTheme: this.getInitialTheme(),
 
@@ -406,6 +397,7 @@ export class DataProvider extends React.Component {
 
     updateProduct(data){
         this.setState(prevState => ({data: prevState.data.map(item => item.id === data.id ? data : item)}))
+
     }
 
     deleteProduct(id){

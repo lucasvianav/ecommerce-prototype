@@ -1,8 +1,8 @@
 /*Campo invalido*/
 
 #imagensInseridas.is-invalid{
-    color: #DC3545;
-    border: 1px solid #DC3545;
+    color: #DC3545 !important;
+    border: 1px solid #DC3545 !important;
 }
 
 .form-row, .form-group, .input-group{

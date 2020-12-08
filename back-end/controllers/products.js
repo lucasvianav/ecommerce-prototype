@@ -1,5 +1,4 @@
 var express = require('express');
-var connection = require('../connection');
 
 var productsModel = require('../models/products');
 
@@ -120,9 +119,9 @@ module.exports = {
       await req.body.stock.forEach((item, indice) => {
         //Formato do stock recebido: ["cor", "template", "size", qtd]
         var chave = req.body.type + "-" + data._id;
-        chave += (item[0] === "") ? "-VOID" : "-" + item[0].toUpperCase().substr(0, 4);
-        chave += (item[1] === "") ? "-VOID" : "-" + item[1].toUpperCase().substr(0, 4);
-        chave += (item[2] === "") ? "-VOID" : "-" + item[2].toUpperCase().substr(0, 4);
+        chave += (item[0] === "" || item[0] === null) ? "-VOID" : "-" + item[0].toUpperCase().substr(0, 4);
+        chave += (item[1] === "" || item[1] === null) ? "-VOID" : "-" + item[1].toUpperCase().substr(0, 4);
+        chave += (item[2] === "" || item[2] === null) ? "-VOID" : "-" + item[2].toUpperCase().substr(0, 4);
         data.stock[chave] = item[3];
       });
 

@@ -273,7 +273,7 @@ function ProductForm(props){
         setNovaCategoria("")
         setDescricao("")
         setVisibility(true)
-        setOpcoes([])
+        setOpcoes([{}])
       }
 
     }
