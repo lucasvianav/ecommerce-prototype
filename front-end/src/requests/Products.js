@@ -5,28 +5,20 @@ import { DataContext } from '../Context';
 
 import api from './connection';
 
-const getAtt = (idProduct, action, context) => {
-  api.get("products/"+idProduct)
-    .then((response) => {
-      console.log(response);
-      var item = response.data;
-      item.id = item._id;
-      item.img.forEach((img, index) => {
-        var aux = '';
-        if(typeof img.file !== 'undefined'){
-          img.path = img.file;
-        }
-      })
-      if(action == 'update'){
-        context.createProduct(item);
-      }
-      if(action == 'create'){
-        context.updateProduct(item);
-      }
-    })
-    .catch((err) => {
-      console.error("ops! ocorreu um erro" + err);
-    });
+const getAtt = (item, action, context) => {
+  item.id = item._id;
+  item.img.forEach((img, index) => {
+    var aux = '';
+    if(typeof img.file !== 'undefined'){
+      img.path = img.file;
+    }
+  })
+  if(action === 'create'){
+    context.createProduct(item);
+  }
+  if(action === 'update'){
+    context.updateProduct(item);
+  }
 }
 
 
@@ -47,7 +39,6 @@ export default {
                 img.path = img.file;
               }
             })
-            console.log(item);
             context.createProduct(item);
           })
           props.onChange();
@@ -72,7 +63,8 @@ export default {
         props.onChange();
         api.post("products", {...data})
           .then((response) => {
-            getAtt(response.data._id, "create", context);
+            console.log(response.data._id);
+            getAtt(response.data, "create", context);
             alert("Produto inserido com sucesso");
           })
           .catch((err) => {

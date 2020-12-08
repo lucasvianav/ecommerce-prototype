@@ -120,7 +120,6 @@ function ProductForm(props){
         novo.path = URL.createObjectURL(selectedImg);
         novo.alt = altImg;
         novo.file = await resizeFile(selectedImg);
-        console.log(novo.file);
         setImagens([...imagens, novo]);
       }
     }else{
@@ -206,7 +205,7 @@ function ProductForm(props){
     }
 
     if(opcoes.some(item => item.stock === -1)){
-      console.log('é necessário definir o estoque')
+      alert('É necessário definir o estoque')
       flag = 1
     }
     
@@ -235,8 +234,6 @@ function ProductForm(props){
           stock.push([item.color, item.template, item.size, item.stock])
       }
       
-      console.log(imagens);
-
       var exportData = {
         name: nomeProduto,
         type: tipo,
@@ -253,7 +250,6 @@ function ProductForm(props){
       }
       
       if(action === 'Salvar'){
-        console.log("salvando...");
         var r = {};
         r.send = "put";
         r.id = props.id;
@@ -262,7 +258,7 @@ function ProductForm(props){
       }
 
       else if(action === 'Cadastrar'){
-        var r = {};
+        r = {};
         r.send = "post";
         r.data = exportData;
         setReq(r);
@@ -277,7 +273,7 @@ function ProductForm(props){
         setNovaCategoria("")
         setDescricao("")
         setVisibility(true)
-        setOpcoes([{}])
+        setOpcoes([])
       }
 
     }

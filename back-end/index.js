@@ -4,7 +4,7 @@ var app = express();
 var cors = require('cors');
 var db = require('./connection');
 
-require('dotenv').config()
+require('dotenv').config();
 
 var products = require('./routes/products');
 var accounts = require('./routes/account');
