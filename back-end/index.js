@@ -5,7 +5,7 @@ const cors = require('cors')
 const apiRouter = require('./routes')
 const db = require('./connection')
 
-require('dotenv').config()
+require('dotenv').config();
 
 app.use(express.json({limit: '30mb'}))
 app.use(express.urlencoded({ extended: true }))
