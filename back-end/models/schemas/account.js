@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const cartItemSchema = require('./cart')
 
 const accountSchema = mongoose.Schema({
     name: {
@@ -28,7 +29,11 @@ const accountSchema = mongoose.Schema({
     phoneNumber: {
         type: String,
         required: true
-
+    },
+    cart: {
+        type: [cartItemSchema],
+        default: [],
+        required: true
     }
 })
 

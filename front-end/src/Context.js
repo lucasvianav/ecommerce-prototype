@@ -101,44 +101,6 @@ export class DataProvider extends React.Component {
 
             ],
 
-            accounts: [ 
-                {   name: 'Fiona',
-                    type: 'client', // client x admin
-                    email: 'fionagatinha74@gmail.com',
-                    password: 'souLinda123',
-                    birthday: '01/01/2000',
-                    cpf: '666.666.666-66',
-                    phoneNumber: '+55 99 99999-9999'
-                },
-                {
-                    name: 'Biscoito',
-                    type: 'client',
-                    email: 'biscoitodamassa@gmail.com',
-                    password: 'nhameNhame123',
-                    birthday: '01/01/2000',
-                    cpf: '666.666.666-66',
-                    phoneNumber: '+55 99 99999-9999'
-                },
-                {
-                    name: 'Usuario',
-                    type: 'client',
-                    email: 'teste@gmail.com',
-                    password: 'Teste123',
-                    birthday: '01/01/2000',
-                    cpf: '666.666.666-66',
-                    phoneNumber: '+55 99 99999-9999'
-                },
-                {
-                    name: 'admin',
-                    type: 'admin',
-                    email: 'admin@admin.adm',
-                    password: 'Admin123',
-                    birthday: '01/01/2000',
-                    cpf: '666.666.666-66',
-                    phoneNumber: '+55 99 99999-9999'
-                }
-            ],
-
             isLogged: {status: false, user: {}},
     
             coupons: [
@@ -461,11 +423,11 @@ export class DataProvider extends React.Component {
     }
 
     render(){
-        const {data, cart, accounts, coupons, home, categories, darkTheme, orders, activeCoupon, isLogged} = this.state
+        const {data, cart, coupons, home, categories, darkTheme, orders, activeCoupon, isLogged} = this.state
         const {addToCart, removeFromCart, deleteFromCart, toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, getId, createProduct, updateProduct, deleteProduct, deleteAllProducts, placeOrder, updateCurrentAccount, getInitialLogin} = this
 
         return(
-            <DataContext.Provider value={{data, cart, accounts, isLogged, coupons, home, categories, darkTheme, orders, activeCoupon, addToCart, removeFromCart, deleteFromCart, toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, getId, createProduct, updateProduct, deleteProduct, deleteAllProducts, placeOrder, updateCurrentAccount, getInitialLogin}}>
+            <DataContext.Provider value={{data, cart, isLogged, coupons, home, categories, darkTheme, orders, activeCoupon, addToCart, removeFromCart, deleteFromCart, toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, getId, createProduct, updateProduct, deleteProduct, deleteAllProducts, placeOrder, updateCurrentAccount, getInitialLogin}}>
                 {this.props.children}
             </DataContext.Provider>
         )
