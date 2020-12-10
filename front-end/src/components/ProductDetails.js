@@ -243,7 +243,7 @@ class ProductDetails extends React.Component {
                                     }
 
                                     {
-                                        (this.product.sizeTable.img)
+                                        (this.product.sizeTable && this.product.sizeTable.img)
                                         ? (
                                             <div>
                                                 <span className="green underlined clicker disable-selection">Ver medidas</span>
@@ -288,7 +288,7 @@ class ProductDetails extends React.Component {
                 </div>
 
                 {
-                    (this.type !== 'PR' || !this.product.sizeTable.img) ? '' :
+                    (this.type !== 'PR' || !this.product.sizeTable || !this.product.sizeTable.img) ? '' :
                     <section id="sizes-modal" className="modal">
                         <img id="size-photo" src={this.product.sizeTable.img} alt={this.product.sizeTable.alt}/>
                     </section>
