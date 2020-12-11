@@ -6,6 +6,7 @@ import ProductForm from '../ProductForm';
 import UsersPanel from './UsersPanel';
 import OrdersPanel from '../OrdersPanel';
 import FilterDiv from './FilterDiv';
+import CouponPanel from './CouponPanel';
 
 import { DataContext } from '../../Context';
 import ProductsRequests from '../../requests/Products'
@@ -23,6 +24,7 @@ function AdmAccount(props){
     const [novoProd, setNovoProd] = useState(false);
     const [pedidos, setPedidos] = useState(true);
     const [usuarios, setUsuarios] = useState(false);
+    const [cupons, setCupons] = useState(false);
 
     const [filter, setFilter] = useState("none");
     const [arrayCategorias, setArrayCategorias] = useState([]);
@@ -31,6 +33,7 @@ function AdmAccount(props){
     const [selectedFilter2, setSelectedFilter2] = useState([]);
     const [selectedFilter3, setSelectedFilter3] = useState([]);
     const [selectedFilter4, setSelectedFilter4] = useState([]);
+    const [selectedFilter5, setSelectedFilter5] = useState([]);
 
     useEffect( () => {
         var vet = [];
@@ -46,11 +49,13 @@ function AdmAccount(props){
         setNovoProd(false);
         setPedidos(false);
         setUsuarios(false);
+        setCupons(false);
         $("#tabProdAtivos").addClass("active");
         $("#tabProdInativos").removeClass("active");
         $("#tabNovoProd").removeClass("active");
         $("#tabPedidos").removeClass("active");
         $("#tabUsuarios").removeClass("active");
+        $("#tabCupons").removeClass("active");
     }
 
     function showProdutosInativos(){
@@ -59,11 +64,13 @@ function AdmAccount(props){
         setNovoProd(false);
         setPedidos(false);
         setUsuarios(false);
+        setCupons(false);
         $("#tabProdInativos").addClass("active");
         $("#tabProdAtivos").removeClass("active");
         $("#tabNovoProd").removeClass("active");
         $("#tabPedidos").removeClass("active");
         $("#tabUsuarios").removeClass("active");
+        $("#tabCupons").removeClass("active");
     }
 
     function showProdutoNovo(){
@@ -72,11 +79,13 @@ function AdmAccount(props){
         setNovoProd(true);
         setPedidos(false);
         setUsuarios(false);
+        setCupons(false);
         $("#tabNovoProd").addClass("active");
         $("#tabProdAtivos").removeClass("active");
         $("#tabProdInativos").removeClass("active");
         $("#tabPedidos").removeClass("active");
         $("#tabUsuarios").removeClass("active");
+        $("#tabCupons").removeClass("active");
     }
     
     function showPedidos(){
@@ -85,11 +94,13 @@ function AdmAccount(props){
         setNovoProd(false);
         setPedidos(true);
         setUsuarios(false);
+        setCupons(false);
         $("#tabPedidos").addClass("active");
         $("#tabProdAtivos").removeClass("active");
         $("#tabProdInativos").removeClass("active");
         $("#tabNovoProd").removeClass("active");
         $("#tabUsuarios").removeClass("active");
+        $("#tabCupons").removeClass("active");
     }
 
     function showUsuarios(){
@@ -98,11 +109,28 @@ function AdmAccount(props){
         setNovoProd(false);
         setPedidos(false);
         setUsuarios(true);
+        setCupons(false);
         $("#tabUsuarios").addClass("active");
         $("#tabProdAtivos").removeClass("active");
         $("#tabProdInativos").removeClass("active");
         $("#tabNovoProd").removeClass("active");
         $("#tabPedidos").removeClass("active");
+        $("#tabCupons").removeClass("active");
+    }
+
+    function showCupons(){
+        setAtivo(false);
+        setInativo(false);
+        setNovoProd(false);
+        setPedidos(false);
+        setUsuarios(false);
+        setCupons(true);
+        $("#tabCupons").addClass("active");
+        $("#tabProdAtivos").removeClass("active");
+        $("#tabProdInativos").removeClass("active");
+        $("#tabNovoProd").removeClass("active");
+        $("#tabPedidos").removeClass("active");
+        $("#tabUsuarios").removeClass("active");
     }
 
     return(
@@ -148,6 +176,12 @@ function AdmAccount(props){
                                     <button className="nav-link ml-0 mr-0" id="tabUsuarios" onClick={() => {showUsuarios();}} 
                                     aria-controls="usuarios" aria-expanded={usuarios}>
                                         Usuários
+                                    </button>
+                                    </Nav.Item>
+                                    <Nav.Item>
+                                    <button className="nav-link ml-0 mr-0" id="tabCupons" onClick={() => {showCupons();}} 
+                                    aria-controls="cupons" aria-expanded={cupons}>
+                                        Cupons
                                     </button>
                                     </Nav.Item>
                                 </Nav>
@@ -215,6 +249,21 @@ function AdmAccount(props){
                                             </h6>
                                         </div>
                                         <UsersPanel filter={selectedFilter4} />
+                                </div>
+                                </Collapse>
+                                <Collapse in={cupons}>
+                                    <div id="cupons" className="p-2 bg-flex tabcontent">
+                                        <div className="d-flex justify-content-end" style={{width: '100%'}}>
+                                            <h6 className="align-right mt-2 text-right">
+                                                <i className="fas fa-search pointer" onClick={() =>{setFilter("search")}}></i>
+                                                <i className="fas fa-filter pointer" onClick={() =>{setFilter("filter")}}></i>
+                                                < FilterDiv show={filter} onHide={() => setFilter("none")} 
+                                                    onChange={(event) => {setSelectedFilter5(event)}}
+                                                    seletores={[{title: "Tipo de cupon", property: "type", labels:["Porcentagem","Valor Cheio"], values: ["percentage","absolute"]}]} 
+                                                />
+                                            </h6>
+                                        </div>
+                                        <CouponPanel filter={selectedFilter4} />
                                 </div>
                                 </Collapse>
                         </section>

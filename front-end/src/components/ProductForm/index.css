@@ -1,3 +1,8 @@
+/*Fix modal*/
+.fade.modal.modal.show{
+    background-color: rgba(0, 0, 0, 0.767);
+}
+
 /*Campo invalido*/
 
 #imagensInseridas.is-invalid{
