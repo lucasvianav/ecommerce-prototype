@@ -103,7 +103,7 @@ class ProductDetails extends React.Component {
             $('.error-message').text('')
         }
         
-        const stock = this.product.stock[this.generateSKU()] ? this.product.stock[this.generateSKU()] : 0
+        const stock = parseInt(this.product.stock[this.generateSKU()] ? this.product.stock[this.generateSKU()] : 0)
 
         if(name === 'quantity' && 0 < value && value <= stock){ 
             this.setState({quantity: parseInt(value)})
