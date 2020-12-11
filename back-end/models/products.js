@@ -2,6 +2,6 @@ var mongoose = require('mongoose');
 
 var productsSchema = require('./schemas/products');
 
-var products = mongoose.model('Products', productsSchema);
+var Products = mongoose.model('Products', productsSchema);
 
-module.exports = products;
+module.exports = Products;
