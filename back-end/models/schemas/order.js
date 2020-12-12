@@ -1,6 +1,19 @@
 const mongoose = require('mongoose')
-const cartItemSchema = require('./cart')
-const accountSchema = require('./account')
+
+const specsSchema = mongoose.Schema({
+    color: {
+        type: String,
+        default: '',
+    },
+    template: {
+        type: String,
+        default: '',
+    },
+    size: {
+        type: String,
+        default: '',
+    }
+})
 
 const clientSchema = mongoose.Schema({
     _id: String,
@@ -22,9 +35,50 @@ const clientSchema = mongoose.Schema({
     }
 })
 
+const orderItemSchema = mongoose.Schema({
+    sku: {
+        type: String,
+        required: true
+    },
+    quantity: {
+        type: Number,
+        min: 1,
+        required: true,
+    },
+    specs: {
+        type: specsSchema,
+        required: true
+    },
+    price: {
+        type: Number,
+        required: true
+    }
+})
+
+/*
+{
+    id: '', //id do pedido
+    product:[
+        {
+            sku: '',    //sku do produto
+            quantity: '',    //quantidade (número)
+            specs: {color: '', template:'', size:''},
+            price: '' // preço do produto no momento da compra
+        }
+    ],
+    client: '',   //email do cliente
+    date: '', // data do pedido
+    time: '', // horário do pedido
+    payment: '', // método de pagamento escolhido
+    situation: '',   //AA - aguardando aprovação, PA - pagamento aprovado, PPR - pronto para retirada, FF - finalizado
+    discount: '',      // Desconto provindo de cupon, em R$ (número)
+    total: '' // Valor total da compra
+},
+*/
+
 const orderSchema = mongoose.Schema({
     products: {
-        type: [cartItemSchema],
+        type: [orderItemSchema],
         required: true,
     },
     client: {
