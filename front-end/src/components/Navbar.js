@@ -82,12 +82,19 @@ class Navbar extends React.Component {
     constructor(props, context){
         super(props, context)
 
-        const {data} = this.context
+        const {categories} = this.context
 
         this.state = { search: '' }
 
-        this.products = data.filter(value => value.visibility && value.type === 'PR').map(item => item.category).filter((value, index, self) => (self.indexOf(value) === index)).map(item => item.title())
-        this.events = data.filter(value => value.visibility && value.type === 'EV').map(item => item.category).filter((value, index, self) => (self.indexOf(value) === index)).map(item => item.title())
+        this.products = categories.reduce((acc, cur) => {
+            if(cur.parent === 'PR'){ acc.push(cur.name.title()) }
+            return acc
+        }, [])
+
+        this.events = categories.reduce((acc, cur) => {
+            if(cur.parent === 'EV'){ acc.push(cur.name.title()) }
+            return acc
+        }, [])
 
         this.handleChange = this.handleChange.bind(this)
         this.submitSearch = this.submitSearch.bind(this)
