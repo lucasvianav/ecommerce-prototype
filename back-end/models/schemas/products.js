@@ -19,12 +19,12 @@ var priceSchema = mongoose.Schema({
     },
     sale: {
         type: Number,
-        default: ""
+        required: true
     }
 });
 
 var imgSchema = mongoose.Schema({
-    file: String,
+    path: String,
     alt: String
 });
 
