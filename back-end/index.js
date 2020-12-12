@@ -1,11 +1,14 @@
-const express = require('express')
-const app = express()
 const cors = require('cors')
+const express = require('express')
+const mongoose = require('mongoose')
+const app = express()
 
 const apiRouter = require('./routes')
 const db = require('./connection')
 
 require('dotenv').config();
+
+mongoose.set('useFindAndModify', false)
 
 app.use(express.json({limit: '30mb'}))
 app.use(express.urlencoded({ extended: true }))
