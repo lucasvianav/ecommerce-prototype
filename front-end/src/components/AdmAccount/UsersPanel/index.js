@@ -2,7 +2,6 @@ import React, {useContext, useState, useEffect} from 'react';
 
 import { DataContext } from '../../../Context';
 
-import './index.css';
 import '../../css/bootstrap.css';
 
 const UsersPanel = (props) => {

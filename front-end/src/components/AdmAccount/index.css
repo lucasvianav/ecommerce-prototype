@@ -70,3 +70,8 @@
     padding: 0;
     width: fit-content;
 }
+
+.btn-none{
+    background-color: transparent;
+    border: none;
+}
