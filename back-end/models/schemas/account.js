@@ -33,7 +33,6 @@ const accountSchema = mongoose.Schema({
     cart: {
         type: [cartItemSchema],
         default: [],
-        required: true
     }
 })
 
