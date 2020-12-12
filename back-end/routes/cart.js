@@ -8,6 +8,8 @@ const cartController = require('../controllers/cart')
 
 router.get('/:_id', cartController.find)
 
+router.post('/', cartController.substitute)
+
 router.patch('/', cartController.edit)
 
 router.put('/', cartController.update)

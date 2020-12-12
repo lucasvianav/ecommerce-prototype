@@ -15,7 +15,7 @@ class ProductSearch extends React.Component {
 
         this.query = query
 
-        const products = data.filter(item => item.category && (item.category.toLowerCase().includes(query.toLowerCase()) || item.name.toLowerCase().includes(query.toLowerCase()) || item.id.toLowerCase().includes(query.toLowerCase())))
+        const products = data.filter(item => item.category && (item.category.toLowerCase().includes(query.toLowerCase()) || item.name.toLowerCase().includes(query.toLowerCase()) || item._id.toLowerCase().includes(query.toLowerCase())))
         this.state = { products: products }
     }
 
@@ -27,7 +27,7 @@ class ProductSearch extends React.Component {
     
             this.query = query
 
-            const products = data.filter(item => item.category.toLowerCase().includes(query.toLowerCase()) || item.name.toLowerCase().includes(query.toLowerCase()) || item.id.toLowerCase().includes(query.toLowerCase()))
+            const products = data.filter(item => item.category.toLowerCase().includes(query.toLowerCase()) || item.name.toLowerCase().includes(query.toLowerCase()) || item._id.toLowerCase().includes(query.toLowerCase()))
             this.setState({ products: products })
         }
     }
@@ -49,7 +49,7 @@ class ProductSearch extends React.Component {
                             {
                                 this.state.products.map((item) =>
                                     item.visibility ?
-                                    <div className="product-card" key={item.id}><Link to={'/' + this.tab + '/' + item.id }>
+                                    <div className="product-card" key={item._id}><Link to={'/' + this.tab + '/' + item._id }>
                                         <img className="product-thumb" src={item.img[0].path} alt={item.img[0].alt}/> 
                                         <p className="product-title">{item.name}</p>
                                         <div className="price-line">

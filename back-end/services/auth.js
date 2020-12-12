@@ -4,8 +4,8 @@ const accountService = require('./account')
 const jwt = require('jsonwebtoken')
 
 const formatResponse = user => {
-    const {_id, name, type, email, birthday, cpf, phoneNumber} = user
-    return { _id, name, type, email, birthday, cpf, phoneNumber }
+    const {_id, name, type, email, birthday, cpf, phoneNumber, cart} = user
+    return { _id, name, type, email, birthday, cpf, phoneNumber, cart }
 }
 
 const insertToken = user => {

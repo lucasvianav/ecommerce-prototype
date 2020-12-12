@@ -118,11 +118,11 @@ export class DataProvider extends React.Component {
 
             activeCoupon: {
                 status: false,
-                coupon: '',
+                coupon: {},
                 discount: 0
             },
 
-            categories: [{}],
+            categories: [],
 
             darkTheme: this.getInitialTheme(),
 
@@ -136,9 +136,8 @@ export class DataProvider extends React.Component {
         $('*').removeClass('dark-theme light-theme')
         $('*').addClass(this.state.darkTheme ? 'dark-theme' : 'light-theme')
 
-        this.addToCart = this.addToCart.bind(this)
+        this.editCart = this.editCart.bind(this)
         this.removeFromCart = this.removeFromCart.bind(this)
-        this.deleteFromCart = this.deleteFromCart.bind(this)
         this.toggleTheme = this.toggleTheme.bind(this)
         this.redeemCoupon = this.redeemCoupon.bind(this)
         this.clearCoupon = this.clearCoupon.bind(this)
@@ -147,7 +146,6 @@ export class DataProvider extends React.Component {
         this.signup = this.signup.bind(this)
         this.getCurrentAccount = this.getCurrentAccount.bind(this)
         this.getId = this.getId.bind(this)
-        this.getOrderId = this.getOrderId.bind(this)
         this.createProduct = this.createProduct.bind(this)
         this.updateProduct = this.updateProduct.bind(this)
         this.deleteProduct = this.deleteProduct.bind(this)
@@ -155,12 +153,22 @@ export class DataProvider extends React.Component {
         this.placeOrder = this.placeOrder.bind(this)
         this.updateCurrentAccount = this.updateCurrentAccount.bind(this)
         this.getInitialLogin = this.getInitialLogin.bind(this)
+        this.getInitialCart = this.getInitialCart.bind(this)
+        this.fetchData = this.fetchData.bind(this)
+        this.fetchProducts = this.fetchProducts.bind(this)
+        this.refreshCart = this.refreshCart.bind(this)
     }
 
     componentDidMount(){
         localStorage.setItem('darkTheme', JSON.stringify(this.state.darkTheme))
     }
     
+    async fetchData(){
+        await this.getInitialLogin()
+        await this.fetchProducts()
+        await this.getInitialCart()
+    }
+
     async getInitialLogin(){
         const token = JSON.parse(localStorage.getItem('session'))
         await api.get('/auth/authenticate', { headers: {'Authorization': 'Bearer ' + token} })
@@ -169,6 +177,48 @@ export class DataProvider extends React.Component {
                 this.setState({isLogged: {status: false, user: null}})
                 localStorage.removeItem('session')
             })
+    }
+
+    async getInitialCart(){
+        if(!this.state.isLogged.status){
+            if(!this.state.cart.isEmpty()){
+                localStorage.setItem('guestCart', JSON.stringify(this.state.cart))
+            }
+
+            else if('guestCart' in localStorage){
+                this.setState({cart: JSON.parse(localStorage.getItem('guestCart'))})
+            }
+        }
+
+        else{
+            await api.get('/cart/' + this.state.isLogged.user._id)
+                .then(r => {
+                    this.setState({cart: r.data})
+                    localStorage.removeItem('guestCart')
+                })
+        }
+
+        return
+    }
+
+    async fetchProducts(){
+        await api.get('/products')
+            .then(r => {
+                const {data} = r
+
+                let categories = []
+                for(let product of data){
+                    if((!categories.includes(product.category)) && product.visibility){
+                        categories.push({
+                            name: product.category,
+                            parent: product.type
+                        })
+                    }
+                }
+
+                this.setState({data, categories})
+            })
+            .catch(e => console.log('Algo deu errado: ', e))
     }
 
     updateCurrentAccount(){
@@ -194,21 +244,32 @@ export class DataProvider extends React.Component {
     async login(email, password){
         try{
             const response = await api.post('/auth/login', {email, password})
-            console.log(response)
-
+            
             if(response.status === 200){
+                let {cart} = this.state
+                const {_id} = response.data.user
+
+                cart = !cart.isEmpty() ? await api.post('/cart', { _id, cart }) : await api.get('/cart/' + response.data.user._id)
+                cart = cart.data
+
+                this.setState({ isLogged: {status: true, user: response.data.user}, cart })
+                localStorage.removeItem('guestCart')
                 localStorage.setItem('session', JSON.stringify(response.data.token))
-                this.setState({isLogged: {status: true, user: response.data.user}})
+
                 return true
             }
 
             else{ return false }
         }
 
-        catch(e){ return false }
+        catch(e){ 
+            console.log('Ocorreu um erro: ', e)
+            return false 
+        }
     }
 
     logout(){
+        localStorage.setItem('guestCart', JSON.stringify(this.state.cart))
         localStorage.removeItem('session')
         this.setState({isLogged: {status: false, user: null}}, window.location.reload())
     }
@@ -221,7 +282,8 @@ export class DataProvider extends React.Component {
             password: data.signupPw,
             birthday: data.signupBirthday,
             cpf: data.signupCPF,
-            phoneNumber: data.signupPhoneNumber
+            phoneNumber: data.signupPhoneNumber,
+            cart: this.state.cart
         }
 
         return await api.post('auth/signup', {...account})
@@ -232,70 +294,79 @@ export class DataProvider extends React.Component {
         return isLogged.status ? isLogged.user : null
     }
 
-    addToCart(sku, quantity, specs){
-        if(quantity < 1){ return false }
+    async editCart(sku, quantity, specs, callback){
+        if(-1 < quantity && quantity < 1){ return false; }
+        
+        var {cart} = this.state
 
-        const [type, id] = sku.split('-')
+        if(!this.state.isLogged.status){
+            if(quantity >= 1){
+                const stock = (await api.get('/products/stock/' + sku)).data
 
-        const product = this.state.data.find(item => (item.id === id && item.type === type))
+                // If the cart already contains that item
+                if(cart.some(item => item.sku === sku)){
+                    cart = cart.map(item => {
+                        if(item.sku === sku){ 
+                            if(parseInt(item.quantity) + parseInt(quantity) <= parseInt(stock)){ item.quantity += parseInt(quantity) }
+                            else{ item.quantity = parseInt(stock) }
+                        }
 
-        let {cart} = this.state
-
-        const stock = product.stock[sku] ? parseInt(product.stock[sku]) : 0
-
-        var output = true
-
-        // If the cart already contains that item
-        if(cart.some(item => item.sku === sku)){
-            cart = cart.map(item => {
-                if(item.sku === sku){ 
-                    if(parseInt(item.quantity) + parseInt(quantity) <= parseInt(stock)){ item.quantity += parseInt(quantity) }
-                    else{ 
-                        output = false
-                        item.quantity = parseInt(stock) 
-                    }
+                        return item
+                    })
                 }
 
-                return item
-            })
+                // If it doesn't
+                else{
+                    cart.push({
+                        sku: sku,
+                        quantity: Math.min(parseInt(quantity), parseInt(stock)),
+                        specs: specs
+                    })
+                }
+            }
+            
+            else if(quantity <= -1){
+                const qty = Math.abs(quantity)
+
+                // If the cart contains that item and the quantity 
+                // in cart is higher the quantity to be removed
+                cart = cart.map(item => {
+                    if(item.sku === sku && item.quantity > qty){ item.quantity -= qty }
+                    return item
+                })
+            }
+
+            localStorage.setItem('guestCart', JSON.stringify(cart))
         }
 
-        // If it doesn't
         else{
-            cart.push({
-                sku: sku,
-                quantity: Math.min(parseInt(quantity), parseInt(stock)),
-                specs: specs
+            const {_id} = this.state.isLogged.user
+            cart = (await api.patch('/cart', {_id, sku, quantity, specs})).data
+        }
+        
+        this.setState({cart}, () => callback ? callback() : null)
+        this.clearCoupon()
+    }
+
+    async removeFromCart(sku, callback){
+        var {cart} = this.state
+        const {status: isLogged} = this.state.isLogged
+
+        cart = isLogged ? await api.delete('/cart', {_id: this.state.isLogged.user._id, sku}) : cart.filter(item => item.sku !== sku)
+
+        if(!isLogged){ localStorage.setItem('guestCart', JSON.stringify(cart)) }
+        this.setState({cart}, () => callback ? callback() : null)
+        this.clearCoupon()
+    }
+
+    async refreshCart(callback){
+        if(this.state.isLogged.status){
+            const {_id} = this.state.isLogged.user
+            await api.put('/cart', {_id}).then(r => {
+                const cart = r.data
+                this.setState({ cart }, callback ? callback() : null)
             })
         }
-
-        this.setState({cart: cart})
-        this.clearCoupon()
-
-        return output
-    }
-
-    removeFromCart(sku, quantity){
-        if(quantity < 1){ return false }
-
-        let {cart} = this.state
-        var output = true
-        
-        // If the cart contains that item and the quantity 
-        // in cart is higher the quantity to be removed
-        cart = cart.map(item => {
-            if(item.sku === sku){ item.quantity > quantity ? item.quantity -= quantity : output = false }
-            return item
-        })
-
-        this.setState({cart: cart})
-
-        return output
-    }
-
-    deleteFromCart(sku){
-        this.setState(prevState => ({cart: prevState.cart.filter(item => item.sku !== sku)}))
-        return true
     }
 
     redeemCoupon(coupon, subtotal){
@@ -307,7 +378,7 @@ export class DataProvider extends React.Component {
             return {status: true, coupon: c, discount: discount}
         }
 
-        return {status: false, coupon: '', discount: 0}
+        return {status: false, coupon: {}, discount: 0}
     }
 
     clearCoupon(){
@@ -326,18 +397,6 @@ export class DataProvider extends React.Component {
                 order: prevState.id.order
             }
         }))
-
-        return newId
-    }
-
-    getOrderId(){
-        const newId = this.state.id.order + 1
-
-        this.setState(prevState => ({id: {
-            PR: prevState.id.PR,
-            EV: prevState.id.EV,
-            order: prevState.id.order + 1
-        }}))
 
         return newId
     }
@@ -370,21 +429,23 @@ export class DataProvider extends React.Component {
         this.setState({data: [{}]})
     }
 
-    placeOrder(total, payment){
+    async placeOrder(total, payment){
         if(!this.state.isLogged.status || this.state.cart.isEmpty()){ return }
         
         let subtotal = 0
         const cart = this.state.cart.map(item => {
-            let id = item.sku.split('-')[1]
-            item.price = this.state.data.find(el => id === el.id).price.sale
+            let _id = item.sku.split('-')[1]
+            item.price = this.state.data.find(el => _id === el._id).price.sale
             subtotal += parseFloat(item.price) * parseInt(item.quantity)
             return item
         })
+
+        const {_id, name, email, cpf, phoneNumber} = this.state.isLogged.user
+        const client = {_id, name, email, cpf, phoneNumber}
         
         const order = {
-            id: this.getOrderId(),
-            product: cart,
-            client: this.state.isLogged.email,
+            products: cart,
+            client,
             date: (new Date()).toLocaleDateString().replace(/(^\d\d)\/(\d\d)/mg, '$2/$1'),
             time: (new Date()).toLocaleTimeString(),
             payment: payment,
@@ -392,42 +453,27 @@ export class DataProvider extends React.Component {
             discount: this.state.activeCoupon.discount,
             total: subtotal - this.state.activeCoupon.discount
         }
-
-        // data = [{sku: string, quantity: number}]
-        const updateStock = (data) => {
-            let {data: products} = this.state
-
-            for(let item of data){
-                if(isNaN(item.quantity) || parseInt(item.quantity) === 0){ continue }
-
-                let id = item.sku.split('-')[1]
-                let product = products.find(el => el.id === id)
-                product.stock[item.sku] = parseInt(product.stock[item.sku]) - parseInt(item.quantity)
-            }
-
-            this.setState({data: products, cart: [], activeCoupon: {status: false, coupon: '', discount: 0}})
-
-            return true
-        }
         
-        if(total !== order.total || !updateStock(cart.map(item => ({sku: item.sku, quantity: parseInt(item.quantity)})))){
+        if(total !== order.total){
             alert('Erro!')
-            return false
+            return null
         }
 
-        let {orders} = this.state
-        orders.push(order)
-        this.setState({orders: orders})
+        const newOrderId = (await api.post('/orders', {...order})).data
 
-        return true
+        this.clearCoupon()
+        await this.refreshCart()
+        await this.fetchProducts()
+
+        return newOrderId
     }
 
     render(){
         const {data, cart, coupons, home, categories, darkTheme, orders, activeCoupon, isLogged} = this.state
-        const {addToCart, removeFromCart, deleteFromCart, toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, getId, createProduct, updateProduct, deleteProduct, deleteAllProducts, placeOrder, updateCurrentAccount, getInitialLogin} = this
+        const {editCart, removeFromCart, toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, getId, createProduct, updateProduct, deleteProduct, deleteAllProducts, placeOrder, updateCurrentAccount, getInitialLogin, getInitialCart, fetchData, refreshCart} = this
 
         return(
-            <DataContext.Provider value={{data, cart, isLogged, coupons, home, categories, darkTheme, orders, activeCoupon, addToCart, removeFromCart, deleteFromCart, toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, getId, createProduct, updateProduct, deleteProduct, deleteAllProducts, placeOrder, updateCurrentAccount, getInitialLogin}}>
+            <DataContext.Provider value={{data, cart, isLogged, coupons, home, categories, darkTheme, orders, activeCoupon, editCart, removeFromCart, toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, getId, createProduct, updateProduct, deleteProduct, deleteAllProducts, placeOrder, updateCurrentAccount, getInitialLogin, getInitialCart, fetchData, refreshCart}}>
                 {this.props.children}
             </DataContext.Provider>
         )

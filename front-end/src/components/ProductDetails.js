@@ -41,7 +41,7 @@ class ProductDetails extends React.Component {
         
         this.type = tab.substring(0,2).toUpperCase()
         this.tab = this.type === 'PR' ? 'produtos' : 'eventos'
-        this.product = data.find(item => item.id === id && item.type === this.type) ? data.find(item => item.id === id && item.type === this.type) : false
+        this.product = data.find(item => item._id === id && item.type === this.type) ? data.find(item => item._id === id && item.type === this.type) : false
         
         if(!this.product || !this.product.visibility){ this.props.history.push('/') }
 
@@ -85,7 +85,7 @@ class ProductDetails extends React.Component {
     generateSKU(){
         const {template, size, color} = this.state
         
-        let sku = this.type + '-' + this.product.id
+        let sku = this.type + '-' + this.product._id
         if(this.type === 'PR'){
             sku += color ? '-' + color.substring(0,4).toUpperCase() + '-' : '-VOID-'
             sku += template ? template.substring(0,4).toUpperCase() + '-' : 'VOID-'
@@ -115,7 +115,7 @@ class ProductDetails extends React.Component {
         }
     }
 
-    handleSubmit(e){
+    async handleSubmit(e){
         e.preventDefault()
 
         const {template, size, color, quantity} = this.state
@@ -128,7 +128,7 @@ class ProductDetails extends React.Component {
         const specs = {color: color, template: template, size: size}
         const sku = this.generateSKU()
 
-        this.context.addToCart(sku, quantity, specs)
+        await this.context.editCart(sku, quantity, specs)
         this.props.history.push('/carrinho')
     }
 

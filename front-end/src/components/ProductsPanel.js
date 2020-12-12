@@ -4,8 +4,6 @@ import $ from 'jquery'
 
 import './css/ProductsPanel.css'
 import { DataContext } from '../Context'
-
-import ProductsRequests from '../requests/Products'
 class ProductsPanel extends React.Component {
     static contextType = DataContext
 
@@ -98,7 +96,7 @@ class ProductsPanel extends React.Component {
     render(){
         return(
             <main className="ProductsPanel">
-                <ProductsRequests.GetAllProducts onChange={() => {this.loadProducts()}}/>
+                {/* <ProductsRequests.GetAllProducts onChange={() => {this.loadProducts()}}/> */}
                 <div className="panel-title"><span>{this.title.capitalize()}</span></div>
 
                 <div className="tabs-history disable-selection">
@@ -134,7 +132,7 @@ class ProductsPanel extends React.Component {
                                 {
                                     this.state.products.map((item) =>
                                         item.visibility ?
-                                        <div className="product-card" key={item.id}><Link to={'/' + this.title.toLowerCase() + '/' + item.id }>
+                                        <div className="product-card" key={item._id}><Link to={'/' + this.title.toLowerCase() + '/' + item._id }>
                                             <img className="product-thumb" src={item.img[0].path} alt={item.img[0].alt}/> 
                                             <p className="product-title">{item.name}</p>
                                             <div className="price-line">

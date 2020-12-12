@@ -8,6 +8,15 @@ const cartController = {
         return res.json(cart)
     },
 
+    substitute: async (req, res) => {
+        const {_id, cart: newCart} = req.body
+        await cartService.substitute(_id, newCart)
+
+        const cart = await cartService.update(_id)
+
+        return res.json(cart)
+    },
+
     edit: async (req, res) => {
         const {_id, sku, quantity, specs} = req.body
         const cart = await cartService.edit(_id, sku, quantity, specs)

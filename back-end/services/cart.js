@@ -2,7 +2,9 @@ const Accounts = require('../models/account')
 const Products = require('../models/products')
 
 const cartService = {
-    find: async _id => await Accounts.findById(_id, 'cart'),
+    find: async _id => (await Accounts.findById(_id, 'cart')).cart,
+
+    substitute: async (_id, cart) => await Accounts.findByIdAndUpdate(_id, { cart }),
 
     edit: async (_id, sku, quantity, specs) => {
         if(-1 < quantity && quantity < 1){ return null }
@@ -40,7 +42,7 @@ const cartService = {
         }
         
         else{
-            const qty = -quantity
+            const qty = Math.abs(quantity)
             
             cart = cart.map(item => {
                 if(item.sku === sku && item.quantity > qty){ item.quantity -= qty }
@@ -81,7 +83,9 @@ const cartService = {
         await Accounts.findByIdAndUpdate(_id, { $pull: { cart: { sku } } })
 
         return await Accounts.findById(_id, 'cart')
-    }
+    },
+
+    empty: async _id => await Accounts.findByIdAndUpdate(_id, {cart: []}, {new: true})
 }
 
 module.exports = cartService

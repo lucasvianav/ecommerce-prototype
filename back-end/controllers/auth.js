@@ -2,9 +2,9 @@ const authService = require('../services/auth')
 
 const authController = {
     signup: async (req, res) => {
-        const {name, type, email, password, birthday, cpf, phoneNumber} = req.body
+        const {name, type, email, password, birthday, cpf, phoneNumber, cart} = req.body
 
-        const createdAccount = await authService.signup({name, type, email, password, birthday, cpf, phoneNumber})
+        const createdAccount = await authService.signup({name, type, email, password, birthday, cpf, phoneNumber, cart})
 
         return createdAccount ? res.json(createdAccount) : res.status(400).json()
     },

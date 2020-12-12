@@ -4,17 +4,14 @@ const specsSchema = mongoose.Schema({
     color: {
         type: String,
         default: '',
-        required: true
     },
     template: {
         type: String,
         default: '',
-        required: true
     },
     size: {
         type: String,
         default: '',
-        required: true
     }
 })
 
