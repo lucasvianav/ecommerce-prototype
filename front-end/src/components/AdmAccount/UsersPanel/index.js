@@ -50,7 +50,7 @@ const UsersPanel = (props) => {
                 </tr>
               </thead>
               <tbody>
-                {users.map((user, index) =>{
+                {(users !== undefined) ? users.map((user, index) =>{
 
                   return (
                     <tr id={"user"+index} key={index}>
@@ -60,7 +60,7 @@ const UsersPanel = (props) => {
                         <td className="text-right"></td>
                     </tr>
                   );
-                })}
+                }) : ""}
               </tbody>
           </table>
       </section>

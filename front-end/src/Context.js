@@ -103,18 +103,7 @@ export class DataProvider extends React.Component {
 
             isLogged: {status: false, user: {}},
     
-            coupons: [
-                {
-                    str: 'FLIPRULEZ10',
-                    type: 'percentage', // 'percentage' x 'absolute'
-                    discount: 10 // 10%
-                },
-                {
-                    str: 'FLIPRULEZ25',
-                    type: 'absolute',
-                    discount: 25 // R$25
-                }
-            ],
+            coupons: [],
 
             activeCoupon: {
                 status: false,
@@ -152,6 +141,10 @@ export class DataProvider extends React.Component {
         this.updateProduct = this.updateProduct.bind(this)
         this.deleteProduct = this.deleteProduct.bind(this)
         this.deleteAllProducts = this.deleteAllProducts.bind(this)
+        this.createCoupon = this.createCoupon.bind(this)
+        this.updateCoupon = this.updateCoupon.bind(this)
+        this.deleteCoupon = this.deleteCoupon.bind(this)
+        this.deleteAllCoupons = this.deleteAllCoupons.bind(this)
         this.placeOrder = this.placeOrder.bind(this)
         this.updateCurrentAccount = this.updateCurrentAccount.bind(this)
         this.getInitialLogin = this.getInitialLogin.bind(this)
@@ -370,6 +363,28 @@ export class DataProvider extends React.Component {
         this.setState({data: [{}]})
     }
 
+    createCoupon(data){
+        if(data.id !== undefined && data.id !== ""){
+            let {coupons: cp} = this.state
+            cp.push(data)
+
+            this.setState({coupons: cp})
+        }
+    }
+
+    updateCoupon(data){
+        this.setState(prevState => ({coupons: prevState.coupons.map(item => item.id === data.id ? data : item)}))
+
+    }
+
+    deleteCoupon(id){
+        this.setState(prevState => ({coupons: prevState.coupons.filter(item => item.id !== id)}))
+    }
+
+    deleteAllCoupons(){
+        this.setState({coupons: [{}]})
+    }
+
     placeOrder(total, payment){
         if(!this.state.isLogged.status || this.state.cart.isEmpty()){ return }
         
@@ -424,10 +439,10 @@ export class DataProvider extends React.Component {
 
     render(){
         const {data, cart, coupons, home, categories, darkTheme, orders, activeCoupon, isLogged} = this.state
-        const {addToCart, removeFromCart, deleteFromCart, toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, getId, createProduct, updateProduct, deleteProduct, deleteAllProducts, placeOrder, updateCurrentAccount, getInitialLogin} = this
+        const {addToCart, removeFromCart, deleteFromCart, toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, getId, createProduct, updateProduct, deleteProduct, deleteAllProducts, createCoupon, updateCoupon, deleteCoupon, deleteAllCoupons, placeOrder, updateCurrentAccount, getInitialLogin} = this
 
         return(
-            <DataContext.Provider value={{data, cart, isLogged, coupons, home, categories, darkTheme, orders, activeCoupon, addToCart, removeFromCart, deleteFromCart, toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, getId, createProduct, updateProduct, deleteProduct, deleteAllProducts, placeOrder, updateCurrentAccount, getInitialLogin}}>
+            <DataContext.Provider value={{data, cart, isLogged, coupons, home, categories, darkTheme, orders, activeCoupon, addToCart, removeFromCart, deleteFromCart, toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, getId, createProduct, updateProduct, deleteProduct, deleteAllProducts, createCoupon, updateCoupon, deleteCoupon, deleteAllCoupons, placeOrder, updateCurrentAccount, getInitialLogin}}>
                 {this.props.children}
             </DataContext.Provider>
         )
