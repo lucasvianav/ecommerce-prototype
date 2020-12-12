@@ -35,7 +35,7 @@ class App extends React.Component {
 
     return(
       <BrowserRouter>
-        <Async promiseFn={this.context.getInitialLogin}>
+        <Async promiseFn={this.context.fetchData}>
           {({ response, error, isPending }) => {
             return (isPending) 
             ? 
