@@ -10,6 +10,7 @@ import CouponPanel from './CouponPanel';
 
 import { DataContext } from '../../Context';
 import ProductsRequests from '../../requests/Products'
+import CouponsRequests from '../../requests/Coupons'
 
 import '../css/bootstrap.css';
 import './index.css';
@@ -135,7 +136,8 @@ function AdmAccount(props){
 
     return(
         <main className='adm'>
-            <ProductsRequests.GetAllProducts onChange={() => {this.loadProducts()}}/>
+            <ProductsRequests.GetAllProducts onChange={() => {}} />
+            <CouponsRequests.GetAllCoupons />
             <h1 className='panel-title'>Página do Adiministrador</h1>
             <div className="content-box">
                 <div className="row">
@@ -263,7 +265,7 @@ function AdmAccount(props){
                                                 />
                                             </h6>
                                         </div>
-                                        <CouponPanel filter={selectedFilter4} />
+                                        <CouponPanel filter={selectedFilter5} />
                                 </div>
                                 </Collapse>
                         </section>

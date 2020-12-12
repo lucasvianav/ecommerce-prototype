@@ -75,3 +75,7 @@
     background-color: transparent;
     border: none;
 }
+
+.is-invalid{
+    border-color: #dc3545 !important;
+}
