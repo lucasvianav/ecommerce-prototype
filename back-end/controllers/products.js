@@ -1,11 +1,11 @@
 var express = require('express');
 
-var productsModel = require('../models/products');
+var Products = require('../models/products');
 
 async function generateProductId(data) {
   var retorno = '';
   if (data.type === "EV"){
-    await productsModel.find({type: "EV"}, async (err, products) => {
+    await Products.find({type: "EV"}, async (err, products) => {
       if (products.length > 0){
         var ant = products[products.length-1];
         var nAnt = await ant._id.substr(1, ant.length);
@@ -15,7 +15,7 @@ async function generateProductId(data) {
         retorno = "E1";
     })
   }else{
-    await productsModel.find({type: "PR"}, async (err, products) => {
+    await Products.find({type: "PR"}, async (err, products) => {
       if (products.length > 0){
         var ant = products[products.length-1];
         var nAnt = await ant._id.substr(1, ant.length);
@@ -31,7 +31,7 @@ async function generateProductId(data) {
 module.exports = {
   getAll: function(req, res, next) {
     try{
-      productsModel.find({}, (err, products) => {
+      Products.find({}, (err, products) => {
         if (err) {
           res.status(500);
           res.send(err);
@@ -47,7 +47,7 @@ module.exports = {
 
   getOne: function(req, res, next) {
     try{
-      productsModel.find({_id: req.params.id}, (err, product) => {
+      Products.find({_id: req.params.id}, (err, product) => {
         if (err) {
           res.status(500);
           res.send(err);
@@ -86,7 +86,7 @@ module.exports = {
         data.stock[chave] = item[3];
       });
 
-      productsModel.insertMany([data], (err, response) => {
+      Products.insertMany([data], (err, response) => {
         if (err) {
           res.status(500);
           res.send(err);
@@ -125,7 +125,7 @@ module.exports = {
         data.stock[chave] = item[3];
       });
 
-      productsModel.updateMany({ _id: data._id }, data,
+      Products.updateMany({ _id: data._id }, data,
         (err, response) => {
           if (err) {
             res.status(500);
@@ -140,11 +140,10 @@ module.exports = {
       console.log(err);
     }
   },
-
   
   del: function(req, res, next) {
     try{
-      productsModel.deleteMany({ _id: req.params.id },
+      Products.deleteMany({ _id: req.params.id },
         (err, response) => {
           if (err) {
               res.status(500);
@@ -157,5 +156,12 @@ module.exports = {
     }catch(err){
       console.log(err);
     }
+  },
+
+  getStock: async (req, res) => {
+    const {sku} = req.params
+    const [type, _id] = sku.split('-')
+    const product = await Products.findById(_id)
+    return res.json(parseInt(product.stock.get(sku)) || 0)
   }
 }
