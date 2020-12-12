@@ -27,12 +27,11 @@ const productRequests = {
       useEffect( () => {
         context.deleteAllProducts();
         console.log("Pegando dados da API");
-        api.get("products/all/0", {crossdomain: true})
+        api.get("/products", {crossdomain: true})
         .then((response) => {
           response.data.forEach((item, index) => {
             item.id = item._id;
             item.img.forEach((img, index) => {
-              var aux = '';
               if(typeof img.file !== 'undefined'){
                 img.path = img.file;
               }
