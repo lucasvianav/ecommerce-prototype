@@ -22,7 +22,7 @@ Os requerimentos pedidos e adicionados particularmente para esse projeto foram:
   
   - Uma conta (cliente ou administrador) deve ter ao menos os seguinter dados: nome, email, CPF, número de celular e data de nascimento.
   
-  - Administradores têm acesso crud aos produtos, eventos e serviçoes;
+  - Administradores têm acesso crud aos produtos, eventos, serviços e cupons ;
     
   - Os produtos devem ter ao menos os parêmetros: nome, id, fotos, descrição, preço e quantidade em estoque;
    
@@ -48,18 +48,15 @@ O e-commerce aqui implementado é voltado para o uso de uma extracurricular univ
  - O cliente pode escolher entre visualizar as páginas de produtos e eventos. Para comprar, seleciona as especificação do item (tamanho, quantidade, modelagem e quantidade) e adiciona-o ao carrinho de compras, tendo a possibilidade de inserir um  cupom de desconto. Então, seleciona-se a forma de pagamento e confirma-se a compra, para concluí-la.
  
  - Contas e itens (produtos ou eventos) guardam diversos registros que os classificam, idetificam e carregam com sigo propriedades para serem usadas dentro a implementação. Dentre essas, destaca-se:
-    - __Contas:__ nome, tipo da conta (cliente ou administrador), email, senha, data de nascimento, CPF e número de telefone;  
+    - __Contas:__ id, nome, tipo da conta (cliente ou administrador), email, senha, data de nascimento, CPF e número de telefone;  
    
-    - __Itens:__
+    - __Itens:__ 
        
-       - _Produtos:_ nome, tipo (nesse caso, produto), id, visibilidade, categoria, descrição, modelagens, tamanhos, cores, preço, imagem, imagem com as medidas do produto e estoque.  
-       
-        - _Eventos:_  nome, tipo (nesse caso, evento), id, visibilidade, categoria, descrição, informações (local, data, horário, link relacionado), preço e estoque.  
+      - _Produtos:_ nome, tipo (nesse caso, produto), id, visibilidade, categoria, descrição, modelagens, tamanhos, cores, preço, imagem, imagem com as medidas do     produto e estoque.  
+        
+      - _Eventos:_  nome, tipo (nesse caso, evento), id, visibilidade, categoria, descrição, informações (local, data, horário, link relacionado), preço e estoque.  
    
-- O gerenciamento dos itens é realizado pelos administradores, através da __Página do Administrador__, em conseguem visualizar e editar todos os produtos cadastrados (inclusive os que não estão visíveis aos clientes), podendo alterar todas suas propriedades e também criar produtos novos. Além disso, conseguem ver os pedidos realizados e seus status, bem como atualizá-los. Por fim, podem visualizar todos os usuários cadastrados e seus principais dados - a edição dos usuários será implementada para a próxima entrega, juntamente com a edição e cadastro de cupons de desconto. 
- 
-   
- A funcionalidade de cupons foi feita como um diferencial, de forma que os cupons podem atribuir um desconto de valor absoluto ou percentual (em relação ao subtotal to carrinho). Atualmente, os cupons devem ser cadastrados diretamente no código (_hardcoded_), mas para a próxima entrega já se poderá realizar o cadastro e edição de cupons através da __Página do Administrador__.
+- O gerenciamento dos itens é realizado pelos administradores, através da __Página do Administrador__, onde conseguem visualizar e editar todos os produtos cadastrados (inclusive os que não estão visíveis aos clientes), podendo alterar todas suas propriedades e também criar produtos novos. Além disso, conseguem ver os pedidos realizados e seus status, bem como atualizá-los. Por fim, podem visualizar todos os usuários cadastrados e seus principais dados - a edição dos usuários será implementada para a próxima entrega, juntamente com a edição e cadastro de cupons de desconto. Outras funcionalidades estão atreladas as Usuários e Cupons. No primeiro o administrador consegue visualizar os detalhes dos usuário, mudar o tipo da conta (entre cliente e administrador) e excluir usuários de menor hierarquia. A aba Cupons possibilita a crição e exclução de cupons, escolhendo o nome, tipo (Porcentagem ou Valor Cheio) e valor de desconto. Essa última funcionalidade estabele a loja um diferencial. 
  
  
 O projeto foi desenvolvido tendo em vista os aspectos a seguir:  
@@ -73,7 +70,7 @@ A aplicação foi implementada até aqui para ser funcional e entregar ao usuár
    
 A divisão dos  produtos dentro do site é clara: as duas principais categorias são produtos e eventos, logo ambos aparecem diretamente na barra de navegação. Ao passar o mouse  por cima do botão, um menu _dropdrow_ aparece apresentando as subcategorias. Clicar no botão do menu inicial te leva para uma página de geral, mostrando os itens da categoria selecionada. Outro modo de chegar até o produto é digitar seu nome ou da sua subcategoria na caixa de pesquisa.  
    
-Tendo em vista que a função do usuário administrador é fazer a gestão da loja, todas funções relacionadas a isso estão inclusas em uma única página, na  __Página do Administrador__:
+Tendo em vista que a função do usuário administrador é fazer a gestão da loja, todas funções relacionadas a isso estão inclusas em uma única página, na  __Página do Administrador__: 
       
 ![Página do Administrador do projeto](./images/adminpage.jpeg)  
       
