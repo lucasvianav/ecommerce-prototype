@@ -81,16 +81,16 @@ O projeto foi desenvolvido tendo em vista os aspectos a seguir:
 - __Acessibilidade:__   
    Além de resursos de acessibilidade padrão, como texto alternativo para imagens e placeholders em campos de input, foram implementados recursos de menor presença nos projetos web. Dentre eles: a presença de um tema escuro (modo de contraste) para o site e a página _Acessiblidade_, linkada no rodapé do site, que detalha melhor esses elementos.   
    
-![Página de desrição das funcionalidades de acessibilidade](./images/acessibilidade.JPG)
+  ![Página de desrição das funcionalidades de acessibilidade](./images/acessibilidade.JPG)
       
 - __Usabilidade:__  
 A aplicação foi implementada até aqui para ser funcional e entregar ao usuário aquilo que ele procura. Em questão de design, o site apresenta páginas limpas que mostram apenas o essencial para que o usuário saiba onde está e o que deve fazer, além de botões e links que apresentam suas funções de forma lógica e dentro dos hábitos de navegação dos consumidores. Tomou-se cuidado, também, em utilizar cores que não comprometam a legibilidade dos elementos.
 A divisão dos  produtos dentro do site é clara: as duas principais categorias são produtos e eventos, logo ambos aparecem diretamente na barra de navegação. Ao passar o mouse  por cima do botão, um menu _dropdrow_ aparece apresentando as subcategorias. Clicar no botão do menu inicial te leva para uma página de geral, mostrando os itens da categoria selecionada. Outro modo de chegar até o produto é digitar seu nome ou da sua subcategoria na caixa de pesquisa.  
 Tendo em vista que a função do usuário administrador é fazer a gestão da loja, todas funções relacionadas a isso estão inclusas em uma única página, na  __Página do Administrador__: 
       
-![Página do Administrador do projeto](./images/adminpage.JPG)  
+  ![Página do Administrador do projeto](./images/adminpage.JPG)  
       
-   - __Responsividade:__  
+- __Responsividade:__  
 Os componentes da página foram implementados e estruturados para serem responsivos para qualquer tamanho de tela de computador, utilizando recursos como _flexbox_. O site tem responsividade relativamente satisfatória para mobile, tendo navbar e footer responsisvos. Alguns elementos, por serem construídos com uso de Bootstrap, têm melhor responsividade com dispositivos mobile. 
  
 ------------------------------------ 
