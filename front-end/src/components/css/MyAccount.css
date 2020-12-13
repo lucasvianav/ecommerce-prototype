@@ -5,6 +5,10 @@
   align-items: flex-start;
 }
 
+.MyAccount {
+    padding-top: 5%;
+}
+
 .MyAccount .container{
   margin-top: 80pt;
 }
@@ -63,6 +67,7 @@
     right: 100;
     margin-left: auto;
 }
+
 
 .MyAccount .editing-controls {
   width: 70%;
@@ -127,3 +132,10 @@
   width: 100%;
   margin: auto;
 }
+
+@media (max-width: 952px){
+    .MyAccount {
+        padding-top: 20%;
+    }  
+}
+

@@ -1,3 +1,7 @@
+.Home {
+    padding-top: 50px;
+}
+
 main.Home{
     display: flex;
     flex-flow: column nowrap;
@@ -21,4 +25,10 @@ main.Home{
 
 .Home .scroll-gallery img {
     width: 23.45vw;
+}
+
+@media (max-width: 952px){
+    .Home {
+        padding-top: 80px;
+    }  
 }

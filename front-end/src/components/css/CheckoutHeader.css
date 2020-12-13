@@ -2,7 +2,6 @@ nav.CheckoutHeader {
     opacity: 0.98;
     width: 100%;
     text-align: center;
-    display: flex;
     flex-flow: row nowrap;
     justify-content: space-around;
     align-items: center;
