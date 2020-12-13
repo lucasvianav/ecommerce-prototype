@@ -30,7 +30,7 @@ export class DataProvider extends React.Component {
 
             accounts: [],
 
-            isLogged: {status: false, user: {}},
+            isLogged: { status: false, user: {} },
     
             coupons: [],
 
@@ -43,12 +43,6 @@ export class DataProvider extends React.Component {
             categories: [],
 
             darkTheme: this.getInitialTheme(),
-
-            id: {
-                PR: 1,
-                EV: 1,
-                order: 2
-            }
         }
 
         $('*').removeClass('dark-theme light-theme')
@@ -63,7 +57,6 @@ export class DataProvider extends React.Component {
         this.logout = this.logout.bind(this)
         this.signup = this.signup.bind(this)
         this.getCurrentAccount = this.getCurrentAccount.bind(this)
-        this.getId = this.getId.bind(this)
         this.createProduct = this.createProduct.bind(this)
         this.updateProduct = this.updateProduct.bind(this)
         this.deleteProduct = this.deleteProduct.bind(this)
@@ -72,7 +65,6 @@ export class DataProvider extends React.Component {
         this.updateCoupon = this.updateCoupon.bind(this)
         this.deleteCoupon = this.deleteCoupon.bind(this)
         this.deleteAllCoupons = this.deleteAllCoupons.bind(this)
-        this.updateAccount = this.updateAccount.bind(this)
         this.deleteAccount = this.deleteAccount.bind(this)
         this.placeOrder = this.placeOrder.bind(this)
         this.updateCurrentAccount = this.updateCurrentAccount.bind(this)
@@ -85,6 +77,7 @@ export class DataProvider extends React.Component {
         this.updateOrder = this.updateOrder.bind(this)
         this.fetchCoupons = this.fetchCoupons.bind(this)
         this.fetchAccounts = this.fetchAccounts.bind(this)
+        this.changeAccountType = this.changeAccountType.bind(this)
     }
 
     componentDidMount(){
@@ -342,22 +335,6 @@ export class DataProvider extends React.Component {
         this.setState({activeCoupon: {status: false, coupon: '', discount: 0}}) 
     }
 
-    getId(type){
-        if(!['EV', 'PR'].includes(type)){ return }
-
-        const newId = type.substring(0,1) + (this.state.id[type] + 1).toString()
-
-        this.setState(prevState => ({
-            id: {
-                PR: prevState.id.PR + (type === 'PR' ? 1 : 0),
-                EV: prevState.id.EV + (type === 'EV' ? 1 : 0),
-                order: prevState.id.order
-            }
-        }))
-
-        return newId
-    }
-
     createProduct(data){
         let {data: products} = this.state
         products.push(data)
@@ -405,16 +382,21 @@ export class DataProvider extends React.Component {
     }
 
     deleteAllCoupons(){
-        this.setState({coupons: [{}]})
+        this.setState({coupons: []})
     }
 
-    updateAccount(data){
-        this.setState(prevState => ({accounts: prevState.accounts.map(item => item.id === data.id ? data : item)}))
-
+    async changeAccountType(_id, type){
+        await api.put('/accounts', {_id, updates: { type }}).then(async r => {
+            const {status, user} = this.state.isLogged
+            status && _id !== user._id ? await this.fetchAccounts() : window.location.reload()
+        }).catch(e => console.log(`Ocorreu um erro: ${e}`))
     }
 
-    deleteAccount(email){
-        this.setState(prevState => ({accounts: prevState.accounts.filter(item => item.email !== email)}))
+    async deleteAccount(_id){
+        await api.delete(`/accounts/${_id}`).then(async r => {
+            const {status, user} = this.state.isLogged
+            status && user._id !== _id ? await this.fetchAccounts() : this.logout()
+        }).catch(e => console.log(`Ocorreu um erro: ${e}`))
     }
 
     async placeOrder(total, payment){
@@ -466,18 +448,18 @@ export class DataProvider extends React.Component {
         const {data, cart, coupons, home, categories, darkTheme, orders, activeCoupon, accounts, isLogged} = this.state
         const { 
             editCart, removeFromCart, toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, 
-            getId, createProduct, updateProduct, deleteProduct, deleteAllProducts, createCoupon, updateCoupon, deleteCoupon, updateAccount, deleteAccount,
+            createProduct, updateProduct, deleteProduct, deleteAllProducts, createCoupon, updateCoupon, deleteCoupon, deleteAccount,
             deleteAllCoupons, placeOrder, updateCurrentAccount, getInitialLogin, getInitialCart, fetchData, refreshCart, fetchOrders,
-            updateOrder, fetchProducts, fetchAccounts, fetchCoupons
+            updateOrder, fetchProducts, fetchAccounts, fetchCoupons, changeAccountType
         } = this
 
         return(
             <DataContext.Provider value={{ 
                 data, cart, isLogged, coupons, home, categories, darkTheme, orders, activeCoupon, accounts, editCart, removeFromCart,
-                toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, getId, createProduct, updateProduct, deleteProduct, 
-                deleteAllProducts, createCoupon, updateCoupon, deleteCoupon, updateAccount, deleteAccount, deleteAllCoupons, placeOrder, 
+                toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, createProduct, updateProduct, deleteProduct, 
+                deleteAllProducts, createCoupon, updateCoupon, deleteCoupon, deleteAccount, deleteAllCoupons, placeOrder, 
                 updateCurrentAccount, getInitialLogin, getInitialCart, fetchData, refreshCart, fetchOrders, updateOrder, fetchProducts, 
-                fetchAccounts, fetchCoupons
+                fetchAccounts, fetchCoupons, changeAccountType
             }}>
                 {this.props.children}
             </DataContext.Provider>

@@ -4,8 +4,6 @@ import { DataContext } from '../../../Context';
 
 import ModalUser from './Modal';
 
-import AccountsRequests from '../../../requests/Account'
-
 import '../../css/bootstrap.css';
 
 const UsersPanel = (props) => {
@@ -15,7 +13,7 @@ const UsersPanel = (props) => {
   const [users, setUsers] = useState(context.accounts);
 
   const [modal, setModal] = useState(false);
-  const [modalProps, setModalProps] = useState({id:"", email: "", phoneNumber: "", type: "", birthday:"", cpf:"", name:""});
+  const [modalProps, setModalProps] = useState({_id:"", email: "", phoneNumber: "", type: "", birthday:"", cpf:"", name:""});
 
   const [req, setReq] = useState({});
 
@@ -49,9 +47,6 @@ const UsersPanel = (props) => {
   return(
     <>
     <section>
-      <AccountsRequests.DeleteAccount {...req} onChange={()=>{setReq({})}}/>
-      <AccountsRequests.EditAccount {...req} onChange={()=>{setReq({})}}/>
-
         <table className="table table-hover border rounded">
             <thead>
               <tr>
@@ -74,7 +69,7 @@ const UsersPanel = (props) => {
                       <td className="text-right"><span>
                           <button className="btn-none" onClick={() => {
                             var properties = {
-                              id: user.id, 
+                              _id: user._id, 
                               name: user.name,
                               cpf: user.cpf, 
                               type: user.type, 
@@ -99,17 +94,6 @@ const UsersPanel = (props) => {
     <ModalUser
       show={modal}
       value = {modalProps}
-      onSave={(event) => {
-        if(event.set === true){
-          var r = {};
-          r.send = event.send;
-          r.id = event.id;
-          r.email = event.email;
-          r.data = event.data;
-          r.contaAtual = event.contaAtual;
-          setReq(r);
-        }
-      }}
       onHide={() => {setModal(false)}}
     />
   </>

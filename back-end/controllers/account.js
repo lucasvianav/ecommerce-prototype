@@ -29,10 +29,10 @@ const accountController = {
   },
 
   update: async (req, res) => {
-    const {id, updates} = req.body
+    const {_id, updates} = req.body
 
     try{
-      const account = await accountService.update(id, updates)
+      const account = await accountService.update(_id, updates)
       
       return res.status(200).json(account)
     }
@@ -42,13 +42,13 @@ const accountController = {
 
   delete: async (req, res) => {
     try{
-      console.log(req.body)
-      const {email} = req.params
-      await accountService.delete(email)
-      return res.json(true)
+      const {_id} = req.params
+      await accountService.delete(_id)
+
+      return res.status(200).json(true)
     }
 
-    catch{ return res.json(false) }
+    catch{ return res.status(400).json(false) }
   }
 }
 
