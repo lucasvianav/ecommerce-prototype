@@ -78,6 +78,7 @@ export class DataProvider extends React.Component {
         this.fetchCoupons = this.fetchCoupons.bind(this)
         this.fetchAccounts = this.fetchAccounts.bind(this)
         this.changeAccountType = this.changeAccountType.bind(this)
+        this.updatePhone = this.updatePhone.bind(this)
     }
 
     componentDidMount(){
@@ -399,6 +400,12 @@ export class DataProvider extends React.Component {
         }).catch(e => console.log(`Ocorreu um erro: ${e}`))
     }
 
+    updatePhone(data){
+        const {isLogged} = this.state;
+        isLogged.user.phoneNumber = data.phoneNumber;
+        this.setState({isLogged})
+    }
+
     async placeOrder(total, payment){
         if(!this.state.isLogged.status || this.state.cart.isEmpty()){ return }
         
@@ -450,7 +457,7 @@ export class DataProvider extends React.Component {
             editCart, removeFromCart, toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, 
             createProduct, updateProduct, deleteProduct, deleteAllProducts, createCoupon, updateCoupon, deleteCoupon, deleteAccount,
             deleteAllCoupons, placeOrder, updateCurrentAccount, getInitialLogin, getInitialCart, fetchData, refreshCart, fetchOrders,
-            updateOrder, fetchProducts, fetchAccounts, fetchCoupons, changeAccountType
+            updateOrder, fetchProducts, fetchAccounts, fetchCoupons, changeAccountType, updatePhone
         } = this
 
         return(
@@ -459,7 +466,7 @@ export class DataProvider extends React.Component {
                 toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, createProduct, updateProduct, deleteProduct, 
                 deleteAllProducts, createCoupon, updateCoupon, deleteCoupon, deleteAccount, deleteAllCoupons, placeOrder, 
                 updateCurrentAccount, getInitialLogin, getInitialCart, fetchData, refreshCart, fetchOrders, updateOrder, fetchProducts, 
-                fetchAccounts, fetchCoupons, changeAccountType
+                fetchAccounts, fetchCoupons, changeAccountType, updatePhone
             }}>
                 {this.props.children}
             </DataContext.Provider>
