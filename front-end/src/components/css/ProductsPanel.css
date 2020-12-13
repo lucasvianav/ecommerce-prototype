@@ -1,6 +1,6 @@
 .ProductsPanel {
-    padding-top: 5%;
-    padding-left: 2%
+    /* padding-top: 5%; */
+    /* padding-left: 2% */
 }
 
 .ProductsPanel .product-thumb {
@@ -149,7 +149,7 @@
 
 @media (max-width: 768px){
     .ProductsPanel {
-        padding-top: 20%;
+        /* padding-top: 20%; */
     } 
 
     .ProductsPanel .product-cards-panel {

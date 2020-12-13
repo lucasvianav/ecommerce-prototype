@@ -54,6 +54,7 @@ const toggleSearchBar = () => {
                 bar.removeClass('invisible-content')
                 $('button', bar).removeClass('no-display')
                 bar.removeClass('show-bar')
+                $('.search-bar input').focus()
             }
         )
 

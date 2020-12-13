@@ -6,7 +6,7 @@
 }
 
 .MyAccount {
-    padding-top: 5%;
+  /* padding-top: 5%; */
 }
 
 .MyAccount .container{
@@ -135,7 +135,7 @@
 
 @media (max-width: 952px){
     .MyAccount {
-        padding-top: 20%;
+      /* padding-top: 20%; */
     }  
 }
 

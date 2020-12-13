@@ -1,5 +1,5 @@
 .ProductDetails {
-    padding-top: 5%;
+    /* padding-top: 5%; */
 }
 
 .ProductDetails ul, .ProductDetails ol {
@@ -201,7 +201,7 @@ hr.product-divisor {
 
 @media (max-width: 952px){
     .ProductDetails {
-        padding-top: 20%;
+        /* padding-top: 20%; */
     }
 
     .ProductDetails .thumbnail-panel {

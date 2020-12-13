@@ -1,6 +1,6 @@
 
 .ShoppingCart {
-    padding-top: 10%;
+    /* padding-top: 10%; */
 }
 
 .ShoppingCart .content-box {
@@ -43,7 +43,7 @@
 }
 
 .ShoppingCart .header-row .name {
-    width: 26%;
+    width: 70%;
 }
 
 .ShoppingCart .header-row .quantity {
@@ -52,7 +52,7 @@
 
 .ShoppingCart .header-row .price {
     width: 26%;
-    /*text-align: right;*/
+    text-align: right;
 }
 
 .ShoppingCart .product-list {
@@ -165,7 +165,7 @@
 .ShoppingCart .quantity input {
     width: 15%;
     padding: 0;
-    /*margin: auto 3% auto 3%;*/
+    /* margin: auto 3% auto 3%; */
     text-align: center;
     justify-content: center;
     border: none;
@@ -287,7 +287,7 @@
 }
 
 .ShoppingCart .coupon {
-    width: fit-content;
+    width: 50%;
     display: flex;
     flex-flow: row nowrap;
     margin: 4% 0;
@@ -316,7 +316,7 @@
 
 @media (max-width: 700px){
     .ShoppingCart {
-        padding-top: 25%;
+        /* padding-top: 25%; */
     } 
 
     .ShoppingCart .section-title {
@@ -348,6 +348,7 @@
     }
 
     .ShoppingCart .order-summary .coupon {
+        width: fit-content;
     	display: block;
     	padding: 2px;
     }
@@ -362,7 +363,7 @@
     	font-size: 100%;
     }
 
-    input::placeholder {
+    .ShoppingCart input::placeholder {
     	font-size: 70%;
     }
 }

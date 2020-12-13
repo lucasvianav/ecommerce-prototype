@@ -26,10 +26,10 @@ nav.CheckoutHeader {
     /* float: left; */
     padding: 0;
     margin: auto 0 auto 0;
-    /* position: absolute;
+    position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    left: 1%; */
+    left: 1%;
 }
 
 .logo img {
@@ -112,9 +112,9 @@ nav.CheckoutHeader {
 }
 
 .toggler {
-    /* position: absolute;
-    right: 5%; */
-    /* float: right; */
-    /* margin: auto; */
-    margin: auto 3% auto auto;
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0;
 }

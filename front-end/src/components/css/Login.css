@@ -1,5 +1,5 @@
 .Login {
-    padding-top: 5%;
+    padding-top: 1%;
 }
 
 main.Login {
@@ -504,6 +504,6 @@ main.Login {
 
 @media (max-width: 952px){
     .Login {
-    	padding-top: 25%;
+    	padding-top: 5%;
     }  
 }
