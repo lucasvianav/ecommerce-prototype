@@ -72,7 +72,7 @@ A divisão dos  produtos dentro do site é clara: as duas principais categorias 
    
 Tendo em vista que a função do usuário administrador é fazer a gestão da loja, todas funções relacionadas a isso estão inclusas em uma única página, na  __Página do Administrador__: 
       
-![Página do Administrador do projeto](./images/adminpage.jpeg)  
+![Página do Administrador do projeto](./images/adminpage.JPG)  
       
    - __Responsividade:__  
 Os componentes da página foram implementados e estruturados para serem responsivos para qualquer tamanho de tela de computador, utilizando recursos como _flexbox_. Grande parte do site não foi configurado para se adaptar para telas mobile, tendo em vista o escopo do projeto. Alguns elementos, por serem construídos com uso de Bootstrap, têm responsividade com dispositivos mobile, porém são exceções. 
