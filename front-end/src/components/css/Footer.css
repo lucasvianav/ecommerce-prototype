@@ -135,4 +135,11 @@
         /* line-height: 5px; */
     }
 
+    #help * {
+        margin: 0 0.5rem;
+    }
+
+    #credits {
+        padding: 0 1%;
+    }
 }
