@@ -231,7 +231,9 @@ O comando irá iniciar o server operando na porta 7000, se não estiver ocupada.
   
   - Uso de múltiplos contextos em um componente;
   
-  - Aprender e implementar todo o back-end me tempo muito limitado.
+  - Aprender e implementar todo o back-end em tempo muito limitado.
+  
+  - Fazer a responsividade do site
   
 
 --------------------------------------------
