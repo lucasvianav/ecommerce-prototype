@@ -57,6 +57,24 @@ O e-commerce aqui implementado é voltado para o uso de uma extracurricular univ
       - _Eventos:_  nome, tipo (nesse caso, evento), id, visibilidade, categoria, descrição, informações (local, data, horário, link relacionado), preço e estoque.  
    
 - O gerenciamento dos itens é realizado pelos administradores, através da __Página do Administrador__, onde conseguem visualizar e editar todos os produtos cadastrados (inclusive os que não estão visíveis aos clientes), podendo alterar todas suas propriedades e também criar produtos novos. Além disso, conseguem ver os pedidos realizados e seus status, bem como atualizá-los. Por fim, podem visualizar todos os usuários cadastrados e seus principais dados - a edição dos usuários será implementada para a próxima entrega, juntamente com a edição e cadastro de cupons de desconto. Outras funcionalidades estão atreladas as Usuários e Cupons. No primeiro o administrador consegue visualizar os detalhes dos usuário, mudar o tipo da conta (entre cliente e administrador) e excluir usuários de menor hierarquia. A aba Cupons possibilita a crição e exclução de cupons, escolhendo o nome, tipo (Porcentagem ou Valor Cheio) e valor de desconto. Essa última funcionalidade estabele a loja um diferencial. 
+
+- No servidor implementado, o qual escolheu-se o MongoDB, foi armazenado quatro tipos de informações. Abaixo temos cada uma delas com exemplos de como elas são armazenadas no servidor, tendo suas classes e valores. 
+  - __account:__ 
+  
+    ![Exemplo de armazenamento das contas](./images/account.JPG)
+ 
+  - __cupons:__
+  
+    ![Exemplo de armazenamento dos cupons](./images/cupons.JPG)
+  
+  - __orders:__
+  
+    ![Exemplo de armazenamento dos pedidos](./images/orders.JPG)
+    
+  - __products:__
+  
+    ![Exemplo de armazenamento dos produtos](./images/products.JPG)
+    
  
  
 O projeto foi desenvolvido tendo em vista os aspectos a seguir:  
@@ -67,20 +85,18 @@ O projeto foi desenvolvido tendo em vista os aspectos a seguir:
       
 - __Usabilidade:__  
 A aplicação foi implementada até aqui para ser funcional e entregar ao usuário aquilo que ele procura. Em questão de design, o site apresenta páginas limpas que mostram apenas o essencial para que o usuário saiba onde está e o que deve fazer, além de botões e links que apresentam suas funções de forma lógica e dentro dos hábitos de navegação dos consumidores. Tomou-se cuidado, também, em utilizar cores que não comprometam a legibilidade dos elementos.
-   
 A divisão dos  produtos dentro do site é clara: as duas principais categorias são produtos e eventos, logo ambos aparecem diretamente na barra de navegação. Ao passar o mouse  por cima do botão, um menu _dropdrow_ aparece apresentando as subcategorias. Clicar no botão do menu inicial te leva para uma página de geral, mostrando os itens da categoria selecionada. Outro modo de chegar até o produto é digitar seu nome ou da sua subcategoria na caixa de pesquisa.  
-   
 Tendo em vista que a função do usuário administrador é fazer a gestão da loja, todas funções relacionadas a isso estão inclusas em uma única página, na  __Página do Administrador__: 
       
 ![Página do Administrador do projeto](./images/adminpage.JPG)  
       
    - __Responsividade:__  
-Os componentes da página foram implementados e estruturados para serem responsivos para qualquer tamanho de tela de computador, utilizando recursos como _flexbox_. Grande parte do site não foi configurado para se adaptar para telas mobile, tendo em vista o escopo do projeto. Alguns elementos, por serem construídos com uso de Bootstrap, têm responsividade com dispositivos mobile, porém são exceções. 
+Os componentes da página foram implementados e estruturados para serem responsivos para qualquer tamanho de tela de computador, utilizando recursos como _flexbox_. O site tem responsividade relativamente satisfatória para mobile, tendo navbar e footer responsisvos. Alguns elementos, por serem construídos com uso de Bootstrap, têm melhor responsividade com dispositivos mobile. 
  
 ------------------------------------ 
 ### 3. Comentários sobre o código  
   
-  
+#### 3.1. Front-end  
 Por característica do ___React___, tem-se que o arquivo html principal do site, o _index.html_ (abaixo), não possui nenhum conteúdo de fato, apenas uma div vazia. O ___React___ No momento de compilação, o ___React___ insere os componentes na ```div#root```, de acordo com o especificado _App.js_. 
 
 ```
@@ -164,6 +180,9 @@ As tags de <Route/> servem para renderizar diferentes componentes (páginas) de 
 Para possibilitar compartilhamento e sincronia de dados, de forma global, entre os diversos componentes da árvore definida nesse arquivo, utilizou-se a Context API. O arquivo _Context.js_ é o responsável por essa integração, ele armazenando os dados de forma dinâmica durante a execução da aplicação - simulando, inclusive, o que seria o _backend_.
 
 
+#### Back-end
+
+
 
 
 
@@ -175,8 +194,10 @@ Para possibilitar compartilhamento e sincronia de dados, de forma global, entre 
 ### 4. Procedimentos de compilação  
 
 Esse projeto tem um conjunto de passos para que se possa visualizar suas implementações. Primeiramente, é necessário a instalação de um _package manager_: _Node.js_ ou _Yarn_. Recomendamos o _Yarn_, que utilizaremos para a explicação.
+
+
   
-Com o _Yarn_ instalado, acesse o terminal do seu computador e vá até a pasta __front-end__ do repositório. Para instalar as dependências do projeto, como jQuery, listadas no arquivo _package.json_, basta utilizar o comando abaixo:
+Com o _Yarn_ instalado, acesse o terminal do seu computador e vá até a pasta __back-end__ do repositório. Para instalar as dependências do projeto, como jQuery, listadas no arquivo _package.json_, basta utilizar o comando abaixo:
 
 ```
 yarn install
@@ -188,8 +209,7 @@ Em seguida, para visualizar o projeto, utilize o comando abaixo:
 ```
 yarn start
 ```
-
-Esse comando iniciará um host local para a visualização de desenvolvimento do app, normalmente na porta 3000 do localhost, se estiver disponível - http://localhost:3000., sendo variante se este já estiver em uso por outra aplicação. A tela inicial do site é mostrada abaixo.
+O comando irá iniciar o server operando na porta 7000, se não estiver ocupada. Retornado o link http://localhost:7000. Na pasta __front-end__ do projeto coloque os mesmo comandos, abrirá assim um host local para a visualização de desenvolvimento do app, normalmente na porta 3000 do localhost, se estiver disponível - http://localhost:3000., sendo variante se este já estiver em uso por outra aplicação. A tela inicial do site é mostrada abaixo.
 
 
 ![Tela inicial do projeto](./images/home.JPG?w=200)  
@@ -211,6 +231,8 @@ Esse comando iniciará um host local para a visualização de desenvolvimento do
   
   - Uso de múltiplos contextos em um componente;
   
+  - Aprender e implementar todo o back-end me tempo muito limitado.
+  
 
 --------------------------------------------
 ### 6. Comentários  
@@ -219,20 +241,16 @@ Tendo em vista o contexto e escopo do site (de Secretaria Acadêmica) decidiu-se
  
 Destaca-se algumas informações para a navegação e teste do site:
  
-- __Login:__ Há algumas contas pré-cadastradas, como as descritas abaixo:
+- __Login:__ Há algumas uma conta de administrador pré-cadastrada. A conta cliente pode ser criada rapidamente.
    
-  >__Conta Cliente:__  
-  >Email: teste@gmail.com  
-  >Senha: Teste123  
-
   >__Conta Adminis:__  
   >Email: admin@admin.adm
   >Senha: Admin123
     
-- __Cupom:__ Os cupons de desconto cadastrados são:
+- __Cupom:__ Os cupons de desconto cadastrados estão abaixo, mas é possível criar novos com uma conta administradora.
 
   >__Cupom de 10% de desconto__  
-  >FLIPRULEZ10  
+  >TESTE1
 
   >__Cupom de R$25,00 de desconto__  
-  >FLIPRULEZ25
+  >TESTE2
