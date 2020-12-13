@@ -144,7 +144,7 @@ function AdmAccount(props){
                     <div className="col-sm-12">
                         <section id="loginInfo" className="d-md-flex no-space d-xs-none d-sm-none">
                             <h2>Olá, {context.getCurrentAccount().name}!</h2>
-                            <p><strong>Email: </strong>{context.isLogged.email}</p>
+                            <p><strong>Email: </strong>{context.isLogged.user.email}</p>
                             {/* <button id="altSenha" className="btn void-btn">Alterar Senha</button> */}
                         </section>
                     
