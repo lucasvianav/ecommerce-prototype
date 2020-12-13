@@ -200,21 +200,81 @@ hr.product-divisor {
 }
 
 @media (max-width: 952px){
-    .ProductDetails {
-        /* padding-top: 20%; */
-    }
-
-    .ProductDetails .thumbnail-panel {
-        width: 10%;
-    }
-
     .ProductDetails .product-photos {
         width: 100%;
+        float: none;
+        display: flex;
+        flex-flow: column-reverse nowrap;
+    }
+    
+    .ProductDetails .thumbnail-panel {
+        width: 100%;
+        flex-flow: row nowrap;
+        overflow-y: hidden;
+        overflow-x: auto;
+        float: none;
+        border: none !important;
+    }
+    
+    .light-theme .ProductDetails .product-photos{
+        border: 1px solid rgba(65, 65, 65, 0.315);
+    }
+    
+    .dark-theme .ProductDetails .product-photos{
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    .light-theme .ProductDetails .thumbnail-panel{
+        border-top: 1px solid rgba(65, 65, 65, 0.315) !important;
+    }
+    
+    .dark-theme .ProductDetails .thumbnail-panel{
+        border-top: 1px solid rgba(255, 255, 255, 0.3) !important;
+    }
+    
+    .ProductDetails .product-photo-thumb {
+        width: 30%;
+        margin-right: 2%;
+        margin-bottom: 0;
+    }
+    
+    .ProductDetails .product-photo-thumb:last-child {
+        margin-right: 0;
+    }
+    
+    .ProductDetails .large-photo {
+        width: 100%;
+        border: none !important;
     }
 
     .ProductDetails .product-info{
         width: 100%;
-        padding-top: 20px;
+        margin-top: 5%;
     }
 
+    .ProductDetails #quantity {
+        width: 20%;
+        text-align: center;
+    }
+
+    .ProductDetails .product-info .title {
+        font-size: 15pt;
+    }
+
+    .ProductDetails .product-info .price-line {
+        margin-top: 2%;
+    }
+
+    .ProductDetails .product-info .price-line h2 {
+        font-size: 16pt;
+    }
+
+    .ProductDetails .product-info .price-line h3 {
+        font-size: 14pt;
+    }
+
+    .ProductDetails .big-btn.full-btn {
+        margin-top: 6%;
+        margin-bottom: 10%;
+    }
 }

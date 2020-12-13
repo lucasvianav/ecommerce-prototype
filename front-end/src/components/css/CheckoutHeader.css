@@ -118,3 +118,27 @@ nav.CheckoutHeader {
     transform: translateY(-50%);
     margin: 0;
 }
+
+@media (max-width: 945px){
+    .steps-panel {
+        width: 75%;
+    }
+}
+
+@media (max-width: 750px){
+    .steps-panel {
+        display: none;
+    }
+
+    .logo {
+        width: 40%;
+        position: relative;
+        display: block;
+        margin: auto auto auto 5%;
+        transform: none;
+    }
+
+    .toggler {
+        margin-right: 5%;
+    }
+}
