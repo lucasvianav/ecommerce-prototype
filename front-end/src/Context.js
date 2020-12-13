@@ -137,9 +137,11 @@ export class DataProvider extends React.Component {
 
             let categories = []
             for(let product of data){
-                if((!categories.includes(product.category)) && product.visibility){
+                let {category} = product
+
+                if((!categories.some(e => e.name === category.trim())) && product.visibility){
                     categories.push({
-                        name: product.category,
+                        name: category.trim(),
                         parent: product.type
                     })
                 }
@@ -187,11 +189,12 @@ export class DataProvider extends React.Component {
     }
 
     toggleTheme(){
-        $('*').removeClass('dark-theme light-theme')
-        $('*').addClass(!this.state.darkTheme ? 'dark-theme' : 'light-theme')
-        
-        localStorage.setItem('darkTheme', JSON.stringify(!this.state.darkTheme))
-        this.setState(prevState => {return {darkTheme: !prevState.darkTheme}})
+        this.setState(prevState => ({ darkTheme: !prevState.darkTheme }), () => {
+            $('*').removeClass('dark-theme light-theme')
+            $('*').addClass(this.state.darkTheme ? 'dark-theme' : 'light-theme')
+            
+            localStorage.setItem('darkTheme', JSON.stringify(this.state.darkTheme))
+        })
     }
     
     async login(email, password){

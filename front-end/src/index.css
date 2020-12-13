@@ -401,7 +401,7 @@ input::placeholder {
   display: block;
   width: 80%;
   max-width: 120px;
-  margin: auto;
+  /* margin: auto; */
   font-size: 18px;
   line-height: 280%;
   border-radius: 25px;
@@ -471,6 +471,11 @@ input::placeholder {
     color: #c7c6c7;
 }
 
+.light-theme input::placeholder, 
+.light-theme textarea::placeholder{
+    color: #888888;
+}
+
 /* AUXILIAR */
 
 .disable-selection {
@@ -499,11 +504,11 @@ input::placeholder {
   visibility: hidden;
 }
 
-.light-theme .green {
+.light-theme *.green, .light-theme *.green * {
   color: #28A745 !important; 
 }
 
-.dark-theme .green {
+.dark-theme *.green, .dark-theme *.green * {
   color: #80ac39 !important; 
 }
 

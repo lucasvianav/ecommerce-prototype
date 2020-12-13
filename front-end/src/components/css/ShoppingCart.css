@@ -314,56 +314,51 @@
     clear: both;
 }
 
-@media (max-width: 700px){
-    .ShoppingCart {
-        /* padding-top: 25%; */
-    } 
-
-    .ShoppingCart .section-title {
-        font-size: 140%;
+@media screen and (max-width: 960px){
+    .ShoppingCart .header-row * {
+        visibility: hidden;
     }
 
     .ShoppingCart .content-box {
-        font-size: 65%;
+        display: flex;
+        flex-flow: column nowrap;
     }
 
-    .ShoppingCart .text-btn {
-        font-size: 65%;
+    .ShoppingCart .products-panel {
+        float: none;
+        margin: auto;
+        vertical-align: middle;
+        width: 100%;
     }
 
-    .ShoppingCart .order-summary-title{
-        font-size: 140%;
+    .ShoppingCart .product-card {
+        flex-flow: column nowrap;
+        width: 100%;
     }
 
-    .ShoppingCart .order-summary .row {
-        font-size: 72%;
+    .ShoppingCart .product-card .link, 
+    .ShoppingCart .product-card .product-title,
+    .ShoppingCart .product-card .quantity {
+        width: 95%;
+    }
+    
+    .ShoppingCart .product-card .quantity {
+        margin: 4% auto 4% auto;
+    }
+    
+    .ShoppingCart .product-card .quantity input {
+        margin: auto 4%  auto 5% ;
+    }
+    
+    .ShoppingCart .product-card .quantity .text-btn {
+        font-size: 15px;
     }
 
-    .ShoppingCart .order-summary .big-btn {
-    	font-size: 100%;
+    .ShoppingCart .order-summary {
+        float: none;
+        margin: auto;
+        width: 100%;
+        margin-top: 10%;
     }
 
-    .ShoppingCart .order-summary .small-btn {
-    	font-size: 100%;
-    }
-
-    .ShoppingCart .order-summary .coupon {
-        width: fit-content;
-    	display: block;
-    	padding: 2px;
-    }
-
-    .ShoppingCart #coupon {
-	    width: 90%;
-	    margin-bottom: 4px;
-    }
-
-    .ShoppingCart .order-summary .small-btn {
-    	width: 50%;
-    	font-size: 100%;
-    }
-
-    .ShoppingCart input::placeholder {
-    	font-size: 70%;
-    }
 }

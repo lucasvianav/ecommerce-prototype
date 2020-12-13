@@ -35,7 +35,7 @@ const ModalPedido = (props) => {
         >
             <Modal.Header className='modal-color' closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
-                <span>Detalhes do Pedido #{props.pedido._id}:</span>
+                <span title={props.pedido._id}>Detalhes do Pedido #{props.pedido._id}:</span>
             </Modal.Title>
             </Modal.Header>
             <Modal.Body className="modal-color justify-content-center">

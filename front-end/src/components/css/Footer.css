@@ -100,7 +100,7 @@
 }
 
 @media (max-width: 952px){
-    #social-media li{
+    /* #social-media li{
         padding-left: 20px;
         padding-bottom: 5px;
         font-size: 10px;
@@ -109,20 +109,37 @@
     #help li {
         padding-left: 20px;
         padding-top: 5px;
-    }
+    } */
 
 }
 
 @media (max-width: 858px){
+    #footer-info {
+        flex-wrap: wrap;
+        margin-bottom: 4%;
+    }
+
+    #divisor {
+        display: none;
+    }
+
     #social-media {
-        display: block;
+        width: 100%;
+        /* display: block; */
     }
 
     #help {
-
-        display: block;
-        line-height: 5px;
-
+        width: 100%;
+        flex-wrap: wrap;
+        /* display: block; */
+        /* line-height: 5px; */
     }
 
+    #help * {
+        margin: 0 0.5rem;
+    }
+
+    #credits {
+        padding: 0 1%;
+    }
 }

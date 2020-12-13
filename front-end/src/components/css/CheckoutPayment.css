@@ -8,7 +8,7 @@
     justify-content: flex-start;
     align-items: center;
     vertical-align: auto;
-    width: 50%;
+    width: 100%;
     margin-bottom: 2%;
 }
 
@@ -40,4 +40,28 @@
 
 .CheckoutPayment .void-btn.big-btn, .CheckoutPayment .error-message {
     margin: auto 0 auto auto;
+}
+
+@media (max-width: 750px){
+    .CheckoutPayment .content-box {
+        margin-top: 15%;
+    }
+
+    .CheckoutPayment section.content-section.options {
+        width: auto;
+        margin: 3% auto 5% auto;
+    }
+
+    .CheckoutPayment .options .option {
+        margin: 5% auto 5% auto;
+        padding: 3% 0;
+    }
+
+    .CheckoutPayment .void-btn.big-btn{
+        margin: 7% auto;
+    }
+
+    .CheckoutPayment .error-message {
+        font-size: 12pt;
+    }
 }

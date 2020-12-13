@@ -2,12 +2,12 @@ import $ from 'jquery'
 
 // eslint-disable-next-line
 String.prototype.capitalize = function(){
-    return this.charAt(0).toUpperCase() + this.slice(1);
+    return this.charAt(0).toUpperCase() + this.slice(1)
 }
 
 // eslint-disable-next-line
 String.prototype.title = function(){
-    return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+    return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()})
 }
 
 // eslint-disable-next-line
@@ -16,7 +16,7 @@ Array.prototype.isEmpty = function(){
 }
 
 // MODAL BOX CONTROLS
-var currentModalId;
+var currentModalId
 
 function handleEsc(e){
     if(e.key === 'Escape') { closeModal() }
@@ -38,7 +38,7 @@ export function openModal(id){
 
     // Creates a margin to compensate the loss of the scrollbar width, so the document.body won't shift right
     $('html').css('margin-right', scrollBarWidth + 'px')
-    // document.body.style.marginRight = scrollBarWidth + "px";
+    // document.body.style.marginRight = scrollBarWidth + "px"
 
     // Shows the modal
     modal.show()
@@ -46,6 +46,8 @@ export function openModal(id){
     currentModalId = id
     document.addEventListener("keydown", handleEsc)
     window.addEventListener("click", handleWindowClick)
+
+    return true
 }
 
 function closeModal(){
@@ -60,7 +62,11 @@ function closeModal(){
     // Hides the modal
     modal.hide()
     
-    // currentModalId = null
-    document.removeEventListener("keydown", handleEsc);
-    window.removeEventListener("click", handleWindowClick);
+    currentModalId = null
+    document.removeEventListener("keydown", handleEsc)
+    window.removeEventListener("click", handleWindowClick)
+
+    return false
 }
+
+export const toggleModal = id => currentModalId ? closeModal() : openModal(id)

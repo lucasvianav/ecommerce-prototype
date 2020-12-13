@@ -148,16 +148,17 @@
 }
 
 @media (max-width: 768px){
-    .ProductsPanel {
-        /* padding-top: 20%; */
+    .ProductsPanel .content-box {
+        flex-flow: column nowrap;
     } 
 
     .ProductsPanel .product-cards-panel {
-        width: 50%;
+        width: 100%;
     }
 
     .ProductsPanel .filters {
-        width: 40%;
+        width: 100%;
+        margin-bottom: 7%;
     }
 }
 

@@ -42,7 +42,7 @@ class Checkout extends React.Component {
                         { 
                             !(checkout.currentStep === 'finished') ? '' : 
                             <TextTab link={{text: 'Voltar para o início', to: '/'}}>
-                                <h1 className='grey section-title'>Pedido #{this.context._id}:</h1>
+                                <h1 className='grey section-title' title={`Pedido #${this.context._id}`}>Pedido #{this.context._id}:</h1>
 
                                 <div className='center-text'>
                                     <h1 className='green title'><i className="fa fa-check-circle"></i> Seu pedido foi realizado com sucesso!</h1>

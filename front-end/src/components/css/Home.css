@@ -1,13 +1,10 @@
-.Home {
-    padding-top: 50px;
-}
-
-main.Home{
+main.Home {
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
     justify-items: center;
     margin: auto;
+    padding: 0;
     vertical-align: middle;
 }
 
@@ -24,11 +21,5 @@ main.Home{
 }
 
 .Home .scroll-gallery img {
-    width: 23.45vw;
-}
-
-@media (max-width: 952px){
-    .Home {
-        padding-top: 80px;
-    }  
+    height: 45vh;
 }

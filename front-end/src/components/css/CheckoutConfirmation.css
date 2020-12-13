@@ -106,14 +106,8 @@
 
 .CheckoutConfirmation .quantity {
     width: 20%;
-    display: flex;
-    flex-flow: row wrap;
     padding: 0;
     text-align: center;
-    justify-content: center;
-    justify-items: center;
-    align-items: center;
-    align-content: center;
 }
 
 .CheckoutConfirmation .break-flex {
@@ -248,4 +242,99 @@
 
 .CheckoutConfirmation .full-btn.big-btn {
     max-width: 165px;
+}
+
+@media screen and (max-width: 960px){
+    .CheckoutConfirmation {
+        display: flex;
+        flex-flow: column row;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .CheckoutConfirmation section.content-section.order {
+        width: 98%;
+        float: none;
+        margin: 5% auto;
+    }
+
+    .CheckoutConfirmation .header-row * {
+        visibility: hidden;
+    }
+
+    .CheckoutConfirmation .content-box {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: center;
+        justify-items: center;
+        margin: auto;
+        width: 83%;
+    }
+
+    .CheckoutConfirmation .product-card {
+        flex-flow: column nowrap;
+        width: 100%;
+        margin: auto;
+    }
+
+    .CheckoutConfirmation .product-card img, 
+    .CheckoutConfirmation .product-card .product-title,
+    .CheckoutConfirmation .product-card .quantity,
+    .CheckoutConfirmation .product-card .price {
+        width: 95%;
+    }
+    
+    .CheckoutConfirmation .product-card img {
+        margin: 6% auto;
+    }
+
+    .CheckoutConfirmation .product-card .quantity {
+        margin: 1% auto;
+    }
+    
+    .CheckoutConfirmation .product-card .price {
+        text-align: center;
+        margin-bottom: 3%;
+    }
+
+    .CheckoutConfirmation .remaining-info {
+        display: flex;
+        flex-flow: column-reverse nowrap;
+        width: 98%;
+        justify-content: center;
+        justify-items: center;
+        align-items: center;
+    }
+
+    .CheckoutConfirmation .summary {
+        float: none;
+        margin: auto;
+        width: 95%;
+        margin-top: 10%;
+    }
+
+    .CheckoutConfirmation .summary .coupon.row {
+        float: none;
+    }
+
+    .CheckoutConfirmation .content-section.payment, .CheckoutConfirmation .content-section.takeaway {
+        float: none;
+        width: 100% !important;
+        margin: 5% auto;
+    }
+
+    .CheckoutConfirmation .content-section.takeaway p, .CheckoutConfirmation .content-section.payment p {
+        width: 95%;
+        text-align: center;
+        margin: 3% auto;
+    }
+
+    .CheckoutConfirmation .content-section.payment .text-btn {
+        margin: auto;
+        font-size: 12pt;
+        margin-bottom: 2%
+    }
+
 }

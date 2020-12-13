@@ -31,9 +31,9 @@ const accountController = {
   update: async (req, res) => {
     const {id, updates} = req.body
     try{
-      await accountService.update(id, updates)
-      att = await accountService.findById(id)
-      return res.status(200).json(att)
+      const account = await accountService.update(id, updates)
+      
+      return res.status(200).json(account)
     }
 
     catch(e){ return res.status(400).json() }

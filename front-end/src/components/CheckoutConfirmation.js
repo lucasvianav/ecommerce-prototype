@@ -168,13 +168,7 @@ class CheckoutConfirmation extends React.Component {
                                                 </div>
                                             </div>
 
-                                            <div className="quantity">
-                                                <div className='controls'>
-                                                    <span className='disable-selection'>{this.state.cart.find(el => el.sku === item.sku).quantity}</span> 
-                                                </div>
-                                                
-                                                <span className='break-flex'></span>
-                                            </div>
+                                            <span className='quantity disable-selection'>{this.state.cart.find(el => el.sku === item.sku).quantity}</span> 
 
                                             <span className='price'>R${(item.price * item.quantity).toFixed(2).replaceAll('.',',')}</span>
                                         </section>
@@ -183,62 +177,64 @@ class CheckoutConfirmation extends React.Component {
                             </div>
                         </section>
 
-                        <div className='summary'>
-                            <section className='content-section'>
-                                <span className='section-title mini'>Resumo do pedido</span>
+                        <section className='remaining-info'>
+                            <div className='summary'>
+                                <section className='content-section'>
+                                    <span className='section-title mini'>Resumo do pedido</span>
 
-                                <div className="row">
-                                    <p><strong>Subtotal (produtos):</strong></p>
-                                    <p>R${this.state.subtotal.toFixed(2).replaceAll('.',',')}</p>
-                                </div>
-
-                                {
-                                    !this.state.hasCoupon ? '' :
                                     <div className="row">
-                                        <p><strong>Cupom de desconto</strong> <span className='text-btn disable-selection' onClick={this.removeCoupon}>(remover)</span> <strong>:</strong></p>
-                                        <p>- R${this.context.activeCoupon.discount.toFixed(2).replaceAll('.',',')}</p>
+                                        <p><strong>Subtotal (produtos):</strong></p>
+                                        <p>R${this.state.subtotal.toFixed(2).replaceAll('.',',')}</p>
                                     </div>
-                                }
 
-                                <div className="row total green">
-                                    <p>Total do pedido:</p>
-                                    <p>R${this.state.total.toFixed(2).replaceAll('.',',')}</p>
+                                    {
+                                        !this.state.hasCoupon ? '' :
+                                        <div className="row">
+                                            <p><strong>Cupom de desconto</strong> <span className='text-btn disable-selection' onClick={this.removeCoupon}>(remover)</span> <strong>:</strong></p>
+                                            <p>- R${this.context.activeCoupon.discount.toFixed(2).replaceAll('.',',')}</p>
+                                        </div>
+                                    }
+
+                                    <div className="row total green">
+                                        <p>Total do pedido:</p>
+                                        <p>R${this.state.total.toFixed(2).replaceAll('.',',')}</p>
+                                    </div>
+
+                                    <span className='description grey'>Ao realizar o pedido, você concorda com as as políticas de devolução e de entrega da SA-SHREK. Por favor, as leia para garantir que está de acordo.</span>
+
+                                    <button type='button' className='full-btn big-btn' onClick={this.placeOrder}>Confirmar pedido</button>
+                                </section>
+
+                                
+                                <div className="coupon row">
+                                    <input onChange={this.handleChange} id='coupon' name="coupon" value={this.state.coupon} type="text" minLength='1' placeholder="Inserir cupom"/>  
+                                    <button onClick={this.handleCoupon} type='button' className="small-btn void-btn">OK</button>
                                 </div>
 
-                                <span className='description grey'>Ao realizar o pedido, você concorda com as as políticas de devolução e de entrega da SA-SHREK. Por favor, as leia para garantir que está de acordo.</span>
-
-                                <button type='button' className='full-btn big-btn' onClick={this.placeOrder}>Confirmar pedido</button>
-                            </section>
-
-                            
-                            <div className="coupon row">
-                                <input onChange={this.handleChange} id='coupon' name="coupon" value={this.state.coupon} type="text" minLength='1' placeholder="Inserir cupom"/>  
-                                <button onClick={this.handleCoupon} type='button' className="small-btn void-btn">OK</button>
                             </div>
 
-                        </div>
+                            <section className='content-section payment'>
+                                <span className='section-title mini'>Forma de pagamento</span>
+                                <p>
+                                    O método de pagamento escolhido foi: 
+                                    {
+                                        this.props.checkout.payment === 'deposit'
+                                            ? <i className="fas fa-university"></i>
+                                            : this.props.checkout.payment === 'picpay'
+                                                ? <i className="fas fa-mobile-alt"></i>
+                                                : ''
+                                    }
+                                    {this.state.payment}.
+                                </p>
 
-                        <section className='content-section payment'>
-                            <span className='section-title mini'>Forma de pagamento</span>
-                            <p>
-                                O método de pagamento escolhido foi: 
-                                {
-                                    this.props.checkout.payment === 'deposit'
-                                        ? <i className="fas fa-university"></i>
-                                        : this.props.checkout.payment === 'picpay'
-                                            ? <i className="fas fa-mobile-alt"></i>
-                                            : ''
-                                }
-                                {this.state.payment}.
-                            </p>
+                                <span className='text-btn disable-selection green' onClick={this.props.checkout.changePayment}>(Alterar)</span>
+                            </section>
 
-                            <span className='text-btn disable-selection green' onClick={this.props.checkout.changePayment}>(Alterar)</span>
-                        </section>
-
-                        <section className='content-section takeaway'>
-                            <span className='section-title mini'>Retirada do pedido</span>
-                            <p>O pedido deverá ser retirada na sala da SA-SHREK, a princípio apenas por {this.context.getCurrentAccount().name}, mediante apresentação de documento com foto.</p>
-                            <p>Mais informações serão enviadas por email, que pode ser respondido caso necessário permitir a retirada por um terceiro.</p>
+                            <section className='content-section takeaway'>
+                                <span className='section-title mini'>Retirada do pedido</span>
+                                <p>O pedido deverá ser retirada na sala da SA-SHREK, a princípio apenas por {this.context.getCurrentAccount().name}, mediante apresentação de documento com foto.</p>
+                                <p>Mais informações serão enviadas por email, que pode ser respondido caso necessário permitir a retirada por um terceiro.</p>
+                            </section>
                         </section>
                     </div>
                 </main>
