@@ -126,7 +126,6 @@ class MyAccount extends React.Component {
                 <div className="content-box">
                     <div className="left-content col-md-5 col-sm-12 align-self-top">
                         <section id="loginInfo" className="d-flex no-space">
-<<<<<<< HEAD
                             <h2>Olá, {this.context.isLogged.user.name}! </h2>
                             <span><strong>Email: </strong>{this.context.isLogged.user.email}</span>
                             <div className="col-md-6 offset-md-8 pt-3">
@@ -151,10 +150,6 @@ class MyAccount extends React.Component {
                                 onClick={() => {submitEdit(this.state, this.context.isLogged.user)}} style={{width: '30%'}}
                                 >Salvar</button>
                             </div>
-=======
-                            <h2>Olá, {this.context.isLogged.user.name.replace(/(\S*\s?\S*).*/, '$1')}! </h2>
-                            <span><strong>Email: </strong>{this.context.isLogged.user.email} <span className='disable-selection text-btn green' onClick={this.context.logout}>(sair)</span></span>
->>>>>>> e3a4332220792362f32d7f27009bc4b332e92027
                         </section>
 
                         <section id="dadosPessoais" className="d-flex">
