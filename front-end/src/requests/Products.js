@@ -61,7 +61,6 @@ const productRequests = {
 
     useEffect( () => {
       const {data, _id} = props;
-      console.log(data)
 
       if (props.send === 'put') {
         console.log("Mandando dados para a API");
