@@ -3,7 +3,7 @@ import React, {useContext, useState, useEffect} from 'react';
 import { DataContext } from '../../../Context';
 import ModalCoupon from './Modal';
 
-import CouponsRequests from '../../../requests/Coupons'
+import CouponsRequests from '../../../requests/Coupons';
 
 import '../../css/bootstrap.css';
 
