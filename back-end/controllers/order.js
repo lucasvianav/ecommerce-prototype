@@ -6,6 +6,30 @@ const orderController = {
         return res.json(orders)
     },
 
+    findById: async (req, res) => {
+        const {_id} = req.params
+        const order = await orderService.findById(_id)
+        return res.json(order)
+    },
+
+    findByStatus: async (req, res) => {
+        const {status} = req.params
+        const order = await orderService.findByStatus(status)
+        return res.json(order)
+    },
+
+    findByClientId: async (req, res) => {
+        const {_id} = req.params
+        const orders = await orderService.findByClientId(_id)
+        return res.json(orders)
+    },
+
+    findByClientEmail: async (req, res) => {
+        const {email} = req.params
+        const orders = await orderService.findByClientEmail(email)
+        return res.json(orders)
+    },
+
     new: async (req, res) => {
         const {products, client, date, time, payment, situation, discount, total} = req.body
         const order = {products, client, date, time, payment, situation, discount, total}

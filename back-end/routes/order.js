@@ -6,7 +6,15 @@ router.use(cors())
 
 const orderController = require('../controllers/order')
 
-router.get('/', orderController.find)
+router.get('/', orderController.find) 
+
+router.get('/:_id', orderController.findById)
+
+router.get('/status/:status', orderController.findByStatus)
+
+router.get('/clientId/:_id', orderController.findByClientId)
+
+router.get('/clientEmail/:email', orderController.findByClientEmail)
 
 router.post('/', orderController.new)
 

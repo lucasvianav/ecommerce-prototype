@@ -5,6 +5,14 @@ const cartService = require('./cart')
 const orderService = {
     find: async () => await Orders.find({}),
 
+    findById: async _id => await Orders.findById(_id),
+
+    findByStatus: async situation => await Orders.find({ situation }),
+
+    findByClientId: async _id => await Orders.find({ 'client._id': _id }),
+
+    findByClientEmail: async email => await Orders.find({ 'client.email': email }),
+
     new: async order => {
         const newOrder = await Orders.create(order)
 
