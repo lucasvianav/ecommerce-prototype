@@ -8,7 +8,8 @@ var descriptionSchema = mongoose.Schema({
         type: [String]
     },
     txt: {
-        type: String
+        type: String,
+        trim: true,
     }
 });
 
@@ -32,10 +33,12 @@ var productSchema = mongoose.Schema({
     _id: String,
     name: {
         type: String,
+        trim: true,
         required: true
     },
     type: {
         type: String,
+        trim: true,
         required: true
     },
     visibility: {
@@ -44,6 +47,7 @@ var productSchema = mongoose.Schema({
     },
     category: {
         type: String,
+        trim: true,
         required: true
     },
     description: {

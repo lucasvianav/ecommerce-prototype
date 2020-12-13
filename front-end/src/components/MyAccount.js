@@ -56,7 +56,7 @@ class MyAccount extends React.Component {
                     <div className="left-content col-md-6 col-sm-12 align-self-top">
                         <section id="loginInfo" className="d-flex no-space">
                             <h2>Olá, {this.context.isLogged.user.name.replace(/(\S*\s?\S*).*/, '$1')}! </h2>
-                            <span><strong>Email: </strong>{this.context.isLogged.user.email}</span>
+                            <span><strong>Email: </strong>{this.context.isLogged.user.email} <span className='disable-selection text-btn green' onClick={this.context.logout}>(sair)</span></span>
                         </section>
 
                         <section id="dadosPessoais" className="d-flex">

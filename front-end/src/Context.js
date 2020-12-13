@@ -136,9 +136,9 @@ export class DataProvider extends React.Component {
 
             let categories = []
             for(let product of data){
-                if((!categories.includes(product.category)) && product.visibility){
+                if((!categories.includes(product.category.trim())) && product.visibility){
                     categories.push({
-                        name: product.category,
+                        name: product.category.trim(),
                         parent: product.type
                     })
                 }

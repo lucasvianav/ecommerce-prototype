@@ -3,14 +3,17 @@ const mongoose = require('mongoose')
 const specsSchema = mongoose.Schema({
     color: {
         type: String,
+        trim: true,
         default: '',
     },
     template: {
         type: String,
+        trim: true,
         default: '',
     },
     size: {
         type: String,
+        trim: true,
         default: '',
     }
 })
@@ -19,18 +22,22 @@ const clientSchema = mongoose.Schema({
     _id: String,
     name: {
         type: String,
+        trim: true,
         required: true
     },
     email: {
         type: String,
+        trim: true,
         required: true
     },
     cpf: {
         type: String,
+        trim: true,
         required: true
     },
     phoneNumber: {
         type: String,
+        trim: true,
         required: true
     }
 })
@@ -38,6 +45,7 @@ const clientSchema = mongoose.Schema({
 const orderItemSchema = mongoose.Schema({
     sku: {
         type: String,
+        trim: true,
         required: true
     },
     quantity: {
@@ -87,18 +95,22 @@ const orderSchema = mongoose.Schema({
     },
     date: {
         type: String,
+        trim: true,
         required: true
     },
     time: {
         type: String,
+        trim: true,
         required: true
     },
     payment: {
         type: String,
+        trim: true,
         required: true
     },
     situation: {
         type: String,
+        trim: true,
         required: true
     },
     discount: {
