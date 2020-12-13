@@ -85,7 +85,7 @@ const UsersPanel = (props) => {
                             setModalProps(properties);
                             setModal(true);
                           }}>
-                            <i className="fa fa-eye"></i>
+                            <i className="fa fa-eye grey"></i>
                           </button>
                         </span>
                       </td>

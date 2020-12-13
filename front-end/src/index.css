@@ -401,7 +401,7 @@ input::placeholder {
   display: block;
   width: 80%;
   max-width: 120px;
-  margin: auto;
+  /* margin: auto; */
   font-size: 18px;
   line-height: 280%;
   border-radius: 25px;

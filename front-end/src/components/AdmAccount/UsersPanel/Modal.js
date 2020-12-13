@@ -87,19 +87,16 @@ const ModalUser = (props) => {
                         <strong>Data de Nascimento: </strong>
                         {props.value.birthday}
                     </p>
-                    {(props.value.type !== "admin") ? 
-                        <button onClick={(e) => {salva(e)}}
-                        className="btn btn-secondary" style={{width: '30%'}}
-                        >
-                            Tornar Adiministrador
-                        </button>
-                        : ""
-                    }
                 </div>
             </Modal.Body>
             <Modal.Footer className='dark-bg'>
-                <button onClick={exclui} className="btn btn-danger" style={{width: '20%'}}>Excluir</button>
-                <button onClick={props.onHide} className="btn btn-secondary" style={{width: '20%'}}>Voltar</button>
+                <button onClick={exclui} className="big-btn void-btn" style={{width: '20%'}}>Excluir</button>
+                {
+                    (props.value.type === "admin") ? '' :
+                    <button onClick={(e) => {salva(e)}} className="big-btn void-btn" style={{maxWidth: '210px'}}>
+                        Tornar Adiministrador
+                    </button>
+                }
             </Modal.Footer>
         </Modal>
     );
