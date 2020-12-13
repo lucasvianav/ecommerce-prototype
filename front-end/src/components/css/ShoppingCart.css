@@ -314,7 +314,7 @@
     clear: both;
 }
 
-@media screen and (max-width: 700px){
+@media screen and (max-width: 960px){
     .ShoppingCart .header-row * {
         visibility: hidden;
     }
@@ -361,58 +361,4 @@
         margin-top: 10%;
     }
 
-}
-
-@media (max-width: 700px){
-    .ShoppingCart {
-        /* padding-top: 25%; */
-    } 
-
-    /* .ShoppingCart .section-title {
-        font-size: 140%;
-    }
-
-    .ShoppingCart .content-box {
-        font-size: 65%;
-    }
-
-    .ShoppingCart .text-btn {
-        font-size: 65%;
-    }
-
-    .ShoppingCart .order-summary-title{
-        font-size: 140%;
-    }
-
-    .ShoppingCart .order-summary .row {
-        font-size: 72%;
-    }
-
-    .ShoppingCart .order-summary .big-btn {
-    	font-size: 100%;
-    }
-
-    .ShoppingCart .order-summary .small-btn {
-    	font-size: 100%;
-    }
-
-    .ShoppingCart .order-summary .coupon {
-        width: fit-content;
-    	display: block;
-    	padding: 2px;
-    }
-
-    .ShoppingCart #coupon {
-	    width: 90%;
-	    margin-bottom: 4px;
-    }
-
-    .ShoppingCart .order-summary .small-btn {
-    	width: 50%;
-    	font-size: 100%;
-    }
-
-    .ShoppingCart input::placeholder {
-    	font-size: 70%;
-    } */
 }

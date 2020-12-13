@@ -184,11 +184,12 @@ export class DataProvider extends React.Component {
     }
 
     toggleTheme(){
-        $('*').removeClass('dark-theme light-theme')
-        $('*').addClass(!this.state.darkTheme ? 'dark-theme' : 'light-theme')
-        
-        localStorage.setItem('darkTheme', JSON.stringify(!this.state.darkTheme))
-        this.setState(prevState => {return {darkTheme: !prevState.darkTheme}})
+        this.setState(prevState => ({ darkTheme: !prevState.darkTheme }), () => {
+            $('*').removeClass('dark-theme light-theme')
+            $('*').addClass(this.state.darkTheme ? 'dark-theme' : 'light-theme')
+            
+            localStorage.setItem('darkTheme', JSON.stringify(this.state.darkTheme))
+        })
     }
     
     async login(email, password){

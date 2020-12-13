@@ -5,6 +5,8 @@ import {Link, withRouter} from 'react-router-dom'
 import './css/Navbar.css'
 import { DataContext } from '../Context'
 import ThemeToggler from './ThemeToggler'
+import { toggleModal } from '../Util'
+import SearchBar from './SearchBar'
 
 const handleNavbarDropdown = e => {
     let dropdownMenu = $(e.target.parentElement).hasClass('drop') ? $(e.target.parentElement) : $('.drop', e.target.parentElement)
@@ -41,40 +43,45 @@ const handleNavbarDropdown = e => {
 
 const toggleSearchBar = () => {
     const bar = $('.search-bar')
-    const panel = $('#right-buttons')
+    
+    if($(window).width() >= 960){
+        const panel = $('#right-buttons')
 
-    if(bar.css('display') === 'none'){
-        bar.show()
-        
-        let auto = panel.css('width', 'auto').css('width')
-        panel.css('width', '12%')
+        if(bar.css('display') === 'none'){
+            bar.show()
+            
+            let auto = panel.css('width', 'auto').css('width')
+            panel.css('width', '12%')
 
-        panel.animate({width: auto}, 400,
-            () => {
-                bar.removeClass('invisible-content')
-                $('button', bar).removeClass('no-display')
-                bar.removeClass('show-bar')
-                $('.search-bar input').focus()
-            }
-        )
+            panel.animate({width: auto}, 400,
+                () => {
+                    bar.removeClass('invisible-content')
+                    $('button', bar).removeClass('no-display')
+                    bar.removeClass('show-bar')
+                    $('.search-bar input').focus()
+                }
+            )
 
-        bar.addClass('show-bar')
+            bar.addClass('show-bar')
+        }
+
+        else{
+            $('button', bar).addClass('no-display')
+            
+            panel.animate({width: '12%'}, 400,
+                () => {
+                    bar.addClass('invisible-content')
+                    $('button', bar).addClass('no-display')
+                    bar.removeClass('hide-bar')
+                    bar.hide()
+                }
+            )
+            
+            bar.addClass('hide-bar')
+        }
     }
 
-    else{
-        $('button', bar).addClass('no-display')
-        
-        panel.animate({width: '12%'}, 400,
-            () => {
-                bar.addClass('invisible-content')
-                $('button', bar).addClass('no-display')
-                bar.removeClass('hide-bar')
-                bar.hide()
-            }
-        )
-        
-        bar.addClass('hide-bar')
-    }
+    else{ toggleModal('search-modal') ? $('.search-bar input').focus() : $()}
 }
 
 class Navbar extends React.Component {
@@ -85,20 +92,17 @@ class Navbar extends React.Component {
 
         const {categories} = this.context
 
-        this.state = { search: '' }
-
-        this.products = categories.reduce((acc, cur) => {
+        const products = categories.reduce((acc, cur) => {
             if(cur.parent === 'PR'){ acc.push(cur.name.title()) }
             return acc
         }, [])
 
-        this.events = categories.reduce((acc, cur) => {
+        const events = categories.reduce((acc, cur) => {
             if(cur.parent === 'EV'){ acc.push(cur.name.title()) }
             return acc
         }, [])
 
-        this.handleChange = this.handleChange.bind(this)
-        this.submitSearch = this.submitSearch.bind(this)
+        this.state = {products, events}
     }
 
     componentDidMount(){
@@ -118,49 +122,41 @@ class Navbar extends React.Component {
     }
 
     componentDidUpdate(prevProps){
-        if(prevProps.location !== this.props.location && $('.search-bar').css('display') !== 'none'){ 
+        if(prevProps.location !== this.props.location && 
+            ($('.search-bar').css('display') !== 'none' || $('.modal#search-modal').css('display') !== 'none')
+        ){ 
             toggleSearchBar() 
-            this.setState({ search: '' })
         }
 
-        else if(this.context.categories.length !== this.products.length + this.events.length){
+        else if(this.context.categories.length !== this.state.products.length + this.state.events.length){
             const {categories} = this.context
 
-            this.products = categories.reduce((acc, cur) => {
+            const products = categories.reduce((acc, cur) => {
                 if(cur.parent === 'PR'){ acc.push(cur.name.title()) }
                 return acc
             }, [])
     
-            this.events = categories.reduce((acc, cur) => {
+            const events = categories.reduce((acc, cur) => {
                 if(cur.parent === 'EV'){ acc.push(cur.name.title()) }
                 return acc
             }, [])
-        }
-    }
 
-    handleChange(e){
-        this.setState({[e.target.name]: e.target.value})
-    }
-    
-    submitSearch(){
-        if(this.state.search !== ''){
-            this.props.history.push("/search?query=" + this.state.search)
+            this.setState({products, events})
         }
     }
 
     render(){
         return(
             <nav id="navbar">
+                <input type="checkbox" id="check"></input>
+                <label htmlFor="check" className="checkbtn">
+                  <i className="fas fa-bars"></i>
+                </label>
+            
 
-                 <input type="checkbox" id="check"></input>
-                 <label for="check" class="checkbtn">
-                    <i class="fas fa-bars"></i>
-                 </label>
-               
-
-                <div id="logo">
-                    <Link to="/"><img src={process.env.PUBLIC_URL + "/img/logo.png"} alt="Logo da SA-SHREK"/></Link>
-                </div>
+                <div id="logo"><Link to="/">
+                    <img src={process.env.PUBLIC_URL + "/img/logo.png"} alt="Logo da SA-SHREK"/>
+                </Link></div>
 
 
                 <ul id="central-buttons" className="align-center">
@@ -168,11 +164,11 @@ class Navbar extends React.Component {
                     <li id="products-button">
                         <Link to="/produtos">Produtos</Link>
                         {
-                            this.products.isEmpty() ? '' :
+                            this.state.products.isEmpty() ? '' :
                             <div className="drop" style={{display: 'none'}}>
                                 <span className="divisor"></span>
                                 <ul>
-                                    { this.products.map((item, index) => <li key={item + index.toString()}><Link to={'/produtos/' + item.toLowerCase().replaceAll(' ', '-')}>{item}</Link></li>) }
+                                    { this.state.products.map((item, index) => <li key={item + index.toString()}><Link to={'/produtos/' + item.toLowerCase().replaceAll(' ', '-')}>{item}</Link></li>) }
                                 </ul>
                             </div>
                         }
@@ -181,24 +177,20 @@ class Navbar extends React.Component {
                     <li id="events-button">
                         <Link to="/eventos">Eventos</Link>
                         {
-                            this.events.isEmpty() ? '' :
+                            this.state.events.isEmpty() ? '' :
                             <div className="drop" style={{display: 'none'}}>
                                 <span className="divisor"></span>
                                 <ul>
-                                    { this.events.map((item, index) => <li key={item + index.toString()}><Link to={'/eventos/' + item.toLowerCase().replaceAll(' ', '-')}>{item}</Link></li>) }
+                                    { this.state.events.map((item, index) => <li key={item + index.toString()}><Link to={'/eventos/' + item.toLowerCase().replaceAll(' ', '-')}>{item}</Link></li>) }
                                 </ul>
                             </div>
                         }
                     </li>
                 </ul>
-            
-
-
 
                 <ul id="right-buttons" className="align-center">
-                    <li className="search-bar no-display invisible-content">
-                        <input type="text" name="search" placeholder="Buscar produtos" onChange={this.handleChange} onKeyDown={e => e.key === 'Enter' ? this.submitSearch() : ''} value={this.state.search}/>
-                        <button type="button" className="green no-display" onClick={this.submitSearch}><i className="fas fa-arrow-right"></i></button>
+                    <li>
+                        <SearchBar {...this.props} visible={false}/>
                     </li>
                     <div className='main'>
                         <li><button id="search-button" type="button" title='Pesquisar'><i className="fas fa-search"></i></button></li>
@@ -223,6 +215,10 @@ class Navbar extends React.Component {
                         <li><ThemeToggler/></li>
                     </div>
                 </ul>
+
+                <section class="modal" id="search-modal">
+                    <SearchBar {...this.props} visible={true}/>
+                </section>
             </nav>
         )
     }
