@@ -47,14 +47,12 @@ nav#navbar {
     padding: 0;
     margin: 0;
 }
-
   
 #central-buttons {
     width: 20%;
     text-align: center;
 }
 
-  
 #navbar ul {
     display: flex;
     flex-flow: row nowrap;
@@ -153,10 +151,10 @@ nav#navbar {
     }
 
     #central-buttons {
-        position: fixed;
-        top: 45px;
+        position: absolute;
+        top: 100%;
         width: 100%;
-        left: -800px;
+        left: -800%;
         text-align: center;
         transition: all .5s;
         line-height: 30px;
@@ -185,10 +183,6 @@ nav#navbar {
 
     #right-buttons .main {
         min-width: 240px;
-    }
-
-    #logo {
-        width: 100%;
     }
 }
 
