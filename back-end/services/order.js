@@ -34,7 +34,7 @@ const orderService = {
         return newOrder
     },
 
-    edit: async (_id, situation) => await Orders.findByIdAndUpdate(_id, {situation})
+    edit: async (_id, situation) => await Orders.findByIdAndUpdate(_id, {situation}, {new: true})
 }
 
 module.exports = orderService

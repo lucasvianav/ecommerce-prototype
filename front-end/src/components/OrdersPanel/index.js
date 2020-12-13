@@ -16,7 +16,7 @@ const OrdersPanel = (props) => {
   const products = context.data;
 
   const [modalPedido, setModalPedido] = useState(false);
-  const [propsModal, setPropsModal] = useState({pedido: {products: [], situation: [], status: []}});
+  const [propsModal, setPropsModal] = useState({pedido: {products: [], situation: [], status: [], client: []}});
 
   const allOrders = context.orders;
 
@@ -71,9 +71,10 @@ const OrdersPanel = (props) => {
 
         orders.forEach((it, index)=>{
           if(it._id === id){ 
-            info.pedido = it;
+            info.pedido = it
             info.pedido.status = st
-            info.index = index;
+            info.pedido.client = it.client
+            info.index = index
           }
         })
 
@@ -143,11 +144,15 @@ const OrdersPanel = (props) => {
               type={props.type}
               show={modalPedido}
               {...propsModal}
-              onSave = {(e) => {
+              onSave = {async e => {
                 if (e.set === true) {
-                  var vet = orders;
+                  const {_id} = orders[e.index]
+                  const situation = e.new
+                  await context.updateOrder(_id, situation)
+
+                  let vet = orders;
                   vet[e.index].situation = e.new;
-                  setOrders(vet);
+                  setOrders(vet)
               }}}
               onHide={() => {setModalPedido(false)}}
             />

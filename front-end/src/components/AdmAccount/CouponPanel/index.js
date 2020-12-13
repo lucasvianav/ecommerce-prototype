@@ -72,7 +72,7 @@ const CouponPanel = (props) => {
                         setModalType("create");
                         setModal(true);
                       }}>
-                        <i class="fas fa-plus"></i>
+                        <i className="fas fa-plus grey"></i>
                     </button>
                   </th>
                 </tr>
@@ -83,7 +83,7 @@ const CouponPanel = (props) => {
                     return (
                       <tr id={"coupon"+index} key={index}>
                           <td><span>{coupon.str}</span></td>
-                          <td><span>{(coupon.type === "percentage") ? "Porcentagem" : "Valor cheio"}</span></td>
+                          <td><span>{(coupon.type === "percentage") ? "Porcentagem" : "Valor absoluto"}</span></td>
                           <td><span>{coupon.discount}</span></td>
                           <td className="text-right">
                               <button type="button" className="btn-none" 
@@ -97,14 +97,14 @@ const CouponPanel = (props) => {
                                   setModalType("update");
                                   setModal(true);
                                 }}>
-                                  <i class="fas fa-pen"></i>
+                                  <i className="fas fa-pen grey"></i>
                               </button>
                               <button type="button" className="btn-none"
                                 onClick={(e)=>{
                                   excluiCupon(coupon.id)
                                 }}
                               >
-                                  <i class="fas fa-trash"></i>
+                                  <i className="fas fa-trash grey"></i>
                               </button>
                           </td>
                       </tr>

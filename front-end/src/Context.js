@@ -122,6 +122,7 @@ export class DataProvider extends React.Component {
         this.fetchProducts = this.fetchProducts.bind(this)
         this.refreshCart = this.refreshCart.bind(this)
         this.fetchOrders = this.fetchOrders.bind(this)
+        this.updateOrder = this.updateOrder.bind(this)
     }
 
     componentDidMount(){
@@ -466,12 +467,19 @@ export class DataProvider extends React.Component {
         return newOrderId
     }
 
+    async updateOrder(_id, situation){
+        if(['AA', 'PA', 'PPR', 'FF'].includes(situation)){
+            await api.patch('/orders', {_id, situation }).then(async r => await this.fetchOrders())
+        }
+    }
+
     render(){
         const {data, cart, coupons, home, categories, darkTheme, orders, activeCoupon, isLogged} = this.state
         const { 
             editCart, removeFromCart, toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, 
             getId, createProduct, updateProduct, deleteProduct, deleteAllProducts, createCoupon, updateCoupon, deleteCoupon, 
-            deleteAllCoupons, placeOrder, updateCurrentAccount, getInitialLogin, getInitialCart, fetchData, refreshCart, fetchOrders 
+            deleteAllCoupons, placeOrder, updateCurrentAccount, getInitialLogin, getInitialCart, fetchData, refreshCart, fetchOrders,
+            updateOrder
         } = this
 
         return(
@@ -479,7 +487,7 @@ export class DataProvider extends React.Component {
                 data, cart, isLogged, coupons, home, categories, darkTheme, orders, activeCoupon, editCart, removeFromCart,
                 toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, getId, createProduct, updateProduct, deleteProduct, 
                 deleteAllProducts, createCoupon, updateCoupon, deleteCoupon, deleteAllCoupons, placeOrder, updateCurrentAccount, getInitialLogin, 
-                getInitialCart, fetchData, refreshCart, fetchOrders 
+                getInitialCart, fetchData, refreshCart, fetchOrders, updateOrder
             }}>
                 {this.props.children}
             </DataContext.Provider>

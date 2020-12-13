@@ -11,7 +11,6 @@ const ModalPedido = (props) => {
     const products = context.data;
     const [estado, setEstado] = useState("");
     
-    console.log(props)
     useEffect( () => {
       setEstado(props.pedido.situation);
     }, [props])
@@ -25,7 +24,7 @@ const ModalPedido = (props) => {
       props.onHide();
     }
       
-    const client = context.isLogged.user
+    const { client } = props.pedido
 
     return (
         <Modal className="modal"
@@ -106,10 +105,7 @@ const ModalPedido = (props) => {
                     <p><strong>Data: </strong>{props.pedido.date}</p>
                     <p><strong>Horário: </strong>{props.pedido.time}</p>
                     <div className='payment'><p title={props.pedido.payment}><strong>Forma de pagamento: </strong>{props.pedido.payment}</p></div>
-                    {
-                      props.type !== 'client' ? '' :
-                      <div className='status'><p title={props.pedido.status}><strong>Situação: </strong>{props.pedido.status}</p></div>
-                    }
+                    <div className='status'><p title={props.pedido.status}><strong>Situação: </strong>{props.pedido.status}</p></div>
 
                     {
                       !parseFloat(props.pedido.discount) > 0 ? '' :
