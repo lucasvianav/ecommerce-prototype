@@ -25,8 +25,6 @@ const isValidPassword = (pw) => {
 }
 
 const submitEdit = async (state, account) =>{
-    console.log('oi');
-    console.log(state)
     const {lastPass, newPass1, newPass2} = state;
     var flag = true;
     
@@ -52,7 +50,6 @@ const submitEdit = async (state, account) =>{
         
 
     if(flag && res != null){
-        console.log(account)
         api.put("accounts/", {"id":account._id, "updates":{password: newPass1}})
           .then((response) => {
             alert("Senha atualizada com sucesso!");
@@ -63,6 +60,20 @@ const submitEdit = async (state, account) =>{
             console.error("ops! ocorreu um erro" + err);
           });
     }
+}
+
+const submitEditPhone = (state, context) => {
+    const {phoneNumber} = state;
+    const account = context.isLogged.user;
+
+    api.put("accounts/", {"id":account._id, "updates":{phoneNumber}})
+    .then((response) => {
+        context.updatePhone({id: context.isLogged.user._id, phoneNumber: state.phoneNumber});
+        alert("Telefone atualizado com sucesso!");
+    })
+    .catch((err) => {
+        console.error("ops! ocorreu um erro" + err);
+    });
 }
 
 class MyAccount extends React.Component {
@@ -81,7 +92,6 @@ class MyAccount extends React.Component {
     }
 
     toggleEdit(){
-        this.setState({phoneNumber: this.context.isLogged.user.phoneNumber})
         $('.standard').toggle()
         $('.editing').toggle()
     }
@@ -169,7 +179,11 @@ class MyAccount extends React.Component {
                                     <span className="text-btn green standard" onClick={this.toggleEdit}>Editar celular</span>
                                     <div className='editing-controls'>
                                         <span className="text-btn green no-display editing" onClick={this.toggleEdit}>Cancelar</span>
-                                        <span className="text-btn green no-display editing" onClick={this.submitChange}>Salvar</span>
+                                        <span className="text-btn green no-display editing" 
+                                            onClick={(e) => {
+                                                submitEditPhone(this.state, this.context);
+                                                this.toggleEdit();
+                                        }}>Salvar</span>
                                     </div>
                                 </div>
                             </div>

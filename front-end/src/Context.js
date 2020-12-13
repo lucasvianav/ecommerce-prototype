@@ -85,6 +85,7 @@ export class DataProvider extends React.Component {
         this.updateOrder = this.updateOrder.bind(this)
         this.fetchCoupons = this.fetchCoupons.bind(this)
         this.fetchAccounts = this.fetchAccounts.bind(this)
+        this.updatePhone = this.updatePhone.bind(this)
     }
 
     componentDidMount(){
@@ -407,11 +408,16 @@ export class DataProvider extends React.Component {
 
     updateAccount(data){
         this.setState(prevState => ({accounts: prevState.accounts.map(item => item.id === data.id ? data : item)}))
-
     }
 
     deleteAccount(email){
         this.setState(prevState => ({accounts: prevState.accounts.filter(item => item.email !== email)}))
+    }
+
+    updatePhone(data){
+        const {isLogged} = this.state;
+        isLogged.user.phoneNumber = data.phoneNumber;
+        this.setState({isLogged})
     }
 
     async placeOrder(total, payment){
@@ -465,7 +471,7 @@ export class DataProvider extends React.Component {
             editCart, removeFromCart, toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, 
             getId, createProduct, updateProduct, deleteProduct, deleteAllProducts, createCoupon, updateCoupon, deleteCoupon, updateAccount, deleteAccount,
             deleteAllCoupons, placeOrder, updateCurrentAccount, getInitialLogin, getInitialCart, fetchData, refreshCart, fetchOrders,
-            updateOrder, fetchProducts, fetchAccounts, fetchCoupons
+            updateOrder, fetchProducts, fetchAccounts, fetchCoupons, updatePhone
         } = this
 
         return(
@@ -474,7 +480,7 @@ export class DataProvider extends React.Component {
                 toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, getId, createProduct, updateProduct, deleteProduct, 
                 deleteAllProducts, createCoupon, updateCoupon, deleteCoupon, updateAccount, deleteAccount, deleteAllCoupons, placeOrder, 
                 updateCurrentAccount, getInitialLogin, getInitialCart, fetchData, refreshCart, fetchOrders, updateOrder, fetchProducts, 
-                fetchAccounts, fetchCoupons
+                fetchAccounts, fetchCoupons, updatePhone
             }}>
                 {this.props.children}
             </DataContext.Provider>
