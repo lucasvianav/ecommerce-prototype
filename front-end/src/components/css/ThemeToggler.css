@@ -11,6 +11,7 @@
     padding: 0;
     margin: 0;
     color: #f1eff1;
+    font-size: normal;
 }
 
 .theme input#theme-checkbox {
@@ -58,4 +59,19 @@
 
 .fa-sun {
     font-size: large;
+}
+
+@media (max-width: 858px){
+    .theme .toggle input#theme-checkbox + label {
+        min-width: 14px;
+        min-height: 14px;
+    }
+
+    .theme input#theme-checkbox{
+        min-width: 30px;
+    }
+
+    .fa-sun {
+        font-size: 16px !important;
+    }
 }
