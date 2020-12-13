@@ -22,82 +22,53 @@ export class DataProvider extends React.Component {
     
             data: [],
     
-            cart: [
-                // {
-                //     sku: 'PR-P1-VOID-MASC-M', // PR = type (PRoduct) --- P1 = id --- VOID = color --- MASC = template (MASC x FEMI) --- M = size
-                //     quantity: 2,
-                //     specs: {color: '', template: 'Masculino', size: 'M'}
-                // },
-                // {
-                //     sku: 'EV-E1', // EV = type (EVent) --- E1 = id
-                //     quantity: 1,
-                //     specs: {color: '', template: '', size: ''}
-                // }
-            ],
+            // sku: 'PR-P1-VOID-MASC-M', // PR = type (PRoduct) --- P1 = id --- VOID = color --- MASC = template (MASC x FEMI) --- M = size
+            // sku: 'EV-E1', // EV = type (EVent) --- E1 = id
+            cart: [],
     
             orders: [
-                /*
-                {
-                    id: '', //id do pedido
-                    product:[
-                        {
-                            sku: '',    //sku do produto
-                            quantity: '',    //quantidade (número)
-                            specs: {color: '', template:'', size:''},
-                            price: '' // preço do produto no momento da compra
-                        }
-                    ],
-                    client: '',   //email do cliente
-                    date: '', // data do pedido
-                    time: '', // horário do pedido
-                    payment: '', // método de pagamento escolhido
-                    situation: '',   //AA - aguardando aprovação, PA - pagamento aprovado, PPR - pronto para retirada, FF - finalizado
-                    discount: '',      // Desconto provindo de cupon, em R$ (número)
-                    total: '' // Valor total da compra
-                },
-                */
-                {
-                    id: '1',
-                    product: [
-                        {
-                            sku: 'PR-P1-VOID-FEMI-GG',   
-                            quantity: '1',
-                            specs: {color: '', template:'Feminino', size:'GG'},
-                            price: 130
-                        },
-                        {
-                            sku: 'PR-P1-VOID-MASC-EXG',   
-                            quantity: '1',
-                            specs: {color: '', template:'Masculino', size:'EXG'},
-                            price: 130
-                        },
-                    ],
-                    client: 'fionagatinha74@gmail.com', 
-                    date: '20/11/2020',
-                    time: '11:45:45 AM',
-                    payment: 'Transferência/Depósito bancário',
-                    situation: 'AA',
-                    discount: 10,
-                    total: 250
-                },
-                {
-                    id: '2',
-                    product:[
-                        {
-                            sku: 'EV-E1',   
-                            quantity: '2',
-                            specs: {color: '', template: '', size: ''},
-                            price: 40
-                        },
-                    ],
-                    client: 'biscoitodamassa@gmail.com', 
-                    date: '16/11/2020',
-                    time: '7:31:12 PM',
-                    payment: 'Transferência por Picpay',
-                    situation: 'FF',
-                    discount: 0,
-                    total: 40
-                }
+                // {
+                //     id: '1',
+                //     product: [
+                //         {
+                //             sku: 'PR-P1-VOID-FEMI-GG',   
+                //             quantity: '1',
+                //             specs: {color: '', template:'Feminino', size:'GG'},
+                //             price: 130
+                //         },
+                //         {
+                //             sku: 'PR-P1-VOID-MASC-EXG',   
+                //             quantity: '1',
+                //             specs: {color: '', template:'Masculino', size:'EXG'},
+                //             price: 130
+                //         },
+                //     ],
+                //     client: 'fionagatinha74@gmail.com', 
+                //     date: '20/11/2020',
+                //     time: '11:45:45 AM',
+                //     payment: 'Transferência/Depósito bancário',
+                //     situation: 'AA',
+                //     discount: 10,
+                //     total: 250
+                // },
+                // {
+                //     id: '2',
+                //     product:[
+                //         {
+                //             sku: 'EV-E1',   
+                //             quantity: '2',
+                //             specs: {color: '', template: '', size: ''},
+                //             price: 40
+                //         },
+                //     ],
+                //     client: 'biscoitodamassa@gmail.com', 
+                //     date: '16/11/2020',
+                //     time: '7:31:12 PM',
+                //     payment: 'Transferência por Picpay',
+                //     situation: 'FF',
+                //     discount: 0,
+                //     total: 40
+                // }
 
             ],
 
@@ -150,6 +121,7 @@ export class DataProvider extends React.Component {
         this.fetchData = this.fetchData.bind(this)
         this.fetchProducts = this.fetchProducts.bind(this)
         this.refreshCart = this.refreshCart.bind(this)
+        this.fetchOrders = this.fetchOrders.bind(this)
     }
 
     componentDidMount(){
@@ -212,6 +184,17 @@ export class DataProvider extends React.Component {
                 this.setState({data, categories})
             })
             .catch(e => console.log('Algo deu errado: ', e))
+    }
+
+    async fetchOrders(){
+        var orders = []
+
+        if(this.state.isLogged.status){
+            const {_id, type} = this.state.isLogged.user
+            await api.get('orders' + (type === 'admin' ? '' : ('/clientId/' + _id))).then(r => orders = r.data)
+        }
+
+        this.setState({ orders })
     }
 
     updateCurrentAccount(){
@@ -488,7 +471,7 @@ export class DataProvider extends React.Component {
         const { 
             editCart, removeFromCart, toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, 
             getId, createProduct, updateProduct, deleteProduct, deleteAllProducts, createCoupon, updateCoupon, deleteCoupon, 
-            deleteAllCoupons, placeOrder, updateCurrentAccount, getInitialLogin, getInitialCart, fetchData, refreshCart 
+            deleteAllCoupons, placeOrder, updateCurrentAccount, getInitialLogin, getInitialCart, fetchData, refreshCart, fetchOrders 
         } = this
 
         return(
@@ -496,7 +479,7 @@ export class DataProvider extends React.Component {
                 data, cart, isLogged, coupons, home, categories, darkTheme, orders, activeCoupon, editCart, removeFromCart,
                 toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, getId, createProduct, updateProduct, deleteProduct, 
                 deleteAllProducts, createCoupon, updateCoupon, deleteCoupon, deleteAllCoupons, placeOrder, updateCurrentAccount, getInitialLogin, 
-                getInitialCart, fetchData, refreshCart 
+                getInitialCart, fetchData, refreshCart, fetchOrders 
             }}>
                 {this.props.children}
             </DataContext.Provider>

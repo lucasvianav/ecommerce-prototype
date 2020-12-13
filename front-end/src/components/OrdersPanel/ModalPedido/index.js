@@ -11,6 +11,7 @@ const ModalPedido = (props) => {
     const products = context.data;
     const [estado, setEstado] = useState("");
     
+    console.log(props)
     useEffect( () => {
       setEstado(props.pedido.situation);
     }, [props])
@@ -35,18 +36,18 @@ const ModalPedido = (props) => {
         >
             <Modal.Header className='modal-color' closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
-                <span>Detalhes do Pedido #{props.pedido.id}:</span>
+                <span>Detalhes do Pedido #{props.pedido._id}:</span>
             </Modal.Title>
             </Modal.Header>
             <Modal.Body className="modal-color justify-content-center">
                 <h5>Produtos:</h5>
                 <div className="product-cards d-flex">
                   {
-                    props.pedido.product.map((pr, index) => {
+                    props.pedido.products.map((pr, index) => {
                       
                       var p = {};
                       products.forEach((prod, index) => {
-                        if(prod.id === pr.sku.split('-')[1]) {
+                        if(prod._id === pr.sku.split('-')[1]) {
                           p = prod;
                         }
                       })
@@ -106,12 +107,18 @@ const ModalPedido = (props) => {
                     <p><strong>Horário: </strong>{props.pedido.time}</p>
                     <div className='payment'><p title={props.pedido.payment}><strong>Forma de pagamento: </strong>{props.pedido.payment}</p></div>
                     {
+                      props.type !== 'client' ? '' :
+                      <div className='status'><p title={props.pedido.status}><strong>Situação: </strong>{props.pedido.status}</p></div>
+                    }
+
+                    {
                       !parseFloat(props.pedido.discount) > 0 ? '' :
                       <>
                         <p><strong>Subtotal: </strong>R${(parseFloat(props.pedido.total) + parseFloat(props.pedido.discount)).toFixed(2).replaceAll('.',',')}</p>
                         <p><strong>Desconto: </strong>R${parseFloat(props.pedido.discount).toFixed(2).replaceAll('.',',')}</p>
                       </>
                     }
+
                     <p className='total'><strong>Total: </strong>R${parseFloat(props.pedido.total).toFixed(2).replaceAll('.',',')}</p>
                   </div>
                 </div>
