@@ -220,24 +220,39 @@ function ProductForm(props){
         txt: txt ? txt.replace(/^[\s\n]*/, '') : ''
       }
 
-      const newId = props.mode === 'view' ? props.id : context.getId(tipo)
+      // const newId = props.mode === 'view' ? props.id : context.getId(tipo)
 
       let colors = []
       let sizes = []
       let templates = []
-      let stock = []
+      let stock = {}
+
+      const generateSKU = (template, size, color) => {
+        let sku = ''
+        if(tipo === 'PR'){
+            sku += color ? '-' + color.substring(0,4).toUpperCase() + '-' : '-VOID-'
+            sku += template ? template.substring(0,4).toUpperCase() + '-' : 'VOID-'
+            sku += size ? size : 'VOID'
+        }
+
+        return sku
+    }
 
       for(let item of opcoes){
-          if(item.template !== '' && !templates.includes(item.template)){ templates.push(item.template) }
-          if(item.color !== '' && !colors.includes(item.color)){ colors.push(item.color) }
-          if(item.size !== '' && !sizes.includes(item.size)){ sizes.push(item.size) }
-          stock.push([item.color, item.template, item.size, item.stock])
+        let {template, color, size} = item
+
+        if(template !== '' && !templates.includes(template)){ templates.push(template) }
+        if(color !== '' && !colors.includes(color)){ colors.push(color) }
+        if(size !== '' && !sizes.includes(size)){ sizes.push(size) }
+
+        let sku = generateSKU(template, size, color)
+        stock[sku] = item.stock
       }
       
       var exportData = {
         name: nomeProduto,
         type: tipo,
-        id: newId,
+        // id: newId,
         visibility: visibility,
         category: cat,
         description: description,
@@ -379,7 +394,7 @@ function ProductForm(props){
               </div>
             </div>
             <div className="form-group col-md-3 col-sm-6">
-              <label htmlFor="displayPrice">Preço de venda (com desconto):</label>
+              <label htmlFor="displayPrice">Preço de venda (com desconto)*:</label>
               <div className="input-group">
                 <div className="input-group-prepend">
                   <div className="input-group-text bg-white"><span>R$</span></div>

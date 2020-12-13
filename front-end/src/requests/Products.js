@@ -59,8 +59,9 @@ const productRequests = {
         console.log(data)
         props.onChange();
         api.post("products", {...data})
-          .then((response) => {
-            getAtt(response.data, "create", context);
+          .then(async (response) => {
+            // getAtt(response.data, "create", context);
+            await context.fetchProducts()
             alert("Produto inserido com sucesso");
           })
           .catch((err) => {
@@ -83,8 +84,9 @@ const productRequests = {
         props.onChange();
         api.put("products/"+id, {...data})
           .then((response) => {
-            api.get("products/"+id).then((res) => {
-              getAtt(res.data[0], "update", context);
+            api.get("products/"+id).then(async (res) => {
+              // getAtt(res.data[0], "update", context);
+              await context.fetchProducts()
             }).catch((err) => {
               console.error("ops! ocorreu um erro" + err);
             });
