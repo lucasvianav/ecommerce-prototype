@@ -4,28 +4,26 @@ import '../index.js';
 
 const OpCampo = (props) => {
 
-    const [modelagem, setModelagem] = useState(props.modelagem);
-    const [tamanho, setTamanho] = useState(props.tamanho);
-    const [cor, setCor] = useState(props.cor);
-    const [estoque, setEstoque] = useState(props.estoque);
+    const [template, setModelagem] = useState(props.template);
+    const [size, setTamanho] = useState(props.size);
+    const [color, setCor] = useState(props.color);
+    const [stock, setEstoque] = useState(props.stock);
 
     useEffect (() => {
       var e = {};
 
-      console.log(props);
-
-      setModelagem(props.modelagem);
-      setTamanho(props.tamanho);
-      setCor(props.cor);
-      setEstoque(props.estoque);
+      setModelagem(props.template);
+      setTamanho(props.size);
+      setCor(props.color);
+      setEstoque(props.stock);
 
       e.index = props.index;
 
       e.dado = {
-        template: modelagem ? modelagem : '',
-        size: tamanho ? tamanho : '',
-        color: cor ? cor : '',
-        stock: estoque ? estoque : -1
+        template: template ? template : '',
+        size: size ? size : '',
+        color: color ? color : '',
+        stock: stock ? stock : -1
       }
 
       props.onChange(e);
@@ -36,14 +34,14 @@ const OpCampo = (props) => {
       e.index = props.index;
 
       e.dado = {
-        template: modelagem ? modelagem : '',
-        size: tamanho ? tamanho : '',
-        color: cor ? cor : '',
-        stock: estoque ? estoque : -1
+        template: template ? template : '',
+        size: size ? size : '',
+        color: color ? color : '',
+        stock: stock ? stock : -1
       }
 
       props.onChange(e);
-    },[modelagem, tamanho, estoque, cor])
+    },[template, size, stock, color])
 
     return (
       <>
@@ -51,29 +49,29 @@ const OpCampo = (props) => {
           <div className="form-group col-3">
             <label htmlFor="categoria">Modelagem: </label>
             <input type="text" className="input-control form-control bg-white" id={"modelagemOp" + props.index}
-              value={modelagem} placeholder="Deixe em Branco para Geral"
+              value={template} placeholder="Deixe em Branco para Geral"
               onChange={(event) => {setModelagem(event.target.value)}}
             />                
         </div>
         <div className="form-group col-3">
             <label htmlFor="categoria">Tamanho: </label>
             <input type="text" className="input-control form-control bg-white" id={"tamanhoOp"+props.index}
-            value={tamanho} placeholder="Deixe em Branco para Geral"
+            value={size} placeholder="Deixe em Branco para Geral"
             onChange={(event) => {setTamanho(event.target.value)}}
           />
         </div>
         <div className="form-group col-3">
             <label htmlFor="categoria">Cor: </label>
             <input type="text" className="input-control form-control bg-white" id={"corOp"+props.index}
-            value={cor} placeholder="Deixe em Branco para Geral"
+            value={color} placeholder="Deixe em Branco para Geral"
             onChange={(event) => {setCor(event.target.value)}}
           />
         </div>
         <div className="form-group col-2">
-            <label htmlFor="estoque">Estoque: </label>
+            <label htmlFor="stock">Estoque: </label>
             <input type="number" className="input-control form-control bg-white" id={"estoqueOp"+props.index}
               placeholder="Estoque Da Opção"
-              value={estoque}
+              value={stock}
               min='1'
               onChange={(event) => {setEstoque(event.target.value)}}
               required

@@ -105,24 +105,25 @@ class ShoppingCart extends React.Component {
     }
 
     handleCoupon(){
-        const activeCoupon = this.context.redeemCoupon(this.state.coupon, this.state.subtotal)
+        if(!this.state.cart.isEmpty()){
+            const activeCoupon = this.context.redeemCoupon(this.state.coupon, this.state.subtotal)
 
-        let field = $('#coupon')
-        const {status: hasCoupon, discount} = activeCoupon
-        
-        if(hasCoupon){
+            let field = $('#coupon')
+            const {status: hasCoupon, discount} = activeCoupon
+            
+            if(hasCoupon){
+                this.setState(prevState => {
+                    return {
+                    coupon: '',
+                    total: prevState.subtotal - discount,
+                }})
 
-            this.setState(prevState => {
-                return {
-                coupon: '',
-                total: prevState.subtotal - discount,
-            }})
+                field.css('border', '1px solid #cddbef')
+            }
 
-            field.css('border', '1px solid #cddbef')
-        }
-
-        else{
-            field.css('border', '1px solid red')
+            else{
+                field.css('border', '1px solid red')
+            }
         }
     }
 

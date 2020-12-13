@@ -121,6 +121,20 @@ class Navbar extends React.Component {
             toggleSearchBar() 
             this.setState({ search: '' })
         }
+
+        else if(this.context.categories.length !== this.products.length + this.events.length){
+            const {categories} = this.context
+
+            this.products = categories.reduce((acc, cur) => {
+                if(cur.parent === 'PR'){ acc.push(cur.name.title()) }
+                return acc
+            }, [])
+    
+            this.events = categories.reduce((acc, cur) => {
+                if(cur.parent === 'EV'){ acc.push(cur.name.title()) }
+                return acc
+            }, [])
+        }
     }
 
     handleChange(e){

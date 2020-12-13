@@ -34,12 +34,11 @@ export default function ProductEdit(props) {
               sku += size ? size : 'VOID'
 
               ops.push({
-                cor: color ? color : '',
-                modelagem: template ? template : '',
-                tamanho: size ? size : '',
-                estoque: product.stock[sku]
+                color: color ? color : '',
+                template: template ? template : '',
+                size: size ? size : '',
+                stock: product.stock[sku]
               })
-              console.log(sku);
           })
         })
       })
@@ -47,10 +46,10 @@ export default function ProductEdit(props) {
 
     else{
       ops.push({
-        cor: '',
-        modelagem: '',
-        tamanho: '',
-        estoque: product.stock[sku]
+        color: '',
+        template: '',
+        size: '',
+        stock: product.stock[sku]
       })
     }
       

@@ -90,9 +90,8 @@ module.exports = {
 
   update: async function(req, res, next) {
     try{
-      const {name, type, price, visibility, category, description, sizes, templates, colors, img: img_, stock: stock_} = req.body
-      const img = img_.map(e => ({ alt: e.alt, path: e.file }) )
-      const _id = await generateProductId(req.body)
+      const {_id, name, type, price, visibility, category, description, sizes, templates, colors, img: img_, stock: stock_} = req.body
+      const img = img_.map(e => ({ alt: e.alt, path: (e.file ? e.file : e.path) }) )
 
       let stock = {}
       Object.keys(stock_).forEach(key => {
@@ -119,7 +118,9 @@ module.exports = {
   
   del: function(req, res, next) {
     try{
-      Products.deleteMany({ _id: req.params.id },
+      const {_id} = req.params
+
+      Products.deleteMany({ _id },
         (err, response) => {
           if (err) {
               res.status(500);

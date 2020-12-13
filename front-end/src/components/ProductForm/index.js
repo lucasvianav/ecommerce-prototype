@@ -58,7 +58,7 @@ function ProductForm(props){
       setTipo(props.type);
       setCategoria(props.category);
       setDescricao(descr);
-      setTitle(props.name + ' | ID: ' + props.id);
+      setTitle(props.name + ' | ID: ' + props._id);
       setAction("Salvar");
       setOpcoes(props.opcoes); 
       setVisibility(props.visibility)
@@ -220,8 +220,6 @@ function ProductForm(props){
         txt: txt ? txt.replace(/^[\s\n]*/, '') : ''
       }
 
-      // const newId = props.mode === 'view' ? props.id : context.getId(tipo)
-
       let colors = []
       let sizes = []
       let templates = []
@@ -240,6 +238,7 @@ function ProductForm(props){
 
       for(let item of opcoes){
         let {template, color, size} = item
+        console.log(item)
 
         if(template !== '' && !templates.includes(template)){ templates.push(template) }
         if(color !== '' && !colors.includes(color)){ colors.push(color) }
@@ -248,11 +247,10 @@ function ProductForm(props){
         let sku = generateSKU(template, size, color)
         stock[sku] = item.stock
       }
-      
+
       var exportData = {
         name: nomeProduto,
         type: tipo,
-        // id: newId,
         visibility: visibility,
         category: cat,
         description: description,
@@ -267,8 +265,9 @@ function ProductForm(props){
       if(action === 'Salvar'){
         var r = {};
         r.send = "put";
-        r.id = props.id;
+        r._id = props._id;
         r.data = exportData;
+        r.data._id = r._id
         setReq(r);
       }
 
@@ -298,7 +297,7 @@ function ProductForm(props){
     if(window.confirm('O produto não poderá ser recuperado. Você tem certeza que deseja excluí-lo?')){
       var r = {};
       r.send = "del";
-      r.id = props.id;
+      r._id = props._id;
       setReq(r);
     }
   }
@@ -306,8 +305,8 @@ function ProductForm(props){
   return(
     <>
       <ProductsRequests.InsertProduct {...req} onChange={()=>{setReq({})}}/>
-      <ProductsRequests.EditProduct {...req} onChange={()=>{setReq({})}}/>
-      <ProductsRequests.DeleteProduct {...req} onChange={()=>{setReq({})}}/>
+      <ProductsRequests.EditProduct {...req} history={props.history} onChange={()=>{setReq({})}}/>
+      <ProductsRequests.DeleteProduct {...req} history={props.history} onChange={()=>{setReq({})}}/>
       <h3>{title}</h3>
       <form id='product-form'>
         <div id="cadastroProduto" style={{width: '97%'}}>
