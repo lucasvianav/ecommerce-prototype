@@ -30,7 +30,6 @@ const accountController = {
 
   update: async (req, res) => {
     const {id, updates} = req.body
-
     try{
       await accountService.update(id, updates)
       att = await accountService.findById(id)

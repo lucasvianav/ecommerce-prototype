@@ -1,4 +1,5 @@
 const Accounts = require('../models/account')
+const bcrypt = require('bcrypt')
 
 const accountService = {
   find: async () => await Accounts.find({}, 'name type email birthday cpf phoneNumber'),
@@ -9,7 +10,12 @@ const accountService = {
 
   checkExistence: async condition => Boolean(await Accounts.findOne(condition)),
 
-  update: async (_id, updates) => await Accounts.findByIdAndUpdate(_id, updates),
+  update: async (_id, updates) => {
+    if (updates.password !== undefined){
+      updates.password = await bcrypt.hash(updates.password, 10) 
+    }
+    await Accounts.findByIdAndUpdate(_id, updates)
+  },
 
   delete: async email => await Accounts.findOneAndDelete({email})
 }
