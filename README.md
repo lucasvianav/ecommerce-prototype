@@ -91,7 +91,9 @@ Tendo em vista que a função do usuário administrador é fazer a gestão da lo
   ![Página do Administrador do projeto](./images/adminpage.JPG)  
       
 - __Responsividade:__  
-Os componentes da página foram implementados e estruturados para serem responsivos para qualquer tamanho de tela de computador, utilizando recursos como _flexbox_. O site tem responsividade relativamente satisfatória para mobile, tendo navbar e footer responsisvos. Alguns elementos, por serem construídos com uso de Bootstrap, têm melhor responsividade com dispositivos mobile. 
+Os componentes da página foram implementados e estruturados para serem responsivos para qualquer tamanho de tela de computador, utilizando recursos como _flexbox_, outros elementos foram criados com bootstrap e têm responsividade garantida. O site tem em sua versão final responsividade mobile. A imagem abaixo mostra a home do site em uma tela mobile. 
+
+  ![Home do site em tela mobile](./images/mobile.JPG)
  
 ------------------------------------ 
 ### 3. Comentários sobre o código  
@@ -180,9 +182,51 @@ As tags de <Route/> servem para renderizar diferentes componentes (páginas) de 
 Para possibilitar compartilhamento e sincronia de dados, de forma global, entre os diversos componentes da árvore definida nesse arquivo, utilizou-se a Context API. O arquivo _Context.js_ é o responsável por essa integração, ele armazenando os dados de forma dinâmica durante a execução da aplicação - simulando, inclusive, o que seria o _backend_.
 
 
-#### Back-end
+#### 3.2. Back-end
 
+As requisições do projeto já definiam a criação de um servidor pelo Node.js, utilizando o Express. A partir disso, vamos analisar algumas comando fundamentais para implementação do back-end, explicando as principais bibliotecas node inseridas.
 
+No arquivo index.js, há o seguinte trecho de código logo no início.
+
+```
+
+1 const cors = require('cors')
+2 const express = require('express')
+3 const mongoose = require('mongoose')
+4 const app = express()
+
+```
+A linha 2 importa o Express, uma framework do Node que soluciona diversas tarefas e para esta aplicação é fundamental. Na linha 4 o Express é inicializado.
+Como o banco de dados escolhido foi o MongoDB, é necessário utilizar um módulo que realize a tradução das informações no banco de dados objetos JavaScript para serem utilizados pela aplicação, o Mongoose é esse módulo. Na linha 3 ele está sendo importado.
+
+Por fim falaremos da linha 1. Como se pode observar, tendo em vista as linhas 2 e 3, ele está importando um módulo chamado Cors. A necessidade do Cors advém de uma funcionalidade dos navegadores que impossibilita um recurso de um site ser chamado por uma página em domínio distinto. Como o servidor e a página se encontram nesse exato caso, o Cors então se torna necessario pois possibita a livre comunicação entre domínios. 
+
+```
+6 const apiRouter = require('./routes')
+7 const db = require('./connection')
+8
+9 require('dotenv').config();
+```
+Na linha 9 temos a importação e inicialização do Dotenv, que gerencia variáveis de ambiente de um projeto por meio de um arquivo .env, possibilitando executar a aplicação em qualquer lugar. A linha 6 , ele define os caminhos para todas a ações sobre os dados no bando de dados, seja eles das contas, pedidos, produtos ou cupons. Na pasta router é possível observar separadamente por tipo de dado todas as ações que podem ser executadas. A linha 7 apenas chama o código do arquivo connection.js, abaixo podemos vê-lo.
+
+```
+1 const mongoose = require('mongoose')
+2 require('dotenv').config()
+3
+4 mongoose.connect(process.env.DB_URL, {useNewUrlParser: true, useUnifiedTopology: true})
+5
+6 module.exports = mongoose.connection
+
+```
+
+A linha 4 realiza a conexão do banco de dados, até aqui estamos com uma conexão pendente como o banco de dados. A linha 6 inicia a execução para uma conexão de fato, o resntante do processeo está no arquivo index.js, onde temos o trecho abaixo.  
+
+```
+
+23 db.on('error', console.error.bind(console, 'connection error:'))
+24 db.once('open', () => app.listen(process.env.SERVER_PORT, () => console.log(`Example app listening at http://localhost:` + process.env.SERVER_PORT)))
+
+```
 
 
 
