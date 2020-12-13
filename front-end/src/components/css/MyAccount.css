@@ -133,9 +133,21 @@
   margin: auto;
 }
 
-@media (max-width: 952px){
-    .MyAccount {
-      /* padding-top: 20%; */
-    }  
-}
+@media (max-width: 950px){
+  .MyAccount .content-box {
+    flex-direction: column;
+  }
 
+  .MyAccount #dadosPessoais .d-flex, 
+  .MyAccount #dadosPessoais.d-flex {
+    width: 97%;
+  }
+
+  .MyAccount #loginInfo{
+    margin-bottom: 5%;
+  }
+
+  .MyAccount #dadosPessoais h2 {
+    font-size: 19pt;
+  }
+}

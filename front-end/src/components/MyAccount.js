@@ -55,7 +55,7 @@ class MyAccount extends React.Component {
                 <div className="content-box">
                     <div className="left-content col-md-6 col-sm-12 align-self-top">
                         <section id="loginInfo" className="d-flex no-space">
-                            <h2>Olá, {this.context.isLogged.user.name}! </h2>
+                            <h2>Olá, {this.context.isLogged.user.name.replace(/(\S*\s?\S*).*/, '$1')}! </h2>
                             <span><strong>Email: </strong>{this.context.isLogged.user.email}</span>
                         </section>
 
@@ -64,11 +64,11 @@ class MyAccount extends React.Component {
 
                             <div className="d-flex justify-content-between">
                                 <div> 
-                                    <span><strong>Nome Completo:</strong></span> <br/>
+                                    <span><strong>Nome completo:</strong></span> <br/>
                                     <span>{this.context.isLogged.user.name}</span> <br/><br/>
                                 </div>
                                 <div style={{textAlign: 'right'}}> 
-                                    <span><strong>Data de Nacimento:</strong></span> <br/>
+                                    <span><strong>Data de nacimento:</strong></span> <br/>
                                     <span>{this.context.isLogged.user.birthday}</span> <br/><br/>
                                 </div>
                             </div>
