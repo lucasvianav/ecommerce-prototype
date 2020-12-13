@@ -2,6 +2,10 @@ import React, {useContext, useState, useEffect} from 'react';
 
 import { DataContext } from '../../../Context';
 
+import ModalUser from './Modal';
+
+import AccountsRequests from '../../../requests/Account'
+
 import '../../css/bootstrap.css';
 
 const UsersPanel = (props) => {
@@ -9,6 +13,11 @@ const UsersPanel = (props) => {
   const context = useContext(DataContext);
   const allUsers = context.accounts;
   const [users, setUsers] = useState(context.accounts);
+
+  const [modal, setModal] = useState(false);
+  const [modalProps, setModalProps] = useState({id:"", email: "", phoneNumber: "", type: "", birthday:"", cpf:"", name:""});
+
+  const [req, setReq] = useState({});
 
   useEffect( () => {
     var d = [], flag = 0;
@@ -38,16 +47,19 @@ const UsersPanel = (props) => {
   }, [props])
 
   return(
+    <>
     <section>
+      <AccountsRequests.DeleteAccount {...req} onChange={()=>{setReq({})}}/>
+      <AccountsRequests.EditAccount {...req} onChange={()=>{setReq({})}}/>
+
         <table className="table table-hover border rounded">
             <thead>
               <tr>
                 <th scope="col"><span>Nome</span></th>
                 <th scope="col"><span>Email</span></th>
                 <th scope="col"><span>Telefone</span></th>
-                <th scope="col"><span>CPF</span></th>
                 <th scope="col"><span>Tipo</span></th>
-                <th className="text-right"></th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -58,15 +70,49 @@ const UsersPanel = (props) => {
                       <td><span>{user.name}</span></td>
                       <td><span>{user.email}</span></td>
                       <td><span>{user.phoneNumber}</span></td>
-                      <td><span>{user.cpf}</span></td>
                       <td><span>{user.type}</span></td>
-                      <td className="text-right"></td>
+                      <td className="text-right"><span>
+                          <button className="btn-none" onClick={() => {
+                            var properties = {
+                              id: user.id, 
+                              name: user.name,
+                              cpf: user.cpf, 
+                              type: user.type, 
+                              email: user.email, 
+                              phoneNumber: user.phoneNumber, 
+                              birthday: user.birthday
+                            };
+                            setModalProps(properties);
+                            setModal(true);
+                          }}>
+                            <i className="fa fa-eye"></i>
+                          </button>
+                        </span>
+                      </td>
                   </tr>
                 );
               }) : ""}
             </tbody>
         </table>
+        
     </section>
+    <ModalUser
+      show={modal}
+      value = {modalProps}
+      onSave={(event) => {
+        if(event.set === true){
+          var r = {};
+          r.send = event.send;
+          r.id = event.id;
+          r.email = event.email;
+          r.data = event.data;
+          r.contaAtual = event.contaAtual;
+          setReq(r);
+        }
+      }}
+      onHide={() => {setModal(false)}}
+    />
+  </>
   );
 }
 

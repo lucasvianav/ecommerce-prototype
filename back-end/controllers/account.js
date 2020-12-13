@@ -29,11 +29,12 @@ const accountController = {
   },
 
   update: async (req, res) => {
-    const {_id, updates} = req.body
+    const {id, updates} = req.body
 
     try{
-      await accountService.update(_id, updates)
-      return res.status(200).json()
+      await accountService.update(id, updates)
+      att = await accountService.findById(id)
+      return res.status(200).json(att)
     }
 
     catch(e){ return res.status(400).json() }
@@ -41,7 +42,8 @@ const accountController = {
 
   delete: async (req, res) => {
     try{
-      const {email} = req.body
+      console.log(req.body)
+      const {email} = req.params
       await accountService.delete(email)
       return res.json(true)
     }

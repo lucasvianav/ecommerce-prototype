@@ -72,6 +72,8 @@ export class DataProvider extends React.Component {
         this.updateCoupon = this.updateCoupon.bind(this)
         this.deleteCoupon = this.deleteCoupon.bind(this)
         this.deleteAllCoupons = this.deleteAllCoupons.bind(this)
+        this.updateAccount = this.updateAccount.bind(this)
+        this.deleteAccount = this.deleteAccount.bind(this)
         this.placeOrder = this.placeOrder.bind(this)
         this.updateCurrentAccount = this.updateCurrentAccount.bind(this)
         this.getInitialLogin = this.getInitialLogin.bind(this)
@@ -404,6 +406,15 @@ export class DataProvider extends React.Component {
         this.setState({coupons: [{}]})
     }
 
+    updateAccount(data){
+        this.setState(prevState => ({accounts: prevState.accounts.map(item => item.id === data.id ? data : item)}))
+
+    }
+
+    deleteAccount(email){
+        this.setState(prevState => ({accounts: prevState.accounts.filter(item => item.email !== email)}))
+    }
+
     async placeOrder(total, payment){
         if(!this.state.isLogged.status || this.state.cart.isEmpty()){ return }
         
@@ -453,7 +464,7 @@ export class DataProvider extends React.Component {
         const {data, cart, coupons, home, categories, darkTheme, orders, activeCoupon, accounts, isLogged} = this.state
         const { 
             editCart, removeFromCart, toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, 
-            getId, createProduct, updateProduct, deleteProduct, deleteAllProducts, createCoupon, updateCoupon, deleteCoupon, 
+            getId, createProduct, updateProduct, deleteProduct, deleteAllProducts, createCoupon, updateCoupon, deleteCoupon, updateAccount, deleteAccount,
             deleteAllCoupons, placeOrder, updateCurrentAccount, getInitialLogin, getInitialCart, fetchData, refreshCart, fetchOrders,
             updateOrder, fetchProducts, fetchAccounts, fetchCoupons
         } = this
@@ -462,8 +473,9 @@ export class DataProvider extends React.Component {
             <DataContext.Provider value={{ 
                 data, cart, isLogged, coupons, home, categories, darkTheme, orders, activeCoupon, accounts, editCart, removeFromCart,
                 toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, getId, createProduct, updateProduct, deleteProduct, 
-                deleteAllProducts, createCoupon, updateCoupon, deleteCoupon, deleteAllCoupons, placeOrder, updateCurrentAccount, getInitialLogin, 
-                getInitialCart, fetchData, refreshCart, fetchOrders, updateOrder, fetchProducts, fetchAccounts, fetchCoupons
+                deleteAllProducts, createCoupon, updateCoupon, deleteCoupon, updateAccount, deleteAccount, deleteAllCoupons, placeOrder, 
+                updateCurrentAccount, getInitialLogin, getInitialCart, fetchData, refreshCart, fetchOrders, updateOrder, fetchProducts, 
+                fetchAccounts, fetchCoupons
             }}>
                 {this.props.children}
             </DataContext.Provider>
