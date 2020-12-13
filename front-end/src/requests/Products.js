@@ -4,22 +4,6 @@ import { DataContext } from '../Context';
 
 import api from './connection';
 
-const getAtt = (item, action, context) => {
-  item.id = item._id;
-  item.img.forEach((img, index) => {
-    var aux = '';
-    if(typeof img.file !== 'undefined'){
-      img.path = img.file;
-    }
-  })
-  if(action === 'create'){
-    context.createProduct(item);
-  }
-  if(action === 'update'){
-    context.updateProduct(item);
-  }
-}
-
 
 const productRequests = {
   GetAllProducts: (props) =>{
@@ -59,9 +43,9 @@ const productRequests = {
         console.log(data)
         props.onChange();
         api.post("products", {...data})
-          .then((response) => {
-            getAtt(response.data, "create", context);
-            alert("Produto inserido com sucesso");
+          .then(async (response) => {
+            await context.fetchProducts()
+            alert("O produto foi criado com sucesso!");
           })
           .catch((err) => {
             console.error("ops! ocorreu um erro" + err);
@@ -76,19 +60,16 @@ const productRequests = {
     const context = useContext(DataContext);
 
     useEffect( () => {
-      const data = props.data;
-      const id = props.id;
+      const {data, _id} = props;
+
       if (props.send === 'put') {
         console.log("Mandando dados para a API");
         props.onChange();
-        api.put("products/"+id, {...data})
-          .then((response) => {
-            api.get("products/"+id).then((res) => {
-              getAtt(res.data[0], "update", context);
-            }).catch((err) => {
-              console.error("ops! ocorreu um erro" + err);
-            });
-            alert("Produto atualizado com sucesso!");
+        api.put("products/"+_id, {...data})
+          .then(async (response) => {
+            props.history.push('/minhaconta')
+            await context.fetchProducts()
+            alert("O produto atualizado com sucesso!");
           })
           .catch((err) => {
             console.error("ops! ocorreu um erro" + err);
@@ -103,15 +84,16 @@ const productRequests = {
     const context = useContext(DataContext);
 
     useEffect( () => {
-      const id = props.id;
+      const {_id} = props;
+      
       if (props.send === 'del') {
         console.log("Mandando dados para a API");
         props.onChange();
-        api.delete("products/"+id)
-          .then((response) => {
-            context.deleteProduct(id);
-            alert("Produto excluido com sucesso");
+        api.delete("products/"+_id)
+          .then(async (response) => {
             props.history.push('/minhaconta');
+            await context.fetchProducts();
+            alert("O produto foi excluido com sucesso!");
           })
           .catch((err) => {
             console.error("ops! ocorreu um erro" + err);

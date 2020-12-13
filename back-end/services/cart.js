@@ -61,7 +61,8 @@ const cartService = {
         cart = await cart.reduce(async (acc, item) => {
             const [type, id] = item.sku.split('-')
             const product = await Products.findById(id)
-            
+            acc = await acc
+
             if(product && product.visibility){
                 const stock = product.stock.get(item.sku) ? parseInt(product.stock.get(item.sku)) : 0
                 

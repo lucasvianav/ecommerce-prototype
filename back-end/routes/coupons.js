@@ -7,7 +7,7 @@ router.use(cors());
 
 var couponsController = require('../controllers/coupons');
 
-router.get('/all/:page', (req, res, next) => {couponsController.getAll(req, res, next)});
+router.get('/', (req, res, next) => {couponsController.getAll(req, res, next)});
 
 router.get('/:id', (req, res, next) => {couponsController.getOne(req, res, next)});
 

@@ -40,7 +40,7 @@ const orderController = {
 
     edit: async (req, res) => {
         const {_id, situation} = req.body
-        const order = await orderService.edit(_id, { situation })
+        const order = await orderService.edit(_id, situation)
 
         return res.json(order)
     }

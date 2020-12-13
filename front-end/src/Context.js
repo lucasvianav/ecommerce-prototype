@@ -26,51 +26,9 @@ export class DataProvider extends React.Component {
             // sku: 'EV-E1', // EV = type (EVent) --- E1 = id
             cart: [],
     
-            orders: [
-                // {
-                //     id: '1',
-                //     product: [
-                //         {
-                //             sku: 'PR-P1-VOID-FEMI-GG',   
-                //             quantity: '1',
-                //             specs: {color: '', template:'Feminino', size:'GG'},
-                //             price: 130
-                //         },
-                //         {
-                //             sku: 'PR-P1-VOID-MASC-EXG',   
-                //             quantity: '1',
-                //             specs: {color: '', template:'Masculino', size:'EXG'},
-                //             price: 130
-                //         },
-                //     ],
-                //     client: 'fionagatinha74@gmail.com', 
-                //     date: '20/11/2020',
-                //     time: '11:45:45 AM',
-                //     payment: 'Transferência/Depósito bancário',
-                //     situation: 'AA',
-                //     discount: 10,
-                //     total: 250
-                // },
-                // {
-                //     id: '2',
-                //     product:[
-                //         {
-                //             sku: 'EV-E1',   
-                //             quantity: '2',
-                //             specs: {color: '', template: '', size: ''},
-                //             price: 40
-                //         },
-                //     ],
-                //     client: 'biscoitodamassa@gmail.com', 
-                //     date: '16/11/2020',
-                //     time: '7:31:12 PM',
-                //     payment: 'Transferência por Picpay',
-                //     situation: 'FF',
-                //     discount: 0,
-                //     total: 40
-                // }
+            orders: [],
 
-            ],
+            accounts: [],
 
             isLogged: {status: false, user: {}},
     
@@ -122,6 +80,9 @@ export class DataProvider extends React.Component {
         this.fetchProducts = this.fetchProducts.bind(this)
         this.refreshCart = this.refreshCart.bind(this)
         this.fetchOrders = this.fetchOrders.bind(this)
+        this.updateOrder = this.updateOrder.bind(this)
+        this.fetchCoupons = this.fetchCoupons.bind(this)
+        this.fetchAccounts = this.fetchAccounts.bind(this)
     }
 
     componentDidMount(){
@@ -132,6 +93,7 @@ export class DataProvider extends React.Component {
         await this.getInitialLogin()
         await this.fetchProducts()
         await this.getInitialCart()
+        await this.fetchCoupons()
     }
 
     async getInitialLogin(){
@@ -167,23 +129,21 @@ export class DataProvider extends React.Component {
     }
 
     async fetchProducts(){
-        await api.get('/products')
-            .then(r => {
-                const {data} = r
+        await api.get('/products').then(r => {
+            const {data} = r
 
-                let categories = []
-                for(let product of data){
-                    if((!categories.includes(product.category)) && product.visibility){
-                        categories.push({
-                            name: product.category,
-                            parent: product.type
-                        })
-                    }
+            let categories = []
+            for(let product of data){
+                if((!categories.includes(product.category)) && product.visibility){
+                    categories.push({
+                        name: product.category,
+                        parent: product.type
+                    })
                 }
+            }
 
-                this.setState({data, categories})
-            })
-            .catch(e => console.log('Algo deu errado: ', e))
+            this.setState({data, categories})
+        }).catch(e => console.log('Algo deu errado: ', e))
     }
 
     async fetchOrders(){
@@ -191,10 +151,24 @@ export class DataProvider extends React.Component {
 
         if(this.state.isLogged.status){
             const {_id, type} = this.state.isLogged.user
-            await api.get('orders' + (type === 'admin' ? '' : ('/clientId/' + _id))).then(r => orders = r.data)
+            await api.get('/orders' + (type === 'admin' ? '' : ('/clientId/' + _id))).then(r => orders = r.data)
         }
 
         this.setState({ orders })
+    }
+
+    async fetchCoupons(){
+        await api.get('/coupons').then(r => {
+            const {data: coupons} = r
+            this.setState({ coupons })
+        })
+    }
+
+    async fetchAccounts(){
+        await api.get('/accounts').then(r => {
+            const {data: accounts} = r
+            this.setState({ accounts })
+        })
     }
 
     updateCurrentAccount(){
@@ -326,9 +300,11 @@ export class DataProvider extends React.Component {
 
     async removeFromCart(sku, callback){
         var {cart} = this.state
-        const {status: isLogged} = this.state.isLogged
+        const {status: isLogged, user: { _id }} = this.state.isLogged
+        console.log(_id)
 
-        cart = isLogged ? await api.delete('/cart', {_id: this.state.isLogged.user._id, sku}) : cart.filter(item => item.sku !== sku)
+        cart = isLogged ? (await api.delete('/cart', { data: { _id, sku } })).data : cart.filter(item => item.sku !== sku)
+        console.log(cart)
 
         if(!isLogged){ localStorage.setItem('guestCart', JSON.stringify(cart)) }
         this.setState({cart}, () => callback ? callback() : null)
@@ -466,20 +442,27 @@ export class DataProvider extends React.Component {
         return newOrderId
     }
 
+    async updateOrder(_id, situation){
+        if(['AA', 'PA', 'PPR', 'FF'].includes(situation)){
+            await api.patch('/orders', {_id, situation }).then(async r => await this.fetchOrders())
+        }
+    }
+
     render(){
-        const {data, cart, coupons, home, categories, darkTheme, orders, activeCoupon, isLogged} = this.state
+        const {data, cart, coupons, home, categories, darkTheme, orders, activeCoupon, accounts, isLogged} = this.state
         const { 
             editCart, removeFromCart, toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, 
             getId, createProduct, updateProduct, deleteProduct, deleteAllProducts, createCoupon, updateCoupon, deleteCoupon, 
-            deleteAllCoupons, placeOrder, updateCurrentAccount, getInitialLogin, getInitialCart, fetchData, refreshCart, fetchOrders 
+            deleteAllCoupons, placeOrder, updateCurrentAccount, getInitialLogin, getInitialCart, fetchData, refreshCart, fetchOrders,
+            updateOrder, fetchProducts, fetchAccounts, fetchCoupons
         } = this
 
         return(
             <DataContext.Provider value={{ 
-                data, cart, isLogged, coupons, home, categories, darkTheme, orders, activeCoupon, editCart, removeFromCart,
+                data, cart, isLogged, coupons, home, categories, darkTheme, orders, activeCoupon, accounts, editCart, removeFromCart,
                 toggleTheme, redeemCoupon, clearCoupon, login, logout, signup, getCurrentAccount, getId, createProduct, updateProduct, deleteProduct, 
                 deleteAllProducts, createCoupon, updateCoupon, deleteCoupon, deleteAllCoupons, placeOrder, updateCurrentAccount, getInitialLogin, 
-                getInitialCart, fetchData, refreshCart, fetchOrders 
+                getInitialCart, fetchData, refreshCart, fetchOrders, updateOrder, fetchProducts, fetchAccounts, fetchCoupons
             }}>
                 {this.props.children}
             </DataContext.Provider>

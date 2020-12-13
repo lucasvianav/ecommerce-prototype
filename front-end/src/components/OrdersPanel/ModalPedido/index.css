@@ -15,18 +15,23 @@
     display: flex;
     flex-flow: row nowrap !important;
     justify-content: space-around !important;
+    align-items: flex-start !important;
     overflow: hidden;
 }
 
 .info-data .client {
     width: 40%;
     text-align: left;
+    vertical-align: top;
+    margin-top: 0;
     padding: 0;
 }
 
 .info-data .order-admin {
     width: 40%;
     text-align: right;
+    vertical-align: top;
+    margin-top: 0;
     padding: 0;
 }
 
@@ -39,7 +44,7 @@
     padding: 0;
     margin: auto 0 auto auto;
     font-size: 18px;
-    border-bottom: solid 1px;
+    /* border-bottom: solid 1px; */
 }
 
 div.d-flex.product-cards {
@@ -64,7 +69,7 @@ div.order-admin .payment p {
     margin-left: auto;
     text-overflow: ellipsis;
     overflow: hidden;
-    white-space: nowrap;
+    white-space: normal;
 }
 
 .info-data .order-client {
@@ -79,5 +84,5 @@ div.order-admin .payment p {
     width: fit-content;
     padding: 0;
     font-size: 18px;
-    border-bottom: solid 1px;
+    /* border-bottom: solid 1px; */
 }

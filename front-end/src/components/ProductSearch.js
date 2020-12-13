@@ -31,7 +31,6 @@ class ProductSearch extends React.Component {
             this.setState({ products: products })
         }
     }
-
     render(){
         return(
             <main className="ProductsPanel">
@@ -49,7 +48,7 @@ class ProductSearch extends React.Component {
                             {
                                 this.state.products.map((item) =>
                                     item.visibility ?
-                                    <div className="product-card" key={item._id}><Link to={'/' + this.tab + '/' + item._id }>
+                                    <div className="product-card" key={item._id}><Link to={'/' + (item.type === 'PR' ? 'produtos' : 'eventos') + '/' + item._id }>
                                         <img className="product-thumb" src={item.img[0].path} alt={item.img[0].alt}/> 
                                         <p className="product-title">{item.name}</p>
                                         <div className="price-line">

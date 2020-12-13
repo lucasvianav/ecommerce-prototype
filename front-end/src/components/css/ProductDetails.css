@@ -1,3 +1,7 @@
+.ProductDetails {
+    /* padding-top: 5%; */
+}
+
 .ProductDetails ul, .ProductDetails ol {
     padding-left: 3.5%;
     margin-top: 0.5%;
@@ -23,7 +27,6 @@
 
 .ProductDetails .thumbnail-panel {
     width: 15%;
-    max-height: 539px;
     overflow-y: auto;
     float: left;
     margin-right: 1%;
@@ -192,6 +195,26 @@ hr.product-divisor {
     color: red !important
 }
   
-  .dark-theme #product-form span.error-message {
+.dark-theme #product-form span.error-message {
     color: #ec3e3e !important
+}
+
+@media (max-width: 952px){
+    .ProductDetails {
+        /* padding-top: 20%; */
+    }
+
+    .ProductDetails .thumbnail-panel {
+        width: 10%;
+    }
+
+    .ProductDetails .product-photos {
+        width: 100%;
+    }
+
+    .ProductDetails .product-info{
+        width: 100%;
+        padding-top: 20px;
+    }
+
 }

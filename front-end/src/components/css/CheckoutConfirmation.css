@@ -245,3 +245,7 @@
     width: 58%;
     clear: left;
 }
+
+.CheckoutConfirmation .full-btn.big-btn {
+    max-width: 165px;
+}

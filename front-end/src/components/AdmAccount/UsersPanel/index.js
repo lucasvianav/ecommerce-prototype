@@ -8,7 +8,7 @@ const UsersPanel = (props) => {
 
   const context = useContext(DataContext);
   const allUsers = context.accounts;
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState(context.accounts);
 
   useEffect( () => {
     var d = [], flag = 0;
@@ -38,33 +38,35 @@ const UsersPanel = (props) => {
   }, [props])
 
   return(
-    <>
-      <section>
-          <table className="table table-hover border rounded">
-              <thead>
-                <tr>
-                  <th scope="col"><span>Nome</span></th>
-                  <th scope="col"><span>Email</span></th>
-                  <th scope="col"><span>Tipo</span></th>
-                  <th className="text-right"></th>
-                </tr>
-              </thead>
-              <tbody>
-                {(users !== undefined) ? users.map((user, index) =>{
+    <section>
+        <table className="table table-hover border rounded">
+            <thead>
+              <tr>
+                <th scope="col"><span>Nome</span></th>
+                <th scope="col"><span>Email</span></th>
+                <th scope="col"><span>Telefone</span></th>
+                <th scope="col"><span>CPF</span></th>
+                <th scope="col"><span>Tipo</span></th>
+                <th className="text-right"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {(users !== undefined) ? users.map((user, index) =>{
 
-                  return (
-                    <tr id={"user"+index} key={index}>
-                        <td><span>{user.name}</span></td>
-                        <td><span>{user.email}</span></td>
-                        <td><span>{user.type}</span></td>
-                        <td className="text-right"></td>
-                    </tr>
-                  );
-                }) : ""}
-              </tbody>
-          </table>
-      </section>
-    </>
+                return (
+                  <tr id={"user"+index} key={index}>
+                      <td><span>{user.name}</span></td>
+                      <td><span>{user.email}</span></td>
+                      <td><span>{user.phoneNumber}</span></td>
+                      <td><span>{user.cpf}</span></td>
+                      <td><span>{user.type}</span></td>
+                      <td className="text-right"></td>
+                  </tr>
+                );
+              }) : ""}
+            </tbody>
+        </table>
+    </section>
   );
 }
 

@@ -55,19 +55,19 @@ const ModalCoupon = (props) => {
             centered
         >
             <Modal.Header className='dark-bg' closeButton>
-            <Modal.Title id="contained-modal-title-vcenter">
-                {(props.type === "create") ? "Novo Cumpom" : "Alterar Cupom"}
+            <Modal.Title id="contained-modal-title-vcenter" className='section-title'>
+                {(props.type === "create") ? "Novo Cumpom" : "Editar Cupom"}
             </Modal.Title>
             </Modal.Header>
             <Modal.Body className="justify-content-center dark-bg">
                 <div className="row">
                     <div className="col-md-5">
-                        <label htmlFor="couponstr" >Texto do Cupon:</label>
+                        <label htmlFor="couponstr" >Cupom:</label>
                         <input type="text" className="form-control input-control" id="couponstr" placeholder="Exemplo10" 
                           value={str} onChange={(e)=>{setStr(e.target.value)}}/>
                     </div>
                     <div className="col-md-3">
-                        <label htmlFor="coupontype" >Tipo do Cupon:</label>
+                        <label htmlFor="coupontype" >Tipo:</label>
                         <select name="coupontype" id="coupontype" className="custom-select"
                           value={type} onChange={(e)=>{setType(e.target.value)}}>
                             <option value="" disabled={true}>Selecione</option>

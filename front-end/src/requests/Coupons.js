@@ -21,11 +21,11 @@ const CouponsRequests = {
       useEffect( () => {
         context.deleteAllCoupons();
         console.log("Pegando dados da API (Cupons)");
-        api.get("coupons/all/0", {crossdomain: true})
+        api.get("coupons/", {crossdomain: true})
         .then((response) => {
           response.data.forEach((item, index) => {
             item.id = item._id;
-            console.log(item)
+            // console.log(item)
             context.createCoupon(item);
           })
           })
@@ -45,7 +45,7 @@ const CouponsRequests = {
         const data = props.data;
         if (props.send === 'post') {
         console.log("Mandando dados para a API");
-        console.log(data)
+        // console.log(data)
         props.onChange();
         api.post("coupons", {...data})
           .then((response) => {

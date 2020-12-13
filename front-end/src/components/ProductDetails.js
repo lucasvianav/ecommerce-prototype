@@ -171,16 +171,21 @@ class ProductDetails extends React.Component {
                         {
                             (this.type === 'EV')
                             ? (
-                                <form onSubmit={this.handleSubmit} id="product-form">           
-                                    <span><strong>Informações:</strong></span>
-                                    <ul>
-                                        {this.product.info.location ? <li><span>Local: {this.product.info.location}</span></li> : ''}
-                                        {this.product.info.date ? <li><span>Data: {this.product.info.date}</span></li> : ''}
-                                        {this.product.info.time ? <li><span>Horário: {this.product.info.time}</span></li> : ''}
-                                        {(this.product.info.link.text && this.product.info.link.url) ? <li><a href={this.product.info.link.url} target="_blank" rel="noopener noreferrer">{this.product.info.link.text}</a></li> : ''}
-                                    </ul>
+                                <form onSubmit={this.handleSubmit} id="product-form">  
+                                    {
+                                        !this.product.info ? '' :
+                                        <>
+                                            <span><strong>Informações:</strong></span>
+                                            <ul>
+                                                {this.product.info.location ? <li><span>Local: {this.product.info.location}</span></li> : ''}
+                                                {this.product.info.date ? <li><span>Data: {this.product.info.date}</span></li> : ''}
+                                                {this.product.info.time ? <li><span>Horário: {this.product.info.time}</span></li> : ''}
+                                                {(this.product.info.link.text && this.product.info.link.url) ? <li><a href={this.product.info.link.url} target="_blank" rel="noopener noreferrer">{this.product.info.link.text}</a></li> : ''}
+                                            </ul>
 
-                                    <hr className="product-divisor"/>
+                                            <hr className="product-divisor"/>
+                                        </>
+                                    }
 
                                     <span><strong>Quantidade:</strong></span>
                                     <br/>
