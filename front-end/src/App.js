@@ -119,7 +119,6 @@ class App extends React.Component {
 
                   <Route path='/:tab/:base' render={props => {
                     const {tab, base} = props.match.params
-                    console.log(data)
                     
                     if(!['eventos', 'events', 'event', 'evento'].includes(tab.toLowerCase()) && !['produtos', 'products', 'produto', 'product'].includes(tab.toLowerCase())){
                       return <Redirect to='/'/>

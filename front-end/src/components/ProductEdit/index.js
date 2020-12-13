@@ -50,7 +50,7 @@ export default function ProductEdit(props) {
         cor: '',
         modelagem: '',
         tamanho: '',
-        estoque: product.stock[sku+'-VOID-VOID-VOID']
+        estoque: product.stock[sku]
       })
     }
       

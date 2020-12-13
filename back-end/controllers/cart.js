@@ -33,7 +33,7 @@ const cartController = {
 
     remove: async (req, res) => {
         const {_id, sku} = req.body
-        const cart = await cartService.remove(_id, sku)
+        const cart = (await cartService.remove(_id, sku)).cart
 
         return res.json(cart)
     }

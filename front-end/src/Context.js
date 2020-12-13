@@ -327,9 +327,11 @@ export class DataProvider extends React.Component {
 
     async removeFromCart(sku, callback){
         var {cart} = this.state
-        const {status: isLogged} = this.state.isLogged
+        const {status: isLogged, user: { _id }} = this.state.isLogged
+        console.log(_id)
 
-        cart = isLogged ? await api.delete('/cart', {_id: this.state.isLogged.user._id, sku}) : cart.filter(item => item.sku !== sku)
+        cart = isLogged ? (await api.delete('/cart', { data: { _id, sku } })).data : cart.filter(item => item.sku !== sku)
+        console.log(cart)
 
         if(!isLogged){ localStorage.setItem('guestCart', JSON.stringify(cart)) }
         this.setState({cart}, () => callback ? callback() : null)
