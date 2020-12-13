@@ -388,20 +388,20 @@ input::placeholder {
 
 .small-btn {
   display: block;
-  min-width: 60px;
+  width: 70%;
   margin: auto;
   font-size: 18px;
-  line-height: 23px;
+  line-height: 150%;
   border-radius: 25px;
   border: none;
 }
 
 .big-btn {
   display: block;
-  min-width: 120px;
+  width: 80%;
   margin: auto;
   font-size: 18px;
-  line-height: 40px;
+  line-height: 280%;
   border-radius: 25px;
   border: none;
 }

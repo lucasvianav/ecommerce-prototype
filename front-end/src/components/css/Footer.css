@@ -98,3 +98,31 @@
     padding: 0;
     margin: 0;
 }
+
+@media (max-width: 952px){
+    #social-media li{
+        padding-left: 20px;
+        padding-bottom: 5px;
+        font-size: 10px;
+    }
+
+    #help li {
+        padding-left: 20px;
+        padding-top: 5px;
+    }
+
+}
+
+@media (max-width: 858px){
+    #social-media {
+        display: block;
+    }
+
+    #help {
+
+        display: block;
+        line-height: 5px;
+
+    }
+
+}

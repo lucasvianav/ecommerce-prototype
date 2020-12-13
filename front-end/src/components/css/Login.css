@@ -1,3 +1,7 @@
+.Login {
+    padding-top: 5%;
+}
+
 main.Login {
 	width: fit-content;
 	height: fit-content;
@@ -496,4 +500,10 @@ main.Login {
 
 #forgot-button {
 	margin-bottom: 2%;
+}
+
+@media (max-width: 952px){
+    .Login {
+    	padding-top: 25%;
+    }  
 }

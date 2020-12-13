@@ -1,7 +1,7 @@
 /* NAVBAR */
 
 #navbar {
-    opacity: 0.98;
+    opacity: 1;
     text-align: center;
     display: flex;
     flex-flow: row nowrap;
@@ -9,9 +9,9 @@
     text-align: center;
     padding: 1%;
     width: 100%;
-    position: relative;
+    position: fixed;
     top: 0;
-    z-index: 5;
+    z-index: 999999;
 }
   
 #navbar * {
@@ -23,7 +23,7 @@
 }
 
 .dark-theme #navbar {
-    background-color: rgba(197, 197, 197, 0.1);
+    background-color: rgb(34, 34, 34);
 }
 
 #navbar a {
@@ -45,11 +45,13 @@
     width: 100%;
     padding: 0;
 }
+
   
 #central-buttons {
     width: 20%;
     text-align: center;
 }
+
   
 #navbar ul {
     display: flex;
@@ -200,4 +202,59 @@
 
 #my-account span {
     cursor: pointer;
+}
+
+.checkbtn {
+    font-size: 20px;
+    float: left;
+    line-height: 20px;
+    position: relative;
+    cursor: pointer;
+    display: none;
+    padding-top: 10px;
+}
+
+#check {
+    display: none;
+}
+
+@media (max-width: 952px){
+    #logo{
+        width: 25%;
+        line-height: 40px;
+    }
+
+    #logo img {
+        width: 100%;
+        padding-left: 10px;
+        
+    }
+}
+
+@media (max-width: 858px){
+    .checkbtn {
+        display: block;
+    }
+    #central-buttons {
+        position: fixed;
+        top: 45px;
+        width: 100%;
+        left: -800px;
+        text-align: center;
+        transition: all .5s;
+        line-height: 30px;
+    }
+
+    .light-theme #central-buttons {
+        background-color: rgb(18, 18, 18);
+    }
+
+    .dark-theme #central-buttons {
+        background-color: rgb(34, 34, 34);
+    }
+
+    #check:checked ~ #central-buttons{
+        left: 0;
+    }
+
 }

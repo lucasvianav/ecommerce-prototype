@@ -136,9 +136,17 @@ class Navbar extends React.Component {
     render(){
         return(
             <nav id="navbar">
+
+                 <input type="checkbox" id="check"></input>
+                 <label for="check" class="checkbtn">
+                    <i class="fas fa-bars"></i>
+                 </label>
+               
+
                 <div id="logo">
                     <Link to="/"><img src={process.env.PUBLIC_URL + "/img/logo.png"} alt="Logo da SA-SHREK"/></Link>
                 </div>
+
 
                 <ul id="central-buttons" className="align-center">
                     <li><Link to="/">Início</Link></li>
@@ -169,6 +177,9 @@ class Navbar extends React.Component {
                     </li>
                 </ul>
             
+
+
+
                 <ul id="right-buttons" className="align-center">
                     <li className="search-bar no-display invisible-content">
                         <input type="text" name="search" placeholder="Buscar produtos" onChange={this.handleChange} onKeyDown={e => e.key === 'Enter' ? this.submitSearch() : ''} value={this.state.search}/>
