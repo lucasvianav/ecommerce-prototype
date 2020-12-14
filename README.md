@@ -395,8 +395,19 @@ O contúedo da pasta _service_ separa por arquivo, onde cada arquivo representa 
 Esse projeto tem um conjunto de passos para que se possa visualizar suas implementações. Primeiramente, é necessário a instalação de um _package manager_: _Node.js_ ou _Yarn_. Recomendamos o _Yarn_, que utilizaremos para a explicação.
 
 
+
+
   
-Com o _Yarn_ instalado, acesse o terminal do seu computador e vá até a pasta __back-end__ do repositório. Para instalar as dependências do projeto, como jQuery, listadas no arquivo _package.json_, basta utilizar o comando abaixo:
+Com o _Yarn_ instalado, acesse a pasta __back-end__ do repositório. Nela deve ser criada uma arquivo _.env_ com as seguintes variáveis:
+
+```
+CLIENT_PORT = 
+SERVER_PORT = 
+DB_URL = 
+JWT_PRIVATE_KEY =
+
+```
+Os valores para serem incluídos foram enviados junto ao projeto. No terminal, acesse o  __back-end__ e para instalar as dependências do projeto, como jQuery, listadas no arquivo _package.json_, basta utilizar o comando abaixo:
 
 ```
 yarn install
@@ -408,7 +419,7 @@ Em seguida, para visualizar o projeto, utilize o comando abaixo:
 ```
 yarn start
 ```
-O comando irá iniciar o server operando na porta 7000, se não estiver ocupada. Retornado o link http://localhost:7000. Na pasta __front-end__ do projeto coloque os mesmo comandos, abrirá assim um host local para a visualização de desenvolvimento do app, normalmente na porta 3000 do localhost, se estiver disponível - http://localhost:3000., sendo variante se este já estiver em uso por outra aplicação. A tela inicial do site é mostrada abaixo.
+O comando irá iniciar o server operando na porta determinada na variável SERVER_PORT. Na pasta __front-end__ do projeto coloque os mesmo comandos, abrirá assim um host local para a visualização de desenvolvimento do app na porta determinada em CLIENT_PORT, caso houver outra aplicação nessa porta, aplicação abrirá em outra porta. Nesse caso devesse alterar a porta CLIENT_PORT para o novo valor para evitar erro. A tela inicial do site é mostrada abaixo.
 
 
 ![Tela inicial do projeto](./images/home.JPG?w=200)  
