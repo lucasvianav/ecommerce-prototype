@@ -18,11 +18,6 @@ import '../css/bootstrap.css';
 import './index.css';
 import { Async } from 'react-async';
 
-const contentToggle = () => {
-    $('.personalAccount').toggle();
-    $('.admFunctions').toggle();
-}
-
 function AdmAccount(props){
 
     const context = useContext(DataContext);
@@ -34,6 +29,7 @@ function AdmAccount(props){
     const [pedidos, setPedidos] = useState(true);
     const [usuarios, setUsuarios] = useState(false);
     const [cupons, setCupons] = useState(false);
+    const [adminPage, setAdminPage] = useState(true)
 
     const [filter, setFilter] = useState("none");
     const [arrayCategorias, setArrayCategorias] = useState([]);
@@ -146,18 +142,23 @@ function AdmAccount(props){
         $("#tabUsuarios").removeClass("active");
     }
 
-    const {fetchAccounts} = context
+    const contentToggle = () => {
+        setAdminPage(!adminPage)
+        // adminPage = !adminPage
+        // $('.personalAccount').toggle();
+        // $('.admFunctions').toggle();
+    }
 
     return(
+        !adminPage
+        ?
+        <MyAccount link={<span className="text-btn green" onClick={contentToggle}>{'<' } Voltar para as funções do administrador</span>}/>
+        :
         <main className='adm'>
             <ProductsRequests.GetAllProducts onChange={() => {}} />
             <CouponsRequests.GetAllCoupons />
-            <div className='personalAccount no-display'>
-                <MyAccount link={<span className="text-btn green" onClick={contentToggle}>{'<' } Voltar para as funções do administrador</span>}/>
-            </div>
             <div className="admFunctions">
                 <h1 className='panel-title'>Página do Adiministrador</h1>
-
                 <span className="text-btn green" onClick={contentToggle}>{'< '} Minha conta</span>
                 <div className="content-box">
                     <section id="loginInfo" className="d-md-flex no-space d-xs-none d-sm-none">
