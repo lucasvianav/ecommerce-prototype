@@ -16,6 +16,6 @@ router.get('/check/:email', accountController.checkExitence)
 
 router.put('/', accountController.update)
 
-router.delete('/:email', accountController.delete)
+router.delete('/:_id', accountController.delete)
 
 module.exports = router

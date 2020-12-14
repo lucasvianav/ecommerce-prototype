@@ -484,8 +484,7 @@ main.Login {
 }
 
 .Login .big-btn {
-	margin-top: 6%;
-	margin-bottom: 1%;
+	margin: 6% auto 1% auto;
 }
 
 .Login .form-wrapper.active .invisible {

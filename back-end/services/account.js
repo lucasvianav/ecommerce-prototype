@@ -17,7 +17,7 @@ const accountService = {
     await Accounts.findByIdAndUpdate(_id, updates)
   },
 
-  delete: async email => await Accounts.findOneAndDelete({email})
+  delete: async _id => await Accounts.findByIdAndDelete(_id)
 }
 
 module.exports = accountService

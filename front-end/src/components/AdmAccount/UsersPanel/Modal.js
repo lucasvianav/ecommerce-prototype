@@ -8,46 +8,6 @@ import { DataContext } from '../../../Context';
 const ModalUser = (props) => {
 
     const context = useContext(DataContext);
-    const getCurrentAccount = context.getCurrentAccount;
-    const [conta, setConta] = useState();
-
-    useEffect(() => {
-        var ct = getCurrentAccount();
-        setConta(ct);
-    }
-    ,[])
-
-
-    const salva = (event) =>{
-        var nv = {};
-        nv.set = true;
-        nv.index = props.index;
-        nv.id = props.value.id;
-        nv.data = {
-            type: "adimin"
-        }
-        nv.send = "put";
-        props.onSave(nv);
-        props.onHide();
-    }
-
-    const exclui = (event) =>{
-        var contaAtual = (conta.email === props.value.email) ? true : false;
-        console.log(conta);
-        console.log(contaAtual);
-
-        if(window.confirm('O produto não poderá ser recuperado. Você tem certeza que deseja excluí-lo?')){
-            var nv = {};
-            nv.set = true;
-            nv.index = props.index;
-            nv.email = props.value.email;
-            nv.send = "del";
-            nv.contaAtual = contaAtual;
-            props.onSave(nv);
-            props.onHide();
-
-        }
-    }
 
     return (
         <Modal className="modal"
@@ -90,10 +50,15 @@ const ModalUser = (props) => {
                 </div>
             </Modal.Body>
             <Modal.Footer className='dark-bg'>
-                <button onClick={exclui} className="big-btn void-btn" style={{width: '20%'}}>Excluir</button>
+                <button onClick={async () => { if(window.confirm('Você tem certeza? Essa ação não poderá ser desfeita.')){ await context.deleteAccount(props.value._id); props.onHide() } }} className="big-btn void-btn" style={{width: '20%'}}>Excluir</button>
                 {
-                    (props.value.type === "admin") ? '' :
-                    <button onClick={(e) => {salva(e)}} className="big-btn void-btn" style={{maxWidth: '210px'}}>
+                    (props.value.type === "admin")
+                    ? 
+                    <button onClick={async () => { if(window.confirm('Você tem certeza?')){ await context.changeAccountType(props.value._id, 'client'); props.onHide() }}} className="big-btn void-btn" style={{maxWidth: '210px'}}>
+                        Tornar Cliente
+                    </button>
+                    :
+                    <button onClick={async () => { if(window.confirm('Você tem certeza?')){ await context.changeAccountType(props.value._id, 'admin'); props.onHide() }}} className="big-btn void-btn" style={{maxWidth: '210px'}}>
                         Tornar Adiministrador
                     </button>
                 }
