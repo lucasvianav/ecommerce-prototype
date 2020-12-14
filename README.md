@@ -94,8 +94,10 @@ Tendo em vista que a função do usuário administrador é fazer a gestão da lo
       
 - __Responsividade:__  
 Os componentes da página foram implementados e estruturados para serem responsivos para qualquer tamanho de tela de computador, utilizando recursos como _flexbox_, outros elementos foram criados com bootstrap e têm responsividade garantida. O site tem em sua versão final responsividade mobile. A imagem abaixo mostra a home do site em uma tela mobile. 
-
-  ![Home do site em tela mobile](./images/mobile.JPG)
+  
+  <img src="mobile.png" width="300">
+  
+  ![Home do site em tela mobile](./images/mobile.png)
  
 ------------------------------------ 
 ### 3. Comentários sobre o código  
