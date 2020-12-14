@@ -124,11 +124,11 @@ class MyAccount extends React.Component {
             <main className="MyAccount">
                 <h1 className='panel-title'>Minha Conta</h1>
                 <div className="content-box">
-                    <div className="left-content col-md-5 col-sm-12 align-self-top">
+                    <div className="accountContent left-content col-md-5 col-sm-12 align-self-top">
                         <section id="loginInfo" className="d-flex no-space">
                             <h2>Olá, {this.context.isLogged.user.name}! </h2>
                             <span><strong>Email: </strong>{this.context.isLogged.user.email}</span>
-                            <div className="col-md-6 offset-md-8 pt-3">
+                            <div className="col-md-6 offset-md-8 pt-3 botaoAlt">
                                 <button className="btn btn-secondary btnPass"
                                 onClick={this.togglePass}
                                 >Alterar Senha</button>
@@ -190,7 +190,7 @@ class MyAccount extends React.Component {
                         </section>
                     </div>
                     <div className="col-md-6">
-                        <section className="myOrders" style={{width: '100%'}}>
+                        <section className="myOrdersPersonal" style={{width: '100%'}}>
                             <Accordion id="pedidos">
                                 <Card className='accordion-card'>
                                     <Accordion.Toggle as={Card.Header} className='pointer' eventKey="0">
