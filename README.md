@@ -32,6 +32,8 @@ Os requerimentos pedidos e adicionados particularmente para esse projeto foram:
   
   - O sistema deve ser responsivo, ter acessibilidade e usabilidade.
   
+  - Implementar um servidor utilizando Node.js e banco de dados NoSQL.
+  
   
   
   
@@ -207,7 +209,7 @@ Por fim falaremos da linha 1. Como se pode observar, tendo em vista as linhas 2 
 8
 9 require('dotenv').config();
 ```
-Na linha 9 temos a importação e inicialização do Dotenv, que gerencia variáveis de ambiente de um projeto por meio de um arquivo .env, possibilitando executar a aplicação em qualquer lugar. A linha 6 , ele define os caminhos para todas a ações sobre os dados no bando de dados, seja eles das contas, pedidos, produtos ou cupons. Na pasta router é possível observar separadamente por tipo de dado todas as ações que podem ser executadas. A linha 7 apenas chama o código do arquivo connection.js, abaixo podemos vê-lo.
+Na linha 9 temos a importação e inicialização do Dotenv, que gerencia variáveis de ambiente de um projeto por meio de um arquivo .env, possibilitando executar a aplicação em qualquer lugar. A linha 6 é a definição de um módulo chamado apiRouter que organiza os endpoints do servidor. Na pasta router é possível observar separadamente por tipo de dado cada um deles. A linha 7 apenas chama o código do arquivo connection.js, abaixo podemos vê-lo.
 
 ```
 1 const mongoose = require('mongoose')
@@ -227,6 +229,95 @@ A linha 4 realiza a conexão do banco de dados, até aqui estamos com uma conex�
 24 db.once('open', () => app.listen(process.env.SERVER_PORT, () => console.log(`Example app listening at http://localhost:` + process.env.SERVER_PORT)))
 
 ```
+
+Analisaresmos agora as pastas controllers, models e services. A primeira pasta apresenta 6 arquivos JavaScript onde estão definidas as ação que podem ser realizadas sobre os distintas informações armazenadas no banco de dados. Citaremos como exemplo uma função do arquivo product.js, onde estão definidas as ações sobre as informações de produtos armazenados. 
+
+```
+async function generateProductId(data) {
+  var retorno = '';
+  if (data.type === "EV"){
+    await Products.find({type: "EV"}, async (err, products) => {
+      if (products.length > 0){
+        var ant = products[products.length-1];
+        var nAnt = await ant._id.substr(1, ant.length);
+        retorno =  "E" + (parseInt(nAnt) + 1);
+
+      }else 
+        retorno = "E1";
+    })
+  }else{
+    await Products.find({type: "PR"}, async (err, products) => {
+      if (products.length > 0){
+        var ant = products[products.length-1];
+        var nAnt = await ant._id.substr(1, ant.length);
+        retorno =  "P" + (parseInt(nAnt) + 1);
+      }else
+        retorno = "P1";
+    })
+  }
+  console.log(retorno);
+  return retorno;
+}
+
+```
+A função acima gera um novo produto de acordo com as especificações dadas dentro da páginas. Crindo um produto de ID próprio e sendo do tipo Evento ou Produto. 
+
+Analisando a segunda pasta, models, achamos a pasta schemas. Nela está defina a estrutura de todos os dados armazenados no servidor divididos por arquivos, com exceção do arquivo cart.js. É nesses arquivos que se estabele os registros de contas, produtos, cupons e pedidos. O exemplo abaixo mostra a definiçãos das propriedades definirão um produto, a estrutura está no arquivo products.js. 
+
+```
+var productSchema = mongoose.Schema({
+    _id: String,
+    name: {
+        type: String,
+        trim: true,
+        required: true
+    },
+    type: {
+        type: String,
+        trim: true,
+        required: true
+    },
+    visibility: {
+        type: Boolean,
+        required: true
+    },
+    category: {
+        type: String,
+        trim: true,
+        required: true
+    },
+    description: {
+        type: descriptionSchema,
+        required: true
+    },
+    price: {
+        type: priceSchema,
+    },
+    templates: {
+        type: [String],
+        default: []
+    },
+    sizes: {
+        type: [String],
+        default: []
+
+    },
+    colors: {
+        type: [String],
+        default: []
+    },
+    img: {
+        type: [imgSchema],
+        default: []
+    },
+    stock: {
+        type: Map,
+        default: {}
+    }
+});
+
+```
+
 
 
 
