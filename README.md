@@ -32,6 +32,8 @@ Os requerimentos pedidos e adicionados particularmente para esse projeto foram:
   
   - O sistema deve ser responsivo, ter acessibilidade e usabilidade.
   
+  - Implementar um servidor utilizando Node.js e banco de dados NoSQL.
+  
   
   
   
@@ -207,7 +209,7 @@ Por fim falaremos da linha 1. Como se pode observar, tendo em vista as linhas 2 
 8
 9 require('dotenv').config();
 ```
-Na linha 9 temos a importação e inicialização do Dotenv, que gerencia variáveis de ambiente de um projeto por meio de um arquivo .env, possibilitando executar a aplicação em qualquer lugar. A linha 6 , ele define os caminhos para todas a ações sobre os dados no bando de dados, seja eles das contas, pedidos, produtos ou cupons. Na pasta router é possível observar separadamente por tipo de dado todas as ações que podem ser executadas. A linha 7 apenas chama o código do arquivo connection.js, abaixo podemos vê-lo.
+Na linha 9 temos a importação e inicialização do Dotenv, que gerencia variáveis de ambiente de um projeto por meio de um arquivo .env, possibilitando executar a aplicação em qualquer lugar. A linha 6 é a definição de um módulo chamado apiRouter que organiza os endpoints do servidor. Na pasta router é possível observar separadamente por tipo de dado cada um deles. A linha 7 apenas chama o código do arquivo connection.js, abaixo podemos vê-lo.
 
 ```
 1 const mongoose = require('mongoose')
@@ -228,8 +230,161 @@ A linha 4 realiza a conexão do banco de dados, até aqui estamos com uma conex�
 
 ```
 
+Analisaresmos agora as pastas _controllers_, _models_ e _services_. A primeira pasta apresenta 6 arquivos JavaScript onde estão definidas as ação que receberãos os requerimentos da página, organizando-os para passar para os arquivos na pasta _service_. Citaremos como exemplo as funções de controle do arquivo cart.js, onde estão definidas as ações relacionadas ao carrinho de compras e que requerem de informações do banco de dodos. Elas recerão, de acordo com suas funções, os requerimentos (que são valores) e mandarão de forma organizada, para os fins da tarefa, os dados para _service_. Mais para frente os arquivos _service_ serão melhor explicados. 
+
+```
+const cartController = {
+    find: async (req, res) => {
+        const {_id} = req.params
+        const cart = await cartService.find(_id)
+
+        return res.json(cart)
+    },
+
+    substitute: async (req, res) => {
+        const {_id, cart: newCart} = req.body
+        await cartService.substitute(_id, newCart)
+
+        const cart = await cartService.update(_id)
+
+        return res.json(cart)
+    },
+
+    edit: async (req, res) => {
+        const {_id, sku, quantity, specs} = req.body
+        const cart = await cartService.edit(_id, sku, quantity, specs)
+
+        return res.json(cart)
+    },
+
+    update: async (req, res) => {
+        const {_id} = req.body
+        const cart = await cartService.update(_id)
+
+        return res.json(cart)
+    },
+
+    remove: async (req, res) => {
+        const {_id, sku} = req.body
+        const cart = (await cartService.remove(_id, sku)).cart
+
+        return res.json(cart)
+    }
+}
+
+```
 
 
+Na segunda pasta, _models_, achamos a pasta _schemas_. Nela está defina a estrutura de todos os dados armazenados no servidor divididos por arquivos, com exceção do arquivo cart.js. É nesses arquivos que se estabele os registros de contas, produtos, cupons e pedidos. O exemplo abaixo mostra a definiçãos das propriedades definirão um produto, a estrutura está no arquivo products.js. 
+
+```
+var productSchema = mongoose.Schema({
+    _id: String,
+    name: {
+        type: String,
+        trim: true,
+        required: true
+    },
+    type: {
+        type: String,
+        trim: true,
+        required: true
+    },
+    visibility: {
+        type: Boolean,
+        required: true
+    },
+    category: {
+        type: String,
+        trim: true,
+        required: true
+    },
+    description: {
+        type: descriptionSchema,
+        required: true
+    },
+    price: {
+        type: priceSchema,
+    },
+    templates: {
+        type: [String],
+        default: []
+    },
+    sizes: {
+        type: [String],
+        default: []
+
+    },
+    colors: {
+        type: [String],
+        default: []
+    },
+    img: {
+        type: [imgSchema],
+        default: []
+    },
+    stock: {
+        type: Map,
+        default: {}
+    }
+});
+
+```
+
+O contúedo da pasta _service_ separa por arquivo, onde cada arquivo representa uma estrutura,  as funções que de fato manipulam o banco de dados. Após os dados chegarem organizados das funções dos arquivos da pasta _controllers_, verificações são realizadas, quando necessário, para que a função atue  sobre os dados armazenados. Seja editando, lendo, excluindo ou criando novos dados. Abaixo temos o exemplo da função edit do arquivo cart.js.
+
+```
+
+  edit: async (_id, sku, quantity, specs) => {
+        if(-1 < quantity && quantity < 1){ return null }
+        
+        let cart = (await Accounts.findById(_id, 'cart'))['cart']
+
+        if(quantity >= 1){
+            const [type, id] = sku.split('-')
+            const product = await Products.findById(id)
+            const stock = product.stock.get(sku) ? parseInt(product.stock.get(sku)) : 0
+
+            if(cart.some(item => item.sku === sku)){
+                cart = cart.map(item => {
+                    if(item.sku === sku){ 
+                        parseInt(item.quantity) + parseInt(quantity) <= parseInt(stock) 
+                            ? item.quantity += parseInt(quantity)
+                            : item.quantity = parseInt(stock)
+                    }
+
+                    return item
+                })
+            }
+
+            else{
+                cart.push({
+                    sku: sku,
+                    quantity: Math.min(parseInt(quantity), parseInt(stock)),
+                    specs: {
+                        color: specs.color || '',
+                        template: specs.template || '',
+                        size: specs.size || ''
+                    }
+                })
+            }
+        }
+        
+        else{
+            const qty = Math.abs(quantity)
+            
+            cart = cart.map(item => {
+                if(item.sku === sku && item.quantity > qty){ item.quantity -= qty }
+                return item
+            })
+        }
+        
+        await Accounts.findByIdAndUpdate(_id, { cart })
+
+        return cart
+  },
+    
+```
 
 
 

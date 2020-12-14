@@ -122,7 +122,7 @@ class MyAccount extends React.Component {
             <main className="MyAccount">
                 <h1 className='panel-title'>Minha Conta</h1>
                 <div className="content-box">
-                    <div className="left-content col-md-5 col-sm-12 align-self-top">
+                    <div className="accountContent left-content col-md-5 col-sm-12 align-self-top">
                         <section id="loginInfo" className="d-flex no-space">
                             <div className='account-header'>
                                 <h2>Olá, {this.context.isLogged.user.name.replace(/(\S*\s?\S*).*/, '$1')}!</h2>
