@@ -121,6 +121,9 @@ class MyAccount extends React.Component {
         return(
             <main className="MyAccount">
                 <h1 className='panel-title'>Minha Conta</h1>
+
+                {this.props.link ? this.props.link : ''}
+
                 <div className="content-box">
                     <div className="accountContent left-content col-md-5 col-sm-12 align-self-top">
                         <section id="loginInfo" className="d-flex no-space">

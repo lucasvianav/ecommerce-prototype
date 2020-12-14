@@ -153,16 +153,16 @@ function AdmAccount(props){
             <ProductsRequests.GetAllProducts onChange={() => {}} />
             <CouponsRequests.GetAllCoupons />
             <div className='personalAccount no-display'>
-                <MyAccount />
-                <button className="btn btn-secondary" style={{width: '30%', marginLeft: '8%'}} onClick={contentToggle}>Funções do Adiministrador</button>
+                <MyAccount link={<span className="text-btn green" onClick={contentToggle}>{'<' } Voltar para as funções do administrador</span>}/>
             </div>
             <div className="admFunctions">
                 <h1 className='panel-title'>Página do Adiministrador</h1>
+
+                <span className="text-btn green" onClick={contentToggle}>{'< '} Minha conta</span>
                 <div className="content-box">
                     <section id="loginInfo" className="d-md-flex no-space d-xs-none d-sm-none">
                         <h2>Olá, {context.getCurrentAccount().name}!</h2>
                         <p><strong>Email: </strong>{context.isLogged.user.email}</p>
-                        <button className="btn btn-secondary" style={{width: '30%'}} onClick={contentToggle}>Página Pessoal</button>
                     </section>
                 
                     <section id="funcoes" className="d-flex rounded shadow-sm mt-3 p-2">
