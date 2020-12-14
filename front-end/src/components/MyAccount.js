@@ -1,15 +1,14 @@
 import React from 'react'
 import $ from 'jquery'
 
-import { Accordion, Card } from 'react-bootstrap';
+import { Accordion, Card } from 'react-bootstrap'
 import './css/bootstrap.css'
 import './css/MyAccount.css'
-import { DataContext } from '../Context';
+import { DataContext } from '../Context'
 import InputMask from 'react-input-mask'
-import OrdersPanel from './OrdersPanel';
+import OrdersPanel from './OrdersPanel'
 
 import api from '../requests/connection'
-
 
 const isValidPassword = (pw) => {
     /** Password Regex Explanation
@@ -24,58 +23,6 @@ const isValidPassword = (pw) => {
     return !(pw.includes(' ') || !pwRegex.test(pw))
 }
 
-const submitEdit = async (state, account) =>{
-    const {lastPass, newPass1, newPass2} = state;
-    var flag = true;
-    
-    if(newPass1 !== newPass2){
-        alert("Ambas as senhas devem ser idênticas.")   
-        flag = false;         
-    }
-
-    if(!isValidPassword(newPass1)){
-        alert("A senha deve conter uma letra maiúscula, minúscula e um número ente 8 e 30 caracteres")
-        flag = false;
-    }
-
-        var res = null;
-        await api.post('/auth/login', {email: account.email, password: lastPass})
-        .then(response =>{
-            res = response;
-        })
-        .catch((err)=>{
-            alert("Senha atual incorreta");
-            flag = false;
-        })
-        
-
-    if(flag && res != null){
-        api.put("accounts/", {"id":account._id, "updates":{password: newPass1}})
-          .then((response) => {
-            alert("Senha atualizada com sucesso!");
-            $('.editingPass').toggle();
-            $('.btnPass').toggle();
-          })
-          .catch((err) => {
-            console.error("ops! ocorreu um erro" + err);
-          });
-    }
-}
-
-const submitEditPhone = (state, context) => {
-    const {phoneNumber} = state;
-    const account = context.isLogged.user;
-
-    api.put("accounts/", {"id":account._id, "updates":{phoneNumber}})
-    .then((response) => {
-        context.updatePhone({id: context.isLogged.user._id, phoneNumber: state.phoneNumber});
-        alert("Telefone atualizado com sucesso!");
-    })
-    .catch((err) => {
-        console.error("ops! ocorreu um erro" + err);
-    });
-}
-
 class MyAccount extends React.Component {
 
     static contextType = DataContext
@@ -83,36 +30,87 @@ class MyAccount extends React.Component {
     constructor(props, context) {
         super(props, context)
 
-        this.state = { phoneNumber: this.context.isLogged.user.phoneNumber, 
-                        lastPass:"", newPass1: "", newPass2:"", req:{} }
+        this.state = {
+            phoneNumber: this.context.isLogged.user.phoneNumber,
+            currentPassword: '',
+            newPassword: '',
+            newPasswordConf: ''
+        }
 
-        this.toggleEdit = this.toggleEdit.bind(this);
-        this.togglePass = this.togglePass.bind(this);
-        this.handleChange= this.handleChange.bind(this);
+        this.togglePhoneNumber = this.togglePhoneNumber.bind(this)
+        this.togglePassword = this.togglePassword.bind(this)
+        this.handleChange = this.handleChange.bind(this)
+        this.submitChange = this.submitChange.bind(this)
+        this.submitChange = this.submitChange.bind(this)
     }
 
-    toggleEdit(){
+    togglePhoneNumber(){
         $('.standard').toggle()
         $('.editing').toggle()
+
+        const { phoneNumber } = this.context.isLogged.user
+        this.setState({phoneNumber})
     }
 
-    togglePass(){
+    togglePassword(){
         $('.editingPass').toggle();
         $('.btnPass').toggle();
+        $('.error-message').text('')
     }
 
     handleChange(e){
         const {name, value} = e.target
         this.setState({[name]: value})
+
+        if((/password/i).test(name)){ $('.error-message').text('') }
     }
 
-    async submitChange(){
-        try{
-            await api.put('/accounts', {_id: this.context.isLogged.user._id, updates: {phoneNumber: this.state.phoneNumber}})
-                .then(r => this.context.updateCurrentAccount())
+    async submitChange(e){
+        if(e.target.id === 'submit-phone'){
+
+            const {_id} = this.context.isLogged.user
+            const {phoneNumber} = this.state
+
+            await api.put('/accounts', { _id, updates: { phoneNumber } }).then(r => {
+                this.context.updateCurrentAccount()
+            })
+                .catch(e => console.log(`Ocorreu um erro: ${e}`))
+                .then(this.togglePhoneNumber)
         }
 
-        finally{ this.toggleEdit() }
+        else if(e.target.id === 'submit-password'){
+            const {currentPassword, newPassword, newPasswordConf} = this.state
+            
+            if(newPassword !== newPasswordConf){
+                $('.error-message').text("Ambas as senhas devem ser idênticas.")   
+                return
+            }
+        
+            else if(!isValidPassword(newPassword)){
+                $('.error-message').text("A senha inserida é inválida.")
+                return
+            }
+        
+            const { user } = this.context.isLogged
+
+            await api.post('/auth/login', {email: user.email, password: currentPassword}).then(async r => {
+                if(r){
+                    const { _id } = user
+
+                    await api.put('/accounts', {_id, updates: { password: newPassword }}).then(r => {
+                        alert('Sua senha foi atualizada com sucesso!')
+                    })
+                        .catch(e => {
+                            console.log('Ocorreu um erro: ' + e)
+                            $('.error-message').text('Ocorreu um erro.')
+                        })
+                        .then(this.togglePassword)
+                    }
+                    else{ $('.error-message').text('Ocorreu um erro.') }
+                }).catch(e => {
+                    $('.error-message').text("A senha atual está incorreta.")
+                })
+        }
     }
 
     componentDidMount(){
@@ -126,29 +124,40 @@ class MyAccount extends React.Component {
                 <div className="content-box">
                     <div className="left-content col-md-5 col-sm-12 align-self-top">
                         <section id="loginInfo" className="d-flex no-space">
-                            <h2>Olá, {this.context.isLogged.user.name}! </h2>
-                            <span><strong>Email: </strong>{this.context.isLogged.user.email}</span>
-                            <div className="col-md-6 offset-md-8 pt-3">
-                                <button className="btn btn-secondary btnPass"
-                                onClick={this.togglePass}
-                                >Alterar Senha</button>
+                            <div className='account-header'>
+                                <h2>Olá, {this.context.isLogged.user.name.replace(/(\S*\s?\S*).*/, '$1')}!</h2>
+                                <span><strong>Email: </strong>{this.context.isLogged.user.email}</span>
+
+                                <div className='account-controls'>
+                                    <span className="disable-selection text-btn green btnPass" onClick={this.togglePassword}>Alterar senha</span>
+                                    <span className='disable-selection text-btn green' onClick={this.context.logout}>Sair</span>
+                                </div>
                             </div>
-                            <div className="editingPass border p-3 mt-3 no-display">
-                                <label htmlFor="lastPass">Senha Atual:</label>
-                                <input type="password" className="form-control" id="lastPass" name="lastPass" onChange={this.handleChange}/> <br/>
 
-                                <label htmlFor="newPass1">Nova Senha:</label>
-                                <input type="password" className="form-control" id="newPass1" name="newPass1" onChange={this.handleChange}/> <br/>
-                                <label htmlFor="newPass2">Confirme a Nova Senha:</label>
-                                <input type="password" className="form-control" id="newPass2" name="newPass2" onChange={this.handleChange}/> <br/>
+                            <div className="editingPass no-display">
+                                <label htmlFor="currentPassword">
+                                    Senha atual: *
+                                    <input type="password" className="form-control" id="currentPassword" name="currentPassword" onChange={this.handleChange}/> <br/>
+                                </label>
 
-                                <button type="button" className="btn btn-danger mt-1"
-                                onClick={this.togglePass} style={{width: '30%'}}
-                                >Cancelar</button>
+                                <label htmlFor="newPassword">
+                                    Nova senha: *
+                                    <input type="password" title='A senha deve conter pelo menos um número, uma letra minúscula e uma letra maiúscula. Deve possuir entre 8 e 30 caracteres.' className="form-control" id="newPassword" name="newPassword" onChange={this.handleChange}/> <br/>
+                                </label>
+                                
+                                <label htmlFor="newPasswordConf">
+                                    Confirme a nova senha: *
+                                    <input type="password" title='Esta deve ser igual à sua nova senha.' className="form-control" id="newPasswordConf" name="newPasswordConf" onChange={this.handleChange}/> <br/>
+                                </label>
 
-                                <button type="button" className="btn btn-success mt-1 ml-2"
-                                onClick={() => {submitEdit(this.state, this.context.isLogged.user)}} style={{width: '30%'}}
-                                >Salvar</button>
+                                <span className="error-message"></span>
+
+                                <div className='button-row'>
+                                    <button type="button" className="big-btn void-btn" onClick={this.togglePassword}>Cancelar</button>
+                                    <button type="button" className="big-btn full-btn" id='submit-password' onClick={this.submitChange}>
+                                        Salvar
+                                    </button>
+                                </div>
                             </div>
                         </section>
 
@@ -176,36 +185,31 @@ class MyAccount extends React.Component {
                                     <span className='standard'>{this.context.isLogged.user.phoneNumber}</span> 
                                     <InputMask mask="+55 (99) 99999-9999" type='text' onChange={this.handleChange} name="phoneNumber" className='editing no-display' value={this.state.phoneNumber} placeholder='(00) 90000-0000'/>
 
-                                    <span className="text-btn green standard" onClick={this.toggleEdit}>Editar celular</span>
+                                    <span className="text-btn green standard" onClick={this.togglePhoneNumber}>Editar celular</span>
                                     <div className='editing-controls'>
-                                        <span className="text-btn green no-display editing" onClick={this.toggleEdit}>Cancelar</span>
-                                        <span className="text-btn green no-display editing" 
-                                            onClick={(e) => {
-                                                submitEditPhone(this.state, this.context);
-                                                this.toggleEdit();
-                                        }}>Salvar</span>
+                                        <span className="text-btn green no-display editing" onClick={this.togglePhoneNumber}>Cancelar</span>
+                                        <span className="text-btn green no-display editing" id='submit-phone' onClick={this.submitChange}>Salvar</span>
                                     </div>
                                 </div>
                             </div>
                         </section>
                     </div>
-                    <div className="col-md-6">
-                        <section className="myOrders" style={{width: '100%'}}>
-                            <Accordion id="pedidos">
-                                <Card className='accordion-card'>
-                                    <Accordion.Toggle as={Card.Header} className='pointer' eventKey="0">
-                                        <h5 className="pointer disable-selection mb-0">Meus pedidos</h5>
-                                    </Accordion.Toggle>
-                                
-                                    <Accordion.Collapse eventKey="0">
-                                        <Card.Body className='accordion-body'>
-                                            <OrdersPanel type='client'/>
-                                        </Card.Body>
-                                    </Accordion.Collapse>
-                                </Card>
-                            </Accordion>
-                        </section>
-                    </div>
+
+                    <section className="myOrders" style={{width: '100%'}}>
+                        <Accordion id="pedidos">
+                            <Card className='accordion-card'>
+                                <Accordion.Toggle as={Card.Header} className='pointer' eventKey="0">
+                                    <h5 className="pointer disable-selection mb-0">Meus pedidos</h5>
+                                </Accordion.Toggle>
+                            
+                                <Accordion.Collapse eventKey="0">
+                                    <Card.Body className='accordion-body'>
+                                        <OrdersPanel type='client'/>
+                                    </Card.Body>
+                                </Accordion.Collapse>
+                            </Card>
+                        </Accordion>
+                    </section>
                 </div>
             </main>
         )

@@ -216,7 +216,7 @@ class Navbar extends React.Component {
                     </div>
                 </ul>
 
-                <section class="modal" id="search-modal">
+                <section className="modal" id="search-modal">
                     <SearchBar {...this.props} visible={true}/>
                 </section>
             </nav>

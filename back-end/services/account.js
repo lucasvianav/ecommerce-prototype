@@ -11,10 +11,8 @@ const accountService = {
   checkExistence: async condition => Boolean(await Accounts.findOne(condition)),
 
   update: async (_id, updates) => {
-    if (updates.password !== undefined){
-      updates.password = await bcrypt.hash(updates.password, 10) 
-    }
-    await Accounts.findByIdAndUpdate(_id, updates)
+    if(updates.password){ updates.password = await bcrypt.hash(updates.password, 10) }
+    return await Accounts.findByIdAndUpdate(_id, updates, {new: true})
   },
 
   delete: async _id => await Accounts.findByIdAndDelete(_id)
